@@ -17,10 +17,12 @@ const fetchPolicies = {
    * @returns {Function} Fetch policy to be used with `<Query />`
    */
   olderThan: delay => queryState => {
-    if (!queryState || !queryState.lastUpdate) {
+    const lastCheck = queryState.lastUpdate || queryState.lastErrorUpdate
+
+    if (!queryState || !lastCheck) {
       return true
     } else {
-      const elapsed = Date.now() - queryState.lastUpdate
+      const elapsed = Date.now() - lastCheck
       return elapsed > delay
     }
   },
