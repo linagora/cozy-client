@@ -29,3 +29,4 @@ If you want to better understand the cozy-client concepts, see the [architecture
 - [Link authoring](docs/link-authoring.md)
 
 > This is the documentation for the current version of cozy-client. If you want to check the old version, [go to the old version](http://github.com/cozy/cozy-client-js) 👵👴.
+
