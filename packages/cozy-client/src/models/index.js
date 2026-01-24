@@ -18,6 +18,7 @@ import * as user from './user'
 import * as geo from './geo'
 import * as doctypes from './doctypes'
 import * as ai from './ai'
+import * as assistant from './assistant'
 
 // For backward compatibility before 9.0.0
 const triggers = trigger
@@ -45,5 +46,6 @@ export {
   user,
   geo,
   doctypes,
-  ai
+  ai,
+  assistant
 }
