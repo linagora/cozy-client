@@ -20,4 +20,5 @@ import * as user from "./user";
 import * as geo from "./geo";
 import * as doctypes from "./doctypes";
 import * as ai from "./ai";
-export { trigger, instance, applications, file, folder, konnectorFolder, note, account, permission, utils, contact, document, timeseries, sharing, dacc, paper, user, geo, doctypes, ai };
+import * as assistant from "./assistant";
+export { trigger, instance, applications, file, folder, konnectorFolder, note, account, permission, utils, contact, document, timeseries, sharing, dacc, paper, user, geo, doctypes, ai, assistant };
