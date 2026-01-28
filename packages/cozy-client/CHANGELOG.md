@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.21.0](https://github.com/linagora/cozy-client/compare/v60.20.0...v60.21.0) (2026-01-28)
+
+
+### Bug Fixes
+
+* Update repo link to linagora/cozy-client repo in docs ([eb5a753](https://github.com/linagora/cozy-client/commit/eb5a7533ed986e525ef639f061d20309d00af787))
+
+
+### Features
+
+* Implement the functions CRUD for assistant :sparkles: ([25daa14](https://github.com/linagora/cozy-client/commit/25daa147aa3af92d56aaa2c3eee826beb505e1f3))
+
+
+
+
+
 # [60.20.0](https://github.com/cozy/cozy-client/compare/v60.19.0...v60.20.0) (2025-12-04)
 
 
