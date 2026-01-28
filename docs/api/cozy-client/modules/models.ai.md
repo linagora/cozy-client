@@ -38,7 +38,7 @@ AI response following OpenAI chat completion format
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:112](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L112)
+[packages/cozy-client/src/models/ai.js:112](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L112)
 
 ***
 
@@ -64,4 +64,4 @@ Extracted text content
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:72](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L72)
+[packages/cozy-client/src/models/ai.js:72](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L72)

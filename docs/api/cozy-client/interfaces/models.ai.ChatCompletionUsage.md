@@ -14,7 +14,7 @@ Number of tokens in completion
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:32](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L32)
+[packages/cozy-client/src/models/ai.js:32](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L32)
 
 ***
 
@@ -26,7 +26,7 @@ Completion tokens details
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:35](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L35)
+[packages/cozy-client/src/models/ai.js:35](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L35)
 
 ***
 
@@ -38,7 +38,7 @@ Number of tokens in prompt
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:33](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L33)
+[packages/cozy-client/src/models/ai.js:33](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L33)
 
 ***
 
@@ -50,7 +50,7 @@ Prompt tokens details
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:36](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L36)
+[packages/cozy-client/src/models/ai.js:36](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L36)
 
 ***
 
@@ -62,4 +62,4 @@ Total tokens used
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:34](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L34)
+[packages/cozy-client/src/models/ai.js:34](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L34)

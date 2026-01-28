@@ -12,7 +12,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:12](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L12)
+[packages/cozy-client/src/models/paper.js:12](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L12)
 
 ***
 
@@ -22,7 +22,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:280](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L280)
+[packages/cozy-client/src/models/paper.js:280](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L280)
 
 ## Variables
 
@@ -32,7 +32,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:51](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L51)
+[packages/cozy-client/src/models/paper.js:51](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L51)
 
 ***
 
@@ -42,7 +42,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:25](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L25)
+[packages/cozy-client/src/models/paper.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L25)
 
 ***
 
@@ -52,7 +52,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:38](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L38)
+[packages/cozy-client/src/models/paper.js:38](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L38)
 
 ***
 
@@ -62,7 +62,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:50](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L50)
+[packages/cozy-client/src/models/paper.js:50](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L50)
 
 ## Functions
 
@@ -86,7 +86,7 @@ Expiration date
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:126](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L126)
+[packages/cozy-client/src/models/paper.js:126](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L126)
 
 ***
 
@@ -110,7 +110,7 @@ Expiration notice date
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:162](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L162)
+[packages/cozy-client/src/models/paper.js:162](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L162)
 
 ***
 
@@ -134,7 +134,7 @@ Expiration notice link
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:181](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L181)
+[packages/cozy-client/src/models/paper.js:181](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L181)
 
 ***
 
@@ -156,7 +156,7 @@ Formatted and translated value of an array of contact
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:452](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L452)
+[packages/cozy-client/src/models/paper.js:452](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L452)
 
 ***
 
@@ -181,7 +181,7 @@ Formatted and translated value for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:330](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L330)
+[packages/cozy-client/src/models/paper.js:330](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L330)
 
 ***
 
@@ -207,7 +207,7 @@ Formatted and translated value for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:373](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L373)
+[packages/cozy-client/src/models/paper.js:373](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L373)
 
 ***
 
@@ -231,7 +231,7 @@ Formatted and translated value for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:249](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L249)
+[packages/cozy-client/src/models/paper.js:249](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L249)
 
 ***
 
@@ -256,7 +256,7 @@ Formatted and translated value for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:427](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L427)
+[packages/cozy-client/src/models/paper.js:427](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L427)
 
 ***
 
@@ -280,7 +280,7 @@ The type of the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:288](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L288)
+[packages/cozy-client/src/models/paper.js:288](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L288)
 
 ***
 
@@ -303,7 +303,7 @@ Translated name for contact
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:442](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L442)
+[packages/cozy-client/src/models/paper.js:442](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L442)
 
 ***
 
@@ -327,7 +327,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:317](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L317)
+[packages/cozy-client/src/models/paper.js:317](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L317)
 
 ***
 
@@ -352,7 +352,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:350](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L350)
+[packages/cozy-client/src/models/paper.js:350](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L350)
 
 ***
 
@@ -376,7 +376,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:414](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L414)
+[packages/cozy-client/src/models/paper.js:414](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L414)
 
 ***
 
@@ -398,7 +398,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:193](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L193)
+[packages/cozy-client/src/models/paper.js:193](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L193)
 
 ***
 
@@ -420,7 +420,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:108](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L108)
+[packages/cozy-client/src/models/paper.js:108](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L108)
 
 ***
 
@@ -442,7 +442,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:205](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L205)
+[packages/cozy-client/src/models/paper.js:205](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L205)
 
 ***
 
@@ -462,7 +462,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:505](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L505)
+[packages/cozy-client/src/models/paper.js:505](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L505)
 
 ***
 
@@ -484,7 +484,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:491](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L491)
+[packages/cozy-client/src/models/paper.js:491](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L491)
 
 ***
 
@@ -505,7 +505,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:463](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L463)
+[packages/cozy-client/src/models/paper.js:463](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L463)
 
 ***
 
@@ -527,7 +527,7 @@ Translated name for the metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:475](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L475)
+[packages/cozy-client/src/models/paper.js:475](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L475)
 
 ***
 
@@ -557,4 +557,4 @@ displayable metadata
 
 *Defined in*
 
-[packages/cozy-client/src/models/paper.js:224](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L224)
+[packages/cozy-client/src/models/paper.js:224](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/paper.js#L224)

@@ -24,7 +24,7 @@ Trigger states come from /jobs/triggers
 
 *Defined in*
 
-[packages/cozy-client/src/models/trigger.js:17](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/trigger.js#L17)
+[packages/cozy-client/src/models/trigger.js:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/trigger.js#L17)
 
 ***
 
@@ -46,4 +46,4 @@ Trigger states come from /jobs/triggers
 
 *Defined in*
 
-[packages/cozy-client/src/models/trigger.js:66](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/trigger.js#L66)
+[packages/cozy-client/src/models/trigger.js:66](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/trigger.js#L66)

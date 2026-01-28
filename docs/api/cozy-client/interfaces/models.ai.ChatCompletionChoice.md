@@ -14,7 +14,7 @@ Reason for finishing
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:25](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L25)
+[packages/cozy-client/src/models/ai.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L25)
 
 ***
 
@@ -26,7 +26,7 @@ Choice index
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:26](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L26)
+[packages/cozy-client/src/models/ai.js:26](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L26)
 
 ***
 
@@ -38,4 +38,4 @@ Message content
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:27](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L27)
+[packages/cozy-client/src/models/ai.js:27](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L27)

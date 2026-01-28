@@ -27,7 +27,7 @@ DatabaseQueryEngine.constructor
 
 *Defined in*
 
-[db/sqlite/sqliteDb.js:3](https://github.com/cozy/cozy-client/blob/master/packages/cozy-pouch-link/src/db/sqlite/sqliteDb.js#L3)
+[db/sqlite/sqliteDb.js:3](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/db/sqlite/sqliteDb.js#L3)
 
 ## Methods
 
@@ -55,7 +55,7 @@ DatabaseQueryEngine.allDocs
 
 *Defined in*
 
-[db/dbInterface.js:55](https://github.com/cozy/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L55)
+[db/dbInterface.js:55](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L55)
 
 ***
 
@@ -83,7 +83,7 @@ DatabaseQueryEngine.find
 
 *Defined in*
 
-[db/dbInterface.js:45](https://github.com/cozy/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L45)
+[db/dbInterface.js:45](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L45)
 
 ***
 
@@ -111,7 +111,7 @@ DatabaseQueryEngine.getById
 
 *Defined in*
 
-[db/dbInterface.js:65](https://github.com/cozy/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L65)
+[db/dbInterface.js:65](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L65)
 
 ***
 
@@ -139,7 +139,7 @@ DatabaseQueryEngine.getByIds
 
 *Defined in*
 
-[db/dbInterface.js:75](https://github.com/cozy/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L75)
+[db/dbInterface.js:75](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L75)
 
 ***
 
@@ -165,4 +165,4 @@ DatabaseQueryEngine.openDB
 
 *Defined in*
 
-[db/dbInterface.js:35](https://github.com/cozy/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L35)
+[db/dbInterface.js:35](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/db/dbInterface.js#L35)

@@ -10,7 +10,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/manifest.js:6](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L6)
+[packages/cozy-client/src/models/manifest.js:6](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L6)
 
 ***
 
@@ -22,7 +22,7 @@ Legacy login fields declared by some konnectors
 
 *Defined in*
 
-[packages/cozy-client/src/models/manifest.js:11](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L11)
+[packages/cozy-client/src/models/manifest.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L11)
 
 ## Functions
 
@@ -42,7 +42,7 @@ Legacy login fields declared by some konnectors
 
 *Defined in*
 
-[packages/cozy-client/src/models/manifest.js:63](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L63)
+[packages/cozy-client/src/models/manifest.js:63](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L63)
 
 ***
 
@@ -66,7 +66,7 @@ The key for the identifier field, example 'login'
 
 *Defined in*
 
-[packages/cozy-client/src/models/manifest.js:161](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L161)
+[packages/cozy-client/src/models/manifest.js:161](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L161)
 
 ***
 
@@ -86,7 +86,7 @@ The key for the identifier field, example 'login'
 
 *Defined in*
 
-[packages/cozy-client/src/models/manifest.js:67](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L67)
+[packages/cozy-client/src/models/manifest.js:67](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L67)
 
 ***
 
@@ -108,7 +108,7 @@ Normalize app manifest, retro-compatibility for old manifests
 
 *Defined in*
 
-[packages/cozy-client/src/models/manifest.js:77](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L77)
+[packages/cozy-client/src/models/manifest.js:77](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L77)
 
 ***
 
@@ -132,7 +132,7 @@ sanitized categories
 
 *Defined in*
 
-[packages/cozy-client/src/models/manifest.js:56](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L56)
+[packages/cozy-client/src/models/manifest.js:56](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L56)
 
 ***
 
@@ -156,4 +156,4 @@ Ensures that fields has at least one field with the role 'identifier'
 
 *Defined in*
 
-[packages/cozy-client/src/models/manifest.js:130](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L130)
+[packages/cozy-client/src/models/manifest.js:130](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/manifest.js#L130)

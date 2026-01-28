@@ -14,7 +14,7 @@ File MIME type
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:6](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L6)
+[packages/cozy-client/src/models/ai.js:6](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L6)
 
 ***
 
@@ -26,4 +26,4 @@ File name
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:5](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L5)
+[packages/cozy-client/src/models/ai.js:5](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L5)

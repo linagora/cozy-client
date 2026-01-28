@@ -14,7 +14,7 @@ Frequency penalty
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:61](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L61)
+[packages/cozy-client/src/models/ai.js:61](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L61)
 
 ***
 
@@ -26,7 +26,7 @@ Maximum tokens to generate
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:59](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L59)
+[packages/cozy-client/src/models/ai.js:59](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L59)
 
 ***
 
@@ -38,7 +38,7 @@ Optional model to use
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:56](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L56)
+[packages/cozy-client/src/models/ai.js:56](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L56)
 
 ***
 
@@ -50,7 +50,7 @@ Presence penalty
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:60](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L60)
+[packages/cozy-client/src/models/ai.js:60](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L60)
 
 ***
 
@@ -62,7 +62,7 @@ Whether to stream the response
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:55](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L55)
+[packages/cozy-client/src/models/ai.js:55](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L55)
 
 ***
 
@@ -74,7 +74,7 @@ Temperature for randomness (0-2)
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:57](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L57)
+[packages/cozy-client/src/models/ai.js:57](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L57)
 
 ***
 
@@ -86,4 +86,4 @@ Top-p sampling
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:58](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L58)
+[packages/cozy-client/src/models/ai.js:58](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L58)

@@ -16,7 +16,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/registry.js:40](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/registry.js#L40)
+[packages/cozy-client/src/registry.js:40](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/registry.js#L40)
 
 ## Properties
 
@@ -26,7 +26,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/registry.js:44](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/registry.js#L44)
+[packages/cozy-client/src/registry.js:44](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/registry.js#L44)
 
 ## Methods
 
@@ -48,7 +48,7 @@ Fetch the status of a single app on the registry
 
 *Defined in*
 
-[packages/cozy-client/src/registry.js:132](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/registry.js#L132)
+[packages/cozy-client/src/registry.js:132](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/registry.js#L132)
 
 ***
 
@@ -73,7 +73,7 @@ Fetch the latest version of an app for the given channel and slug
 
 *Defined in*
 
-[packages/cozy-client/src/registry.js:146](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/registry.js#L146)
+[packages/cozy-client/src/registry.js:146](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/registry.js#L146)
 
 ***
 
@@ -98,7 +98,7 @@ Fetch at most 200 apps from the channel
 
 *Defined in*
 
-[packages/cozy-client/src/registry.js:96](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/registry.js#L96)
+[packages/cozy-client/src/registry.js:96](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/registry.js#L96)
 
 ***
 
@@ -114,7 +114,7 @@ Fetch the list of apps that are in maintenance mode
 
 *Defined in*
 
-[packages/cozy-client/src/registry.js:121](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/registry.js#L121)
+[packages/cozy-client/src/registry.js:121](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/registry.js#L121)
 
 ***
 
@@ -139,7 +139,7 @@ Accepts the terms if the app has them.
 
 *Defined in*
 
-[packages/cozy-client/src/registry.js:56](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/registry.js#L56)
+[packages/cozy-client/src/registry.js:56](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/registry.js#L56)
 
 ***
 
@@ -161,4 +161,4 @@ Uninstalls an app.
 
 *Defined in*
 
-[packages/cozy-client/src/registry.js:80](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/registry.js#L80)
+[packages/cozy-client/src/registry.js:80](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/registry.js#L80)

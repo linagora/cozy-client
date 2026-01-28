@@ -27,7 +27,7 @@ Component.constructor
 
 *Defined in*
 
-[packages/cozy-client/src/Provider.jsx:21](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L21)
+[packages/cozy-client/src/Provider.jsx:21](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L21)
 
 ## Properties
 
@@ -44,7 +44,7 @@ Component.constructor
 
 *Defined in*
 
-[packages/cozy-client/src/Provider.jsx:31](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L31)
+[packages/cozy-client/src/Provider.jsx:31](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L31)
 
 ***
 
@@ -60,7 +60,7 @@ Component.constructor
 
 *Defined in*
 
-[packages/cozy-client/src/Provider.jsx:36](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L36)
+[packages/cozy-client/src/Provider.jsx:36](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L36)
 
 ***
 
@@ -78,7 +78,7 @@ Component.constructor
 
 *Defined in*
 
-[packages/cozy-client/src/Provider.jsx:12](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L12)
+[packages/cozy-client/src/Provider.jsx:12](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L12)
 
 ## Methods
 
@@ -97,7 +97,7 @@ Component.constructor
 
 *Defined in*
 
-[packages/cozy-client/src/Provider.jsx:40](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L40)
+[packages/cozy-client/src/Provider.jsx:40](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L40)
 
 ***
 
@@ -115,4 +115,4 @@ Component.render
 
 *Defined in*
 
-[packages/cozy-client/src/Provider.jsx:47](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L47)
+[packages/cozy-client/src/Provider.jsx:47](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Provider.jsx#L47)

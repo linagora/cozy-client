@@ -14,7 +14,7 @@ Space used in GB rounded
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:114](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L114)
+[packages/cozy-client/src/models/instance.js:114](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L114)
 
 ***
 
@@ -26,7 +26,7 @@ Maximum space available in GB rounded
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:115](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L115)
+[packages/cozy-client/src/models/instance.js:115](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L115)
 
 ***
 
@@ -38,4 +38,4 @@ Usage percent of the disk rounded
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:116](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L116)
+[packages/cozy-client/src/models/instance.js:116](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L116)

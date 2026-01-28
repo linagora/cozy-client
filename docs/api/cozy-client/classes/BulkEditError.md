@@ -29,7 +29,7 @@ Error.constructor
 
 *Defined in*
 
-[packages/cozy-client/src/errors.js:10](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/errors.js#L10)
+[packages/cozy-client/src/errors.js:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/errors.js#L10)
 
 ## Properties
 
@@ -43,7 +43,7 @@ Error.name
 
 *Defined in*
 
-[packages/cozy-client/src/errors.js:12](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/errors.js#L12)
+[packages/cozy-client/src/errors.js:12](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/errors.js#L12)
 
 ***
 
@@ -53,7 +53,7 @@ Error.name
 
 *Defined in*
 
-[packages/cozy-client/src/errors.js:13](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/errors.js#L13)
+[packages/cozy-client/src/errors.js:13](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/errors.js#L13)
 
 ## Methods
 
@@ -71,7 +71,7 @@ Get bulk errors results
 
 *Defined in*
 
-[packages/cozy-client/src/errors.js:32](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/errors.js#L32)
+[packages/cozy-client/src/errors.js:32](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/errors.js#L32)
 
 ***
 
@@ -87,4 +87,4 @@ Get documents that have been correctly updated
 
 *Defined in*
 
-[packages/cozy-client/src/errors.js:23](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/errors.js#L23)
+[packages/cozy-client/src/errors.js:23](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/errors.js#L23)

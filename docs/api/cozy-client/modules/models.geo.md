@@ -27,7 +27,7 @@ Compute the speed from distance and duration
 
 *Defined in*
 
-[packages/cozy-client/src/models/geo.js:12](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L12)
+[packages/cozy-client/src/models/geo.js:12](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L12)
 
 ***
 
@@ -56,7 +56,7 @@ The center point
 
 *Defined in*
 
-[packages/cozy-client/src/models/geo.js:104](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L104)
+[packages/cozy-client/src/models/geo.js:104](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L104)
 
 ***
 
@@ -84,7 +84,7 @@ The delta latitude degrees
 
 *Defined in*
 
-[packages/cozy-client/src/models/geo.js:172](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L172)
+[packages/cozy-client/src/models/geo.js:172](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L172)
 
 ***
 
@@ -114,7 +114,7 @@ the longitude delta degrees
 
 *Defined in*
 
-[packages/cozy-client/src/models/geo.js:155](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L155)
+[packages/cozy-client/src/models/geo.js:155](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L155)
 
 ***
 
@@ -146,4 +146,4 @@ The distance between the points, in meters, rounded to 2 decimals
 
 *Defined in*
 
-[packages/cozy-client/src/models/geo.js:65](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L65)
+[packages/cozy-client/src/models/geo.js:65](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/geo.js#L65)

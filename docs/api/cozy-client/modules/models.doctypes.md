@@ -26,4 +26,4 @@ Fetches the list of all doctypes in the current instance.
 
 *Defined in*
 
-[packages/cozy-client/src/models/doctypes/index.js:11](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/doctypes/index.js#L11)
+[packages/cozy-client/src/models/doctypes/index.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/doctypes/index.js#L11)

@@ -27,7 +27,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/links/WebFlagshipLink.js:8](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L8)
+[packages/cozy-client/src/links/WebFlagshipLink.js:8](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L8)
 
 ## Properties
 
@@ -37,7 +37,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/links/WebFlagshipLink.js:10](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L10)
+[packages/cozy-client/src/links/WebFlagshipLink.js:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L10)
 
 ## Methods
 
@@ -64,7 +64,7 @@ Persist the given data into the links storage
 
 *Defined in*
 
-[packages/cozy-client/src/links/WebFlagshipLink.js:25](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L25)
+[packages/cozy-client/src/links/WebFlagshipLink.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L25)
 
 ***
 
@@ -84,7 +84,7 @@ Persist the given data into the links storage
 
 *Defined in*
 
-[packages/cozy-client/src/links/WebFlagshipLink.js:13](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L13)
+[packages/cozy-client/src/links/WebFlagshipLink.js:13](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L13)
 
 ***
 
@@ -113,7 +113,7 @@ Request the given operation from the link
 
 *Defined in*
 
-[packages/cozy-client/src/links/WebFlagshipLink.js:21](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L21)
+[packages/cozy-client/src/links/WebFlagshipLink.js:21](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L21)
 
 ***
 
@@ -133,4 +133,4 @@ Reset the link data
 
 *Defined in*
 
-[packages/cozy-client/src/links/WebFlagshipLink.js:17](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L17)
+[packages/cozy-client/src/links/WebFlagshipLink.js:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/WebFlagshipLink.js#L17)

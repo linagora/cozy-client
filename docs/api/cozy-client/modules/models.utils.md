@@ -26,7 +26,7 @@ Gets the app that created a document
 
 *Defined in*
 
-[packages/cozy-client/src/models/utils.js:23](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/utils.js#L23)
+[packages/cozy-client/src/models/utils.js:23](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/utils.js#L23)
 
 ***
 
@@ -50,7 +50,7 @@ Gets the download link for the Cozy Flagship app and his white-labels versions
 
 *Defined in*
 
-[packages/cozy-client/src/models/utils.js:31](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/utils.js#L31)
+[packages/cozy-client/src/models/utils.js:31](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/utils.js#L31)
 
 ***
 
@@ -75,4 +75,4 @@ Checks if a document has been updated by a specific app
 
 *Defined in*
 
-[packages/cozy-client/src/models/utils.js:12](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/utils.js#L12)
+[packages/cozy-client/src/models/utils.js:12](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/utils.js#L12)

@@ -26,4 +26,4 @@ Checks whether the user has a password
 
 *Defined in*
 
-[packages/cozy-client/src/models/user.js:11](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/user.js#L11)
+[packages/cozy-client/src/models/user.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/user.js#L11)

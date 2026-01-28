@@ -22,7 +22,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/documentTypeDataHelpers.js:17](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/document/documentTypeDataHelpers.js#L17)
+[packages/cozy-client/src/models/document/documentTypeDataHelpers.js:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/documentTypeDataHelpers.js#L17)
 
 ***
 
@@ -44,4 +44,4 @@ Check if a qualification is a note
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/documentTypeDataHelpers.js:33](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/document/documentTypeDataHelpers.js#L33)
+[packages/cozy-client/src/models/document/documentTypeDataHelpers.js:33](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/documentTypeDataHelpers.js#L33)
