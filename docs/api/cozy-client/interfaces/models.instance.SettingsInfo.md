@@ -14,7 +14,7 @@ Object returned by /settings/context
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:16](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L16)
+[packages/cozy-client/src/models/instance.js:16](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L16)
 
 ***
 
@@ -26,7 +26,7 @@ Object returned by /settings/disk-usage
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:18](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L18)
+[packages/cozy-client/src/models/instance.js:18](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L18)
 
 ***
 
@@ -38,4 +38,4 @@ Object returned by /settings/instance
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:17](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L17)
+[packages/cozy-client/src/models/instance.js:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L17)

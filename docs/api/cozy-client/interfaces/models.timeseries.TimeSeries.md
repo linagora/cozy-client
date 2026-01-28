@@ -14,7 +14,7 @@ The type of time series, e.g. 'electricity'
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:22](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L22)
+[packages/cozy-client/src/models/timeseries.js:22](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L22)
 
 ***
 
@@ -26,7 +26,7 @@ The end date of the series
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:24](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L24)
+[packages/cozy-client/src/models/timeseries.js:24](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L24)
 
 ***
 
@@ -38,7 +38,7 @@ The starting date of the series
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:25](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L25)
+[packages/cozy-client/src/models/timeseries.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L25)
 
 ***
 
@@ -50,7 +50,7 @@ An array of objects representing the time series
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:28](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L28)
+[packages/cozy-client/src/models/timeseries.js:28](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L28)
 
 ***
 
@@ -62,7 +62,7 @@ The data source, e.g. 'enedis.fr'
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:26](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L26)
+[packages/cozy-client/src/models/timeseries.js:26](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L26)
 
 ***
 
@@ -74,7 +74,7 @@ The starting date of the series
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:23](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L23)
+[packages/cozy-client/src/models/timeseries.js:23](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L23)
 
 ***
 
@@ -86,4 +86,4 @@ The theme used to group time series, e.g. 'energy'
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:27](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L27)
+[packages/cozy-client/src/models/timeseries.js:27](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L27)

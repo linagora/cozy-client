@@ -30,7 +30,7 @@ url
 
 *Defined in*
 
-[packages/cozy-client/src/models/note.js:34](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L34)
+[packages/cozy-client/src/models/note.js:34](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L34)
 
 ***
 
@@ -52,7 +52,7 @@ url
 
 *Defined in*
 
-[packages/cozy-client/src/models/note.js:9](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L9)
+[packages/cozy-client/src/models/note.js:9](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L9)
 
 ***
 
@@ -73,4 +73,4 @@ url
 
 *Defined in*
 
-[packages/cozy-client/src/models/note.js:18](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L18)
+[packages/cozy-client/src/models/note.js:18](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L18)

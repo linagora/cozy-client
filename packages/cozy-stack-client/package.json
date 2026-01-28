@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cozy/cozy-client.git"
+    "url": "git+https://github.com/linagora/cozy-client.git"
   },
   "scripts": {
     "build": "../../bin/build",

@@ -27,7 +27,7 @@ io.cozy.accounts attributes
 
 *Defined in*
 
-[packages/cozy-client/src/models/account.js:113](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L113)
+[packages/cozy-client/src/models/account.js:113](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L113)
 
 ***
 
@@ -51,7 +51,7 @@ Get the account login field value from a given account
 
 *Defined in*
 
-[packages/cozy-client/src/models/account.js:79](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L79)
+[packages/cozy-client/src/models/account.js:79](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L79)
 
 ***
 
@@ -75,7 +75,7 @@ Get the account name from a given account
 
 *Defined in*
 
-[packages/cozy-client/src/models/account.js:97](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L97)
+[packages/cozy-client/src/models/account.js:97](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L97)
 
 ***
 
@@ -100,7 +100,7 @@ synchronisation status
 
 *Defined in*
 
-[packages/cozy-client/src/models/account.js:44](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L44)
+[packages/cozy-client/src/models/account.js:44](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L44)
 
 ***
 
@@ -124,7 +124,7 @@ An array of errors with a `type` and `mutedAt` field
 
 *Defined in*
 
-[packages/cozy-client/src/models/account.js:15](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L15)
+[packages/cozy-client/src/models/account.js:15](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L15)
 
 ***
 
@@ -147,7 +147,7 @@ Look if the given account has an associated trigger or not.
 
 *Defined in*
 
-[packages/cozy-client/src/models/account.js:129](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L129)
+[packages/cozy-client/src/models/account.js:129](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L129)
 
 ***
 
@@ -172,7 +172,7 @@ An updated io.cozy.accounts
 
 *Defined in*
 
-[packages/cozy-client/src/models/account.js:25](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L25)
+[packages/cozy-client/src/models/account.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L25)
 
 ***
 
@@ -196,4 +196,4 @@ Sets contract sync status into account relationship
 
 *Defined in*
 
-[packages/cozy-client/src/models/account.js:60](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L60)
+[packages/cozy-client/src/models/account.js:60](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/account.js#L60)

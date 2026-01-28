@@ -14,7 +14,7 @@ Conditions that must be met to display the entrypoint
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:132](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L132)
+[packages/cozy-client/src/models/applications.js:132](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L132)
 
 ***
 
@@ -26,7 +26,7 @@ The URL hash for navigation
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:130](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L130)
+[packages/cozy-client/src/models/applications.js:130](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L130)
 
 ***
 
@@ -38,7 +38,7 @@ Base64 encoded SVG icon
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:131](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L131)
+[packages/cozy-client/src/models/applications.js:131](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L131)
 
 ***
 
@@ -50,7 +50,7 @@ The unique name of the entrypoint
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:128](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L128)
+[packages/cozy-client/src/models/applications.js:128](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L128)
 
 ***
 
@@ -62,4 +62,4 @@ Localized titles for the entrypoint
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:129](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L129)
+[packages/cozy-client/src/models/applications.js:129](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L129)

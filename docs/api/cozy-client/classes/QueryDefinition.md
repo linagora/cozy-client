@@ -34,7 +34,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:51](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L51)
+[packages/cozy-client/src/queries/dsl.js:51](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L51)
 
 ## Properties
 
@@ -44,7 +44,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:65](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L65)
+[packages/cozy-client/src/queries/dsl.js:65](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L65)
 
 ***
 
@@ -54,7 +54,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:64](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L64)
+[packages/cozy-client/src/queries/dsl.js:64](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L64)
 
 ***
 
@@ -64,7 +64,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:52](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L52)
+[packages/cozy-client/src/queries/dsl.js:52](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L52)
 
 ***
 
@@ -74,7 +74,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:56](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L56)
+[packages/cozy-client/src/queries/dsl.js:56](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L56)
 
 ***
 
@@ -84,7 +84,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:53](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L53)
+[packages/cozy-client/src/queries/dsl.js:53](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L53)
 
 ***
 
@@ -94,7 +94,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:54](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L54)
+[packages/cozy-client/src/queries/dsl.js:54](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L54)
 
 ***
 
@@ -104,7 +104,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:60](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L60)
+[packages/cozy-client/src/queries/dsl.js:60](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L60)
 
 ***
 
@@ -114,7 +114,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:57](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L57)
+[packages/cozy-client/src/queries/dsl.js:57](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L57)
 
 ***
 
@@ -124,7 +124,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:62](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L62)
+[packages/cozy-client/src/queries/dsl.js:62](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L62)
 
 ***
 
@@ -134,7 +134,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:58](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L58)
+[packages/cozy-client/src/queries/dsl.js:58](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L58)
 
 ***
 
@@ -144,7 +144,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:61](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L61)
+[packages/cozy-client/src/queries/dsl.js:61](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L61)
 
 ***
 
@@ -154,7 +154,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:55](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L55)
+[packages/cozy-client/src/queries/dsl.js:55](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L55)
 
 ***
 
@@ -164,7 +164,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:66](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L66)
+[packages/cozy-client/src/queries/dsl.js:66](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L66)
 
 ***
 
@@ -174,7 +174,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:63](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L63)
+[packages/cozy-client/src/queries/dsl.js:63](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L63)
 
 ***
 
@@ -184,7 +184,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:59](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L59)
+[packages/cozy-client/src/queries/dsl.js:59](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L59)
 
 ## Methods
 
@@ -198,7 +198,7 @@ from a Cozy. `QueryDefinition`s are sent to links.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:293](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L293)
+[packages/cozy-client/src/queries/dsl.js:293](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L293)
 
 ***
 
@@ -220,7 +220,7 @@ Check if the selected fields are all included in the selectors
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:156](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L156)
+[packages/cozy-client/src/queries/dsl.js:156](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L156)
 
 ***
 
@@ -244,7 +244,7 @@ It is useful to warn the developer when a partial index might be used.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:119](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L119)
+[packages/cozy-client/src/queries/dsl.js:119](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L119)
 
 ***
 
@@ -273,7 +273,7 @@ See https://docs.cozy.io/en/tutorials/data/queries/#sort-data-with-mango
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:80](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L80)
+[packages/cozy-client/src/queries/dsl.js:80](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L80)
 
 ***
 
@@ -297,7 +297,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:183](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L183)
+[packages/cozy-client/src/queries/dsl.js:183](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L183)
 
 ***
 
@@ -321,7 +321,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:196](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L196)
+[packages/cozy-client/src/queries/dsl.js:196](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L196)
 
 ***
 
@@ -346,7 +346,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:276](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L276)
+[packages/cozy-client/src/queries/dsl.js:276](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L276)
 
 ***
 
@@ -370,7 +370,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:232](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L232)
+[packages/cozy-client/src/queries/dsl.js:232](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L232)
 
 ***
 
@@ -394,7 +394,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:289](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L289)
+[packages/cozy-client/src/queries/dsl.js:289](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L289)
 
 ***
 
@@ -421,7 +421,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:306](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L306)
+[packages/cozy-client/src/queries/dsl.js:306](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L306)
 
 ***
 
@@ -448,7 +448,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:344](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L344)
+[packages/cozy-client/src/queries/dsl.js:344](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L344)
 
 ***
 
@@ -477,7 +477,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:326](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L326)
+[packages/cozy-client/src/queries/dsl.js:326](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L326)
 
 ***
 
@@ -503,7 +503,7 @@ You can find more information about partial indexes [here](https://docs.cozy.io/
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:246](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L246)
+[packages/cozy-client/src/queries/dsl.js:246](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L246)
 
 ***
 
@@ -527,7 +527,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:359](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L359)
+[packages/cozy-client/src/queries/dsl.js:359](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L359)
 
 ***
 
@@ -551,7 +551,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:220](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L220)
+[packages/cozy-client/src/queries/dsl.js:220](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L220)
 
 ***
 
@@ -575,7 +575,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:369](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L369)
+[packages/cozy-client/src/queries/dsl.js:369](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L369)
 
 ***
 
@@ -599,7 +599,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:257](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L257)
+[packages/cozy-client/src/queries/dsl.js:257](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L257)
 
 ***
 
@@ -631,7 +631,7 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:373](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L373)
+[packages/cozy-client/src/queries/dsl.js:373](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L373)
 
 ***
 
@@ -656,4 +656,4 @@ The QueryDefinition object.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:207](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L207)
+[packages/cozy-client/src/queries/dsl.js:207](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L207)

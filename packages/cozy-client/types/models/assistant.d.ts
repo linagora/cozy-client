@@ -1,7 +1,7 @@
 export function createAssistant(client: CozyClient, assistantData: {
     name: string;
     prompt: string;
-    icon?: string;
+    icon: string;
     isCustomModel: boolean;
     model: string;
     baseUrl: string;
@@ -11,11 +11,10 @@ export function deleteAssistant(client: CozyClient, assistantId: string): Promis
 export function editAssistant(client: CozyClient, assistantId: string, assistantData: {
     name: string;
     prompt: string;
-    icon?: string;
+    icon: string;
     isCustomModel: boolean;
     model: string;
     baseUrl: string;
-    apiKey?: string;
+    apiKey: string;
 }): Promise<void>;
-
 import CozyClient from "../CozyClient";

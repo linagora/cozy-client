@@ -39,7 +39,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/locales/index.js:21](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/document/locales/index.js#L21)
+[packages/cozy-client/src/models/document/locales/index.js:21](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/locales/index.js#L21)
 
 ***
 
@@ -61,4 +61,4 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/locales/index.js:45](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/document/locales/index.js#L45)
+[packages/cozy-client/src/models/document/locales/index.js:45](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/locales/index.js#L45)

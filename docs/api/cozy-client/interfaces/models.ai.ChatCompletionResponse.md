@@ -14,7 +14,7 @@ Array of completion choices
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:46](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L46)
+[packages/cozy-client/src/models/ai.js:46](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L46)
 
 ***
 
@@ -26,7 +26,7 @@ Creation timestamp
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:42](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L42)
+[packages/cozy-client/src/models/ai.js:42](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L42)
 
 ***
 
@@ -38,7 +38,7 @@ Extra data (e.g., sources)
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:50](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L50)
+[packages/cozy-client/src/models/ai.js:50](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L50)
 
 ***
 
@@ -50,7 +50,7 @@ Completion ID
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:41](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L41)
+[packages/cozy-client/src/models/ai.js:41](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L41)
 
 ***
 
@@ -62,7 +62,7 @@ Model used (may be null)
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:43](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L43)
+[packages/cozy-client/src/models/ai.js:43](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L43)
 
 ***
 
@@ -74,7 +74,7 @@ Object type
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:44](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L44)
+[packages/cozy-client/src/models/ai.js:44](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L44)
 
 ***
 
@@ -86,7 +86,7 @@ Prompt log probabilities
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:49](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L49)
+[packages/cozy-client/src/models/ai.js:49](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L49)
 
 ***
 
@@ -98,7 +98,7 @@ Service tier
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:48](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L48)
+[packages/cozy-client/src/models/ai.js:48](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L48)
 
 ***
 
@@ -110,7 +110,7 @@ System fingerprint
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:45](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L45)
+[packages/cozy-client/src/models/ai.js:45](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L45)
 
 ***
 
@@ -122,4 +122,4 @@ Token usage statistics
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:47](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L47)
+[packages/cozy-client/src/models/ai.js:47](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L47)

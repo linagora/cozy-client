@@ -14,7 +14,7 @@ Message content
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:17](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L17)
+[packages/cozy-client/src/models/ai.js:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L17)
 
 ***
 
@@ -26,7 +26,7 @@ Function call (if any)
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:20](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L20)
+[packages/cozy-client/src/models/ai.js:20](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L20)
 
 ***
 
@@ -38,7 +38,7 @@ Message role
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:18](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L18)
+[packages/cozy-client/src/models/ai.js:18](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L18)
 
 ***
 
@@ -50,4 +50,4 @@ Tool calls (if any)
 
 *Defined in*
 
-[packages/cozy-client/src/models/ai.js:19](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L19)
+[packages/cozy-client/src/models/ai.js:19](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/ai.js#L19)

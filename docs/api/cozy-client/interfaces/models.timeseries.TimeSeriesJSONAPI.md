@@ -14,4 +14,4 @@ The JSON-API data response
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:74](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L74)
+[packages/cozy-client/src/models/timeseries.js:74](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L74)

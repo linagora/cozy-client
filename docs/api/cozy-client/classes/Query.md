@@ -27,7 +27,7 @@ Component.constructor
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:92](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L92)
+[packages/cozy-client/src/Query.jsx:92](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L92)
 
 ## Properties
 
@@ -37,7 +37,7 @@ Component.constructor
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:164](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L164)
+[packages/cozy-client/src/Query.jsx:164](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L164)
 
 ***
 
@@ -49,7 +49,7 @@ Current client
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:106](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L106)
+[packages/cozy-client/src/Query.jsx:106](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L106)
 
 ***
 
@@ -61,7 +61,7 @@ Observable query to connect store to query
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:112](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L112)
+[packages/cozy-client/src/Query.jsx:112](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L112)
 
 ***
 
@@ -73,7 +73,7 @@ Callback to unsubscribe from observable query
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:118](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L118)
+[packages/cozy-client/src/Query.jsx:118](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L118)
 
 ***
 
@@ -132,7 +132,7 @@ Component.componentDidMount
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:124](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L124)
+[packages/cozy-client/src/Query.jsx:124](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L124)
 
 ***
 
@@ -156,7 +156,7 @@ Component.componentDidUpdate
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:146](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L146)
+[packages/cozy-client/src/Query.jsx:146](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L146)
 
 ***
 
@@ -174,7 +174,7 @@ Component.componentWillUnmount
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:152](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L152)
+[packages/cozy-client/src/Query.jsx:152](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L152)
 
 ***
 
@@ -188,7 +188,7 @@ Component.componentWillUnmount
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:131](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L131)
+[packages/cozy-client/src/Query.jsx:131](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L131)
 
 ***
 
@@ -202,7 +202,7 @@ Component.componentWillUnmount
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:158](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L158)
+[packages/cozy-client/src/Query.jsx:158](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L158)
 
 ***
 
@@ -216,7 +216,7 @@ Component.componentWillUnmount
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:163](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L163)
+[packages/cozy-client/src/Query.jsx:163](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L163)
 
 ***
 
@@ -234,4 +234,4 @@ Component.render
 
 *Defined in*
 
-[packages/cozy-client/src/Query.jsx:167](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L167)
+[packages/cozy-client/src/Query.jsx:167](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/Query.jsx#L167)

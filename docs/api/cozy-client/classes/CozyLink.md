@@ -27,7 +27,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/links/CozyLink.js:2](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L2)
+[packages/cozy-client/src/links/CozyLink.js:2](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L2)
 
 ## Methods
 
@@ -50,7 +50,7 @@ Persist the given data into the links storage
 
 *Defined in*
 
-[packages/cozy-client/src/links/CozyLink.js:32](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L32)
+[packages/cozy-client/src/links/CozyLink.js:32](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L32)
 
 ***
 
@@ -75,7 +75,7 @@ Request the given operation from the link
 
 *Defined in*
 
-[packages/cozy-client/src/links/CozyLink.js:21](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L21)
+[packages/cozy-client/src/links/CozyLink.js:21](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L21)
 
 ***
 
@@ -91,4 +91,4 @@ Reset the link data
 
 *Defined in*
 
-[packages/cozy-client/src/links/CozyLink.js:41](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L41)
+[packages/cozy-client/src/links/CozyLink.js:41](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L41)
