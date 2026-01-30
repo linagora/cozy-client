@@ -765,7 +765,7 @@ export const copy = async (client, file, destination, { driveId } = {}) => {
 
     const resp = await client
       .collection(DOCTYPE_FILES, { driveId })
-      .copy(file._id, undefined, destination._id)
+      .copy(file._id, file.name, destination._id)
     return resp
   } catch (e) {
     throw e

@@ -515,9 +515,8 @@ class FileCollection extends DocumentCollection {
     if (sanitizedName != null && sanitizeName) {
       sanitizedName = sanitizeAndValidateFileName(sanitizedName)
     }
-
     const params = {
-      name: sanitizedName,
+      Name: sanitizedName,
       DirID: dirId
     }
     const path = this.prefix + uri`/${id}/copy`
