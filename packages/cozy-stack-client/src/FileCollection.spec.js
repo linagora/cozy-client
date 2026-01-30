@@ -1361,7 +1361,7 @@ describe('FileCollection', () => {
       )
       expect(client.fetchJSON).toHaveBeenCalledWith(
         'POST',
-        '/files/d04ab491-2fc6/copy?name=newName&DirID=41686c35-9d8e'
+        '/files/d04ab491-2fc6/copy?Name=newName&DirID=41686c35-9d8e'
       )
       expect(result).toEqual({
         data: {
@@ -1402,7 +1402,7 @@ describe('FileCollection', () => {
       )
       expect(client.fetchJSON).toHaveBeenCalledWith(
         'POST',
-        '/files/d04ab491-2fc6/copy?name=newName&DirID=41686c35-9d8e'
+        '/files/d04ab491-2fc6/copy?Name=newName&DirID=41686c35-9d8e'
       )
       expect(result).toEqual({
         data: {
@@ -1444,7 +1444,7 @@ describe('FileCollection', () => {
       )
       expect(client.fetchJSON).toHaveBeenCalledWith(
         'POST',
-        '/files/d04ab491-2fc6/copy?name=%20newName%20&DirID=41686c35-9d8e'
+        '/files/d04ab491-2fc6/copy?Name=%20newName%20&DirID=41686c35-9d8e'
       )
       expect(result).toEqual({
         data: {
