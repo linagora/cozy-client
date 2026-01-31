@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.21.1](https://github.com/cozy/cozy-client/compare/v60.21.0...v60.21.1) (2026-01-31)
+
+
+### Bug Fixes
+
+* Correct file copy to include filename and adjust parameter casing ([ef36e2f](https://github.com/cozy/cozy-client/commit/ef36e2fbb62587af6d04bd83c45aea5bddfe0393))
+
+
+
+
+
 # [60.21.0](https://github.com/cozy/cozy-client/compare/v60.20.0...v60.21.0) (2026-01-28)
 
 
