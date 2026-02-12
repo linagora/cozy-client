@@ -53,10 +53,23 @@ export const getIndexNameFromFields = (fields, partialFilter) => {
   const indexName = `by_${fields.join('_and_')}`
 
   if (partialFilter) {
-    return `${indexName}_filter_(${makeKeyFromPartialFilter(partialFilter)})`
+    const filterKey = makeKeyFromPartialFilter(partialFilter)
+    return sanitizeIndexName(`${indexName}_filter_(${filterKey})`)
   }
 
   return indexName
+}
+
+/**
+ * Sanitize an index name to remove characters that are not compatible with
+ * CouchDB design document naming conventions (e.g. "/" breaks CouchDB > 3.3.3)
+ * https://github.com/linagora/cozy-client/issues/1667
+ *
+ * @param {string} name - The index name to sanitize
+ * @returns {string} The sanitized index name
+ */
+const sanitizeIndexName = name => {
+  return name.replace(/%/g, '%25').replace(/\//g, '%2F')
 }
 
 /**
