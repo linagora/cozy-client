@@ -27,7 +27,7 @@ export const arePremiumLinksEnabled = instanceInfo => {
 }
 export const isFreemiumUser = instanceInfo => {
   const quota = get(instanceInfo, 'diskUsage.data.quota', false)
-  return parseInt(quota) <= PREMIUM_QUOTA
+  return parseInt(quota) < PREMIUM_QUOTA
 }
 export const getUuid = instanceInfo => {
   return get(instanceInfo, 'instance.data.uuid')

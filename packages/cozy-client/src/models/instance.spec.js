@@ -49,6 +49,22 @@ const hadAnOfferInstance = {
     }
   }
 }
+
+const freemiumInstance = {
+  diskUsage: {
+    data: {
+      quota: '1000'
+    }
+  }
+}
+
+const nonFreemiumInstance = {
+  diskUsage: {
+    data: {
+      quota: '50000000000'
+    }
+  }
+}
 describe('instance', () => {
   it('should test if self hosted or not', () => {
     expect(instance.isSelfHosted(noSelfHostedInstance)).toBe(false)
@@ -69,7 +85,10 @@ describe('instance', () => {
     expect(instance.isFreemiumUser(noSelfHostedInstance)).toBe(true)
     expect(instance.isFreemiumUser(selftHostedInstance)).toBe(false)
   })
-
+  it('should correctly identify freemium vs non-freemium based on quota boundary', () => {
+    expect(instance.isFreemiumUser(freemiumInstance)).toBe(true)
+    expect(instance.isFreemiumUser(nonFreemiumInstance)).toBe(false)
+  })
   it('should tell us that this instance is concerned by our offers', () => {
     expect(instance.shouldDisplayOffers(noSelfHostedInstance)).toBe(true)
   })
