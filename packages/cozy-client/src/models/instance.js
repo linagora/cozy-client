@@ -141,11 +141,18 @@ const formatDecimals = (value, fractionDigits = 2) =>
  * @param {number} quota - Value in bytes representing the maximum space available
  * @returns {DiskInfosRaw} - Returns an transform data to GB and usage percent of the disk
  */
-const computeDiskInfos = (usage, quota = FallbackQuota) => ({
-  diskQuota: convertBytesToGB(quota),
-  diskUsage: convertBytesToGB(usage),
-  percentUsage: (usage / quota) * 100
-})
+const computeDiskInfos = (usage, quota = FallbackQuota) => {
+  let percentUsage = (usage / quota) * 100
+  // Handle division by zero: if quota is 0, percent is always 0
+  if (quota === 0) {
+    percentUsage = 0
+  }
+  return {
+    diskQuota: convertBytesToGB(quota),
+    diskUsage: convertBytesToGB(usage),
+    percentUsage
+  }
+}
 
 /**
  * Make human readable information from disk information (usage, quota)
@@ -157,7 +164,7 @@ const computeDiskInfos = (usage, quota = FallbackQuota) => ({
 export const makeDiskInfos = (usage, quota) => {
   const { diskQuota, diskUsage, percentUsage } = computeDiskInfos(
     +usage,
-    quota ? +quota : undefined
+    quota != null && quota !== '' ? +quota : undefined
   )
   return {
     humanDiskQuota: formatDecimals(diskQuota),

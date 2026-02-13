@@ -128,9 +128,18 @@ describe('instance', () => {
         percentUsage: '0'
       })
       expect(instance.makeDiskInfos('0', 0)).toStrictEqual({
-        humanDiskQuota: '100',
+        humanDiskQuota: '0',
         humanDiskUsage: '0',
         percentUsage: '0'
+      })
+    })
+
+    it('should handle quota of 0 without converting to default', () => {
+      // Bug: quota of 0 should remain 0, not be converted to 100
+      expect(instance.makeDiskInfos('1000000', 0)).toStrictEqual({
+        humanDiskQuota: '0',
+        humanDiskUsage: '0',
+        percentUsage: 'Infinity'
       })
     })
   })
