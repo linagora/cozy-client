@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.21.2](https://github.com/linagora/cozy-client/compare/v60.21.1...v60.21.2) (2026-02-13)
+
+
+### Bug Fixes
+
+* Better freemium check ([1328aff](https://github.com/linagora/cozy-client/commit/1328affcb5f9b0be000ee692cae4f9be7143012e))
+
+
+
+
+
 ## [60.21.1](https://github.com/linagora/cozy-client/compare/v60.21.0...v60.21.1) (2026-01-31)
 
 
