@@ -3,7 +3,7 @@
     "babel-preset-cozy-app": "1.12.0",
     "babel-preset-react": "6.24.1",
     "commitlint-config-cozy": "0.15.0",
-    "eslint": "5.16.0",
+    "eslint": "9.26.0",
     "eslint-config-cozy-app": "1.6.0",
     "eslint-config-react-app": "5.2.1",
     "eslint-plugin-flowtype": "4.7.0",
