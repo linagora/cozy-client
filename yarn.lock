@@ -6572,7 +6572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-client@npm:^60.21.2, cozy-client@workspace:packages/cozy-client":
+"cozy-client@npm:^60.21.3, cozy-client@workspace:packages/cozy-client":
   version: 0.0.0-use.local
   resolution: "cozy-client@workspace:packages/cozy-client"
   dependencies:
@@ -6686,7 +6686,7 @@ __metadata:
     "@babel/cli": "npm:7.12.8"
     "@cozy/minilog": "npm:1.0.0"
     "@op-engineering/op-sqlite": "npm:^11.4.8"
-    cozy-client: "npm:^60.21.2"
+    cozy-client: "npm:^60.21.3"
     cozy-device-helper: "npm:2.7.0"
     jest-localstorage-mock: "npm:2.4.19"
     parcel: "npm:2.13.3"
