@@ -63,7 +63,7 @@ Deletes an assistant by its ID.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:79](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L79)
+[packages/cozy-client/src/models/assistant.js:85](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L85)
 
 ***
 
@@ -98,4 +98,4 @@ Edit assistant with the provided data.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:120](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L120)
+[packages/cozy-client/src/models/assistant.js:126](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L126)

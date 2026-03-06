@@ -14,21 +14,30 @@ import logger from '../logger'
  * @param {string} assistantData.model - Model identifier
  * @param {string} assistantData.baseUrl - Provider's base URL
  * @param {string} assistantData.apiKey - API key for authentication
+ * @param {string} assistantData.providerId - ID of the provider
  * @returns {Promise<void>} - A promise that resolves when the assistant is created
  * @throws {Error} - Throws an error if the creation fails
  */
 export const createAssistant = async (client, assistantData) => {
   let createdAccountId = null
   try {
+    if (!assistantData.apiKey && assistantData.model !== 'openrag') {
+      throw new Error('API key is empty')
+    }
+
     const account = {
       _type: 'io.cozy.accounts',
       auth: {
-        login: assistantData.model,
-        password: assistantData.apiKey
-      },
-      data: {
+        login: assistantData.model
+      }
+    }
+    if (assistantData.model !== 'openrag') {
+      account.data = {
         baseUrl: assistantData.baseUrl
       }
+    }
+    if (assistantData.apiKey) {
+      account.auth.password = assistantData.apiKey
     }
     const response = await client.save(account)
 
@@ -48,6 +57,9 @@ export const createAssistant = async (client, assistantData) => {
           data: {
             _type: 'io.cozy.accounts',
             _id: createdAccountId
+          },
+          cozyMetadata: {
+            providerId: assistantData.providerId
           }
         }
       }
@@ -113,6 +125,7 @@ export const deleteAssistant = async (client, assistantId) => {
  * @param {boolean} assistantData.isCustomModel - Indicates if it's a custom model
  * @param {string} assistantData.model - Model identifier
  * @param {string} assistantData.baseUrl - Provider's base URL
+ * @param {string} assistantData.providerId - ID of the provider
  * @param {string} [assistantData.apiKey] - API key for authentication
  * @returns {Promise<void>} - A promise that resolves when the assistant is edited
  * @throws {Error} - Throws an error if the edition fails
@@ -141,8 +154,10 @@ export const editAssistant = async (client, assistantId, assistantData) => {
       auth: {
         ...(provider.auth || {}),
         login: assistantData.model
-      },
-      data: {
+      }
+    }
+    if (assistantData.model !== 'openrag') {
+      account.data = {
         ...(provider.data || {}),
         baseUrl: assistantData.baseUrl
       }
@@ -161,7 +176,15 @@ export const editAssistant = async (client, assistantId, assistantData) => {
       name: assistantData.name,
       prompt: assistantData.prompt,
       icon: assistantData.icon || null,
-      isCustomModel: assistantData.isCustomModel
+      isCustomModel: assistantData.isCustomModel,
+      relationships: {
+        provider: {
+          ...existedAssistantData.relationships.provider,
+          cozyMetadata: {
+            providerId: assistantData.providerId
+          }
+        }
+      }
     }
     await client.save(assistant)
   } catch (error) {
