@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.22.0](https://github.com/linagora/cozy-client/compare/v60.21.3...v60.22.0) (2026-03-09)
+
+
+### Features
+
+* Allow PermissionsCollection to handle shared drives files ([26993b1](https://github.com/linagora/cozy-client/commit/26993b16af93447136024497e71e3c7c503b777b))
+
+
+
+
+
 ## [60.21.1](https://github.com/linagora/cozy-client/compare/v60.21.0...v60.21.1) (2026-01-31)
 
 
