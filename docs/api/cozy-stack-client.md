@@ -282,6 +282,9 @@ not.</p>
 <dd></dd>
 <dt><a href="#TwoFactorNeededRes">TwoFactorNeededRes</a></dt>
 <dd></dd>
+<dt><a href="#PermissionCollectionOptions">PermissionCollectionOptions</a> : <code>object</code></dt>
+<dd><p>Options that can be passed to PermissionCollection&#39;s constructor</p>
+</dd>
 <dt><a href="#Permission">Permission</a> ⇒ <code><a href="#Permission">Permission</a></code></dt>
 <dd><p>async getOwnPermissions - deprecated: please use fetchOwnPermissions instead</p>
 </dd>
@@ -1762,6 +1765,7 @@ Implements `DocumentCollection` API along with specific methods for `io.cozy.per
 **Kind**: global class  
 
 * [PermissionCollection](#PermissionCollection)
+    * [new PermissionCollection(doctype, stackClient, [options])](#new_PermissionCollection_new)
     * [.create(permission)](#PermissionCollection+create)
     * [.add(document, permission, options)](#PermissionCollection+add) ⇒ <code>Promise</code>
     * ~~[.findApps()](#PermissionCollection+findApps)~~
@@ -1769,6 +1773,16 @@ Implements `DocumentCollection` API along with specific methods for `io.cozy.per
     * [.fetchPermissionsByLink(permissions)](#PermissionCollection+fetchPermissionsByLink)
     * [.fetchAllLinks(document)](#PermissionCollection+fetchAllLinks) ⇒ <code>object</code>
     * [.revokeSharingLink(document)](#PermissionCollection+revokeSharingLink)
+
+<a name="new_PermissionCollection_new"></a>
+
+### new PermissionCollection(doctype, stackClient, [options])
+
+| Param | Type | Description |
+| --- | --- | --- |
+| doctype | <code>string</code> | Doctype of the collection (should be `io.cozy.permissions`) |
+| stackClient | [<code>CozyStackClient</code>](#CozyStackClient) | The client used to make requests to the server |
+| [options] | [<code>PermissionCollectionOptions</code>](#PermissionCollectionOptions) | The collection options |
 
 <a name="PermissionCollection+create"></a>
 
@@ -3472,6 +3486,18 @@ Options that can be passed to NotesCollection's constructor
 | Name | Type | Description |
 | --- | --- | --- |
 | two_factor_token | <code>string</code> | The 2FA token |
+
+<a name="PermissionCollectionOptions"></a>
+
+## PermissionCollectionOptions : <code>object</code>
+Options that can be passed to PermissionCollection's constructor
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [driveId] | <code>string</code> | ID of the shared drive targeted by the collection |
 
 <a name="Permission"></a>
 

@@ -1,19 +1,35 @@
 import DocumentCollection from './DocumentCollection'
 import { normalizeDoc } from './normalize'
 import { isFile } from './FileCollection'
-import { uri } from './utils'
+import { uri, sharedDriveApiPrefix } from './utils'
 import logger from './logger'
 
 const normalizePermission = perm => normalizeDoc(perm, 'io.cozy.permissions')
 
 /**
+ * Options that can be passed to PermissionCollection's constructor
+ *
+ * @typedef {object} PermissionCollectionOptions
+ * @property {string} [driveId] - ID of the shared drive targeted by the collection
+ */
+
+/**
  * Implements `DocumentCollection` API along with specific methods for `io.cozy.permissions`.
  */
 class PermissionCollection extends DocumentCollection {
+  /**
+   * @param {string} doctype - Doctype of the collection (should be `io.cozy.permissions`)
+   * @param {CozyStackClient} stackClient -The client used to make requests to the server
+   * @param {PermissionCollectionOptions} [options] - The collection options
+   */
+  constructor(doctype, stackClient, options = {}) {
+    super(doctype, stackClient, options)
+    this.prefix = options.driveId ? sharedDriveApiPrefix(options.driveId) : ''
+  }
   async get(id) {
     const resp = await this.stackClient.fetchJSON(
       'GET',
-      uri`/permissions/${id}`
+      this.prefix + uri`/permissions/${id}`
     )
     return {
       data: normalizePermission(resp.data)
@@ -42,7 +58,7 @@ class PermissionCollection extends DocumentCollection {
     if (tiny) searchParams.append('tiny', true)
     const resp = await this.stackClient.fetchJSON(
       'POST',
-      `/permissions?${searchParams}`,
+      `${this.prefix}/permissions?${searchParams}`,
       {
         data: {
           type: 'io.cozy.permissions',
@@ -85,13 +101,13 @@ class PermissionCollection extends DocumentCollection {
     let endpoint
     switch (document._type) {
       case 'io.cozy.apps':
-        endpoint = `/permissions/apps/${document.slug}`
+        endpoint = `${this.prefix}/permissions/apps/${document.slug}`
         break
       case 'io.cozy.konnectors':
-        endpoint = `/permissions/konnectors/${document.slug}`
+        endpoint = `${this.prefix}/permissions/konnectors/${document.slug}`
         break
       case 'io.cozy.permissions':
-        endpoint = `/permissions/${document._id}`
+        endpoint = `${this.prefix}/permissions/${document._id}`
         break
       default:
         throw new Error(
@@ -122,14 +138,14 @@ class PermissionCollection extends DocumentCollection {
   destroy(permission) {
     return this.stackClient.fetchJSON(
       'DELETE',
-      uri`/permissions/${permission.id}`
+      this.prefix + uri`/permissions/${permission.id}`
     )
   }
 
   async findLinksByDoctype(doctype) {
     const resp = await this.stackClient.fetchJSON(
       'GET',
-      uri`/permissions/doctype/${doctype}/shared-by-link`
+      this.prefix + uri`/permissions/doctype/${doctype}/shared-by-link`
     )
     return {
       ...resp,
@@ -174,7 +190,7 @@ class PermissionCollection extends DocumentCollection {
 
     const resp = await this.stackClient.fetchJSON(
       'POST',
-      `/permissions?${searchParams}`,
+      `${this.prefix}/permissions?${searchParams}`,
       {
         data: {
           type: 'io.cozy.permissions',
@@ -257,7 +273,10 @@ class PermissionCollection extends DocumentCollection {
    * @returns {Permission} permission
    */
   async fetchOwnPermissions() {
-    const resp = await this.stackClient.fetchJSON('GET', '/permissions/self')
+    const resp = await this.stackClient.fetchJSON(
+      'GET',
+      `${this.prefix}/permissions/self`
+    )
     return {
       data: normalizePermission(resp.data),
       included: resp.included ? resp.included.map(normalizePermission) : []

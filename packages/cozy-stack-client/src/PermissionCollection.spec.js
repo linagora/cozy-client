@@ -429,3 +429,139 @@ describe('getPermissionsFor', () => {
     expect(perms2.files.verbs).toEqual(expect.arrayContaining(verbs))
   })
 })
+
+describe('PermissionCollection with driveId', () => {
+  const client = new CozyStackClient()
+  const driveId = 'abc123drive'
+  const collection = new PermissionCollection('io.cozy.permissions', client, {
+    driveId
+  })
+
+  beforeEach(() => {
+    client.fetchJSON.mockReset()
+    client.fetchJSON.mockResolvedValue({ data: [] })
+  })
+
+  it('should set the correct API prefix for shared drives', () => {
+    expect(collection.prefix).toEqual('/sharings/drives/abc123drive')
+  })
+
+  describe('get', () => {
+    it('calls the API with the shared drive prefix', async () => {
+      client.fetchJSON.mockResolvedValue({
+        data: { type: 'io.cozy.permissions', id: 'test-perm-id' }
+      })
+      await collection.get('test-perm-id')
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/abc123drive/permissions/test-perm-id'
+      )
+    })
+  })
+
+  describe('create', () => {
+    it('calls the API with the shared drive prefix', async () => {
+      client.fetchJSON.mockResolvedValue({
+        data: { type: 'io.cozy.permissions', id: 'new-perm-id' }
+      })
+      await collection.create({ _type: 'io.cozy.permissions', codes: 'code' })
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/sharings/drives/abc123drive/permissions?codes=code',
+        { data: { attributes: {}, type: 'io.cozy.permissions' } }
+      )
+    })
+
+    it('includes ttl and tiny options', async () => {
+      client.fetchJSON.mockResolvedValue({
+        data: { type: 'io.cozy.permissions', id: 'new-perm-id' }
+      })
+      await collection.create({
+        _type: 'io.cozy.permissions',
+        codes: 'a,b',
+        ttl: '1D',
+        tiny: true
+      })
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/sharings/drives/abc123drive/permissions?codes=a%2Cb&ttl=1D&tiny=true',
+        { data: { attributes: {}, type: 'io.cozy.permissions' } }
+      )
+    })
+  })
+
+  describe('add', () => {
+    it('uses shared drive prefix for permissions document', async () => {
+      await collection.add(
+        {
+          _type: 'io.cozy.permissions',
+          _id: 'a340d5e0d64711e6b66c5fc9ce1e17c6'
+        },
+        fixtures.permission
+      )
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'PATCH',
+        '/sharings/drives/abc123drive/permissions/a340d5e0d64711e6b66c5fc9ce1e17c6',
+        {
+          data: {
+            type: 'io.cozy.permissions',
+            attributes: {
+              permissions: fixtures.permission
+            }
+          }
+        }
+      )
+    })
+  })
+
+  describe('destroy', () => {
+    it('calls the API with the shared drive prefix', async () => {
+      await collection.destroy({ id: 'perm-to-delete' })
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'DELETE',
+        '/sharings/drives/abc123drive/permissions/perm-to-delete'
+      )
+    })
+  })
+
+  describe('createSharingLink', () => {
+    it('calls the API with the shared drive prefix', async () => {
+      client.fetchJSON.mockResolvedValue({
+        data: { type: 'io.cozy.permissions', id: 'new-perm-id' }
+      })
+      const document = { _type: 'io.cozy.files', _id: '1234' }
+      await collection.createSharingLink(document)
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/sharings/drives/abc123drive/permissions?codes=code',
+        {
+          data: {
+            type: 'io.cozy.permissions',
+            attributes: {
+              permissions: {
+                files: {
+                  type: 'io.cozy.files',
+                  verbs: ['GET'],
+                  values: ['1234']
+                }
+              }
+            }
+          }
+        }
+      )
+    })
+  })
+
+  describe('fetchOwnPermissions', () => {
+    it('calls the API with the shared drive prefix', async () => {
+      client.fetchJSON.mockResolvedValue({
+        data: { type: 'io.cozy.permissions', id: 'self-perm' }
+      })
+      await collection.fetchOwnPermissions()
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/abc123drive/permissions/self'
+      )
+    })
+  })
+})
