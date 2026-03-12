@@ -2,18 +2,25 @@ import CozyClient from '../CozyClient'
 import { Q } from '../queries/dsl'
 import logger from '../logger'
 
+const ASSISTANT_DOCTYPE = 'io.cozy.ai.chat.assistants'
+const ACCOUNT_DOCTYPE = 'io.cozy.accounts'
+
+/**
+ * @typedef {object} Assistant
+ * @property {string} name - Name of the assistant
+ * @property {string} prompt - Prompt for the assistant
+ * @property {string} [icon] - Optional icon for the assistant
+ * @property {string} model - Model identifier
+ * @property {string} baseUrl - Provider's base URL
+ * @property {string} [apiKey] - API key for authentication
+ * @property {string} providerId - ID of the provider
+ */
+
 /**
  * Creates a new assistant with the provided data.
  *
  * @param {CozyClient} client - An instance of CozyClient
- * @param {object} assistantData - Data for the new assistant
- * @param {string} assistantData.name - Name of the assistant
- * @param {string} assistantData.prompt - Prompt for the assistant
- * @param {string} [assistantData.icon] - Optional icon for the assistant
- * @param {boolean} assistantData.isCustomModel - Indicates if it's a custom model
- * @param {string} assistantData.model - Model identifier
- * @param {string} assistantData.baseUrl - Provider's base URL
- * @param {string} assistantData.apiKey - API key for authentication
+ * @param {Assistant} assistantData - Data for the new assistant
  * @returns {Promise<void>} - A promise that resolves when the assistant is created
  * @throws {Error} - Throws an error if the creation fails
  */
@@ -21,14 +28,21 @@ export const createAssistant = async (client, assistantData) => {
   let createdAccountId = null
   try {
     const account = {
-      _type: 'io.cozy.accounts',
+      _type: ACCOUNT_DOCTYPE,
       auth: {
-        login: assistantData.model,
-        password: assistantData.apiKey
+        login: assistantData.model
       },
-      data: {
+      account_type: assistantData.providerId
+    }
+
+    if (assistantData.baseUrl) {
+      account.data = {
         baseUrl: assistantData.baseUrl
       }
+    }
+
+    if (assistantData.apiKey) {
+      account.auth.password = assistantData.apiKey
     }
     const response = await client.save(account)
 
@@ -38,16 +52,18 @@ export const createAssistant = async (client, assistantData) => {
     createdAccountId = response.data._id
 
     const assistant = {
-      _type: 'io.cozy.ai.chat.assistants',
+      _type: ASSISTANT_DOCTYPE,
       name: assistantData.name,
       prompt: assistantData.prompt,
       icon: assistantData.icon || null,
-      isCustomModel: assistantData.isCustomModel,
       relationships: {
         provider: {
           data: {
-            _type: 'io.cozy.accounts',
-            _id: createdAccountId
+            _type: ACCOUNT_DOCTYPE,
+            _id: createdAccountId,
+            metadata: {
+              providerId: assistantData.providerId
+            }
           }
         }
       }
@@ -79,7 +95,7 @@ export const createAssistant = async (client, assistantData) => {
 export const deleteAssistant = async (client, assistantId) => {
   try {
     const existedAssistant = await client.query(
-      Q('io.cozy.ai.chat.assistants')
+      Q(ASSISTANT_DOCTYPE)
         .getById(assistantId)
         .include(['provider'])
     )
@@ -88,12 +104,12 @@ export const deleteAssistant = async (client, assistantId) => {
     const provider = existedAssistant.included?.[0]
 
     await client.stackClient
-      .collection('io.cozy.ai.chat.assistants')
+      .collection(ASSISTANT_DOCTYPE)
       .destroy({ _id: assistantId, _rev: assistantInstance._rev })
 
     if (provider?._id && provider?._rev) {
       await client.stackClient
-        .collection('io.cozy.accounts')
+        .collection(ACCOUNT_DOCTYPE)
         .destroy({ _id: provider._id, _rev: provider._rev })
     }
   } catch (error) {
@@ -106,21 +122,14 @@ export const deleteAssistant = async (client, assistantId) => {
  *
  * @param {CozyClient} client - An instance of CozyClient
  * @param {string} assistantId - ID of existed assistant
- * @param {object} assistantData - Data for the new assistant
- * @param {string} assistantData.name - Name of the assistant
- * @param {string} assistantData.prompt - Prompt for the assistant
- * @param {string} [assistantData.icon] - Optional icon for the assistant
- * @param {boolean} assistantData.isCustomModel - Indicates if it's a custom model
- * @param {string} assistantData.model - Model identifier
- * @param {string} assistantData.baseUrl - Provider's base URL
- * @param {string} [assistantData.apiKey] - API key for authentication
+ * @param {Assistant} assistantData - Data for the editted assistant
  * @returns {Promise<void>} - A promise that resolves when the assistant is edited
  * @throws {Error} - Throws an error if the edition fails
  */
 export const editAssistant = async (client, assistantId, assistantData) => {
   try {
     const existedAssistant = await client.query(
-      Q('io.cozy.ai.chat.assistants')
+      Q(ASSISTANT_DOCTYPE)
         .getById(assistantId)
         .include(['provider'])
     )
@@ -142,13 +151,23 @@ export const editAssistant = async (client, assistantId, assistantData) => {
         ...(provider.auth || {}),
         login: assistantData.model
       },
+      account_type: assistantData.providerId,
       data: {
-        ...(provider.data || {}),
-        baseUrl: assistantData.baseUrl
+        ...(provider.data || {})
       }
     }
+
+    if (assistantData.baseUrl) {
+      account.data.baseUrl = assistantData.baseUrl
+    } else {
+      delete account.data?.baseUrl
+    }
+
+    // Only update the password if a new API key is explicitly provided
     if (assistantData.apiKey) {
       account.auth.password = assistantData.apiKey
+    } else if (!assistantData.baseUrl) {
+      delete account.auth?.password
     }
     const response = await client.save(account)
 
@@ -161,7 +180,18 @@ export const editAssistant = async (client, assistantId, assistantData) => {
       name: assistantData.name,
       prompt: assistantData.prompt,
       icon: assistantData.icon || null,
-      isCustomModel: assistantData.isCustomModel
+      relationships: {
+        provider: {
+          data: {
+            ...(existedAssistantData?.relationships?.provider?.data || {}),
+            metadata: {
+              ...(existedAssistantData?.relationships?.provider?.data
+                ?.metadata || {}),
+              providerId: assistantData.providerId
+            }
+          }
+        }
+      }
     }
     await client.save(assistant)
   } catch (error) {

@@ -1,20 +1,34 @@
-export function createAssistant(client: CozyClient, assistantData: {
-    name: string;
-    prompt: string;
-    icon: string;
-    isCustomModel: boolean;
-    model: string;
-    baseUrl: string;
-    apiKey: string;
-}): Promise<void>;
+export function createAssistant(client: CozyClient, assistantData: Assistant): Promise<void>;
 export function deleteAssistant(client: CozyClient, assistantId: string): Promise<void>;
-export function editAssistant(client: CozyClient, assistantId: string, assistantData: {
+export function editAssistant(client: CozyClient, assistantId: string, assistantData: Assistant): Promise<void>;
+export type Assistant = {
+    /**
+     * - Name of the assistant
+     */
     name: string;
+    /**
+     * - Prompt for the assistant
+     */
     prompt: string;
-    icon: string;
-    isCustomModel: boolean;
+    /**
+     * - Optional icon for the assistant
+     */
+    icon?: string;
+    /**
+     * - Model identifier
+     */
     model: string;
+    /**
+     * - Provider's base URL
+     */
     baseUrl: string;
-    apiKey: string;
-}): Promise<void>;
+    /**
+     * - API key for authentication
+     */
+    apiKey?: string;
+    /**
+     * - ID of the provider
+     */
+    providerId: string;
+};
 import CozyClient from "../CozyClient";

@@ -4,6 +4,10 @@
 
 [models](models.md).assistant
 
+## Interfaces
+
+*   [Assistant](../interfaces/models.assistant.Assistant.md)
+
 ## Functions
 
 ### createAssistant
@@ -19,14 +23,7 @@ Creates a new assistant with the provided data.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `client` | [`CozyClient`](../classes/CozyClient.md) | An instance of CozyClient |
-| `assistantData` | `Object` | Data for the new assistant |
-| `assistantData.apiKey` | `string` | API key for authentication |
-| `assistantData.baseUrl` | `string` | Provider's base URL |
-| `assistantData.icon` | `string` | - |
-| `assistantData.isCustomModel` | `boolean` | Indicates if it's a custom model |
-| `assistantData.model` | `string` | Model identifier |
-| `assistantData.name` | `string` | Name of the assistant |
-| `assistantData.prompt` | `string` | Prompt for the assistant |
+| `assistantData` | [`Assistant`](../interfaces/models.assistant.Assistant.md) | Data for the new assistant |
 
 *Returns*
 
@@ -36,7 +33,7 @@ Creates a new assistant with the provided data.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:20](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L20)
+[packages/cozy-client/src/models/assistant.js:27](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L27)
 
 ***
 
@@ -63,7 +60,7 @@ Deletes an assistant by its ID.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:79](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L79)
+[packages/cozy-client/src/models/assistant.js:95](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L95)
 
 ***
 
@@ -81,14 +78,7 @@ Edit assistant with the provided data.
 | :------ | :------ | :------ |
 | `client` | [`CozyClient`](../classes/CozyClient.md) | An instance of CozyClient |
 | `assistantId` | `string` | ID of existed assistant |
-| `assistantData` | `Object` | Data for the new assistant |
-| `assistantData.apiKey` | `string` | - |
-| `assistantData.baseUrl` | `string` | Provider's base URL |
-| `assistantData.icon` | `string` | - |
-| `assistantData.isCustomModel` | `boolean` | Indicates if it's a custom model |
-| `assistantData.model` | `string` | Model identifier |
-| `assistantData.name` | `string` | Name of the assistant |
-| `assistantData.prompt` | `string` | Prompt for the assistant |
+| `assistantData` | [`Assistant`](../interfaces/models.assistant.Assistant.md) | Data for the editted assistant |
 
 *Returns*
 
@@ -98,4 +88,4 @@ Edit assistant with the provided data.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:120](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L120)
+[packages/cozy-client/src/models/assistant.js:129](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L129)
