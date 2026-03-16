@@ -1982,6 +1982,7 @@ Implements the `DocumentCollection` API along with specific methods for
     * [.renameSharedDrive(sharing, newName)](#SharingCollection+renameSharedDrive) ⇒ <code>object</code>
     * [.fetchSharedDrives()](#SharingCollection+fetchSharedDrives) ⇒ <code>Promise.&lt;{data: Array.&lt;Sharing&gt;}&gt;</code>
     * [.create(params)](#SharingCollection+create)
+    * [.createSharedDrive(params)](#SharingCollection+createSharedDrive)
     * [.getDiscoveryLink(sharingId, sharecode, [options])](#SharingCollection+getDiscoveryLink) ⇒ <code>string</code>
     * [.addRecipients(options)](#SharingCollection+addRecipients)
     * [.revokeRecipient(sharing, recipientIndex)](#SharingCollection+revokeRecipient)
@@ -2054,6 +2055,21 @@ Creates a new Sharing. See https://docs.cozy.io/en/cozy-stack/sharing/#post-shar
 | [params.openSharing] | <code>boolean</code> | If someone else than the owner can add a recipient to the sharing |
 | [params.appSlug] | <code>string</code> | Slug of the targeted app |
 | [params.sharedDrive] | <code>boolean</code> | If the sharing is a shared drive |
+
+<a name="SharingCollection+createSharedDrive"></a>
+
+### sharingCollection.createSharedDrive(params)
+Creates a new shared drive. See https://docs.cozy.io/en/cozy-stack/shared-drives/
+
+**Kind**: instance method of [<code>SharingCollection</code>](#SharingCollection)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | Sharing params |
+| params.document | [<code>Sharing</code>](#Sharing) | The document to share. Should have an _id |
+| params.description | <code>string</code> | Description of the sharing |
+| [params.recipients] | [<code>Array.&lt;Recipient&gt;</code>](#Recipient) | Recipients to add to the sharing |
+| [params.readOnlyRecipients] | [<code>Array.&lt;Recipient&gt;</code>](#Recipient) | Recipients to add with read only access |
 
 <a name="SharingCollection+getDiscoveryLink"></a>
 

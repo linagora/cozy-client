@@ -455,6 +455,86 @@ describe('SharingCollection', () => {
     })
   })
 
+  describe('createSharedDrive', () => {
+    beforeEach(() => {
+      client.fetch.mockReset()
+      client.fetchJSON.mockResolvedValue({ data: [] })
+    })
+
+    it('should call POST /sharings/drives with folder_id and description', async () => {
+      await collection.createSharedDrive({
+        document: FOLDER,
+        recipients: [RECIPIENT],
+        description: 'shared drive'
+      })
+
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/sharings/drives',
+        {
+          data: {
+            attributes: {
+              folder_id: FOLDER._id,
+              description: 'shared drive'
+            },
+            relationships: {
+              recipients: {
+                data: [{ id: 'contact_1', type: 'io.cozy.contacts' }]
+              }
+            }
+          }
+        }
+      )
+    })
+
+    it('should support read only recipients', async () => {
+      await collection.createSharedDrive({
+        document: FOLDER,
+        readOnlyRecipients: [RECIPIENT],
+        description: 'test'
+      })
+
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/sharings/drives',
+        {
+          data: {
+            attributes: {
+              folder_id: FOLDER._id,
+              description: 'test'
+            },
+            relationships: {
+              read_only_recipients: {
+                data: [{ id: 'contact_1', type: 'io.cozy.contacts' }]
+              }
+            }
+          }
+        }
+      )
+    })
+
+    it('should be called when create is called with sharedDrive: true', async () => {
+      const spy = jest.spyOn(collection, 'createSharedDrive')
+      spy.mockResolvedValue({ data: [] })
+
+      await collection.create({
+        document: FOLDER,
+        recipients: [RECIPIENT],
+        description: 'test',
+        sharedDrive: true
+      })
+
+      expect(spy).toHaveBeenCalledWith({
+        document: FOLDER,
+        description: 'test',
+        recipients: [RECIPIENT],
+        readOnlyRecipients: []
+      })
+
+      spy.mockRestore()
+    })
+  })
+
   describe('revokeAllRecipients', () => {
     beforeEach(() => {
       client.fetch.mockReset()
