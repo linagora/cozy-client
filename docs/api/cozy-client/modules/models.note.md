@@ -21,6 +21,7 @@ Fetch and build an URL to open a note.
 | `options` | `Object` | Options |
 | `options.driveId` | `string` | - |
 | `options.pathname` | `string` | - |
+| `options.returnUrl` | `string` | - |
 
 *Returns*
 
@@ -30,7 +31,7 @@ url
 
 *Defined in*
 
-[packages/cozy-client/src/models/note.js:34](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L34)
+[packages/cozy-client/src/models/note.js:35](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L35)
 
 ***
 

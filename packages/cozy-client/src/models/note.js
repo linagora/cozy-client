@@ -29,6 +29,7 @@ export const generateUrlForNote = (notesAppUrl, file) => {
  * @param {object} options Options
  * @param {string} [options.pathname] Pathname to use in the URL
  * @param {string} [options.driveId] Shared drive ID used to fetched the URL
+ * @param {string} [options.returnUrl] Return URL to add in query string
  * @returns {Promise<string>} url
  */
 export const fetchURL = async (client, file, options = {}) => {
@@ -41,7 +42,15 @@ export const fetchURL = async (client, file, options = {}) => {
   if (sharecode) {
     const searchParams = [['id', note_id]]
     searchParams.push(['sharecode', sharecode])
-    if (public_name) searchParams.push(['username', public_name])
+
+    if (public_name) {
+      searchParams.push(['username', public_name])
+    }
+
+    if (options.returnUrl) {
+      searchParams.push(['returnUrl', options.returnUrl])
+    }
+
     return generateWebLink({
       cozyUrl: `${protocol}://${instance}`,
       searchParams,
