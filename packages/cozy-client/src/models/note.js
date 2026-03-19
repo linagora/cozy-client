@@ -2,6 +2,13 @@ import { generateWebLink } from '../helpers'
 import logger from '../logger'
 
 /**
+ * @typedef {Object} FetchURLOptions
+ * @property {string} [pathname] - Pathname to use in the URL
+ * @property {string} [driveId] - Shared drive ID used to fetch the URL
+ * @property {string} [returnUrl] - Return URL to add in query string
+ */
+
+/**
  *
  * @param {string} notesAppUrl URL to the Notes App (https://notes.foo.mycozy.cloud)
  * @param {object} file io.cozy.files object
@@ -26,18 +33,19 @@ export const generateUrlForNote = (notesAppUrl, file) => {
  *
  * @param {object} client CozyClient instance
  * @param {object} file io.cozy.file object
- * @param {object} options Options
- * @param {string} [options.pathname] Pathname to use in the URL
- * @param {string} [options.driveId] Shared drive ID used to fetched the URL
- * @param {string} [options.returnUrl] Return URL to add in query string
+ * @param {FetchURLOptions} [options] Options
  * @returns {Promise<string>} url
  */
-export const fetchURL = async (client, file, options = {}) => {
+export const fetchURL = async (
+  client,
+  file,
+  { pathname, driveId, returnUrl } = {}
+) => {
   const {
     data: { note_id, subdomain, protocol, instance, sharecode, public_name }
   } = await client
     .getStackClient()
-    .collection('io.cozy.notes', { driveId: options.driveId })
+    .collection('io.cozy.notes', { driveId })
     .fetchURL({ _id: file.id })
   if (sharecode) {
     const searchParams = [['id', note_id]]
@@ -47,21 +55,21 @@ export const fetchURL = async (client, file, options = {}) => {
       searchParams.push(['username', public_name])
     }
 
-    if (options.returnUrl) {
-      searchParams.push(['returnUrl', options.returnUrl])
+    if (returnUrl) {
+      searchParams.push(['returnUrl', returnUrl])
     }
 
     return generateWebLink({
       cozyUrl: `${protocol}://${instance}`,
       searchParams,
-      pathname: options.pathname ?? '/public/',
+      pathname: pathname ?? '/public/',
       slug: 'notes',
       subDomainType: subdomain
     })
   } else {
     return generateWebLink({
       cozyUrl: `${protocol}://${instance}`,
-      pathname: options.pathname ?? '',
+      pathname: pathname ?? '',
       slug: 'notes',
       subDomainType: subdomain,
       hash: `/n/${note_id}`

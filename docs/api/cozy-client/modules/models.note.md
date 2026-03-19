@@ -4,11 +4,15 @@
 
 [models](models.md).note
 
+## Interfaces
+
+*   [FetchURLOptions](../interfaces/models.note.FetchURLOptions.md)
+
 ## Functions
 
 ### fetchURL
 
-▸ **fetchURL**(`client`, `file`, `options?`): `Promise`<`string`>
+▸ **fetchURL**(`client`, `file`, `[options]?`): `Promise`<`string`>
 
 Fetch and build an URL to open a note.
 
@@ -18,10 +22,7 @@ Fetch and build an URL to open a note.
 | :------ | :------ | :------ |
 | `client` | `any` | CozyClient instance |
 | `file` | `any` | io.cozy.file object |
-| `options` | `Object` | Options |
-| `options.driveId` | `string` | - |
-| `options.pathname` | `string` | - |
-| `options.returnUrl` | `string` | - |
+| `[options]` | [`FetchURLOptions`](../interfaces/models.note.FetchURLOptions.md) | Options |
 
 *Returns*
 
@@ -31,7 +32,7 @@ url
 
 *Defined in*
 
-[packages/cozy-client/src/models/note.js:35](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L35)
+[packages/cozy-client/src/models/note.js:39](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L39)
 
 ***
 
@@ -53,7 +54,7 @@ url
 
 *Defined in*
 
-[packages/cozy-client/src/models/note.js:9](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L9)
+[packages/cozy-client/src/models/note.js:16](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L16)
 
 ***
 
@@ -74,4 +75,4 @@ url
 
 *Defined in*
 
-[packages/cozy-client/src/models/note.js:18](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L18)
+[packages/cozy-client/src/models/note.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/note.js#L25)
