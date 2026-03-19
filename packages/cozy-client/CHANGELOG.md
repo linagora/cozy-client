@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.23.1](https://github.com/linagora/cozy-client/compare/v60.23.0...v60.23.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* Allow to pass a returnUrl when fetching public note URL ([9d26e08](https://github.com/linagora/cozy-client/commit/9d26e08233d33182bb680dcae3818d036105c797))
+
+
+
+
+
 # [60.23.0](https://github.com/linagora/cozy-client/compare/v60.22.1...v60.23.0) (2026-03-16)
 
 **Note:** Version bump only for package cozy-client
