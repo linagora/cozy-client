@@ -23,7 +23,7 @@ export default class CozyProvider extends Component {
     if (!props.client) {
       throw new Error('CozyProvider was not passed a client instance.')
     }
-    if (props.store) {
+    if (props.store && props.client.store !== props.store) {
       props.client.setStore(props.store)
     }
   }
