@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.24.0](https://github.com/linagora/cozy-client/compare/v60.23.2...v60.24.0) (2026-05-04)
+
+
+### Features
+
+* Support name in createSharedDrive ([33fff5c](https://github.com/linagora/cozy-client/commit/33fff5c250e0a2fb91138505c6236557865a2103))
+
+
+
+
+
 # [60.23.0](https://github.com/linagora/cozy-client/compare/v60.22.1...v60.23.0) (2026-03-16)
 
 
