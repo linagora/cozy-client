@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.23.2](https://github.com/cozy/cozy-client/compare/v60.23.1...v60.23.2) (2026-05-04)
+
+
+### Bug Fixes
+
+* Skip setStore in CozyProvider when client already holds same store ([9c7c692](https://github.com/cozy/cozy-client/commit/9c7c6929400ef4a0d0272ba9ad8abe5f94240a32))
+
+
+
+
+
 ## [60.23.1](https://github.com/cozy/cozy-client/compare/v60.23.0...v60.23.1) (2026-03-19)
 
 
