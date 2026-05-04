@@ -2066,7 +2066,8 @@ Creates a new shared drive. See https://docs.cozy.io/en/cozy-stack/shared-drives
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | Sharing params |
-| params.document | [<code>Sharing</code>](#Sharing) | The document to share. Should have an _id |
+| [params.name] | <code>string</code> | Name for the new shared drive (mutually exclusive with document) |
+| [params.document] | [<code>Sharing</code>](#Sharing) | Existing folder to use as shared drive (mutually exclusive with name) |
 | params.description | <code>string</code> | Description of the sharing |
 | [params.recipients] | [<code>Array.&lt;Recipient&gt;</code>](#Recipient) | Recipients to add to the sharing |
 | [params.readOnlyRecipients] | [<code>Array.&lt;Recipient&gt;</code>](#Recipient) | Recipients to add with read only access |

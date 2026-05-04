@@ -193,23 +193,32 @@ class SharingCollection extends DocumentCollection {
    * Creates a new shared drive. See https://docs.cozy.io/en/cozy-stack/shared-drives/
    *
    * @param {object} params Sharing params
-   * @param {Sharing} params.document The document to share. Should have an _id
+   * @param {string=} params.name Name for the new shared drive (mutually exclusive with document)
+   * @param {Sharing=} params.document Existing folder to use as shared drive (mutually exclusive with name)
    * @param {string} params.description Description of the sharing
    * @param {Array<Recipient>=} params.recipients Recipients to add to the sharing
    * @param {Array<Recipient>=} params.readOnlyRecipients Recipients to add with read only access
    */
   async createSharedDrive({
+    name,
     document,
     description,
     recipients = [],
     readOnlyRecipients = []
   }) {
+    const attributes = {
+      description
+    }
+
+    if (name) {
+      attributes.name = name
+    } else if (document) {
+      attributes.folder_id = document._id
+    }
+
     const resp = await this.stackClient.fetchJSON('POST', '/sharings/drives', {
       data: {
-        attributes: {
-          folder_id: document._id,
-          description
-        },
+        attributes,
         relationships: {
           ...(recipients.length > 0 && {
             recipients: { data: recipients.map(toRelationshipItem) }

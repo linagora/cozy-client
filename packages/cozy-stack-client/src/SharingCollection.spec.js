@@ -461,6 +461,32 @@ describe('SharingCollection', () => {
       client.fetchJSON.mockResolvedValue({ data: [] })
     })
 
+    it('should call POST /sharings/drives with name and description', async () => {
+      await collection.createSharedDrive({
+        name: 'My shared drive',
+        recipients: [RECIPIENT],
+        description: 'shared drive'
+      })
+
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/sharings/drives',
+        {
+          data: {
+            attributes: {
+              name: 'My shared drive',
+              description: 'shared drive'
+            },
+            relationships: {
+              recipients: {
+                data: [{ id: 'contact_1', type: 'io.cozy.contacts' }]
+              }
+            }
+          }
+        }
+      )
+    })
+
     it('should call POST /sharings/drives with folder_id and description', async () => {
       await collection.createSharedDrive({
         document: FOLDER,
