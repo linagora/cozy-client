@@ -1,9 +1,8 @@
-import { Component } from 'react'
+import React, { useEffect, useReducer, useRef } from 'react'
 import CozyClient from './CozyClient'
 import PropTypes from 'prop-types'
 import ObservableQuery from './ObservableQuery'
-
-const dummyState = {}
+import useClient from './hooks/useClient'
 
 // Need to have this since Query and ObservableQuery might come from
 // two different incompatible versions of cozy-client. This is kept
@@ -13,6 +12,20 @@ export const fetchQuery = (client, query) => {
     return query.fetch()
   } else {
     return client.query(query.definition, { as: query.queryId })
+  }
+}
+
+const executeQueryRespectingFetchPolicy = (client, observableQuery, props) => {
+  if (props.fetchPolicy) {
+    const queryState = client.getQueryFromState(props.as)
+    if (
+      typeof props.fetchPolicy === 'function' &&
+      props.fetchPolicy(queryState)
+    ) {
+      fetchQuery(client, observableQuery)
+    }
+  } else {
+    fetchQuery(client, observableQuery)
   }
 }
 
@@ -88,92 +101,48 @@ const computeChildrenArgs = queryAttributes => {
   ]
 }
 
-export default class Query extends Component {
-  constructor(props, context) {
-    super(props, context)
-    const { client } = context
-    if (!context.client) {
-      throw new Error(
-        'Query should be used with client in context (use CozyProvider to set context)'
-      )
+/**
+ * @param {object} props
+ * @returns {React.ReactNode}
+ */
+const Query = props => {
+  const client = useClient()
+  if (!client) {
+    throw new Error(
+      'Query should be used with client in context (use CozyProvider to set context)'
+    )
+  }
+
+  // Initialized once, mirrors the previous constructor behavior. Subsequent
+  // prop changes do not recreate the observable query — matches legacy class.
+  const attributesRef = useRef(null)
+  if (attributesRef.current === null) {
+    attributesRef.current = getQueryAttributes(client, props)
+  }
+  const attributes = attributesRef.current
+
+  // Force re-render on observable query changes (equivalent to the legacy
+  // `setState(dummyState)` trick). `forceRender` is stable across renders.
+  const [, forceRender] = useReducer(x => x + 1, 0)
+
+  useEffect(() => {
+    const unsubscribe = attributes.observableQuery.subscribe(forceRender)
+    return () => {
+      if (unsubscribe) unsubscribe()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-    /**
-     * Current client
-     *
-     * @type {CozyClient}
-     */
-    this.client = client
-    /**
-     * Observable query to connect store to query
-     *
-     * @type {ObservableQuery}
-     */
-    this.observableQuery = null
-    /**
-     * Callback to unsubscribe from observable query
-     *
-     * @type {Function}
-     */
-    this.queryUnsubscribe = null
+  const enabled = props.enabled !== false
+  useEffect(() => {
+    if (!enabled) return
+    executeQueryRespectingFetchPolicy(client, attributes.observableQuery, props)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled])
 
-    Object.assign(this, getQueryAttributes(client, props))
-    this.recomputeChildrenArgs()
-  }
-
-  componentDidMount() {
-    this.queryUnsubscribe = this.observableQuery.subscribe(this.onQueryChange)
-    if (this.props.enabled !== false) {
-      this.executeQueryRespectingFetchPolicy()
-    }
-  }
-
-  executeQueryRespectingFetchPolicy() {
-    if (this.props.fetchPolicy) {
-      const queryState = this.client.getQueryFromState(this.props.as)
-      if (
-        this.props.fetchPolicy &&
-        typeof this.props.fetchPolicy === 'function' &&
-        this.props.fetchPolicy(queryState)
-      ) {
-        fetchQuery(this.client, this.observableQuery)
-      }
-    } else {
-      fetchQuery(this.client, this.observableQuery)
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.enabled === false && this.props.enabled !== false) {
-      this.executeQueryRespectingFetchPolicy()
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.queryUnsubscribe) {
-      this.queryUnsubscribe()
-    }
-  }
-
-  onQueryChange = () => {
-    this.recomputeChildrenArgs()
-    this.setState(dummyState)
-  }
-
-  recomputeChildrenArgs() {
-    this.childrenArgs = computeChildrenArgs(this)
-  }
-
-  render() {
-    const children = this.props.children
-    // @ts-ignore
-    return children(this.childrenArgs[0], this.childrenArgs[1])
-  }
-}
-
-Query.contextTypes = {
-  client: PropTypes.object,
-  store: PropTypes.object
+  const childrenArgs = computeChildrenArgs(attributes)
+  // @ts-ignore
+  return props.children(childrenArgs[0], childrenArgs[1])
 }
 
 const queryPropType = PropTypes.object
@@ -194,7 +163,7 @@ Query.propTypes = {
    *
    * @example
    * If you want to only fetch queries that are older than 30 seconds:
-   
+
    * ```js
    * const cache30s = ({ lastUpdate }) => {
    *   return !lastUpdate || (Date.now() - 30 * 1000 > lastUpdate)
@@ -209,4 +178,5 @@ Query.defaultProps = {
   enabled: true
 }
 
+export default Query
 export { getQueryAttributes, computeChildrenArgs }
