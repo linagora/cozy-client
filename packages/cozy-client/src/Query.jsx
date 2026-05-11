@@ -126,8 +126,12 @@ const Query = props => {
   const [, forceRender] = useReducer(x => x + 1, 0)
 
   useEffect(() => {
-    const unsubscribe = attributes.observableQuery.subscribe(forceRender)
+    let mounted = true
+    const unsubscribe = attributes.observableQuery.subscribe(() => {
+      if (mounted) forceRender()
+    })
     return () => {
+      mounted = false
       if (unsubscribe) unsubscribe()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
