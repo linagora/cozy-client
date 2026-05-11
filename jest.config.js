@@ -7,7 +7,7 @@ const commonConfig = {
   ],
   watchPathIgnorePatterns: ['node_modules'],
   modulePathIgnorePatterns: ['<rootDir>/packages/.*/dist/'],
-  transformIgnorePatterns: ['node_modules/(?!(cozy-ui))'],
+  transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-client))'],
   testEnvironment: 'jest-environment-jsdom-sixteen',
   moduleFileExtensions: ['js', 'jsx', 'json'],
   moduleNameMapper: {
