@@ -719,4 +719,35 @@ describe('computeFileFullpath', () => {
     const res2 = await computeFileFullpath(client, updFile)
     expect(res2.path).toEqual('ROOT/MYDIR/file3.1')
   })
+
+  it('should return the file unchanged when queryFileById resolves to undefined', async () => {
+    // This happens offline when the link chain returns nothing for the
+    // parent dir lookup. Before the fix, destructuring `.data` from
+    // `undefined` crashed with "Cannot read property 'data' of undefined".
+    queryFileById.mockResolvedValue(undefined)
+    const file = {
+      _id: 'offline-file-1',
+      _type: 'io.cozy.files',
+      type: 'file',
+      dir_id: 'unknown-dir',
+      name: 'offline.txt'
+    }
+    const res = await computeFileFullpath(client, file)
+    expect(res).toBe(file)
+    expect(res.path).toBeUndefined()
+  })
+
+  it('should return the file unchanged when queryFileById resolves with null data', async () => {
+    queryFileById.mockResolvedValue({ data: null })
+    const file = {
+      _id: 'offline-file-2',
+      _type: 'io.cozy.files',
+      type: 'file',
+      dir_id: 'unknown-dir',
+      name: 'offline2.txt'
+    }
+    const res = await computeFileFullpath(client, file)
+    expect(res).toBe(file)
+    expect(res.path).toBeUndefined()
+  })
 })

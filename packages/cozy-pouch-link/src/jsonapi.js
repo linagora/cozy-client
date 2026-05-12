@@ -168,7 +168,10 @@ export const computeFileFullpath = async (client, file) => {
     logger.warn(`Missing dir_id for file ${file._id}`)
     return file
   }
-  const { data: parentDir } = await queryFileById(client, file.dir_id)
+  // queryFileById can resolve to undefined when offline (no parent dir
+  // found in the link chain), so we must guard before destructuring.
+  const result = await queryFileById(client, file.dir_id)
+  const parentDir = result?.data
 
   if (parentDir?.path) {
     const path = buildPathWithName(parentDir.path, file.name)
