@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.24.1](https://github.com/linagora/cozy-client/compare/v60.24.0...v60.24.1) (2026-05-12)
+
+
+### Bug Fixes
+
+* **pouch:** guard computeFileFullpath against falsy parent lookup ([8639ef3](https://github.com/linagora/cozy-client/commit/8639ef3300be8d6fa5ba0689678aa552936be788))
+* **pouch:** use fetchQueryAndGetFromState in queryFileById ([d358a26](https://github.com/linagora/cozy-client/commit/d358a26917de98990c64accaf62e72496f17f374))
+
+
+
+
+
 # [60.24.0](https://github.com/linagora/cozy-client/compare/v60.23.2...v60.24.0) (2026-05-04)
 
 **Note:** Version bump only for package cozy-pouch-link
