@@ -87,7 +87,9 @@ export const replicateOnce = async pouchManager => {
   )
 
   // Waiting on each replication
-  const doctypes = Object.keys(pouchManager.pouches)
+  const doctypes = Object.keys(pouchManager.pouches).map(dbName =>
+    getDoctypeFromDatabaseName(dbName)
+  )
   const promises = Object.values(pouchManager.replications)
   try {
     const res = await allSettled(promises)

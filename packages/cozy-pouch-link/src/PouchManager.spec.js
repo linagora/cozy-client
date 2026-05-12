@@ -235,7 +235,7 @@ describe('PouchManager', () => {
     manager.updateSyncInfo('io.cozy.todos')
     await manager.replicateOnce()
     expect(onSync).toHaveBeenCalledWith({
-      'cozy.tools__doctype__io.cozy.todos': [
+      'io.cozy.todos': [
         {
           _id: '1',
           name: 'Make replication work'
