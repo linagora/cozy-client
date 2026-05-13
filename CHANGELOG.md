@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.24.2](https://github.com/cozy/cozy-client/compare/v60.24.1...v60.24.2) (2026-05-13)
+
+
+### Bug Fixes
+
+* **pouch:** pass clean doctypes to onSync (not prefixed pouch dbNames) ([246dbea](https://github.com/cozy/cozy-client/commit/246dbea96bc7894c92678578976fbe4325916cc3))
+
+
+
+
+
 ## [60.24.1](https://github.com/cozy/cozy-client/compare/v60.24.0...v60.24.1) (2026-05-12)
 
 
