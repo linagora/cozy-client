@@ -12,7 +12,7 @@
 
 ### createAssistant
 
-▸ **createAssistant**(`client`, `assistantData`): `Promise`<`void`>
+▸ **createAssistant**(`client`, `assistantData`): `Promise`<[`Assistant`](../interfaces/models.assistant.Assistant.md)>
 
 Creates a new assistant with the provided data.
 
@@ -27,9 +27,9 @@ Creates a new assistant with the provided data.
 
 *Returns*
 
-`Promise`<`void`>
+`Promise`<[`Assistant`](../interfaces/models.assistant.Assistant.md)>
 
-*   A promise that resolves when the assistant is created
+*   A promise that resolves with the created assistant document
 
 *Defined in*
 
@@ -60,7 +60,7 @@ Deletes an assistant by its ID.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:95](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L95)
+[packages/cozy-client/src/models/assistant.js:96](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L96)
 
 ***
 
@@ -88,4 +88,4 @@ Edit assistant with the provided data.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:129](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L129)
+[packages/cozy-client/src/models/assistant.js:124](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L124)

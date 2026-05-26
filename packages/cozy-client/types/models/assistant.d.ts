@@ -1,4 +1,4 @@
-export function createAssistant(client: CozyClient, assistantData: Assistant): Promise<void>;
+export function createAssistant(client: CozyClient, assistantData: Assistant): Promise<Assistant>;
 export function deleteAssistant(client: CozyClient, assistantId: string): Promise<void>;
 export function editAssistant(client: CozyClient, assistantId: string, assistantData: Assistant): Promise<void>;
 export type Assistant = {
