@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.25.0](https://github.com/cozy/cozy-client/compare/v60.24.2...v60.25.0) (2026-05-26)
+
+
+### Bug Fixes
+
+* **assistant:** Delete through client.destroy to keep store in sync ([ad627db](https://github.com/cozy/cozy-client/commit/ad627dbfe9b17f3124af9fea69ad675775f8265f))
+
+
+### Features
+
+* **assistant:** Return saved assistant from createAssistant ([ceb402f](https://github.com/cozy/cozy-client/commit/ceb402f2122d25356e302c94a75697c29080de46))
+
+
+
+
+
 ## [60.24.2](https://github.com/cozy/cozy-client/compare/v60.24.1...v60.24.2) (2026-05-13)
 
 
