@@ -21,7 +21,7 @@ const ACCOUNT_DOCTYPE = 'io.cozy.accounts'
  *
  * @param {CozyClient} client - An instance of CozyClient
  * @param {Assistant} assistantData - Data for the new assistant
- * @returns {Promise<object>} - A promise that resolves with the created assistant document
+ * @returns {Promise<Assistant>} - A promise that resolves with the created assistant document
  * @throws {Error} - Throws an error if the creation fails
  */
 export const createAssistant = async (client, assistantData) => {
@@ -95,23 +95,17 @@ export const createAssistant = async (client, assistantData) => {
  */
 export const deleteAssistant = async (client, assistantId) => {
   try {
-    const existedAssistant = await client.query(
+    const { data: assistantDoc, included } = await client.query(
       Q(ASSISTANT_DOCTYPE)
         .getById(assistantId)
         .include(['provider'])
     )
 
-    const assistantInstance = existedAssistant.data
-    const provider = existedAssistant.included?.[0]
+    await client.destroy(assistantDoc)
 
-    await client.stackClient
-      .collection(ASSISTANT_DOCTYPE)
-      .destroy({ _id: assistantId, _rev: assistantInstance._rev })
-
-    if (provider?._id && provider?._rev) {
-      await client.stackClient
-        .collection(ACCOUNT_DOCTYPE)
-        .destroy({ _id: provider._id, _rev: provider._rev })
+    const provider = included?.[0]
+    if (provider) {
+      await client.destroy(provider)
     }
   } catch (error) {
     throw new Error(`Failed to delete assistant: ${error.message}`)
