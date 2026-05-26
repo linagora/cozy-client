@@ -21,7 +21,7 @@ const ACCOUNT_DOCTYPE = 'io.cozy.accounts'
  *
  * @param {CozyClient} client - An instance of CozyClient
  * @param {Assistant} assistantData - Data for the new assistant
- * @returns {Promise<void>} - A promise that resolves when the assistant is created
+ * @returns {Promise<object>} - A promise that resolves with the created assistant document
  * @throws {Error} - Throws an error if the creation fails
  */
 export const createAssistant = async (client, assistantData) => {
@@ -68,7 +68,8 @@ export const createAssistant = async (client, assistantData) => {
         }
       }
     }
-    await client.save(assistant)
+    const { data: savedAssistant } = await client.save(assistant)
+    return savedAssistant
   } catch (error) {
     // Cleanup orphaned account if it was created
     if (createdAccountId) {
