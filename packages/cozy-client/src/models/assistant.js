@@ -100,7 +100,6 @@ export const deleteAssistant = async (client, assistantId) => {
         .getById(assistantId)
         .include(['provider'])
     )
-
     await client.destroy(assistantDoc)
 
     const provider = included?.[0]
