@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.26.0](https://github.com/cozy/cozy-client/compare/v60.25.0...v60.26.0) (2026-05-28)
+
+
+### Features
+
+* Dummy change to trigger publication ([0a272bc](https://github.com/cozy/cozy-client/commit/0a272bcefbf6cb70feb3aa81e97d1da65de22e14))
+
+
+
+
+
 # [60.25.0](https://github.com/cozy/cozy-client/compare/v60.24.2...v60.25.0) (2026-05-26)
 
 
