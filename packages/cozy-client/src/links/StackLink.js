@@ -124,6 +124,7 @@ export default class StackLink extends CozyLink {
       ids,
       referenced,
       sharingId,
+      trash,
       ...rawOptions
     } = query
     let options = { ...rawOptions, driveId: undefined }
@@ -143,6 +144,9 @@ export default class StackLink extends CozyLink {
     }
     if (referenced) {
       return collection.findReferencedBy(referenced, options)
+    }
+    if (doctype === DOCTYPE_FILES && trash) {
+      return collection.getTrash({ limit: query.limit })
     }
     if (hasFindOptions(query)) {
       return collection.find(selector, options)

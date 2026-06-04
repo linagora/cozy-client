@@ -47,6 +47,7 @@ class QueryDefinition {
    * @param {import('../types').CouchDBViewCursor} [options.cursor] - The cursor to paginate views.
    * @param {string} [options.bookmark] - The bookmark to paginate mango queries.
    * @param {string} [options.sharingId] - The id of the sharing
+   * @param {boolean} [options.trash] - Whether to query the trash endpoint
    */
   constructor(options = {}) {
     this.doctype = options.doctype
@@ -64,6 +65,9 @@ class QueryDefinition {
     this.cursor = options.cursor
     this.bookmark = options.bookmark
     this.sharingId = options.sharingId
+    if (options.trash) {
+      this.trash = options.trash
+    }
   }
 
   /**
@@ -370,6 +374,16 @@ class QueryDefinition {
     return new QueryDefinition({ ...this.toDefinition(), sharingId: id })
   }
 
+  /**
+   * Creates a query definition for listing trashed files.
+   * When combined with .sharingById(), it queries the shared drive's trash.
+   *
+   * @returns {QueryDefinition} The QueryDefinition object.
+   */
+  getTrash() {
+    return new QueryDefinition({ ...this.toDefinition(), trash: true })
+  }
+
   toDefinition() {
     return {
       doctype: this.doctype,
@@ -386,7 +400,8 @@ class QueryDefinition {
       skip: this.skip,
       cursor: this.cursor,
       bookmark: this.bookmark,
-      sharingId: this.sharingId
+      sharingId: this.sharingId,
+      trash: this.trash === true ? true : undefined
     }
   }
 }

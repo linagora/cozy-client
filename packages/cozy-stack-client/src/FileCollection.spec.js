@@ -1309,6 +1309,51 @@ describe('FileCollection', () => {
     })
   })
 
+  describe('getTrash', () => {
+    it('should list trashed files', async () => {
+      client.fetchJSON.mockReturnValue({
+        data: [{ id: '1', type: 'io.cozy.files', attributes: { name: 'deleted.txt' } }],
+        meta: { count: 1 },
+        links: {}
+      })
+      const result = await collection.getTrash()
+      expect(client.fetchJSON).toHaveBeenCalledWith('GET', '/files/trash')
+      expect(result.data).toHaveLength(1)
+      expect(result.meta).toEqual({ count: 1 })
+    })
+
+    it('should list trashed files for a shared drive', async () => {
+      const driveCollection = new FileCollection('io.cozy.files', client, {
+        driveId: 'sharing-123'
+      })
+      client.fetchJSON.mockReturnValue({ data: [], meta: {}, links: {} })
+      await driveCollection.getTrash()
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/sharing-123/trash'
+      )
+    })
+
+    it('should pass pagination params', async () => {
+      client.fetchJSON.mockReturnValue({ data: [], meta: {}, links: {} })
+      await collection.getTrash({ limit: 50, bookmark: 'abc123' })
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/files/trash?page[limit]=50&page[cursor]=abc123'
+      )
+    })
+
+    it('should return next link when present', async () => {
+      client.fetchJSON.mockReturnValue({
+        data: [],
+        meta: {},
+        links: { next: '/files/trash?page[cursor]=next' }
+      })
+      const result = await collection.getTrash()
+      expect(result.next).toBe('/files/trash?page[cursor]=next')
+    })
+  })
+
   describe('copy', () => {
     afterEach(() => {
       client.fetchJSON.mockClear()

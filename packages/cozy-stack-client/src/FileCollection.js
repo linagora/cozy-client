@@ -500,6 +500,32 @@ class FileCollection extends DocumentCollection {
   }
 
   /**
+   * Lists trashed files and directories.
+   *
+   * @param {object} [options] - Optional pagination params
+   * @param {number} [options.limit] - Number of results to return
+   * @param {string} [options.bookmark] - Bookmark for pagination
+   * @returns {Promise<{data, meta, next}>} The JSON API conformant response with trashed files
+   * @throws {FetchError}
+   */
+  async getTrash({ limit, bookmark } = {}) {
+    const params = new URLSearchParams()
+    if (limit) params.set('page[limit]', String(limit))
+    if (bookmark) params.set('page[cursor]', bookmark)
+
+    const path = params.toString()
+      ? `${this.prefix}/trash?${params.toString()}`
+      : `${this.prefix}/trash`
+
+    const resp = await this.stackClient.fetchJSON('GET', path)
+    return {
+      data: resp.data.map((item) => normalizeFile(item)),
+      meta: resp.meta,
+      next: resp.links?.next
+    }
+  }
+
+  /**
    * Copy a file.
    *
    * @param {string} id   - The file's id
