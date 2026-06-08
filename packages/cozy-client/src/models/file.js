@@ -575,14 +575,21 @@ export const generateNewFileNameOnConflict = (
   filenameWithoutExtension,
   conflictOptions
 ) => {
-  const delimiter = conflictOptions?.delimiter || '_'
+  const delimiter = conflictOptions?.delimiter
 
-  //Check if the string ends by _1
+  if (!delimiter) {
+    const matches = filenameWithoutExtension.match(/^(.*) \(([0-9]+)\)$/)
+    if (matches) {
+      return `${matches[1]} (${parseInt(matches[2], 10) + 1})`
+    }
+    return `${filenameWithoutExtension} (1)`
+  }
+
+  // Keep explicit delimiter support for callers that opted into the legacy format.
   const regex = new RegExp(`(${delimiter})([0-9]+)$`)
   const matches = filenameWithoutExtension.match(regex)
   if (matches) {
-    let versionNumber = parseInt(matches[2])
-    //increment versionNumber
+    let versionNumber = parseInt(matches[2], 10)
     versionNumber++
     const newFilenameWithoutExtension = filenameWithoutExtension.replace(
       new RegExp(`(${delimiter})([0-9]+)$`),

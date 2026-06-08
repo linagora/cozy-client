@@ -592,19 +592,59 @@ describe('File Model', () => {
   })
 
   describe('generateNewFileNameOnConflict', () => {
-    it('should generate the right file name with _X', () => {
+    it('should generate the default file name with parenthesized copy counters', () => {
       const filename1 = fileModel.generateNewFileNameOnConflict('test')
-      expect(filename1).toEqual('test_1')
-      const filename2 = fileModel.generateNewFileNameOnConflict('test_1')
-      expect(filename2).toEqual('test_2')
+      expect(filename1).toEqual('test (1)')
+      const filename2 = fileModel.generateNewFileNameOnConflict('test (1)')
+      expect(filename2).toEqual('test (2)')
       const filename3 = fileModel.generateNewFileNameOnConflict('test_1_1_test')
+      expect(filename3).toEqual('test_1_1_test (1)')
+      const filename4 = fileModel.generateNewFileNameOnConflict(
+        'test_1_1_test (1)'
+      )
+      expect(filename4).toEqual('test_1_1_test (2)')
+      const filename5 = fileModel.generateNewFileNameOnConflict('test_')
+      expect(filename5).toEqual('test_ (1)')
+    })
+
+    it('should not increment numbers that are part of the file name', () => {
+      const filename1 = fileModel.generateNewFileNameOnConflict('IMG_4521')
+      expect(filename1).toEqual('IMG_4521 (1)')
+      const filename2 = fileModel.generateNewFileNameOnConflict('DSC_0001')
+      expect(filename2).toEqual('DSC_0001 (1)')
+      const filename3 = fileModel.generateNewFileNameOnConflict('report_2024')
+      expect(filename3).toEqual('report_2024 (1)')
+      const filename4 = fileModel.generateNewFileNameOnConflict(
+        'report (draft)'
+      )
+      expect(filename4).toEqual('report (draft) (1)')
+    })
+
+    it('should keep the legacy delimiter behavior when delimiter is passed', () => {
+      const conflictOptions = {
+        delimiter: '_'
+      }
+
+      const filename1 = fileModel.generateNewFileNameOnConflict(
+        'test',
+        conflictOptions
+      )
+      expect(filename1).toEqual('test_1')
+      const filename2 = fileModel.generateNewFileNameOnConflict(
+        'test_1',
+        conflictOptions
+      )
+      expect(filename2).toEqual('test_2')
+      const filename3 = fileModel.generateNewFileNameOnConflict(
+        'test_1_1_test',
+        conflictOptions
+      )
       expect(filename3).toEqual('test_1_1_test_1')
       const filename4 = fileModel.generateNewFileNameOnConflict(
-        'test_1_1_test_1'
+        'test_',
+        conflictOptions
       )
-      expect(filename4).toEqual('test_1_1_test_2')
-      const filename5 = fileModel.generateNewFileNameOnConflict('test_')
-      expect(filename5).toEqual('test__1')
+      expect(filename4).toEqual('test__1')
     })
 
     it('should generate the right file name with _cozyX', () => {
@@ -713,7 +753,33 @@ describe('File Model', () => {
       await fileModel.uploadFileWithConflictStrategy(cozyClient, '', opts)
       expect(createFileSpy).toHaveBeenCalledWith('', {
         ...opts,
-        name: 'filename_1'
+        name: 'filename (1)'
+      })
+    })
+
+    it('should keep real filename numbers when renaming a file with an extension', async () => {
+      const dirId = 'toto'
+      //first call we return an existing file => conflict
+      //second call, we reject as not found
+      statByPathSpy
+        .mockReturnValueOnce({
+          data: {
+            _id: 'file_id',
+            _type: 'io.cozy.files'
+          }
+        })
+        .mockRejectedValueOnce(new Error('Not Found'))
+
+      const opts = {
+        name: 'IMG_4521.jpg',
+        dirId,
+        conflictStrategy: 'rename',
+        contentType: 'image/jpeg'
+      }
+      await fileModel.uploadFileWithConflictStrategy(cozyClient, '', opts)
+      expect(createFileSpy).toHaveBeenCalledWith('', {
+        ...opts,
+        name: 'IMG_4521 (1).jpg'
       })
     })
 
