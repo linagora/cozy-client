@@ -950,7 +950,7 @@ import { QueryDefinition } from './queries/dsl'
  * Represents available options of generateNewFileNameOnConflict method
  *
  * @typedef {object} ConflictOptions
- * @property {string} [delimiter] - Delimiter before the incremented number. Default to '_'
+ * @property {string} [delimiter] - Custom delimiter before the incremented number. Defaults to parenthesized copy counters.
  */
 
 /**

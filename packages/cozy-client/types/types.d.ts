@@ -1702,7 +1702,7 @@ export type RedirectLinkData = {
  */
 export type ConflictOptions = {
     /**
-     * - Delimiter before the incremented number. Default to '_'
+     * - Custom delimiter before the incremented number. Defaults to parenthesized copy counters.
      */
     delimiter?: string;
 };
