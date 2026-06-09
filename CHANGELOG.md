@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.26.1](https://github.com/cozy/cozy-client/compare/v60.26.0...v60.26.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* Use parentheses as default conflict filename suffix ([b13ab93](https://github.com/cozy/cozy-client/commit/b13ab9365ba90b146fcd6300326a618696821a31))
+
+
+
+
+
 # [60.26.0](https://github.com/cozy/cozy-client/compare/v60.25.0...v60.26.0) (2026-05-28)
 
 
