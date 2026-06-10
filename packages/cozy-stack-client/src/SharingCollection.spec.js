@@ -591,6 +591,36 @@ describe('SharingCollection', () => {
     })
   })
 
+  describe('setReadOnly', () => {
+    beforeEach(() => {
+      client.fetch.mockReset()
+      client.fetchJSON.mockResolvedValue({ data: [] })
+    })
+
+    it('should call the right route', async () => {
+      await collection.setReadOnly(SHARING, 1)
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        `/sharings/${SHARING._id}/recipients/1/readonly`
+      )
+    })
+  })
+
+  describe('setReadWrite', () => {
+    beforeEach(() => {
+      client.fetch.mockReset()
+      client.fetchJSON.mockResolvedValue({ data: [] })
+    })
+
+    it('should call the right route', async () => {
+      await collection.setReadWrite(SHARING, 1)
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'DELETE',
+        `/sharings/${SHARING._id}/recipients/1/readonly`
+      )
+    })
+  })
+
   describe('addRecipients', () => {
     beforeEach(() => {
       client.fetch.mockReset()
