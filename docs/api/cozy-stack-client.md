@@ -1986,6 +1986,8 @@ Implements the `DocumentCollection` API along with specific methods for
     * [.getDiscoveryLink(sharingId, sharecode, [options])](#SharingCollection+getDiscoveryLink) ⇒ <code>string</code>
     * [.addRecipients(options)](#SharingCollection+addRecipients)
     * [.revokeRecipient(sharing, recipientIndex)](#SharingCollection+revokeRecipient)
+    * [.setReadOnly(sharing, recipientIndex)](#SharingCollection+setReadOnly)
+    * [.setReadWrite(sharing, recipientIndex)](#SharingCollection+setReadWrite)
     * [.revokeGroup(sharing, groupIndex)](#SharingCollection+revokeGroup)
     * [.revokeSelf(sharing)](#SharingCollection+revokeSelf)
     * [.revokeAllRecipients(sharing)](#SharingCollection+revokeAllRecipients)
@@ -2104,6 +2106,30 @@ Add an array of contacts to the Sharing
 
 ### sharingCollection.revokeRecipient(sharing, recipientIndex)
 Revoke only one recipient of the sharing.
+
+**Kind**: instance method of [<code>SharingCollection</code>](#SharingCollection)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sharing | [<code>Sharing</code>](#Sharing) | Sharing Object |
+| recipientIndex | <code>number</code> | Index of this recipient in the members array of the sharing |
+
+<a name="SharingCollection+setReadOnly"></a>
+
+### sharingCollection.setReadOnly(sharing, recipientIndex)
+Downgrade a sharing member to read-only.
+
+**Kind**: instance method of [<code>SharingCollection</code>](#SharingCollection)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sharing | [<code>Sharing</code>](#Sharing) | Sharing Object |
+| recipientIndex | <code>number</code> | Index of this recipient in the members array of the sharing |
+
+<a name="SharingCollection+setReadWrite"></a>
+
+### sharingCollection.setReadWrite(sharing, recipientIndex)
+Upgrade a read-only sharing member to read-write.
 
 **Kind**: instance method of [<code>SharingCollection</code>](#SharingCollection)  
 

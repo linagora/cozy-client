@@ -299,6 +299,32 @@ class SharingCollection extends DocumentCollection {
   }
 
   /**
+   * Downgrade a sharing member to read-only.
+   *
+   * @param {Sharing} sharing Sharing Object
+   * @param {number} recipientIndex Index of this recipient in the members array of the sharing
+   */
+  setReadOnly(sharing, recipientIndex) {
+    return this.stackClient.fetchJSON(
+      'POST',
+      uri`/sharings/${sharing._id}/recipients/${recipientIndex}/readonly`
+    )
+  }
+
+  /**
+   * Upgrade a read-only sharing member to read-write.
+   *
+   * @param {Sharing} sharing Sharing Object
+   * @param {number} recipientIndex Index of this recipient in the members array of the sharing
+   */
+  setReadWrite(sharing, recipientIndex) {
+    return this.stackClient.fetchJSON(
+      'DELETE',
+      uri`/sharings/${sharing._id}/recipients/${recipientIndex}/readonly`
+    )
+  }
+
+  /**
    * Revoke only one group of the sharing.
    *
    * @param {Sharing} sharing Sharing Object
