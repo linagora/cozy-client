@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.27.0](https://github.com/cozy/cozy-client/compare/v60.26.1...v60.27.0) (2026-06-10)
+
+
+### Features
+
+* **cozy-stack-client:** Add SharingCollection read-only methods ([3452210](https://github.com/cozy/cozy-client/commit/3452210239c2ef82dc78ef0c9d4f904edb9a08eb))
+
+
+
+
+
 ## [60.26.1](https://github.com/cozy/cozy-client/compare/v60.26.0...v60.26.1) (2026-06-09)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.27.0](https://github.com/linagora/cozy-client/compare/v60.26.1...v60.27.0) (2026-06-10)
+
+
+### Features
+
+* **cozy-stack-client:** Add SharingCollection read-only methods ([3452210](https://github.com/linagora/cozy-client/commit/3452210239c2ef82dc78ef0c9d4f904edb9a08eb))
+
+
+
+
+
 # [60.24.0](https://github.com/linagora/cozy-client/compare/v60.23.2...v60.24.0) (2026-05-04)
 
 
