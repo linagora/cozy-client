@@ -318,6 +318,19 @@ describe('PermissionCollection', () => {
       )
     })
   })
+
+  describe('findLinksByIds', () => {
+    beforeEach(() => {
+      client.fetchJSON.mockReset()
+    })
+
+    it('throws when called without a shared drive prefix', async () => {
+      await expect(collection.findLinksByIds(['file_456'])).rejects.toEqual(
+        new Error('findLinksByIds is only supported for shared drives')
+      )
+      expect(client.fetchJSON).not.toHaveBeenCalled()
+    })
+  })
 })
 
 describe('revokeSharingLink', () => {
@@ -562,6 +575,60 @@ describe('PermissionCollection with driveId', () => {
         'GET',
         '/sharings/drives/abc123drive/permissions/self'
       )
+    })
+  })
+
+  describe('findLinksByIds', () => {
+    it('calls the API with the shared drive prefix and the file id', async () => {
+      client.fetchJSON.mockResolvedValue({
+        data: [
+          {
+            type: 'io.cozy.permissions',
+            id: 'perm_1',
+            attributes: {
+              type: 'share',
+              shortcodes: { code: 'abc123' },
+              permissions: {
+                files: {
+                  type: 'io.cozy.files',
+                  verbs: ['GET'],
+                  values: ['file_456']
+                }
+              }
+            }
+          }
+        ]
+      })
+      const resp = await collection.findLinksByIds(['file_456'])
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/abc123drive/permissions?ids=file_456'
+      )
+      expect(resp.data).toHaveLength(1)
+      expect(resp.data[0].id).toBe('perm_1')
+      expect(resp.data[0]._id).toBe('perm_1')
+      expect(resp.data[0].attributes.shortcodes.code).toBe('abc123')
+    })
+
+    it('joins multiple ids with a comma in the query string', async () => {
+      client.fetchJSON.mockResolvedValue({ data: [] })
+      await collection.findLinksByIds(['file_456', 'file_789'])
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/abc123drive/permissions?ids=file_456%2Cfile_789'
+      )
+    })
+
+    it('throws when ids is not an array', async () => {
+      await expect(collection.findLinksByIds('file_456')).rejects.toEqual(
+        new TypeError('ids must be an array')
+      )
+      expect(client.fetchJSON).not.toHaveBeenCalled()
+    })
+
+    it('returns an empty result without calling the API when ids is empty', async () => {
+      await expect(collection.findLinksByIds([])).resolves.toEqual({ data: [] })
+      expect(client.fetchJSON).not.toHaveBeenCalled()
     })
   })
 })

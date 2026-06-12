@@ -1768,6 +1768,7 @@ Implements `DocumentCollection` API along with specific methods for `io.cozy.per
     * [new PermissionCollection(doctype, stackClient, [options])](#new_PermissionCollection_new)
     * [.create(permission)](#PermissionCollection+create)
     * [.add(document, permission, options)](#PermissionCollection+add) ⇒ <code>Promise</code>
+    * [.findLinksByIds(ids)](#PermissionCollection+findLinksByIds) ⇒ <code>Promise</code>
     * ~~[.findApps()](#PermissionCollection+findApps)~~
     * [.createSharingLink(document, options)](#PermissionCollection+createSharingLink)
     * [.fetchPermissionsByLink(permissions)](#PermissionCollection+fetchPermissionsByLink)
@@ -1830,6 +1831,29 @@ const permissions = await client.collection('io.cozy.permissions').add(
   { expiresAt: '2100-01-01T00:00:00Z', password: 'password' }
 )
 ```
+<a name="PermissionCollection+findLinksByIds"></a>
+
+### permissionCollection.findLinksByIds(ids) ⇒ <code>Promise</code>
+Find sharing links by document ids
+
+This is the shared-drive equivalent of `findLinksByDoctype` when you
+already know the document ids. It uses the same `this.prefix`, so the
+URL becomes `/sharings/drives/:driveId/permissions?ids=...` when the
+collection is built with `{ driveId }`.
+
+The returned permissions are normalized (have `_id` and `_type`).
+
+**Kind**: instance method of [<code>PermissionCollection</code>](#PermissionCollection)  
+**Returns**: <code>Promise</code> - The matching permissions  
+**Throws**:
+
+- <code>Error</code> If the collection is not configured with a `driveId`
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ids | <code>Array.&lt;string&gt;</code> | The list of document ids to look up |
+
 <a name="PermissionCollection+findApps"></a>
 
 ### ~~permissionCollection.findApps()~~
