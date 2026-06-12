@@ -6,6 +6,11 @@ import logger from './logger'
 
 const normalizePermission = perm => normalizeDoc(perm, 'io.cozy.permissions')
 
+const normalizePermissionsResponse = resp => ({
+  ...resp,
+  data: resp.data.map(normalizePermission)
+})
+
 /**
  * Options that can be passed to PermissionCollection's constructor
  *
@@ -151,6 +156,44 @@ class PermissionCollection extends DocumentCollection {
       ...resp,
       data: resp.data.map(normalizePermission)
     }
+  }
+
+  /**
+   * Find sharing links by document ids
+   *
+   * This is the shared-drive equivalent of `findLinksByDoctype` when you
+   * already know the document ids. It uses the same `this.prefix`, so the
+   * URL becomes `/sharings/drives/:driveId/permissions?ids=...` when the
+   * collection is built with `{ driveId }`.
+   *
+   * The returned permissions are normalized (have `_id` and `_type`).
+   *
+   * @param {string[]} ids - The list of document ids to look up
+   * @throws {Error} If the collection is not configured with a `driveId`
+   * @returns {Promise} The matching permissions
+   */
+  async findLinksByIds(ids) {
+    if (!this.prefix) {
+      throw new Error('findLinksByIds is only supported for shared drives')
+    }
+
+    if (!Array.isArray(ids)) {
+      throw new TypeError('ids must be an array')
+    }
+
+    if (ids.length === 0) {
+      return normalizePermissionsResponse({ data: [] })
+    }
+
+    const searchParams = new URLSearchParams()
+    searchParams.append('ids', ids.join(','))
+
+    const resp = await this.stackClient.fetchJSON(
+      'GET',
+      `${this.prefix}/permissions?${searchParams}`
+    )
+
+    return normalizePermissionsResponse(resp)
   }
 
   /**
