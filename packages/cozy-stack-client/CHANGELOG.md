@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.28.0](https://github.com/linagora/cozy-client/compare/v60.27.0...v60.28.0) (2026-06-15)
+
+
+### Features
+
+* **permissions:** Add shared drive link lookup by ids ([289dbc5](https://github.com/linagora/cozy-client/commit/289dbc5bba4810bc727463811d76bc39c5102574))
+
+
+
+
+
 # [60.27.0](https://github.com/linagora/cozy-client/compare/v60.26.1...v60.27.0) (2026-06-10)
 
 
