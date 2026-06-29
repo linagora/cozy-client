@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.28.1](https://github.com/cozy/cozy-client/compare/v60.28.0...v60.28.1) (2026-06-29)
+
+
+### Bug Fixes
+
+* **pouch-link:** Dedupe doctypes in addDoctype ([88c423e](https://github.com/cozy/cozy-client/commit/88c423e4b078859114f05876ee0aab5ce3f0ccbf))
+
+
+
+
+
 # [60.28.0](https://github.com/cozy/cozy-client/compare/v60.27.0...v60.28.0) (2026-06-15)
 
 
