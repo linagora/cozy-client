@@ -813,7 +813,8 @@ class PouchLink extends CozyLink {
 
   /**
    * Adds a new doctype to the list of managed doctypes, sets its replication options,
-   * adds it to the pouches, and starts replication.
+   * adds it to the pouches, and starts replication. Does nothing when the doctype is
+   * already managed, so the list stays free of duplicates.
    *
    * @param {string} doctype - The name of the doctype to add.
    * @param {Object} replicationOptions - The replication options for the doctype.
@@ -821,12 +822,19 @@ class PouchLink extends CozyLink {
    * @param {boolean} [options.shouldStartReplication=true] - Whether the replication should be started.
    */
   async addDoctype(doctype, replicationOptions, options) {
+    if (this.doctypes.includes(doctype)) {
+      logger.debug(`PouchLink: doctype ${doctype} already managed, skipping`)
+      return
+    }
     this.doctypes.push(doctype)
     if (!this.doctypesReplicationOptions) {
       this.doctypesReplicationOptions = {}
     }
     this.doctypesReplicationOptions[doctype] = replicationOptions
-    this.pouches.doctypes.push(doctype)
+    // sync onto pouches.doctypes, a separate array only after removeDoctype
+    if (!this.pouches.doctypes.includes(doctype)) {
+      this.pouches.doctypes.push(doctype)
+    }
     await this.pouches.addDoctype(doctype, replicationOptions)
     if (options?.shouldStartReplication === true) {
       this.startReplicationWithDebounce()
