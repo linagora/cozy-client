@@ -253,7 +253,8 @@ declare class PouchLink extends CozyLink {
     syncImmediately(): Promise<void>;
     /**
      * Adds a new doctype to the list of managed doctypes, sets its replication options,
-     * adds it to the pouches, and starts replication.
+     * adds it to the pouches, and starts replication. Does nothing when the doctype is
+     * already managed, so the list stays free of duplicates.
      *
      * @param {string} doctype - The name of the doctype to add.
      * @param {Object} replicationOptions - The replication options for the doctype.

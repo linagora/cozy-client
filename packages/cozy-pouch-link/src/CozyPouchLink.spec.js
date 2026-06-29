@@ -574,6 +574,72 @@ describe('CozyPouchLink', () => {
     })
   })
 
+  describe('addDoctype', () => {
+    const OTHER_DOCTYPE = 'io.cozy.files'
+
+    it('should register a doctype only once, even though the link and pouch manager share the doctypes array', async () => {
+      await setup()
+      jest.spyOn(link.pouches, 'addDoctype').mockResolvedValue(undefined)
+      // The link and its pouch manager hold the same array, so a single
+      // registration must not land the doctype in it twice.
+      expect(link.doctypes).toBe(link.pouches.doctypes)
+
+      await link.addDoctype(OTHER_DOCTYPE, { strategy: 'fromRemote' })
+
+      expect(link.doctypes.filter(d => d === OTHER_DOCTYPE)).toHaveLength(1)
+      expect(
+        link.pouches.doctypes.filter(d => d === OTHER_DOCTYPE)
+      ).toHaveLength(1)
+      expect(link.pouches.addDoctype).toHaveBeenCalledTimes(1)
+    })
+
+    it('should not re-register, restart replication, or overwrite options for a managed doctype', async () => {
+      await setup()
+      jest.spyOn(link.pouches, 'addDoctype').mockResolvedValue(undefined)
+      jest
+        .spyOn(link, 'startReplicationWithDebounce')
+        .mockImplementation(() => {})
+
+      await link.addDoctype(
+        OTHER_DOCTYPE,
+        { strategy: 'fromRemote' },
+        { shouldStartReplication: true }
+      )
+      await link.addDoctype(
+        OTHER_DOCTYPE,
+        { strategy: 'sync' },
+        { shouldStartReplication: true }
+      )
+
+      expect(link.doctypes.filter(d => d === OTHER_DOCTYPE)).toHaveLength(1)
+      expect(
+        link.pouches.doctypes.filter(d => d === OTHER_DOCTYPE)
+      ).toHaveLength(1)
+      expect(link.pouches.addDoctype).toHaveBeenCalledTimes(1)
+      expect(link.startReplicationWithDebounce).toHaveBeenCalledTimes(1)
+      // The no-op re-add keeps the original options instead of overwriting them.
+      expect(link.doctypesReplicationOptions[OTHER_DOCTYPE]).toEqual({
+        strategy: 'fromRemote'
+      })
+    })
+
+    it('should register again a doctype that was previously removed', async () => {
+      await setup()
+      const addSpy = jest.spyOn(link.pouches, 'addDoctype')
+
+      await link.addDoctype(OTHER_DOCTYPE, { strategy: 'fromRemote' })
+      await link.removeDoctype(OTHER_DOCTYPE)
+      await link.addDoctype(OTHER_DOCTYPE, { strategy: 'fromRemote' })
+
+      expect(link.doctypes.filter(d => d === OTHER_DOCTYPE)).toHaveLength(1)
+      expect(
+        link.pouches.doctypes.filter(d => d === OTHER_DOCTYPE)
+      ).toHaveLength(1)
+      // The pouch is recreated on the second registration.
+      expect(addSpy).toHaveBeenCalledTimes(2)
+    })
+  })
+
   describe('immediate sync', () => {
     it('should not throw if pouches not there', async () => {
       await setup()

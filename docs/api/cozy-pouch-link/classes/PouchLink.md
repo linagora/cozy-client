@@ -161,7 +161,8 @@ CozyLink.constructor
 ▸ **addDoctype**(`doctype`, `replicationOptions`, `options`): `Promise`<`void`>
 
 Adds a new doctype to the list of managed doctypes, sets its replication options,
-adds it to the pouches, and starts replication.
+adds it to the pouches, and starts replication. Does nothing when the doctype is
+already managed, so the list stays free of duplicates.
 
 *Parameters*
 
@@ -178,7 +179,7 @@ adds it to the pouches, and starts replication.
 
 *Defined in*
 
-[CozyPouchLink.js:823](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L823)
+[CozyPouchLink.js:824](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L824)
 
 ***
 
@@ -493,7 +494,7 @@ The authenticated replication URL
 
 *Defined in*
 
-[CozyPouchLink.js:848](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L848)
+[CozyPouchLink.js:856](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L856)
 
 ***
 
@@ -762,7 +763,7 @@ and removes it from the pouches.
 
 *Defined in*
 
-[CozyPouchLink.js:842](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L842)
+[CozyPouchLink.js:850](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L850)
 
 ***
 
