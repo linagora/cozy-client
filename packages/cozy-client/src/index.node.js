@@ -48,3 +48,4 @@ export { default as fetchPolicies } from './policies'
 
 export { webPerformanceApi } from './performances/webPerformanceApi'
 export { defaultPerformanceApi } from './performances/defaultPerformanceApi'
+export { resolveForceLink } from './links/forceLink'

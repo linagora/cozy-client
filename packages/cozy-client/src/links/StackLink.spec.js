@@ -2,14 +2,71 @@ import { Q } from '../queries/dsl'
 import CozyClient from '../CozyClient'
 import StackLink, { transformBulkDocsResponse } from './StackLink'
 import { SCHEMA } from '../__tests__/fixtures'
+import logger from '../logger'
+// eslint-disable-next-line no-underscore-dangle
+import { _resetForceStackWarning } from './forceLink'
 
 describe('StackLink', () => {
+  describe('name', () => {
+    it('should expose a stable name', () => {
+      expect(new StackLink().name).toBe('stack')
+    })
+  })
+
   let stackClient, link, client
 
   beforeEach(() => {
     link = new StackLink()
     client = new CozyClient({ links: [link], schema: SCHEMA })
     stackClient = client.getStackClient()
+  })
+
+  describe('forceLink', () => {
+    let warnSpy
+
+    beforeEach(() => {
+      _resetForceStackWarning()
+      warnSpy = jest.spyOn(logger, 'warn').mockImplementation(() => {})
+    })
+
+    afterEach(() => {
+      warnSpy.mockRestore()
+    })
+
+    it('forwards when forceLink targets another link', async () => {
+      const link = new StackLink()
+      const forward = jest.fn().mockResolvedValue('forwarded')
+      expect(
+        await link.request(
+          { doctype: 'io.cozy.files' },
+          { forceLink: 'dataproxy' },
+          undefined,
+          forward
+        )
+      ).toBe('forwarded')
+    })
+
+    it('handles a forceStack:true query (legacy: does not forward, emits deprecation warning)', async () => {
+      const link = new StackLink()
+      link.executeQuery = jest.fn().mockResolvedValue({ data: [] })
+      link.isOnline = jest.fn().mockResolvedValue(false) // offline — should NOT bail because forceStack
+      const forwardFn = jest.fn()
+      const op = { doctype: 'io.cozy.files' }
+      await link.request(op, { forceStack: true }, null, forwardFn)
+      expect(forwardFn).not.toHaveBeenCalled()
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('forceStack is deprecated')
+      )
+    })
+
+    it('forwards a plain query when offline', async () => {
+      const link = new StackLink()
+      link.isOnline = jest.fn().mockResolvedValue(false)
+      const forwardFn = jest.fn().mockResolvedValue(null)
+      const op = { doctype: 'io.cozy.files' }
+      await link.request(op, {}, null, forwardFn)
+      expect(forwardFn).toHaveBeenCalled()
+    })
   })
 
   describe('query execution', () => {

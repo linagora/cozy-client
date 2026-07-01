@@ -24,5 +24,11 @@ export default class CozyLink {
      * @returns {Promise<any>}
      */
     reset(): Promise<any>;
+    /**
+     * Stable name used to target this link via the `forceLink` query option.
+     *
+     * @returns {string|undefined}
+     */
+    get name(): string;
 }
 export function chain(links: any): any;

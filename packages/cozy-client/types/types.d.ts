@@ -567,9 +567,13 @@ export type QueryOptions = {
      */
     executeFromStore?: boolean;
     /**
-     * - If set to true, the query will be executed through StackLink only even if there are other links available
+     * - Deprecated: use forceLink:'stack'. Executes the query through StackLink only.
      */
     forceStack?: boolean;
+    /**
+     * - Route this query exclusively to the link whose name matches (e.g. 'dataproxy').
+     */
+    forceLink?: string;
 };
 export type Query = {
     definition: QueryDefinition;

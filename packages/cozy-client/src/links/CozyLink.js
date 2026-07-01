@@ -41,6 +41,15 @@ export default class CozyLink {
   async reset() {
     throw new Error('reset is not implemented')
   }
+
+  /**
+   * Stable name used to target this link via the `forceLink` query option.
+   *
+   * @returns {string|undefined}
+   */
+  get name() {
+    return undefined
+  }
 }
 
 const toLink = handler =>

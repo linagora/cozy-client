@@ -1,5 +1,6 @@
 import CozyLink from './CozyLink'
 import logger from 'cozy-logger'
+import { resolveForceLink } from './forceLink'
 
 export default class DataProxyLink extends CozyLink {
   /**
@@ -15,6 +16,10 @@ export default class DataProxyLink extends CozyLink {
     if (window) {
       window.addEventListener('message', this._onReceiveMessage)
     }
+  }
+
+  get name() {
+    return 'dataproxy'
   }
 
   registerClient(client) {
@@ -38,6 +43,10 @@ export default class DataProxyLink extends CozyLink {
   }
 
   async request(operation, options, result, forward) {
+    const forceLink = resolveForceLink(options)
+    if (forceLink && forceLink !== this.name) {
+      return forward(operation, options)
+    }
     if (this.dataproxy?.requestLink) {
       return this.doRequest(operation, options)
     }

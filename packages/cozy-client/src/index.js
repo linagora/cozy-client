@@ -3,6 +3,7 @@ export { default as CozyLink } from './links/CozyLink'
 export { default as StackLink } from './links/StackLink'
 export { default as WebFlagshipLink } from './links/WebFlagshipLink'
 export { default as DataProxyLink } from './links/DataProxyLink'
+export { resolveForceLink } from './links/forceLink'
 export { default as compose } from 'lodash/flow'
 export {
   QueryDefinition,

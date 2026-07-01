@@ -29,6 +29,22 @@
 
 [packages/cozy-client/src/links/CozyLink.js:2](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L2)
 
+## Accessors
+
+### name
+
+• `get` **name**(): `string`
+
+Stable name used to target this link via the `forceLink` query option.
+
+*Returns*
+
+`string`
+
+*Defined in*
+
+[packages/cozy-client/src/links/CozyLink.js:50](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/CozyLink.js#L50)
+
 ## Methods
 
 ### persistCozyData

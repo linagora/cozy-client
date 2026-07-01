@@ -12,6 +12,7 @@ export { BulkEditError } from "./errors";
 export { default as fetchPolicies } from "./policies";
 export { webPerformanceApi } from "./performances/webPerformanceApi";
 export { defaultPerformanceApi } from "./performances/defaultPerformanceApi";
+export { resolveForceLink } from "./links/forceLink";
 import * as manifest from "./models/manifest";
 import * as models from "./models";
 export { manifest, models };

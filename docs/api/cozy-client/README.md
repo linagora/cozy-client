@@ -839,6 +839,32 @@ if there are N queries, only 1 extra level of nesting is introduced.
 
 ***
 
+### resolveForceLink
+
+▸ **resolveForceLink**(`options`): `string`
+
+Resolves the effective forceLink target, mapping the deprecated forceStack option onto forceLink:'stack'.
+
+**`internal`**
+
+*Parameters*
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `Object` |
+| `options.forceLink?` | `string` |
+| `options.forceStack?` | `boolean` |
+
+*Returns*
+
+`string`
+
+*Defined in*
+
+[packages/cozy-client/src/links/forceLink.js:18](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/forceLink.js#L18)
+
+***
+
 ### rootCozyUrl
 
 ▸ **rootCozyUrl**(`url`): `Promise`<`URL`>

@@ -16,6 +16,11 @@ describe('CozyLink', () => {
     expect(link.request('dummyOperation')).toBe('foobarbaz')
   })
 
+  it('has name === undefined by default', () => {
+    const link = new CozyLink()
+    expect(link.name).toBe(undefined)
+  })
+
   describe('default last link', () => {
     it('should throw an error when called without result', () => {
       const link = chain([
