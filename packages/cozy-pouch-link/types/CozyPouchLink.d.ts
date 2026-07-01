@@ -89,6 +89,8 @@ declare class PouchLink extends CozyLink {
     doctypes: string[];
     doctypesReplicationOptions: Record<string, any>;
     indexes: {};
+    /** @private Cache of per-drive logical-typed query engines, keyed by `dbDoctype::logicalDoctype`. */
+    private _driveQueryEngines;
     storage: PouchLocalStorage;
     initialSync: boolean;
     periodicSync: boolean;
@@ -197,9 +199,20 @@ declare class PouchLink extends CozyLink {
     public stopReplication(): void;
     onSyncError(error: any): Promise<void>;
     getSyncInfo(doctype: any): import("./types").SyncInfo;
-    getQueryEngineFromDoctype(doctype: any): any;
+    /**
+     * Returns the registered physical doctype for a given logical doctype and query options.
+     *
+     * @param {any} logicalDoctype - The logical doctype
+     * @param {object} [options] - Optional query options
+     */
+    getDbDoctype(logicalDoctype: any, options?: object): any;
+    /**
+     * @param {any} doctype - The doctype
+     * @param {object} [options] - Optional query options
+     */
+    getQueryEngineFromDoctype(doctype: any, options?: object): any;
     getPouch(doctype: any): any;
-    supportsOperation(operation: any): boolean;
+    supportsOperation(operation: any, options: any): boolean;
     /**
      * Get PouchDB changes
      * See https://pouchdb.com/api.html#changes
@@ -227,19 +240,11 @@ declare class PouchLink extends CozyLink {
      */
     needsToWaitWarmup(doctype: string): Promise<boolean>;
     hasIndex(name: any): boolean;
-    executeQuery({ doctype, selector, sort, fields, limit, id, ids, skip, indexedFields, partialFilter, sharingId }: {
-        doctype: any;
-        selector: any;
-        sort: any;
-        fields: any;
-        limit: any;
-        id: any;
-        ids: any;
-        skip: any;
-        indexedFields: any;
-        partialFilter: any;
-        sharingId: any;
-    }): Promise<any>;
+    /**
+     * @param {object} operation - The query operation
+     * @param {object} [options] - Optional query options
+     */
+    executeQuery({ doctype, selector, sort, fields, limit, id, ids, skip, indexedFields, partialFilter, sharingId }: object, options?: object): Promise<any>;
     executeMutation(mutation: any, options: any, result: any, forward: any): Promise<any>;
     createDocument(mutation: any): Promise<any>;
     createDocuments(mutation: any): Promise<any[]>;

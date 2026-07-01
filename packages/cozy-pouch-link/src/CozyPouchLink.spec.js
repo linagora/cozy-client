@@ -78,6 +78,38 @@ describe('CozyPouchLink', () => {
     expect(url).toBe('http://user:token@cozy.tools:8080/data/io.cozy.todos')
   })
 
+  it('has name === "pouch"', async () => {
+    await setup()
+    expect(link.name).toBe('pouch')
+  })
+
+  it('handles a forceLink:"dataproxy" query (regression: Plan A drive capability)', async () => {
+    await setup()
+    link.pouches.getSyncStatus = jest.fn().mockReturnValue('synced')
+    const forwardFn = jest.fn()
+    await link.request(
+      Q(TODO_DOCTYPE),
+      { forceLink: 'dataproxy' },
+      null,
+      forwardFn
+    )
+    expect(forwardFn).not.toHaveBeenCalled()
+  })
+
+  it('forwards a forceLink:"stack" query', async () => {
+    await setup()
+    const forwardFn = jest.fn()
+    await link.request(Q(TODO_DOCTYPE), { forceLink: 'stack' }, null, forwardFn)
+    expect(forwardFn).toHaveBeenCalled()
+  })
+
+  it('forwards a legacy forceStack:true query', async () => {
+    await setup()
+    const forwardFn = jest.fn()
+    await link.request(Q(TODO_DOCTYPE), { forceStack: true }, null, forwardFn)
+    expect(forwardFn).toHaveBeenCalled()
+  })
+
   describe('request handling', () => {
     const query1 = () => ({
       definition: () => Q(TODO_DOCTYPE).limitBy(100),
@@ -680,6 +712,180 @@ describe('CozyPouchLink', () => {
       link.registerClient(client)
 
       expect(link.onLogin()).rejects.toThrow()
+    })
+  })
+
+  describe('driveId support', () => {
+    it('maps a driveId option to its registered drive doctype', () => {
+      const driveLink = new CozyPouchLink({
+        doctypes: ['io.cozy.files', 'io.cozy.files.shareddrives-abc'],
+        doctypesReplicationOptions: {
+          'io.cozy.files.shareddrives-abc': { driveId: 'abc' }
+        }
+      })
+      expect(driveLink.getDbDoctype('io.cozy.files', { driveId: 'abc' })).toBe(
+        'io.cozy.files.shareddrives-abc'
+      )
+      expect(driveLink.getDbDoctype('io.cozy.files', {})).toBe('io.cozy.files')
+      expect(driveLink.getDbDoctype('io.cozy.files', { driveId: 'nope' })).toBe(
+        'io.cozy.files'
+      )
+    })
+
+    it('reads the drive database but types docs as io.cozy.files', async () => {
+      const FILES_DOCTYPE = 'io.cozy.files'
+      const DRIVE_DOCTYPE = 'io.cozy.files.shareddrives-abc'
+
+      const driveLink = new CozyPouchLink({
+        doctypes: [FILES_DOCTYPE, DRIVE_DOCTYPE],
+        doctypesReplicationOptions: {
+          [DRIVE_DOCTYPE]: { driveId: 'abc' }
+        }
+      })
+      const driveClient = new CozyClient({
+        ...mockClient,
+        links: [driveLink],
+        warningForCustomHandlers: false,
+        schema: {}
+      })
+      driveClient.emit = jest.fn()
+      await driveLink.onLogin()
+      driveClient.setData = jest.fn()
+
+      await driveLink.getPouch(FILES_DOCTYPE).put({ _id: 'own1' })
+      await driveLink.getPouch(DRIVE_DOCTYPE).put({ _id: 'drive1' })
+
+      driveLink.pouches.getSyncStatus = jest.fn().mockReturnValue('synced')
+
+      const res = await driveLink.request(Q(FILES_DOCTYPE).getById('drive1'), {
+        driveId: 'abc'
+      })
+      expect(res.data._id).toBe('drive1')
+      expect(res.data._type).toBe(FILES_DOCTYPE)
+
+      await driveLink.reset()
+    })
+
+    it('reads the drive database through the find path and types docs as io.cozy.files', async () => {
+      const FILES_DOCTYPE = 'io.cozy.files'
+      const DRIVE_DOCTYPE = 'io.cozy.files.shareddrives-abc'
+
+      const driveLink = new CozyPouchLink({
+        doctypes: [FILES_DOCTYPE, DRIVE_DOCTYPE],
+        doctypesReplicationOptions: {
+          [DRIVE_DOCTYPE]: { driveId: 'abc' }
+        }
+      })
+      const driveClient = new CozyClient({
+        ...mockClient,
+        links: [driveLink],
+        warningForCustomHandlers: false,
+        schema: {}
+      })
+      driveClient.emit = jest.fn()
+      await driveLink.onLogin()
+      driveClient.setData = jest.fn()
+
+      await driveLink
+        .getPouch(FILES_DOCTYPE)
+        .put({ _id: 'own1', updated_at: '2024-01-01' })
+      await driveLink
+        .getPouch(DRIVE_DOCTYPE)
+        .put({ _id: 'drive1', updated_at: '2024-06-01' })
+
+      driveLink.pouches.getSyncStatus = jest.fn().mockReturnValue('synced')
+
+      const res = await driveLink.request(
+        Q(FILES_DOCTYPE)
+          .where({ updated_at: { $gt: null } })
+          .indexFields(['updated_at']),
+        { driveId: 'abc' }
+      )
+
+      expect(res.data.some(d => d._id === 'drive1')).toBe(true)
+      expect(res.data.some(d => d._id === 'own1')).toBe(false)
+      expect(res.data.every(d => d._type === FILES_DOCTYPE)).toBe(true)
+
+      await driveLink.reset()
+    })
+
+    it('supportsOperation is true for io.cozy.files with driveId when drive doctype is managed', async () => {
+      const FILES_DOCTYPE = 'io.cozy.files'
+      const DRIVE_DOCTYPE = 'io.cozy.files.shareddrives-abc'
+
+      const driveLink = new CozyPouchLink({
+        doctypes: [FILES_DOCTYPE, DRIVE_DOCTYPE],
+        doctypesReplicationOptions: {
+          [DRIVE_DOCTYPE]: { driveId: 'abc' }
+        }
+      })
+      const driveClient = new CozyClient({
+        ...mockClient,
+        links: [driveLink],
+        warningForCustomHandlers: false,
+        schema: {}
+      })
+      driveClient.emit = jest.fn()
+      await driveLink.onLogin()
+
+      expect(driveLink.supportsOperation({ doctype: FILES_DOCTYPE })).toBe(true)
+
+      await driveLink.reset()
+    })
+
+    it('request uses drive doctype sync state, not io.cozy.files sync state', async () => {
+      const FILES_DOCTYPE = 'io.cozy.files'
+      const DRIVE_DOCTYPE = 'io.cozy.files.shareddrives-abc'
+
+      const driveLink = new CozyPouchLink({
+        doctypes: [FILES_DOCTYPE, DRIVE_DOCTYPE],
+        doctypesReplicationOptions: {
+          [DRIVE_DOCTYPE]: { driveId: 'abc' }
+        }
+      })
+      const driveClient = new CozyClient({
+        ...mockClient,
+        links: [driveLink],
+        warningForCustomHandlers: false,
+        schema: {}
+      })
+      driveClient.emit = jest.fn()
+      await driveLink.onLogin()
+
+      await driveLink.getPouch(DRIVE_DOCTYPE).put({ _id: 'drive1' })
+
+      // Drive doctype synced, io.cozy.files not synced: drive query must be handled locally
+      driveLink.pouches.getSyncStatus = jest.fn(doctype => {
+        if (doctype === DRIVE_DOCTYPE) return 'synced'
+        return 'not_synced'
+      })
+
+      const forwardSpy = jest.fn()
+      const res = await driveLink.request(
+        Q(FILES_DOCTYPE).getById('drive1'),
+        { driveId: 'abc' },
+        null,
+        forwardSpy
+      )
+      expect(forwardSpy).not.toHaveBeenCalled()
+      expect(res.data._id).toBe('drive1')
+
+      // Inverse: drive doctype not synced, io.cozy.files synced: drive query must be forwarded
+      driveLink.pouches.getSyncStatus = jest.fn(doctype => {
+        if (doctype === DRIVE_DOCTYPE) return 'not_synced'
+        return 'synced'
+      })
+
+      const forwardSpy2 = jest.fn().mockResolvedValue({ data: null })
+      await driveLink.request(
+        Q(FILES_DOCTYPE).getById('drive1'),
+        { driveId: 'abc' },
+        null,
+        forwardSpy2
+      )
+      expect(forwardSpy2).toHaveBeenCalled()
+
+      await driveLink.reset()
     })
   })
 

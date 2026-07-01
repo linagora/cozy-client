@@ -3,7 +3,8 @@ import {
   CozyLink,
   getDoctypeFromOperation,
   BulkEditError,
-  defaultPerformanceApi
+  defaultPerformanceApi,
+  resolveForceLink
 } from 'cozy-client'
 import PouchDB from 'pouchdb-browser'
 import PouchDBFind from 'pouchdb-find'
@@ -118,6 +119,8 @@ class PouchLink extends CozyLink {
     this.doctypes = doctypes
     this.doctypesReplicationOptions = doctypesReplicationOptions
     this.indexes = {}
+    /** @private Cache of per-drive logical-typed query engines, keyed by `dbDoctype::logicalDoctype`. */
+    this._driveQueryEngines = new Map()
     this.storage = new PouchLocalStorage(
       options.platform?.storage || platformWeb.storage
     )
@@ -139,6 +142,10 @@ class PouchLink extends CozyLink {
 
     /** @type {import('cozy-client/src/performances/types').PerformanceAPI} */
     this.performanceApi = performanceApi || defaultPerformanceApi
+  }
+
+  get name() {
+    return 'pouch'
   }
 
   /**
@@ -270,6 +277,7 @@ class PouchLink extends CozyLink {
       queryEngine: this.queryEngine,
       client: this.client
     })
+    this._driveQueryEngines = new Map()
     await this.pouches.init()
 
     if (this.client && this.initialSync) {
@@ -288,6 +296,7 @@ class PouchLink extends CozyLink {
 
     this.pouches = null
     this.client = null
+    this._driveQueryEngines = new Map()
   }
 
   /**
@@ -432,12 +441,47 @@ class PouchLink extends CozyLink {
     return this.pouches.getSyncInfo(doctype)
   }
 
-  getQueryEngineFromDoctype(doctype) {
+  /**
+   * Returns the registered physical doctype for a given logical doctype and query options.
+   *
+   * @param {any} logicalDoctype - The logical doctype
+   * @param {object} [options] - Optional query options
+   */
+  getDbDoctype(logicalDoctype, options) {
+    const driveId = options?.driveId
+    if (!driveId) return logicalDoctype
+    const match = Object.keys(this.doctypesReplicationOptions || {}).find(
+      d => this.doctypesReplicationOptions[d]?.driveId === driveId
+    )
+    return match || logicalDoctype
+  }
+
+  /**
+   * @param {any} doctype - The doctype
+   * @param {object} [options] - Optional query options
+   */
+  getQueryEngineFromDoctype(doctype, options) {
+    const logicalDoctype = doctype
+    const dbDoctype = this.getDbDoctype(doctype, options)
     const dbName = getDatabaseName(
       getPrefix(this.client.stackClient.uri),
-      doctype
+      dbDoctype
     )
-    return this.pouches.getQueryEngine(dbName, doctype)
+    if (logicalDoctype !== dbDoctype) {
+      // Separate cache keyed by dbDoctype::logicalDoctype so a drive DB is never stamped with the wrong _type.
+      const cacheKey = `${dbDoctype}::${logicalDoctype}`
+      let engine = this._driveQueryEngines.get(cacheKey)
+      if (!engine) {
+        const QueryEngine =
+          /** @type {typeof PouchDBQueryEngine} */ (this.queryEngine ||
+          PouchDBQueryEngine)
+        engine = new QueryEngine(this.pouches, logicalDoctype)
+        engine.openDB(dbName)
+        this._driveQueryEngines.set(cacheKey, engine)
+      }
+      return engine
+    }
+    return this.pouches.getQueryEngine(dbName, logicalDoctype)
   }
 
   getPouch(doctype) {
@@ -448,11 +492,14 @@ class PouchLink extends CozyLink {
     return this.pouches.getPouch(dbName)
   }
 
-  supportsOperation(operation) {
+  supportsOperation(operation, options) {
     if (this.options.readOnly && operation.mutationType) {
       return false
     }
-    const impactedDoctype = getDoctypeFromOperation(operation)
+    const impactedDoctype = this.getDbDoctype(
+      getDoctypeFromOperation(operation),
+      options
+    )
 
     // If the Pouch is configured only to replicate from the remote,
     // we don't want to apply the mutation on it, but to forward
@@ -468,43 +515,44 @@ class PouchLink extends CozyLink {
   }
 
   async request(operation, options, result = null, forward = doNothing) {
-    if (options?.forceStack) {
+    if (resolveForceLink(options) === 'stack') {
       return forward(operation, options)
     }
 
     const doctype = getDoctypeFromOperation(operation)
+    const dbDoctype = this.getDbDoctype(doctype, options)
 
     if (!this.pouches) {
       if (process.env.NODE_ENV !== 'production') {
         logger.info(
-          `Tried to access local ${doctype} but Cozy Pouch is not initialized yet. Forwarding the operation to next link`
+          `Tried to access local ${dbDoctype} but Cozy Pouch is not initialized yet. Forwarding the operation to next link`
         )
       }
 
       return forward(operation, options)
     }
 
-    if (this.pouches.getSyncStatus(doctype) === 'not_synced') {
+    if (this.pouches.getSyncStatus(dbDoctype) === 'not_synced') {
       // The doctype is not locally synced and thus cannot be requested: forward to next link
       if (process.env.NODE_ENV !== 'production') {
         logger.info(
-          `Tried to access local ${doctype} but Cozy Pouch is not synced yet. Forwarding the operation to next link`
+          `Tried to access local ${dbDoctype} but Cozy Pouch is not synced yet. Forwarding the operation to next link`
         )
       }
       return forward(operation, options)
     }
 
-    if (await this.needsToWaitWarmup(doctype)) {
+    if (await this.needsToWaitWarmup(dbDoctype)) {
       if (process.env.NODE_ENV !== 'production') {
         logger.info(
-          `Tried to access local ${doctype} but not warmuped yet. Forwarding the operation to next link`
+          `Tried to access local ${dbDoctype} but not warmuped yet. Forwarding the operation to next link`
         )
       }
       return forward(operation, options)
     }
 
     // Forwards if opeartion on doctype not supported
-    if (!this.supportsOperation(operation)) {
+    if (!this.supportsOperation(operation, options)) {
       if (process.env.NODE_ENV !== 'production') {
         logger.info(
           `The doctype '${doctype}' is not supported. Forwarding the operation to next link`
@@ -515,7 +563,7 @@ class PouchLink extends CozyLink {
     if (operation.mutationType) {
       return this.executeMutation(operation, options, result, forward)
     } else {
-      return this.executeQuery(operation)
+      return this.executeQuery(operation, options)
     }
   }
 
@@ -622,20 +670,27 @@ class PouchLink extends CozyLink {
     return Boolean(this.indexes[name])
   }
 
-  async executeQuery({
-    doctype,
-    selector,
-    sort,
-    fields,
-    limit,
-    id,
-    ids,
-    skip,
-    indexedFields,
-    partialFilter,
-    sharingId
-  }) {
-    const engine = this.getQueryEngineFromDoctype(doctype)
+  /**
+   * @param {object} operation - The query operation
+   * @param {object} [options] - Optional query options
+   */
+  async executeQuery(
+    {
+      doctype,
+      selector,
+      sort,
+      fields,
+      limit,
+      id,
+      ids,
+      skip,
+      indexedFields,
+      partialFilter,
+      sharingId
+    },
+    options
+  ) {
+    const engine = this.getQueryEngineFromDoctype(doctype, options)
 
     let res
     if (id) {
