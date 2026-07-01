@@ -170,7 +170,7 @@ export const computeFileFullpath = async (client, file) => {
   }
   // queryFileById can resolve to undefined when offline (no parent dir
   // found in the link chain), so we must guard before destructuring.
-  const result = await queryFileById(client, file.dir_id)
+  const result = await queryFileById(client, file.dir_id, file.driveId)
   const parentDir = result?.data
 
   if (parentDir?.path) {

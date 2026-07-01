@@ -750,4 +750,47 @@ describe('computeFileFullpath', () => {
     expect(res).toBe(file)
     expect(res.path).toBeUndefined()
   })
+
+  it('passes file.driveId to queryFileById when the file carries a driveId', async () => {
+    const driveParentDir = {
+      _id: 'drive-dir-1',
+      _type: 'io.cozy.files',
+      type: 'directory',
+      path: '/Drive/Folder'
+    }
+    queryFileById.mockResolvedValue({ data: driveParentDir })
+    const driveFile = {
+      _id: 'drive-file-1',
+      _type: 'io.cozy.files',
+      type: 'file',
+      dir_id: 'drive-dir-1',
+      name: 'report.pdf',
+      driveId: 'drive-abc'
+    }
+
+    const res = await computeFileFullpath(client, driveFile)
+
+    expect(queryFileById).toHaveBeenCalledWith(
+      client,
+      'drive-dir-1',
+      'drive-abc'
+    )
+    expect(res.path).toBe('/Drive/Folder/report.pdf')
+  })
+
+  it('passes undefined driveId to queryFileById for own (non-drive) files', async () => {
+    queryFileById.mockResolvedValue({ data: dir })
+    const ownFile = {
+      _id: 'own-file-1',
+      _type: 'io.cozy.files',
+      type: 'file',
+      dir_id: '123',
+      name: 'own.txt'
+      // no driveId field
+    }
+
+    await computeFileFullpath(client, ownFile)
+
+    expect(queryFileById).toHaveBeenCalledWith(client, '123', undefined)
+  })
 })
