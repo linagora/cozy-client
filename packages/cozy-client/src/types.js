@@ -308,7 +308,8 @@ import { QueryDefinition } from './queries/dsl'
  * a single doc instead of an array for single doc queries. Defaults to false for backward
  * compatibility but will be set to true in the future.
  * @property {boolean} [executeFromStore=false] - If set to true, the query will be run directly on the current store's state
- * @property {boolean} [forceStack] - If set to true, the query will be executed through StackLink only even if there are other links available
+ * @property {boolean} [forceStack] - Deprecated: use forceLink:'stack'. Executes the query through StackLink only.
+ * @property {string} [forceLink] - Route this query exclusively to the link whose name matches (e.g. 'dataproxy').
  */
 
 /**

@@ -7,6 +7,7 @@ import { BulkEditError } from '../errors'
 import logger from '../logger'
 import { isReactNativeOfflineError } from '../utils'
 import { defaultPerformanceApi } from '../performances/defaultPerformanceApi'
+import { resolveForceLink } from './forceLink'
 
 /**
  *
@@ -81,6 +82,10 @@ export default class StackLink extends CozyLink {
     this.performanceApi = performanceApi || defaultPerformanceApi
   }
 
+  get name() {
+    return 'stack'
+  }
+
   registerClient(client) {
     this.stackClient = client.stackClient || client.client
   }
@@ -90,18 +95,20 @@ export default class StackLink extends CozyLink {
   }
 
   async request(operation, options, result, forward) {
-    //console.log('[CozySackLink] ', operation)
-    if (!options?.forceStack && this.isOnline && !(await this.isOnline())) {
+    const forceLink = resolveForceLink(options)
+    if (forceLink && forceLink !== this.name) {
       return forward(operation, options)
     }
-
+    if (forceLink !== 'stack' && this.isOnline && !(await this.isOnline())) {
+      return forward(operation, options)
+    }
     try {
       if (operation.mutationType) {
         return await this.executeMutation(operation, options, result, forward)
       }
       return await this.executeQuery(operation)
     } catch (err) {
-      if (!options?.forceStack && isReactNativeOfflineError(err)) {
+      if (forceLink !== 'stack' && isReactNativeOfflineError(err)) {
         return forward(operation, options)
       }
       throw err
