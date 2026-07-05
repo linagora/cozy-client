@@ -624,8 +624,10 @@ class PouchLink extends CozyLink {
       const pouch = this.getPouch(doc._type)
       const resp = await getExistingDocument(engine, sanitizedDoc._id)
       if (!resp?.data || Object.keys(resp?.data).length < 1) {
-        // Doc does not exist in db, save it
-        return pouch.put(sanitizedDoc)
+        // Doc does not exist in db, save it. Must be awaited so a concurrent
+        // insert (409 conflict) is caught below instead of rejecting the
+        // in-flight read query.
+        return await pouch.put(sanitizedDoc)
       }
       const oldDoc = sanitizeJsonApi(resp.data)
       if (areDocsEqual(oldDoc, sanitizedDoc)) {
