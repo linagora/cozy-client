@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.28.2](https://github.com/linagora/cozy-client/compare/v60.28.1...v60.28.2) (2026-07-16)
+
+
+### Bug Fixes
+
+* **cozy-client:** Back off olderThan on the most recent fetch or error ([4903769](https://github.com/linagora/cozy-client/commit/4903769cf308ad77ce8f26e01c0af4510e0e0b90))
+* **cozy-client:** Failed queries not respecting fetchPolicy ([17ce40f](https://github.com/linagora/cozy-client/commit/17ce40f9073f5f655076b5c5c68e1118c519102d))
+
+
+
+
+
 # [60.28.0](https://github.com/linagora/cozy-client/compare/v60.27.0...v60.28.0) (2026-06-15)
 
 **Note:** Version bump only for package cozy-client
