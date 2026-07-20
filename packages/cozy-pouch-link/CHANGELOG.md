@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.29.0](https://github.com/linagora/cozy-client/compare/v60.28.2...v60.29.0) (2026-07-20)
+
+
+### Bug Fixes
+
+* **pouch-link:** Await persistCozyData insert so conflicts are caught ([66e55fb](https://github.com/linagora/cozy-client/commit/66e55fbb4e1ae479b894bab8734a91c40de7e3e4))
+
+
+### Features
+
+* **pouch-link:** Read shared-drive DB by driveId, keep type and path ([d51cf9d](https://github.com/linagora/cozy-client/commit/d51cf9d57206735cb794db6336f344b66aeee989))
+
+
+
+
+
 ## [60.28.2](https://github.com/linagora/cozy-client/compare/v60.28.1...v60.28.2) (2026-07-16)
 
 **Note:** Version bump only for package cozy-pouch-link
