@@ -36,6 +36,7 @@
   "scripts": {
     "lint": "eslint 'packages/*/src/**/*.{js,jsx}' 'packages/*/examples/**/*.{js,jsx}'",
     "test": "jest",
+    "bench": "yarn build && node packages/cozy-client/benchmarks/run.js",
     "watch": "lerna run watch --parallel --stream",
     "build": "lerna run build",
     "commitmsg": "commitlint -e $GIT_PARAMS",
