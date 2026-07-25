@@ -50,3 +50,77 @@ jobs:
           git remote set-url origin https://cozy-bot:$GH_TOKEN@github.com/cozy/cozy-client.git
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
           yarn lerna publish --yes -m "chore: Publish [skip ci]"
+
+  perf:
+    name: Performance benchmarks
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - name: Record PR ref
+        id: prref
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Install dependencies (PR)
+        run: yarn install --immutable
+      - name: Benchmark PR
+        run: yarn bench --out=pr.bench.json
+      - name: Checkout base branch
+        run: git checkout --force ${{ github.event.pull_request.base.sha }}
+      - name: Install dependencies (base)
+        run: yarn install --immutable
+      - name: Benchmark base (same runner)
+        run: yarn bench --out=base.bench.json || echo "No baseline on base branch (benchmarks are new)."
+      - name: Restore PR tree
+        run: git checkout --force ${{ steps.prref.outputs.sha }}
+      - name: Compare PR vs base
+        id: compare
+        run: |
+          set +e
+          node packages/cozy-client/benchmarks/compare.js base.bench.json pr.bench.json --md=perf-comment.md
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+      - name: Post benchmark comment
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs')
+            const marker = '<!-- cozy-client-benchmarks -->'
+            const body = `${marker}\n${fs.readFileSync('perf-comment.md', 'utf8')}`
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            })
+            const existing = comments.find(c => c.body && c.body.includes(marker))
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body
+              })
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body
+              })
+            }
+      - name: Fail on regression
+        if: steps.compare.outputs.status != '0'
+        run: |
+          echo "A guarded benchmark regressed beyond its threshold."
+          exit 1

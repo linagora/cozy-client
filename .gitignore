@@ -8,6 +8,9 @@ yarn-error.log
 coverage
 .cache
 dist
+packages/*/benchmarks/results
+*.bench.json
+perf-comment.md
 .eslintcache
 .idea
 
