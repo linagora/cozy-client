@@ -442,6 +442,90 @@ export const makeSorterFromDefinition = definition => {
   }
 }
 
+// Within a single dispatch, `newData` is the same array reference for every
+// active query. A `getById`/`getByIds` query does not need to sift-scan the
+// whole `newData` array to know if its documents are in there: it only cares
+// about a handful of known ids. We therefore index `newData` by `_id` once per
+// dispatch and resolve those queries with an O(1) lookup, mirroring the O(1)
+// getById access already used by `executeQueryFromState`. Selector queries keep
+// the sift scan but memoize the partition per distinct definition, so several
+// queries sharing the same selector only scan `newData` once. On a full-sync
+// dispatch (thousands of getById queries against thousands of docs) this turns
+// an O(queries * docs) scan into O(queries + docs).
+let dedupNewData = null
+let dedupCache = null
+let dedupIdIndex = null
+
+const makeDefinitionKey = def =>
+  JSON.stringify([
+    def.doctype,
+    def.selector,
+    def.partialFilter,
+    def.id,
+    def.ids
+  ])
+
+const getDedupIdIndex = newData => {
+  if (dedupIdIndex) return dedupIdIndex
+  const idx = new Map()
+  for (const doc of newData) {
+    if (doc && doc._id != null) idx.set(doc._id, doc)
+  }
+  dedupIdIndex = idx
+  return idx
+}
+
+/**
+ * Splits `newData` into the ids matching a query definition and the ids that
+ * do not, memoized per dispatch (same `newData` reference) and per definition.
+ *
+ * @param  {QueryDefinition} definition - Definition of the query
+ * @param  {Array<import("../types").CozyClientDocument>} newData - New documents
+ * @returns {{ matchedIds: Array<string>, unmatchedIds: Array<string> }}
+ */
+export const computeMatchPartition = (definition, newData) => {
+  if (dedupNewData !== newData) {
+    dedupNewData = newData
+    dedupCache = {}
+    dedupIdIndex = null
+  }
+
+  const key = makeDefinitionKey(definition)
+  const cached = dedupCache[key]
+  if (cached) return cached
+
+  let partition
+  if (definition.id || definition.ids) {
+    const idx = getDedupIdIndex(newData)
+    const wanted = definition.id ? [definition.id] : definition.ids
+    const matchedIds = []
+    const unmatchedIds = []
+    for (const id of wanted) {
+      const doc = idx.get(id)
+      if (doc) {
+        if (!doc._deleted && doc._type === definition.doctype) {
+          matchedIds.push(properId(doc))
+        } else {
+          unmatchedIds.push(properId(doc))
+        }
+      }
+    }
+    partition = { matchedIds, unmatchedIds }
+  } else {
+    const belongsToQuery = makeFilterDocumentFn(definition)
+    const res = mapValues(groupBy(newData, belongsToQuery), docs =>
+      docs.map(properId)
+    )
+    partition = {
+      matchedIds: res.true === undefined ? [] : res.true,
+      unmatchedIds: res.false === undefined ? [] : res.false
+    }
+  }
+
+  dedupCache[key] = partition
+  return partition
+}
+
 /**
  * Updates query state when new data comes in
  *
@@ -451,11 +535,10 @@ export const makeSorterFromDefinition = definition => {
  * @returns {import("../types").QueryState} - Updated query state
  */
 export const updateData = (query, newData, documents) => {
-  const belongsToQuery = makeFilterDocumentFn(query.definition)
-  const res = mapValues(groupBy(newData, belongsToQuery), docs =>
-    docs.map(properId)
+  const { matchedIds, unmatchedIds } = computeMatchPartition(
+    query.definition,
+    newData
   )
-  const { true: matchedIds = [], false: unmatchedIds = [] } = res
   const originalIds = query.data
 
   const autoUpdate = query.options && query.options.autoUpdate
