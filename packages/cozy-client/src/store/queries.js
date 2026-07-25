@@ -442,16 +442,6 @@ export const makeSorterFromDefinition = definition => {
   }
 }
 
-// Within a single dispatch, `newData` is the same array reference for every
-// active query. A `getById`/`getByIds` query does not need to sift-scan the
-// whole `newData` array to know if its documents are in there: it only cares
-// about a handful of known ids. We therefore index `newData` by `_id` once per
-// dispatch and resolve those queries with an O(1) lookup, mirroring the O(1)
-// getById access already used by `executeQueryFromState`. Selector queries keep
-// the sift scan but memoize the partition per distinct definition, so several
-// queries sharing the same selector only scan `newData` once. On a full-sync
-// dispatch (thousands of getById queries against thousands of docs) this turns
-// an O(queries * docs) scan into O(queries + docs).
 let dedupNewData = null
 let dedupCache = null
 let dedupIdIndex = null
@@ -476,8 +466,7 @@ const getDedupIdIndex = newData => {
 }
 
 /**
- * Splits `newData` into the ids matching a query definition and the ids that
- * do not, memoized per dispatch (same `newData` reference) and per definition.
+ * Splits `newData` into the ids matching a query definition and the ids that do not
  *
  * @param  {QueryDefinition} definition - Definition of the query
  * @param  {Array<import("../types").CozyClientDocument>} newData - New documents
