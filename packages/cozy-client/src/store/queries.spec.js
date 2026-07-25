@@ -9,6 +9,7 @@ import queries, {
   loadQuery,
   receiveQueryError,
   updateData,
+  computeMatchPartition,
   executeQueryFromState,
   mapIdsToDocuments
 } from './queries'
@@ -672,6 +673,64 @@ describe('updateData', () => {
     const updatedDataToCheck = updateData(queryState, newData, documents)
     expect(updatedDataToCheck.data.length).toEqual(1)
     expect(updatedDataToCheck.count).toEqual(1)
+  })
+})
+
+describe('computeMatchPartition', () => {
+  it('should resolve a getById query without scanning the whole newData', () => {
+    const newData = [TODO_1, TODO_2, TODO_3]
+    const definition = Q('io.cozy.todos').getById(TODO_2._id)
+    const { matchedIds, unmatchedIds } = computeMatchPartition(
+      definition,
+      newData
+    )
+    expect(matchedIds).toEqual([TODO_2._id])
+    expect(unmatchedIds).toEqual([])
+  })
+
+  it('should not match a getById query for a missing or wrong-doctype id', () => {
+    const newData = [TODO_1, { ...TODO_2, _type: 'io.cozy.other' }]
+    expect(
+      computeMatchPartition(Q('io.cozy.todos').getById('missing'), newData)
+    ).toEqual({ matchedIds: [], unmatchedIds: [] })
+    expect(
+      computeMatchPartition(Q('io.cozy.todos').getById(TODO_2._id), newData)
+    ).toEqual({ matchedIds: [], unmatchedIds: [TODO_2._id] })
+  })
+
+  it('should treat a deleted document as unmatched for a getById query', () => {
+    const newData = [{ ...TODO_1, _deleted: true }]
+    expect(
+      computeMatchPartition(Q('io.cozy.todos').getById(TODO_1._id), newData)
+    ).toEqual({ matchedIds: [], unmatchedIds: [TODO_1._id] })
+  })
+
+  it('should resolve a getByIds query', () => {
+    const newData = [TODO_1, TODO_2, TODO_3]
+    const definition = Q('io.cozy.todos').getByIds([TODO_1._id, 'missing'])
+    expect(computeMatchPartition(definition, newData)).toEqual({
+      matchedIds: [TODO_1._id],
+      unmatchedIds: []
+    })
+  })
+
+  it('should partition a selector query with the sift scan', () => {
+    const newData = [TODO_1, TODO_2, TODO_3]
+    const definition = Q('io.cozy.todos').where({ done: true })
+    const { matchedIds, unmatchedIds } = computeMatchPartition(
+      definition,
+      newData
+    )
+    expect(matchedIds).toEqual([TODO_3._id])
+    expect(unmatchedIds.sort()).toEqual([TODO_1._id, TODO_2._id].sort())
+  })
+
+  it('should memoize the partition per definition within the same newData', () => {
+    const newData = [TODO_1, TODO_2]
+    const definition = Q('io.cozy.todos').getById(TODO_1._id)
+    const first = computeMatchPartition(definition, newData)
+    const second = computeMatchPartition(definition, newData)
+    expect(second).toBe(first)
   })
 })
 
