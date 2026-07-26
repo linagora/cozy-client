@@ -270,9 +270,12 @@ export const makeSQLCreateMangoIndex = (
 }
 
 export const makeSQLCreateDocIDIndex = () => {
-  // This index is useful for docid queries
+  // This index is useful for docid queries. It is NOT unique: PouchDB's
+  // by-sequence keeps a doc's whole rev history, so several rows can share the
+  // same (doc_id, deleted) — the winning rev is picked in JS by
+  // keepDocWitHighestRev(). A UNIQUE index here throws on any multi-rev doc.
   const sql = `
-    CREATE UNIQUE INDEX IF NOT EXISTS 'by_docid_and_deleted'
+    CREATE INDEX IF NOT EXISTS 'by_docid_and_deleted'
     ON 'by-sequence'
     (doc_id, deleted);
   `
@@ -308,5 +311,15 @@ export const deleteIndex = async (db, indexName) => {
 }
 
 export const executeSQL = async (db, sql) => {
-  return db.executeAsync(sql)
+  return db.executeAsync(sql).catch(err => {
+    const message = (err && err.message) || String(err)
+    // On the very first queries the by-sequence table may not exist yet (the
+    // adapter creates it lazily), and a briefly-contended shared connection can
+    // report a busy lock. Treat both as an empty result rather than letting an
+    // uncaught rejection bubble up.
+    if (/no such table|database is locked/i.test(message)) {
+      return { rows: { length: 0, item: () => undefined } }
+    }
+    throw err
+  })
 }
