@@ -190,10 +190,14 @@ export const makeSQLQueryFromMango = ({
   const whereClause = makeWhereClause(selector)
   const sortClause = makeSortClause(sort)
 
+  // Scan by-sequence via the mango index, then join document-store on its
+  // winningseq so only WINNING revisions survive (matches CouchDB mango, which
+  // queries the winning rev). `data` aliases 'by-sequence'.json; `deleted` lives
+  // only on by-sequence, so the where clause stays unambiguous.
   let sql = [
-    `SELECT json AS data, doc_id, rev`,
-    `FROM 'by-sequence' INDEXED BY ${indexName}`,
-    `WHERE ${whereClause}`
+    `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
+    `FROM 'by-sequence' INDEXED BY ${indexName}, 'document-store'`,
+    `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND ${whereClause}`
   ].join(' ')
 
   if (skip > 0) {
@@ -209,10 +213,15 @@ export const makeSQLQueryFromMango = ({
 }
 
 export const makeSQLQueryForId = id => {
+  // Join document-store on its winningseq so we return the WINNING revision
+  // (PouchDB keeps every rev in by-sequence; document-store.winningseq points at
+  // the winning one). Both sides are indexed: by-sequence.seq is the PK and the
+  // adapter indexes document-store.winningseq.
   const sql = [
-    `SELECT json AS data, doc_id, rev`,
-    `FROM 'by-sequence'`,
-    `WHERE doc_id="${id}" AND deleted=0`,
+    `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
+    `FROM 'document-store', 'by-sequence'`,
+    `WHERE 'by-sequence'.seq = 'document-store'.winningseq`,
+    `AND 'document-store'.id = "${id}" AND 'by-sequence'.deleted = 0`,
     `;`
   ].join(' ')
   return sql
@@ -221,18 +230,19 @@ export const makeSQLQueryForId = id => {
 export const makeSQLQueryForIds = ids => {
   const doc_ids = ids.join(',')
   const sql = `
-    SELECT json AS data, doc_id, rev
-    FROM 'by-sequence'
-    WHERE doc_id IN ("${doc_ids}") AND deleted = 0;
+    SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev
+    FROM 'document-store', 'by-sequence'
+    WHERE 'by-sequence'.seq = 'document-store'.winningseq
+    AND 'document-store'.id IN ("${doc_ids}") AND 'by-sequence'.deleted = 0;
   `
   return sql
 }
 
 export const makeSQLQueryAll = ({ limit = -1, skip = 0 } = {}) => {
   let sql = [
-    `SELECT json AS data, doc_id, rev`,
-    `FROM 'by-sequence'`,
-    `WHERE deleted=0`,
+    `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
+    `FROM 'document-store', 'by-sequence'`,
+    `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND 'by-sequence'.deleted=0`,
     `LIMIT ${limit}`
   ].join(' ')
   if (skip > 0) {
