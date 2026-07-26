@@ -228,12 +228,12 @@ export const makeSQLQueryForId = id => {
 }
 
 export const makeSQLQueryForIds = ids => {
-  const doc_ids = ids.join(',')
+  const doc_ids = ids.map(id => `"${id}"`).join(', ')
   const sql = `
     SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev
     FROM 'document-store', 'by-sequence'
     WHERE 'by-sequence'.seq = 'document-store'.winningseq
-    AND 'document-store'.id IN ("${doc_ids}") AND 'by-sequence'.deleted = 0;
+    AND 'document-store'.id IN (${doc_ids}) AND 'by-sequence'.deleted = 0;
   `
   return sql
 }
@@ -323,11 +323,12 @@ export const deleteIndex = async (db, indexName) => {
 export const executeSQL = async (db, sql) => {
   return db.executeAsync(sql).catch(err => {
     const message = (err && err.message) || String(err)
-    // On the very first queries the by-sequence table may not exist yet (the
-    // adapter creates it lazily), and a briefly-contended shared connection can
-    // report a busy lock. Treat both as an empty result rather than letting an
-    // uncaught rejection bubble up.
-    if (/no such table|database is locked/i.test(message)) {
+    // Before the adapter has created the by-sequence table, the earliest
+    // queries hit a missing table. That is transient (the table appears once
+    // replication first writes), so return empty instead of rejecting uncaught.
+    // Lock timeouts are NOT swallowed: WAL + busy_timeout handle contention, and
+    // a genuine lock error must surface rather than look like "no documents".
+    if (/no such table/i.test(message)) {
       return { rows: { length: 0, item: () => undefined } }
     }
     throw err

@@ -3,6 +3,8 @@ import {
   makeWhereClause,
   makeSortClause,
   makeSQLQueryFromMango,
+  makeSQLQueryForId,
+  makeSQLQueryForIds,
   keepDocWitHighestRev,
   makeSQLQueryAll,
   parseResults
@@ -222,6 +224,22 @@ describe('makeSQLQueryAll', () => {
       `OFFSET 100;`
     ].join(' ')
     expect(sql).toEqual(expectedSql)
+  })
+})
+
+describe('makeSQLQueryForId', () => {
+  it('joins document-store on winningseq to return the winning revision', () => {
+    const sql = makeSQLQueryForId('abc')
+    expect(sql).toContain(`'by-sequence'.seq = 'document-store'.winningseq`)
+    expect(sql).toContain(`'document-store'.id = "abc"`)
+  })
+})
+
+describe('makeSQLQueryForIds', () => {
+  it('emits one quoted value per id in the IN clause', () => {
+    const sql = makeSQLQueryForIds(['a', 'b'])
+    expect(sql).toContain(`'document-store'.id IN ("a", "b")`)
+    expect(sql).toContain(`'by-sequence'.seq = 'document-store'.winningseq`)
   })
 })
 
