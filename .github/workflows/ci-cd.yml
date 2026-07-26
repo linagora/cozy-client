@@ -63,6 +63,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # Don't leave the workflow token in .git/config where the untrusted
+          # PR code we run below (yarn install / yarn bench) could read it. The
+          # comment step posts via github-script's ambient token, not git.
+          persist-credentials: false
       - name: Enable Corepack
         run: corepack enable
       - name: Use Node.js
@@ -77,7 +81,9 @@ jobs:
       - name: Benchmark PR
         run: yarn bench --out=pr.bench.json
       - name: Checkout base branch
-        run: git checkout --force ${{ github.event.pull_request.base.sha }}
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git checkout --force "$BASE_SHA"
       - name: Install dependencies (base)
         run: yarn install --immutable
       - name: Benchmark base (same runner)
@@ -91,7 +97,9 @@ jobs:
             echo "No baseline on base branch (benchmarks are new)."
           fi
       - name: Restore PR tree
-        run: git checkout --force ${{ steps.prref.outputs.sha }}
+        env:
+          PR_SHA: ${{ steps.prref.outputs.sha }}
+        run: git checkout --force "$PR_SHA"
       - name: Compare PR vs base
         id: compare
         run: |
