@@ -29,12 +29,12 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
 
   openDB(dbName) {
     const fileDbName = `${dbName}.sqlite`
-    // Resolve the DB handle lazily on first use. When the app's PouchDB adapter
-    // publishes its already-open op-sqlite connection via
-    // globalThis.__rnSqliteRawDBs, reuse it so the engine and the adapter share
-    // ONE connection on the SAME file (no filename mismatch, no cross-connection
-    // lock — the two-connection setup was what made this engine unusable). Fall
-    // back to opening our own connection when no shared handle is available.
+    // Resolve the DB handle lazily on first use, opening our OWN op-sqlite
+    // connection on the same file the adapter uses. WAL mode + a busy timeout
+    // let this connection coexist with the adapter's writer without "database
+    // is locked" — the two-connection setup in rollback mode was what made this
+    // engine unusable. Lazy so the adapter has created the schema by the time
+    // the first query runs.
     let resolved = null
     Object.defineProperty(this, 'db', {
       configurable: true,
@@ -43,10 +43,10 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
       },
       get: () => {
         if (resolved) return resolved
-        const registry = globalThis.__rnSqliteRawDBs
-        resolved =
-          (registry && registry.get(fileDbName)) || open({ name: fileDbName })
+        resolved = open({ name: fileDbName })
         try {
+          executeSQL(resolved, 'PRAGMA journal_mode=WAL')
+          executeSQL(resolved, 'PRAGMA busy_timeout=5000')
           executeSQL(resolved, makeSQLCreateDocIDIndex())
           executeSQL(resolved, makeSQLCreateDeletedIndex())
         } catch (err) {
