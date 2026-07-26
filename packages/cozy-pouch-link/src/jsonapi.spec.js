@@ -722,6 +722,9 @@ describe('computeFileFullpath', () => {
   })
 
   it('normalizeDocs seeds directory paths so sibling files resolve without querying', async () => {
+    // Clear the module-level path cache so the result depends on the seeding
+    // block, not on a directory a previous test may have cached.
+    resetAllPaths()
     queryFileById.mockClear()
     const dirDoc = { ...dir }
     const fileDoc = { ...filewithNoPath }
