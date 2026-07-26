@@ -115,7 +115,7 @@ describe('makeWhereClause', () => {
   it('should return deleted and mango clauses when there is a mango selector', () => {
     const selector = { status: 'active' }
     expect(makeWhereClause(selector)).toEqual(
-      "DELETED = 0 AND json_extract(data, '$.status') = 'active'"
+      "DELETED = 0 AND (json_extract(data, '$.status') = 'active')"
     )
   })
 })
@@ -134,7 +134,7 @@ describe('makeSortClause', () => {
   it('should return correct order by, with multiple sorting attribute', () => {
     const sortBy = [{ date: 'asc' }, { name: 'asc' }, { type: 'asc' }]
     expect(makeSortClause(sortBy)).toEqual(
-      "json_extract(data, '$.date'), json_extract(data, '$.name'), json_extract(data, '$.type') ASC"
+      "json_extract(data, '$.date') ASC, json_extract(data, '$.name') ASC, json_extract(data, '$.type') ASC"
     )
   })
 
@@ -156,7 +156,7 @@ describe('makeSQLQueryFromMango', () => {
     const expectedSql = [
       `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
       `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
-      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
+      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND (json_extract(data, '$.date') > '2025-01-01')`,
       `LIMIT 100;`
     ].join(' ')
     expect(sql).toEqual(expectedSql)
@@ -172,7 +172,7 @@ describe('makeSQLQueryFromMango', () => {
     const expectedSql = [
       `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
       `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
-      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
+      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND (json_extract(data, '$.date') > '2025-01-01')`,
       `ORDER BY json_extract(data, '$.date') ASC`,
       `LIMIT 100;`
     ].join(' ')
@@ -194,7 +194,7 @@ describe('makeSQLQueryFromMango', () => {
     const expectedSql = [
       `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
       `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
-      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
+      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND (json_extract(data, '$.date') > '2025-01-01')`,
       `OFFSET 100`,
       `LIMIT 200;`
     ].join(' ')

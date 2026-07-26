@@ -86,6 +86,15 @@ export const parseResults = (
   }
 }
 
+// Quote a value for inline SQL. String single quotes are doubled ('' ) so a
+// value like "l'ete.txt" cannot break out of the literal (SQL error) or inject.
+const quoteSQLValue = value => {
+  if (typeof value === 'string') {
+    return `'${value.replace(/'/g, "''")}'`
+  }
+  return value
+}
+
 const parseCondition = (field, condition) => {
   const conditions = []
 
@@ -95,10 +104,15 @@ const parseCondition = (field, condition) => {
       let sqlOp = MANGO_TO_SQL_OP[operator]
 
       if (operator === '$in' || operator === '$nin') {
-        const values = condition[operator]
-          .map(v => (typeof v === 'string' ? `'${v}'` : v))
-          .join(', ')
-        conditions.push(`${sqlField} ${sqlOp} (${values})`)
+        const list = condition[operator] || []
+        if (list.length === 0) {
+          // "IN ()" is a syntax error. $in [] matches nothing (0 = false),
+          // $nin [] matches everything (1 = true).
+          conditions.push(operator === '$in' ? '0' : '1')
+        } else {
+          const values = list.map(quoteSQLValue).join(', ')
+          conditions.push(`${sqlField} ${sqlOp} (${values})`)
+        }
       } else if (operator === '$exists') {
         const value = condition[operator]
         if (value) {
@@ -108,21 +122,18 @@ const parseCondition = (field, condition) => {
         }
         conditions.push(`${sqlField} ${sqlOp}`)
       } else {
-        const value =
-          typeof condition[operator] === 'string'
-            ? `'${condition[operator]}'`
-            : condition[operator]
-        if (operator === '$gt' && value === null) {
+        if (operator === '$gt' && condition[operator] === null) {
           // Special case for $gt: null conditions
           conditions.push(`${sqlField} IS NOT NULL`)
         } else {
-          conditions.push(`${sqlField} ${sqlOp} ${value}`)
+          conditions.push(
+            `${sqlField} ${sqlOp} ${quoteSQLValue(condition[operator])}`
+          )
         }
       }
     }
   } else {
-    const value = typeof condition === 'string' ? `'${condition}'` : condition
-    conditions.push(`${sqlField} = ${value}`)
+    conditions.push(`${sqlField} = ${quoteSQLValue(condition)}`)
   }
 
   return conditions.join(' AND ')
@@ -160,7 +171,13 @@ export const makeWhereClause = selector => {
     return baseWhere
   }
   const mangoWhere = mangoSelectorToSQL(selector)
-  baseWhere += ` AND ${mangoWhere}`
+  if (!mangoWhere) {
+    return baseWhere
+  }
+  // Parenthesise the mango expression: SQL binds AND tighter than OR, so a
+  // top-level $or would otherwise read as "(DELETED = 0 AND a) OR b" and leak
+  // deleted docs matching b.
+  baseWhere += ` AND (${mangoWhere})`
   return baseWhere
 }
 
@@ -168,16 +185,15 @@ export const makeSortClause = mangoSortBy => {
   if (!mangoSortBy || !Array.isArray(mangoSortBy) || mangoSortBy.length < 1) {
     return null
   }
-  const firstSortEntry = mangoSortBy[0]
-  const sortOrder = Object.values(firstSortEntry)[0].toUpperCase()
-  const sortFields = mangoSortBy
+  // Each field carries its own direction; a shared trailing ASC/DESC would sort
+  // every field the first entry's way and silently ignore mixed asc/desc sorts.
+  return mangoSortBy
     .map(sort => {
       const attribute = Object.keys(sort)[0]
-      return `json_extract(data, '$.${attribute}')`
+      const order = String(sort[attribute]).toUpperCase()
+      return `json_extract(data, '$.${attribute}') ${order}`
     })
     .join(', ')
-  const sortClause = `${sortFields} ${sortOrder}`
-  return sortClause
 }
 
 export const makeSQLQueryFromMango = ({
