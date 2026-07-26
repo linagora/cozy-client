@@ -152,9 +152,9 @@ describe('makeSQLQueryFromMango', () => {
     const sql = makeSQLQueryFromMango({ selector, indexName, limit })
 
     const expectedSql = [
-      `SELECT json AS data, doc_id, rev`,
-      `FROM 'by-sequence' INDEXED BY by_name`,
-      `WHERE DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
+      `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
+      `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
+      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
       `LIMIT 100;`
     ].join(' ')
     expect(sql).toEqual(expectedSql)
@@ -168,9 +168,9 @@ describe('makeSQLQueryFromMango', () => {
     const sql = makeSQLQueryFromMango({ selector, sort, indexName, limit })
 
     const expectedSql = [
-      `SELECT json AS data, doc_id, rev`,
-      `FROM 'by-sequence' INDEXED BY by_name`,
-      `WHERE DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
+      `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
+      `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
+      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
       `ORDER BY json_extract(data, '$.date') ASC`,
       `LIMIT 100;`
     ].join(' ')
@@ -190,9 +190,9 @@ describe('makeSQLQueryFromMango', () => {
     })
 
     const expectedSql = [
-      `SELECT json AS data, doc_id, rev`,
-      `FROM 'by-sequence' INDEXED BY by_name`,
-      `WHERE DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
+      `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
+      `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
+      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND json_extract(data, '$.date') > '2025-01-01'`,
       `OFFSET 100`,
       `LIMIT 200;`
     ].join(' ')
@@ -204,9 +204,9 @@ describe('makeSQLQueryAll', () => {
   it('should return a correct sql query to get all docs', () => {
     const sql = makeSQLQueryAll()
     const expectedSql = [
-      `SELECT json AS data, doc_id, rev`,
-      `FROM 'by-sequence'`,
-      `WHERE deleted=0`,
+      `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
+      `FROM 'document-store', 'by-sequence'`,
+      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND 'by-sequence'.deleted=0`,
       `LIMIT -1;`
     ].join(' ')
     expect(sql).toEqual(expectedSql)
@@ -215,9 +215,9 @@ describe('makeSQLQueryAll', () => {
   it('should handle limit and skip', () => {
     const sql = makeSQLQueryAll({ limit: 10, skip: 100 })
     const expectedSql = [
-      `SELECT json AS data, doc_id, rev`,
-      `FROM 'by-sequence'`,
-      `WHERE deleted=0`,
+      `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
+      `FROM 'document-store', 'by-sequence'`,
+      `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND 'by-sequence'.deleted=0`,
       `LIMIT 10`,
       `OFFSET 100;`
     ].join(' ')
