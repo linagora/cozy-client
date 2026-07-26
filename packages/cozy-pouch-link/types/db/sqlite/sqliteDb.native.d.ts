@@ -1,6 +1,6 @@
 export default class SQLiteQueryEngine extends DatabaseQueryEngine {
     constructor(pouchManager: any, doctype: any);
-    db: import("@op-engineering/op-sqlite").DB;
+    db: any;
     client: any;
     doctype: any;
 }
