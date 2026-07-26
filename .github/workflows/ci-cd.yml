@@ -81,7 +81,15 @@ jobs:
       - name: Install dependencies (base)
         run: yarn install --immutable
       - name: Benchmark base (same runner)
-        run: yarn bench --out=base.bench.json || echo "No baseline on base branch (benchmarks are new)."
+        # Only tolerate the "base branch has no benchmarks yet" bootstrap case;
+        # a real bench failure (bad build/install) must still fail the job
+        # rather than being masked into a missing baseline.
+        run: |
+          if [ -f packages/cozy-client/benchmarks/run.js ]; then
+            yarn bench --out=base.bench.json
+          else
+            echo "No baseline on base branch (benchmarks are new)."
+          fi
       - name: Restore PR tree
         run: git checkout --force ${{ steps.prref.outputs.sha }}
       - name: Compare PR vs base
