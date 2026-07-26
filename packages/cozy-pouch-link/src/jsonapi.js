@@ -32,6 +32,16 @@ export const resetAllPaths = () => {
  * @param {Array<import('./CozyPouchLink').CozyPouchDocument>} docs - The documents to normalize
  */
 export const normalizeDocs = (client, doctype, docs) => {
+  if (doctype === 'io.cozy.files') {
+    // Seed the path cache with every directory's path first, so each file
+    // resolves its parent path from memory instead of a per-file getById.
+    for (let j = 0; j < docs.length; j++) {
+      const dir = docs[j]
+      if (dir && dir.type === TYPE_DIRECTORY && dir.path) {
+        setFilePath(dir._id || dir.id, dir.path)
+      }
+    }
+  }
   for (let i = docs.length; i >= 0; i--) {
     const doc = docs[i]
     if (!doc) {

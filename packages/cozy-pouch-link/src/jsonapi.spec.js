@@ -4,6 +4,7 @@ import {
   computeFileFullpath,
   fromPouchResult,
   normalizeDoc,
+  normalizeDocs,
   resetAllPaths
 } from './jsonapi'
 import { queryFileById } from './files'
@@ -718,6 +719,15 @@ describe('computeFileFullpath', () => {
     const updFile = { ...filewithNoPath, name: 'file3.1', path: undefined }
     const res2 = await computeFileFullpath(client, updFile)
     expect(res2.path).toEqual('ROOT/MYDIR/file3.1')
+  })
+
+  it('normalizeDocs seeds directory paths so sibling files resolve without querying', async () => {
+    queryFileById.mockClear()
+    const dirDoc = { ...dir }
+    const fileDoc = { ...filewithNoPath }
+    normalizeDocs(client, 'io.cozy.files', [dirDoc, fileDoc])
+    expect(fileDoc.path).toEqual('ROOT/MYDIR/file3')
+    expect(queryFileById).not.toHaveBeenCalled()
   })
 
   it('should return the file unchanged when queryFileById resolves to undefined', async () => {
