@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.29.1](https://github.com/cozy/cozy-client/compare/v60.29.0...v60.29.1) (2026-07-27)
+
+
+### Bug Fixes
+
+* **ci:** Harden the perf job's token handling ([6b1ec7c](https://github.com/cozy/cozy-client/commit/6b1ec7ccef5d23ae3842eee1f470c2da954e2c13))
+* **ci:** Only tolerate a missing baseline, not real bench failures ([d2e3dd4](https://github.com/cozy/cozy-client/commit/d2e3dd4ced028a0378f2f0c134553b8a0cff62ba))
+* **store:** Commit generated types for the getById fast-path ([f128667](https://github.com/cozy/cozy-client/commit/f128667bdcf85aa1858fc57310caf342860542c2))
+* **store:** Resolve getById queries by _id index on setData ([0387402](https://github.com/cozy/cozy-client/commit/038740294523fa80360d59cfd65d49c1fecf6d0f))
+
+
+
+
+
 # [60.29.0](https://github.com/cozy/cozy-client/compare/v60.28.2...v60.29.0) (2026-07-20)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.29.1](https://github.com/linagora/cozy-client/compare/v60.29.0...v60.29.1) (2026-07-27)
+
+
+### Bug Fixes
+
+* **store:** Commit generated types for the getById fast-path ([f128667](https://github.com/linagora/cozy-client/commit/f128667bdcf85aa1858fc57310caf342860542c2))
+* **store:** Resolve getById queries by _id index on setData ([0387402](https://github.com/linagora/cozy-client/commit/038740294523fa80360d59cfd65d49c1fecf6d0f))
+
+
+
+
+
 # [60.29.0](https://github.com/linagora/cozy-client/compare/v60.28.2...v60.29.0) (2026-07-20)
 
 
