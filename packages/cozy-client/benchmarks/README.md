@@ -19,6 +19,11 @@ The benchmarks exercise the real `packages/cozy-client/src/store/queries.js` red
 - **`store-queries:sift-compiled-exec-10k`** — a pure `sift` canary: run a pre-compiled
   selector over 10k documents. Catches a raw `sift` slowdown (e.g. a version bump).
   Informational.
+- **`pouch-normalize:files-cold-cache`** — `cozy-pouch-link`'s `normalizeDocs` over 200
+  directories + 10k `io.cozy.files` with a cold path cache (via the built
+  `packages/cozy-pouch-link/dist`). Guards the per-file parent-path resolution done on
+  every sync: without directory-path seeding each file falls through to a `getById` per
+  file. Gated on a regression threshold.
 
 ## Running locally
 
