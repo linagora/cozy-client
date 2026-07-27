@@ -401,8 +401,11 @@ export const makeSortClause = mangoSortBy => {
   return mangoSortBy
     .map(sort => {
       const attribute = Object.keys(sort)[0]
-      const order = String(sort[attribute]).toUpperCase()
-      return `json_extract(data, '$.${attribute}') ${order}`
+      // ASC/DESC are bare SQL keywords, so the direction cannot be quoted the
+      // way a value would be - it has to be whitelisted instead.
+      const order =
+        String(sort[attribute]).toUpperCase() === 'DESC' ? 'DESC' : 'ASC'
+      return `${transformMangoFieldInJSONSQL(attribute)} ${order}`
     })
     .join(', ')
 }
@@ -499,8 +502,14 @@ export const makeSQLCreateMangoIndex = (
   fieldsToIndex,
   { partialFilter }
 ) => {
+  // Escaped like the where clause's paths, so an index covers exactly the
+  // expression makeWhereClause emits for the same field.
+  // XXX - indexName itself is still interpolated raw here, in makeSQLDropIndex
+  // and in makeSQLQueryFromMango's INDEXED BY. The three must agree, so they are
+  // left alone together: a field name containing a quote would break index
+  // resolution rather than the where clause.
   const jsonAttributes = fieldsToIndex.map(
-    field => `json_extract(json, '$.${field}')`
+    field => `json_extract(json, '$.${escapeSQLString(field)}')`
   )
   const jsonIndex = jsonAttributes.join(',')
 
