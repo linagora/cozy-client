@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.30.0](https://github.com/linagora/cozy-client/compare/v60.29.0...v60.30.0) (2026-07-27)
+
+
+### Bug Fixes
+
+* **pouch:** Harden native SQLite mango translation ([2c6e861](https://github.com/linagora/cozy-client/commit/2c6e861bde0d164e91f58b864e9a0a7bfe26ae87))
+* **pouch:** One IN value per id, and don't mask lock errors ([0fa2037](https://github.com/linagora/cozy-client/commit/0fa2037260bae234e83ff4fa4680451f5348f55b))
+* **pouch:** Return winning revisions via a document-store join ([9bf5f7e](https://github.com/linagora/cozy-client/commit/9bf5f7e747bb0e6de1ba42b8286df1a73879f6ff))
+* **pouch:** Seed dir paths in normalizeDocs to skip per-file getById ([46cd7a8](https://github.com/linagora/cozy-client/commit/46cd7a8dcf85bf4ffe654ed56376e46b93a1801b))
+
+
+### Features
+
+* **pouch:** Make the native SQLite query engine usable on op-sqlite ([c4ba237](https://github.com/linagora/cozy-client/commit/c4ba237124b0dcfbf7c25a09c9a6869b650ffeb1))
+
+
+
+
+
 # [60.29.0](https://github.com/linagora/cozy-client/compare/v60.28.2...v60.29.0) (2026-07-20)
 
 

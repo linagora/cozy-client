@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.30.0](https://github.com/cozy/cozy-client/compare/v60.29.0...v60.30.0) (2026-07-27)
+
+
+### Bug Fixes
+
+* **ci:** Harden the perf job's token handling ([6b1ec7c](https://github.com/cozy/cozy-client/commit/6b1ec7ccef5d23ae3842eee1f470c2da954e2c13))
+* **ci:** Only tolerate a missing baseline, not real bench failures ([d2e3dd4](https://github.com/cozy/cozy-client/commit/d2e3dd4ced028a0378f2f0c134553b8a0cff62ba))
+* **pouch:** Harden native SQLite mango translation ([2c6e861](https://github.com/cozy/cozy-client/commit/2c6e861bde0d164e91f58b864e9a0a7bfe26ae87))
+* **pouch:** One IN value per id, and don't mask lock errors ([0fa2037](https://github.com/cozy/cozy-client/commit/0fa2037260bae234e83ff4fa4680451f5348f55b))
+* **pouch:** Return winning revisions via a document-store join ([9bf5f7e](https://github.com/cozy/cozy-client/commit/9bf5f7e747bb0e6de1ba42b8286df1a73879f6ff))
+* **pouch:** Seed dir paths in normalizeDocs to skip per-file getById ([46cd7a8](https://github.com/cozy/cozy-client/commit/46cd7a8dcf85bf4ffe654ed56376e46b93a1801b))
+* **store:** Commit generated types for the getById fast-path ([f128667](https://github.com/cozy/cozy-client/commit/f128667bdcf85aa1858fc57310caf342860542c2))
+* **store:** Resolve getById queries by _id index on setData ([0387402](https://github.com/cozy/cozy-client/commit/038740294523fa80360d59cfd65d49c1fecf6d0f))
+
+
+### Features
+
+* **pouch:** Make the native SQLite query engine usable on op-sqlite ([c4ba237](https://github.com/cozy/cozy-client/commit/c4ba237124b0dcfbf7c25a09c9a6869b650ffeb1))
+
+
+
+
+
 # [60.29.0](https://github.com/cozy/cozy-client/compare/v60.28.2...v60.29.0) (2026-07-20)
 
 
