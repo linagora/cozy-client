@@ -1,16 +1,26 @@
 import { normalizeDoc } from '../../jsonapi'
 import { getCozyPouchData } from '../helpers'
+import { UnsupportedMangoSelectorError } from '../../errors'
 
+// Binary operators with a direct SQL equivalent. Everything else needs its own
+// SQL shape and is handled explicitly in parseCondition.
 const MANGO_TO_SQL_OP = {
   $eq: '=',
-  $ne: '!=',
   $gt: '>',
   $gte: '>=',
   $lt: '<',
-  $lte: '<=',
-  $in: 'IN',
-  $nin: 'NOT IN',
-  $exists: 'IS'
+  $lte: '<='
+}
+
+// Mango and SQLite do not spell types the same way: json_type() reports integers
+// and reals separately, and booleans as 'true'/'false'.
+const MANGO_TYPE_TO_JSON_TYPES = {
+  null: ['null'],
+  boolean: ['true', 'false'],
+  number: ['integer', 'real'],
+  string: ['text'],
+  array: ['array'],
+  object: ['object']
 }
 
 const extractRevPrefix = rev => {
@@ -86,63 +96,220 @@ export const parseResults = (
   }
 }
 
-// Quote a value for inline SQL. String single quotes are doubled ('' ) so a
-// value like "l'ete.txt" cannot break out of the literal (SQL error) or inject.
+// Single quotes are doubled ('') so a value like "l'ete.txt" cannot break out of
+// the literal (SQL error) or inject.
+const escapeSQLString = str => str.replace(/'/g, "''")
+
+// Quote a value for inline SQL.
 const quoteSQLValue = value => {
   if (typeof value === 'string') {
-    return `'${value.replace(/'/g, "''")}'`
+    return `'${escapeSQLString(value)}'`
+  }
+  if (value === undefined || (typeof value === 'object' && value !== null)) {
+    // undefined, objects and arrays have no SQL literal form. A template
+    // literal would stringify undefined to the word "undefined" - the very
+    // failure this translator exists to make impossible - and an object to
+    // "[object Object]".
+    throw new UnsupportedMangoSelectorError(
+      `Cannot express ${JSON.stringify(value)} as a SQL value`
+    )
   }
   return value
 }
 
-const parseCondition = (field, condition, columnName) => {
+// Mango forbids mixing operators and field names in the same object, so a single
+// $-prefixed key is enough to tell an operator object ({ $gt: 1 }) from a nested
+// document selector ({ b: 'x' }).
+const isOperatorObject = obj =>
+  Object.keys(obj).some(key => key.startsWith('$'))
+
+const isPlainObject = value =>
+  typeof value === 'object' && value !== null && !Array.isArray(value)
+
+// json_extract yields SQL NULL for a missing path, and NOT NULL is NULL rather
+// than true. CouchDB's $not / $nor match documents where the inner condition
+// merely fails to hold, missing field included, so resolve the unknown to false
+// before negating.
+const negate = sql => `NOT IFNULL((${sql}), 0)`
+
+// json_each / json_type / json_array_length take (column, path) rather than a
+// pre-extracted value: json_extract unwraps a JSON string into bare SQL text,
+// which those functions then fail to re-parse as JSON.
+const makeJSONFunctionArgs = (field, columnName) =>
+  field ? `${columnName}, '$.${escapeSQLString(field)}'` : columnName
+
+// "at least one element of the array satisfies elementWhere", where the element
+// is bound to `elem.value`.
+const makeArrayElementExists = (field, columnName, elementWhere) =>
+  `EXISTS (SELECT 1 FROM json_each(${makeJSONFunctionArgs(
+    field,
+    columnName
+  )}) AS elem WHERE ${elementWhere})`
+
+// A sub-selector made of operators applies to the array element itself
+// ({ tags: { $elemMatch: { $eq: 'a' } } }); one made of field names applies to
+// the element's subfields ({ referenced_by: { $elemMatch: { type: 'album' } } }).
+const parseElemMatch = (field, subSelector, columnName) => {
+  if (!isPlainObject(subSelector)) {
+    throw new UnsupportedMangoSelectorError(
+      `$elemMatch on "${field}" expects a selector`
+    )
+  }
+  const elementColumn = 'elem.value'
+  const where = isOperatorObject(subSelector)
+    ? parseCondition('', subSelector, elementColumn)
+    : mangoSelectorToSQL(subSelector, elementColumn)
+  return makeArrayElementExists(field, columnName, where)
+}
+
+const parseCondition = (field, condition, columnName = 'data') => {
   const conditions = []
-
   const sqlField = transformMangoFieldInJSONSQL(field, columnName)
-  if (typeof condition === 'object' && !Array.isArray(condition)) {
-    for (const operator in condition) {
-      let sqlOp = MANGO_TO_SQL_OP[operator]
 
-      if (operator === '$in' || operator === '$nin') {
-        const list = condition[operator] || []
-        if (list.length === 0) {
-          // "IN ()" is a syntax error. $in [] matches nothing (0 = false),
-          // $nin [] matches everything (1 = true).
-          conditions.push(operator === '$in' ? '0' : '1')
-        } else {
-          const values = list.map(quoteSQLValue).join(', ')
-          conditions.push(`${sqlField} ${sqlOp} (${values})`)
-        }
-      } else if (operator === '$exists') {
-        const value = condition[operator]
-        if (value) {
-          sqlOp += ' NOT NULL'
-        } else {
-          sqlOp += ' NULL'
-        }
-        conditions.push(`${sqlField} ${sqlOp}`)
-      } else {
-        if (operator === '$gt' && condition[operator] === null) {
-          // Special case for $gt: null conditions
-          conditions.push(`${sqlField} IS NOT NULL`)
-        } else {
-          conditions.push(
-            `${sqlField} ${sqlOp} ${quoteSQLValue(condition[operator])}`
-          )
-        }
-      }
+  if (!isPlainObject(condition)) {
+    // Implicit equality. Routed through $eq so `null` gets the same IS NULL
+    // treatment as its explicit form.
+    return parseCondition(field, { $eq: condition }, columnName)
+  }
+
+  if (!isOperatorObject(condition)) {
+    // A nested document means subfield equality: { a: { b: 'x' } } selects the
+    // same documents as { 'a.b': 'x' }.
+    for (const subField in condition) {
+      conditions.push(
+        parseCondition(`${field}.${subField}`, condition[subField], columnName)
+      )
     }
-  } else {
-    conditions.push(`${sqlField} = ${quoteSQLValue(condition)}`)
+    return conditions.join(' AND ')
+  }
+
+  for (const operator in condition) {
+    const value = condition[operator]
+    const sqlOp = MANGO_TO_SQL_OP[operator]
+
+    // json_extract returns SQL NULL both for a JSON null and for a missing path,
+    // so every null comparison needs an IS [NOT] NULL form: `= NULL` and
+    // `!= NULL` are NULL, never true.
+    if (operator === '$eq' && value === null) {
+      conditions.push(`${sqlField} IS NULL`)
+    } else if ((operator === '$gt' || operator === '$ne') && value === null) {
+      conditions.push(`${sqlField} IS NOT NULL`)
+    } else if (value === null && sqlOp) {
+      // The remaining range operators have no meaningful null form here: `x >=
+      // NULL` is NULL for every row, so the query would silently match nothing.
+      // CouchDB orders null against every other type, which SQL comparison does
+      // not, so hand these to pouch-find rather than approximate them.
+      throw new UnsupportedMangoSelectorError(
+        `Cannot compare "${field}" to null with "${operator}"`
+      )
+    } else if (operator === '$ne') {
+      // CouchDB matches a missing field: `x != v` is NULL, not true, when
+      // json_extract finds nothing, so the absent case needs its own branch.
+      conditions.push(
+        `(${sqlField} IS NULL OR ${sqlField} != ${quoteSQLValue(value)})`
+      )
+    } else if (operator === '$in' || operator === '$nin') {
+      const list = value || []
+      if (list.length === 0) {
+        // "IN ()" is a syntax error. $in [] matches nothing (0 = false),
+        // $nin [] matches everything (1 = true).
+        conditions.push(operator === '$in' ? '0' : '1')
+      } else {
+        const values = list.map(quoteSQLValue).join(', ')
+        conditions.push(
+          operator === '$in'
+            ? `${sqlField} IN (${values})`
+            : `(${sqlField} IS NULL OR ${sqlField} NOT IN (${values}))`
+        )
+      }
+    } else if (operator === '$exists') {
+      conditions.push(`${sqlField} IS ${value ? 'NOT NULL' : 'NULL'}`)
+    } else if (operator === '$not') {
+      conditions.push(negate(parseCondition(field, value, columnName)))
+    } else if (operator === '$elemMatch') {
+      conditions.push(parseElemMatch(field, value, columnName))
+    } else if (operator === '$all') {
+      const list = value || []
+      // One scan per value: SQLite has no "contains all of" primitive, and the
+      // values may sit at any positions in the array.
+      conditions.push(
+        list.length === 0
+          ? '1'
+          : list
+              .map(item =>
+                makeArrayElementExists(
+                  field,
+                  columnName,
+                  `elem.value = ${quoteSQLValue(item)}`
+                )
+              )
+              .join(' AND ')
+      )
+    } else if (operator === '$size') {
+      conditions.push(
+        `json_array_length(${makeJSONFunctionArgs(
+          field,
+          columnName
+        )}) = ${quoteSQLValue(value)}`
+      )
+    } else if (operator === '$mod') {
+      if (!Array.isArray(value) || value.length !== 2) {
+        throw new UnsupportedMangoSelectorError(
+          `$mod on "${field}" expects a [divisor, remainder] pair`
+        )
+      }
+      // The numeric guard is not decoration: SQLite coerces a non-numeric
+      // operand of % to 0, so a text field would match any {$mod: [d, 0]}.
+      conditions.push(
+        `(json_type(${makeJSONFunctionArgs(
+          field,
+          columnName
+        )}) IN (${MANGO_TYPE_TO_JSON_TYPES.number
+          .map(quoteSQLValue)
+          .join(', ')}) AND ${sqlField} % ${quoteSQLValue(
+          value[0]
+        )} = ${quoteSQLValue(value[1])})`
+      )
+    } else if (operator === '$type') {
+      const jsonTypes = MANGO_TYPE_TO_JSON_TYPES[value]
+      if (!jsonTypes) {
+        throw new UnsupportedMangoSelectorError(
+          `Unsupported mango $type "${value}" on field "${field}"`
+        )
+      }
+      conditions.push(
+        `json_type(${makeJSONFunctionArgs(
+          field,
+          columnName
+        )}) IN (${jsonTypes.map(quoteSQLValue).join(', ')})`
+      )
+    } else if (sqlOp) {
+      conditions.push(`${sqlField} ${sqlOp} ${quoteSQLValue(value)}`)
+    } else {
+      // The single point where an untranslatable selector is caught. $regex ends
+      // up here - op-sqlite exposes no way to register a REGEXP function - along
+      // with any operator this translator does not know. Throwing rather than
+      // interpolating an undefined operator is what guarantees the generated SQL
+      // never contains "undefined"; SQLiteQueryEngine turns it into a pouch-find
+      // fallback.
+      throw new UnsupportedMangoSelectorError(
+        `Unsupported mango operator "${operator}" on field "${field}"`
+      )
+    }
   }
 
   return conditions.join(' AND ')
 }
 
 const parseLogicalOperator = (operator, conditionsArray, columnName) => {
+  if (!Array.isArray(conditionsArray) || conditionsArray.length === 0) {
+    throw new UnsupportedMangoSelectorError(
+      `${operator} expects a non-empty array of selectors`
+    )
+  }
   const sqlOperator = operator === '$and' ? 'AND' : 'OR'
   const parsedConditions = conditionsArray.map(
-    cond => `(${mangoSelectorToSQL(cond, columnName).replace(/^WHERE /, '')})`
+    cond => `(${mangoSelectorToSQL(cond, columnName)})`
   )
   return parsedConditions.join(` ${sqlOperator} `)
 }
@@ -155,23 +322,52 @@ const PHYSICAL_COLUMNS = { _id: 'doc_id', _rev: 'rev' }
 
 const transformMangoFieldInJSONSQL = (field, columnName = 'data') => {
   const physicalColumn = PHYSICAL_COLUMNS[field]
-  if (physicalColumn) {
-    // `data` is the query alias, where by-sequence is joined with document-store
-    // and the column needs qualifying; `json` is the CREATE INDEX context, which
-    // is scoped to by-sequence alone and must stay unqualified.
+  // Only at document level: inside a json_each element (`elem.value`) the row
+  // is an array item, which has no doc_id / rev of its own.
+  if (physicalColumn && (columnName === 'data' || columnName === 'json')) {
+    // `data` is the query alias, where by-sequence is joined with
+    // document-store and the column needs qualifying; `json` is the CREATE
+    // INDEX context, scoped to by-sequence alone, which must stay unqualified.
     return columnName === 'json'
       ? physicalColumn
       : `'by-sequence'.${physicalColumn}`
   }
-  return `json_extract(${columnName}, '$.${field}')`
+  if (!field) {
+    // No path: the value IS the column (a json_each element, for $elemMatch on
+    // an array of scalars). json_extract would re-parse it as JSON and fail on a
+    // bare string.
+    return columnName
+  }
+  return `json_extract(${columnName}, '$.${escapeSQLString(field)}')`
 }
 
-export const mangoSelectorToSQL = (selector, columnName) => {
+/**
+ * Translate a mango selector into a SQL boolean expression.
+ *
+ * @param {object} selector - The mango selector
+ * @param {string} [columnName] - The JSON column the paths are resolved against
+ * @returns {string} The SQL expression, never containing "undefined"
+ * @throws {UnsupportedMangoSelectorError} When the selector uses a mango feature
+ * this translator cannot express in SQL
+ */
+export const mangoSelectorToSQL = (selector, columnName = 'data') => {
+  if (!isPlainObject(selector)) {
+    throw new UnsupportedMangoSelectorError(
+      `Expected a selector, got ${JSON.stringify(selector)}`
+    )
+  }
   const conditions = []
 
   for (const key in selector) {
     if (key === '$and' || key === '$or') {
       conditions.push(parseLogicalOperator(key, selector[key], columnName))
+    } else if (key === '$nor') {
+      // "none of these match" is the negation of the $or.
+      conditions.push(
+        negate(parseLogicalOperator('$or', selector[key], columnName))
+      )
+    } else if (key === '$not') {
+      conditions.push(negate(mangoSelectorToSQL(selector[key], columnName)))
     } else {
       conditions.push(parseCondition(key, selector[key], columnName))
     }

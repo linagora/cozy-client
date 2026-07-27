@@ -32,9 +32,11 @@ describe('mangoSelectorToSQL', () => {
   })
 
   it('should handle $neq operator', () => {
+    // The IS NULL arm keeps documents missing the field, which CouchDB matches
+    // but a bare `!=` would drop (json_extract returns NULL for them).
     const selector = { status: { $ne: 'active' } }
     expect(mangoSelectorToSQL(selector)).toBe(
-      "json_extract(data, '$.status') != 'active'"
+      "(json_extract(data, '$.status') IS NULL OR json_extract(data, '$.status') != 'active')"
     )
   })
 
@@ -44,7 +46,7 @@ describe('mangoSelectorToSQL', () => {
       other_status: { $nin: ['maintenance', 'failing'] }
     }
     expect(mangoSelectorToSQL(selector)).toBe(
-      "json_extract(data, '$.status') IN ('active', 'pending') AND json_extract(data, '$.other_status') NOT IN ('maintenance', 'failing')"
+      "json_extract(data, '$.status') IN ('active', 'pending') AND (json_extract(data, '$.other_status') IS NULL OR json_extract(data, '$.other_status') NOT IN ('maintenance', 'failing'))"
     )
   })
 

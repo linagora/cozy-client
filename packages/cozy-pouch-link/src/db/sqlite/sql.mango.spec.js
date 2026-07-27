@@ -1,3 +1,5 @@
+import { UnsupportedMangoSelectorError } from '../../errors'
+
 import { makeWhereClause, makeSortClause, makeSQLQueryForIds } from './sql'
 
 // Compatibility of the native SQLite engine with the mango selector language
@@ -5,9 +7,10 @@ import { makeWhereClause, makeSortClause, makeSQLQueryForIds } from './sql'
 //
 // - "correctness fixes" lock the behaviour of selectors the engine DOES accept
 //   but used to mistranslate (quoting, $or precedence, empty $in, sort order).
-// - "gaps" document selectors mango accepts that the engine cannot translate
-//   yet; they are `.skip` and assert the SQL we want, so each unskips the day
-//   the gap is closed. See the tracking issue for the full matrix.
+// - "operator coverage" locks the operators the translator now expresses in SQL.
+// - "unsupported selectors" locks the other half of the contract: anything the
+//   translator cannot express throws, so SQLiteQueryEngine can route the query
+//   to pouch-find. No selector may ever produce "undefined" in the SQL.
 
 describe('native SQLite mango — correctness fixes', () => {
   it('escapes single quotes in string values (no SQL break / injection)', () => {
@@ -43,48 +46,176 @@ describe('native SQLite mango — correctness fixes', () => {
   })
 })
 
-describe('native SQLite mango — gaps (mango accepts, engine does not yet)', () => {
-  // $not / $nor are currently read as field names -> "json_extract('$.$not') undefined"
-  it.skip('translates $not', () => {
-    expect(makeWhereClause({ $not: { type: 'file' } })).not.toContain(
-      'undefined'
+describe('native SQLite mango — operator coverage', () => {
+  it('translates $not', () => {
+    // IFNULL, not a bare NOT: NOT NULL is NULL, so a document missing the field
+    // would be dropped where CouchDB keeps it.
+    expect(makeWhereClause({ $not: { type: 'file' } })).toBe(
+      "DELETED = 0 AND (NOT IFNULL((json_extract(data, '$.type') = 'file'), 0))"
     )
   })
 
-  // No mapping in MANGO_TO_SQL_OP -> literal "undefined" in the SQL
-  it.skip('translates $regex', () => {
-    expect(makeWhereClause({ name: { $regex: '^foo' } })).not.toContain(
-      'undefined'
+  it('translates a field-level $not', () => {
+    expect(makeWhereClause({ type: { $not: { $eq: 'file' } } })).toBe(
+      "DELETED = 0 AND (NOT IFNULL((json_extract(data, '$.type') = 'file'), 0))"
     )
   })
 
-  // Array operators are entirely absent
-  it.skip('translates $elemMatch on an array field', () => {
+  it('translates $nor as the negation of the $or', () => {
+    expect(
+      makeWhereClause({ $nor: [{ type: 'file' }, { type: 'directory' }] })
+    ).toBe(
+      "DELETED = 0 AND (NOT IFNULL(((json_extract(data, '$.type') = 'file') OR (json_extract(data, '$.type') = 'directory')), 0))"
+    )
+  })
+
+  it('translates $elemMatch on an array of objects', () => {
     expect(
       makeWhereClause({ referenced_by: { $elemMatch: { type: 'album' } } })
-    ).not.toContain('undefined')
-  })
-  it.skip('translates $all', () => {
-    expect(makeWhereClause({ tags: { $all: ['a', 'b'] } })).not.toContain(
-      'undefined'
+    ).toBe(
+      "DELETED = 0 AND (EXISTS (SELECT 1 FROM json_each(data, '$.referenced_by') AS elem WHERE json_extract(elem.value, '$.type') = 'album'))"
     )
   })
-  it.skip('translates $size', () => {
-    expect(makeWhereClause({ tags: { $size: 3 } })).not.toContain('undefined')
+
+  it('translates $elemMatch on an array of scalars against the element itself', () => {
+    expect(makeWhereClause({ tags: { $elemMatch: { $eq: 'a' } } })).toBe(
+      "DELETED = 0 AND (EXISTS (SELECT 1 FROM json_each(data, '$.tags') AS elem WHERE elem.value = 'a'))"
+    )
   })
 
-  // A nested object means subfield equality; the sub-keys are currently iterated
-  // as operators -> "json_extract('$.cozyMetadata') undefined 'drive'"
-  it.skip('treats a nested object as subfield equality', () => {
+  it('translates $all', () => {
+    expect(makeWhereClause({ tags: { $all: ['a', 'b'] } })).toBe(
+      "DELETED = 0 AND (EXISTS (SELECT 1 FROM json_each(data, '$.tags') AS elem WHERE elem.value = 'a') AND EXISTS (SELECT 1 FROM json_each(data, '$.tags') AS elem WHERE elem.value = 'b'))"
+    )
+  })
+
+  it('translates $size', () => {
+    expect(makeWhereClause({ tags: { $size: 3 } })).toBe(
+      "DELETED = 0 AND (json_array_length(data, '$.tags') = 3)"
+    )
+  })
+
+  it('translates $mod, guarding against SQLite coercing text to 0', () => {
+    expect(makeWhereClause({ count: { $mod: [4, 0] } })).toBe(
+      "DELETED = 0 AND ((json_type(data, '$.count') IN ('integer', 'real') AND json_extract(data, '$.count') % 4 = 0))"
+    )
+  })
+
+  it('maps mango $type onto the json_type vocabulary', () => {
+    expect(makeWhereClause({ size: { $type: 'number' } })).toBe(
+      "DELETED = 0 AND (json_type(data, '$.size') IN ('integer', 'real'))"
+    )
+    expect(makeWhereClause({ trashed: { $type: 'boolean' } })).toBe(
+      "DELETED = 0 AND (json_type(data, '$.trashed') IN ('true', 'false'))"
+    )
+  })
+
+  it('treats a nested object as subfield equality', () => {
     expect(makeWhereClause({ cozyMetadata: { createdByApp: 'drive' } })).toBe(
       "DELETED = 0 AND (json_extract(data, '$.cozyMetadata.createdByApp') = 'drive')"
     )
   })
 
-  // "= NULL" never matches; mango $eq null should match null / missing
-  it.skip('translates $eq null to an IS NULL check', () => {
+  it('recurses through several levels of nested objects', () => {
+    expect(makeWhereClause({ a: { b: { c: 'x' } } })).toBe(
+      "DELETED = 0 AND (json_extract(data, '$.a.b.c') = 'x')"
+    )
+  })
+
+  it('translates $eq null to an IS NULL check', () => {
     expect(makeWhereClause({ trashed: { $eq: null } })).toBe(
       "DELETED = 0 AND (json_extract(data, '$.trashed') IS NULL)"
     )
+  })
+
+  it('translates an implicit null equality the same way', () => {
+    expect(makeWhereClause({ trashed: null })).toBe(
+      "DELETED = 0 AND (json_extract(data, '$.trashed') IS NULL)"
+    )
+  })
+
+  it('matches missing fields on $ne and $nin, as CouchDB does', () => {
+    expect(makeWhereClause({ type: { $ne: 'file' } })).toBe(
+      "DELETED = 0 AND ((json_extract(data, '$.type') IS NULL OR json_extract(data, '$.type') != 'file'))"
+    )
+    expect(makeWhereClause({ type: { $nin: ['file'] } })).toBe(
+      "DELETED = 0 AND ((json_extract(data, '$.type') IS NULL OR json_extract(data, '$.type') NOT IN ('file')))"
+    )
+  })
+
+  it('translates $ne null to an IS NOT NULL check', () => {
+    expect(makeWhereClause({ trashed: { $ne: null } })).toBe(
+      "DELETED = 0 AND (json_extract(data, '$.trashed') IS NOT NULL)"
+    )
+  })
+
+  it('escapes single quotes in field names as well as values', () => {
+    expect(makeWhereClause({ "l'ete": 'x' })).toBe(
+      "DELETED = 0 AND (json_extract(data, '$.l''ete') = 'x')"
+    )
+  })
+})
+
+describe('native SQLite mango — unsupported selectors are routed, never mistranslated', () => {
+  // op-sqlite exposes no way to register a REGEXP function, so $regex cannot be
+  // expressed here at all. It must be detected, not approximated.
+  it('rejects $regex', () => {
+    expect(() => makeWhereClause({ name: { $regex: '^foo' } })).toThrow(
+      UnsupportedMangoSelectorError
+    )
+  })
+
+  it('rejects any unknown operator', () => {
+    expect(() => makeWhereClause({ name: { $whatever: 1 } })).toThrow(
+      UnsupportedMangoSelectorError
+    )
+  })
+
+  it('rejects a $type mango does accept but json_type does not name', () => {
+    expect(() => makeWhereClause({ size: { $type: 'decimal' } })).toThrow(
+      UnsupportedMangoSelectorError
+    )
+  })
+
+  it('rejects a malformed $mod instead of emitting a half-built expression', () => {
+    expect(() => makeWhereClause({ count: { $mod: [4] } })).toThrow(
+      UnsupportedMangoSelectorError
+    )
+  })
+
+  it('rejects a value with no SQL literal form', () => {
+    expect(() => makeWhereClause({ meta: { $gt: { a: 1 } } })).toThrow(
+      UnsupportedMangoSelectorError
+    )
+  })
+
+  // A template literal stringifies undefined to the word "undefined", so an
+  // unresolved variable in a selector - Q().where({ dir_id: someVar }) - is the
+  // shortest path back to the bug this whole change is about.
+  it('rejects an undefined value rather than stringifying it', () => {
+    expect(() => makeWhereClause({ dir_id: undefined })).toThrow(
+      UnsupportedMangoSelectorError
+    )
+  })
+
+  // $gt: null is the "field exists" idiom normalizeFindSelector injects, so it
+  // stays supported; the other range operators have no sound null form here.
+  it('rejects range operators compared to null, except $gt', () => {
+    expect(makeWhereClause({ date: { $gt: null } })).toBe(
+      "DELETED = 0 AND (json_extract(data, '$.date') IS NOT NULL)"
+    )
+    for (const operator of ['$gte', '$lt', '$lte']) {
+      expect(() => makeWhereClause({ date: { [operator]: null } })).toThrow(
+        UnsupportedMangoSelectorError
+      )
+    }
+  })
+
+  it('detects an unsupported operator nested inside a logical operator', () => {
+    expect(() =>
+      makeWhereClause({
+        $and: [{ type: 'file' }, { name: { $regex: '^foo' } }]
+      })
+    ).toThrow(UnsupportedMangoSelectorError)
   })
 })

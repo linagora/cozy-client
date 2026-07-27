@@ -44,3 +44,22 @@ export const isMissingPouchDBIndexError = error => {
 export const isDocumentNotFoundPouchDBError = error => {
   return POUCHDB_NOT_FOUND_ERROR.test(error.name)
 }
+
+/**
+ * Thrown by the native SQLite mango translator when a selector uses a feature it
+ * cannot express in SQL. Raising it is what keeps the translator from emitting
+ * `undefined` SQL: every branch either produces valid SQL or throws.
+ */
+export class UnsupportedMangoSelectorError extends Error {
+  /**
+   * @param {string} message - What could not be translated
+   */
+  constructor(message) {
+    super(message)
+    this.name = 'UnsupportedMangoSelectorError'
+  }
+}
+
+export const isUnsupportedMangoSelectorError = error => {
+  return error instanceof UnsupportedMangoSelectorError
+}
