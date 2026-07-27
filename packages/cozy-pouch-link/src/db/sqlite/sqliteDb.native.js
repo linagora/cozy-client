@@ -16,18 +16,24 @@ import {
   parseResults
 } from './sql'
 import { getIndexFields, getIndexName } from '../../mango'
-import { isMissingSQLiteIndexError } from '../../errors'
+import {
+  isMissingSQLiteIndexError,
+  isUnsupportedMangoSelectorError
+} from '../../errors'
+import PouchDBQueryEngine from '../pouchdb/pouchdb'
 import logger from '../../logger'
 
 export default class SQLiteQueryEngine extends DatabaseQueryEngine {
   constructor(pouchManager, doctype) {
     super()
     this.db = null
+    this.pouchManager = pouchManager
     this.client = pouchManager?.client
     this.doctype = doctype
   }
 
   openDB(dbName) {
+    this.dbName = dbName
     const fileDbName = `${dbName}.sqlite`
     // Resolve the DB handle lazily on first use, opening our OWN op-sqlite
     // connection on the same file the adapter uses. WAL mode + a busy timeout
@@ -55,6 +61,20 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
         return resolved
       }
     })
+  }
+
+  // pouch-find can answer every mango selector, at the cost of the mapreduce view
+  // this engine exists to avoid. Built lazily so the PouchDB handle is only
+  // resolved by queries that actually need it.
+  getPouchFallback() {
+    if (!this.pouchFallback) {
+      this.pouchFallback = new PouchDBQueryEngine(
+        this.pouchManager,
+        this.doctype
+      )
+      this.pouchFallback.openDB(this.dbName)
+    }
+    return this.pouchFallback
   }
 
   async allDocs({ limit = -1, skip = 0 } = {}) {
@@ -121,36 +141,52 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
       partialFilter,
       indexedFields
     })
-    const sql = makeSQLQueryFromMango({
-      selector,
-      sort,
-      indexName,
-      partialFilter,
-      limit,
-      skip
-    })
-    let result
-    if (recreateIndex) {
-      await deleteIndex(this.db, indexName)
-    }
+    let sql
     try {
-      result = await executeSQL(this.db, sql)
+      sql = makeSQLQueryFromMango({
+        selector,
+        sort,
+        indexName,
+        partialFilter,
+        limit,
+        skip
+      })
     } catch (err) {
-      if (isMissingSQLiteIndexError(err)) {
+      if (!isUnsupportedMangoSelectorError(err)) {
+        throw err
+      }
+      // The selector uses mango features SQL cannot express here ($regex, ...).
+      // Answering it with an empty result would be indistinguishable from "no
+      // match", so let pouch-find handle it instead.
+      logger.warn(`${err.message} - falling back to the PouchDB query engine`)
+      return this.getPouchFallback().find(options)
+    }
+
+    try {
+      if (recreateIndex) {
+        await deleteIndex(this.db, indexName)
+      }
+      let result
+      try {
+        result = await executeSQL(this.db, sql)
+      } catch (err) {
+        if (!isMissingSQLiteIndexError(err)) {
+          throw err
+        }
         await createMangoIndex(this.db, indexName, indexedFields, {
           partialFilter
         })
         result = await executeSQL(this.db, sql)
-      } else {
-        logger.error(err)
-        return null
       }
+      return parseResults(this.client, result, this.doctype, {
+        skip,
+        limit
+      })
+    } catch (err) {
+      // Returning null here would surface as an empty - but successful - result.
+      // Falling back makes a SQLite failure cost performance, not correctness.
+      logger.error(err)
+      return this.getPouchFallback().find(options)
     }
-
-    const docs = parseResults(this.client, result, this.doctype, {
-      skip,
-      limit
-    })
-    return docs
   }
 }
