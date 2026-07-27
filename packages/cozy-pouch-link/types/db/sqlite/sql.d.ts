@@ -16,7 +16,7 @@ export function parseResults(client: any, result: any, doctype: any, { isSingleD
     skip: number;
     next: boolean;
 };
-export function mangoSelectorToSQL(selector: any, columnName: any): string;
+export function mangoSelectorToSQL(selector: object, columnName?: string): string;
 export function makeWhereClause(selector: any, columnName: any): string;
 export function makeSortClause(mangoSortBy: any): string;
 export function makeSQLQueryFromMango({ selector, sort, indexName, partialFilter, limit, skip }: {
