@@ -2,7 +2,10 @@ const fs = require('fs')
 const path = require('path')
 
 const { runSuite } = require('./harness')
-const { getSpecs } = require('./store-queries.bench')
+const { getSpecs: getStoreQueriesSpecs } = require('./store-queries.bench')
+const { getSpecs: getNormalizeDocsSpecs } = require('./normalize-docs.bench')
+
+const getSpecs = () => [...getStoreQueriesSpecs(), ...getNormalizeDocsSpecs()]
 
 const parseOut = argv => {
   const flag = argv.find(arg => arg.startsWith('--out='))
@@ -29,7 +32,10 @@ const main = () => {
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2))
 
   for (const bench of benchmarks) {
-    const ops = bench.opsPerSec >= 1 ? bench.opsPerSec.toFixed(1) : bench.opsPerSec.toFixed(3)
+    const ops =
+      bench.opsPerSec >= 1
+        ? bench.opsPerSec.toFixed(1)
+        : bench.opsPerSec.toFixed(3)
     console.log(
       `${bench.name}: ${bench.medianMs.toFixed(3)} ms (median), ${ops} ops/s`
     )
