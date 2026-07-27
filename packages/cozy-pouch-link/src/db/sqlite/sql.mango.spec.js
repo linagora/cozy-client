@@ -41,6 +41,20 @@ describe('native SQLite mango — correctness fixes', () => {
     )
   })
 
+  it('whitelists the sort direction instead of interpolating it', () => {
+    // ASC/DESC are bare keywords, so an unrecognised direction cannot simply be
+    // quoted - it has to be rejected.
+    expect(makeSortClause([{ name: 'asc; DROP TABLE docs' }])).toBe(
+      "json_extract(data, '$.name') ASC"
+    )
+  })
+
+  it('escapes single quotes in sorted field names too', () => {
+    expect(makeSortClause([{ "l'ete": 'asc' }])).toBe(
+      "json_extract(data, '$.l''ete') ASC"
+    )
+  })
+
   it('quotes each id separately in getByIds', () => {
     expect(makeSQLQueryForIds(['a', 'b'])).toContain('IN ("a", "b")')
   })
