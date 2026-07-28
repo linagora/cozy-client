@@ -43,4 +43,5 @@ export function createMangoIndex(db: any, indexName: any, fieldsToIndex: any, { 
     partialFilter: any;
 }): Promise<any>;
 export function deleteIndex(db: any, indexName: any): Promise<void>;
+export function toWebSQLResult(result: object): object;
 export function executeSQL(db: any, sql: any): Promise<any>;
