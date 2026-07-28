@@ -95,10 +95,10 @@ const quoteSQLValue = value => {
   return value
 }
 
-const parseCondition = (field, condition) => {
+const parseCondition = (field, condition, columnName) => {
   const conditions = []
 
-  const sqlField = transformMangoFieldInJSONSQL(field)
+  const sqlField = transformMangoFieldInJSONSQL(field, columnName)
   if (typeof condition === 'object' && !Array.isArray(condition)) {
     for (const operator in condition) {
       let sqlOp = MANGO_TO_SQL_OP[operator]
@@ -139,10 +139,10 @@ const parseCondition = (field, condition) => {
   return conditions.join(' AND ')
 }
 
-const parseLogicalOperator = (operator, conditionsArray) => {
+const parseLogicalOperator = (operator, conditionsArray, columnName) => {
   const sqlOperator = operator === '$and' ? 'AND' : 'OR'
   const parsedConditions = conditionsArray.map(
-    cond => `(${mangoSelectorToSQL(cond).replace(/^WHERE /, '')})`
+    cond => `(${mangoSelectorToSQL(cond, columnName).replace(/^WHERE /, '')})`
   )
   return parsedConditions.join(` ${sqlOperator} `)
 }
@@ -151,26 +151,26 @@ const transformMangoFieldInJSONSQL = (field, columnName = 'data') => {
   return `json_extract(${columnName}, '$.${field}')`
 }
 
-export const mangoSelectorToSQL = selector => {
+export const mangoSelectorToSQL = (selector, columnName) => {
   const conditions = []
 
   for (const key in selector) {
     if (key === '$and' || key === '$or') {
-      conditions.push(parseLogicalOperator(key, selector[key]))
+      conditions.push(parseLogicalOperator(key, selector[key], columnName))
     } else {
-      conditions.push(parseCondition(key, selector[key]))
+      conditions.push(parseCondition(key, selector[key], columnName))
     }
   }
 
   return conditions.length > 0 ? `${conditions.join(' AND ')}` : ''
 }
 
-export const makeWhereClause = selector => {
+export const makeWhereClause = (selector, columnName) => {
   let baseWhere = 'DELETED = 0'
   if (!selector) {
     return baseWhere
   }
-  const mangoWhere = mangoSelectorToSQL(selector)
+  const mangoWhere = mangoSelectorToSQL(selector, columnName)
   if (!mangoWhere) {
     return baseWhere
   }
@@ -200,10 +200,21 @@ export const makeSQLQueryFromMango = ({
   selector,
   sort,
   indexName,
+  partialFilter,
   limit = -1,
   skip = 0
 }) => {
-  const whereClause = makeWhereClause(selector)
+  let whereClause = makeWhereClause(selector)
+  // Restate the partial filter in the query itself. Relying on the partial index
+  // alone is unsafe: CREATE INDEX IF NOT EXISTS never rewrites an index built
+  // under an older definition, so a stale unfiltered index would silently return
+  // the rows the filter is meant to hide.
+  if (partialFilter) {
+    const partialWhere = mangoSelectorToSQL(partialFilter)
+    if (partialWhere) {
+      whereClause += ` AND (${partialWhere})`
+    }
+  }
   const sortClause = makeSortClause(sort)
 
   // Scan by-sequence via the mango index, then join document-store on its
@@ -288,7 +299,10 @@ export const makeSQLCreateMangoIndex = (
     (${jsonIndex})
   `
   if (partialFilter) {
-    const whereClause = makeWhereClause(partialFilter)
+    // `data` only exists as a SELECT alias of 'by-sequence'.json; inside CREATE
+    // INDEX the column is `json`. Emitting the alias made every partial index
+    // fail with "no such column: data", so the filter was never enforced.
+    const whereClause = makeWhereClause(partialFilter, 'json')
     sql += ` WHERE ${whereClause}`
   }
   sql += ';'

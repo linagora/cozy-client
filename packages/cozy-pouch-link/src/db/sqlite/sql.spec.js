@@ -7,7 +7,8 @@ import {
   makeSQLQueryForIds,
   keepDocWitHighestRev,
   makeSQLQueryAll,
-  parseResults
+  parseResults,
+  makeSQLCreateMangoIndex
 } from './sql'
 
 describe('mangoSelectorToSQL', () => {
@@ -433,5 +434,27 @@ describe('parseResults', () => {
       _type: doctype,
       name: 'single_doc'
     })
+  })
+})
+
+describe('partialFilter', () => {
+  it('should build the index filter against the json column', () => {
+    const sql = makeSQLCreateMangoIndex('by_name', ['name'], {
+      partialFilter: { trashed: false }
+    })
+
+    // `data` is only a SELECT alias, CREATE INDEX would reject it.
+    expect(sql).toContain(`json_extract(json, '$.trashed') = false`)
+    expect(sql).not.toContain(`json_extract(data`)
+  })
+
+  it('should restate the partial filter in the query', () => {
+    const sql = makeSQLQueryFromMango({
+      selector: { dir_id: 'root' },
+      indexName: 'by_dir_id',
+      partialFilter: { trashed: false }
+    })
+
+    expect(sql).toContain(`json_extract(data, '$.trashed') = false`)
   })
 })
