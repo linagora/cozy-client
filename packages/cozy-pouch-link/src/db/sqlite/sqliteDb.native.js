@@ -125,6 +125,7 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
       selector,
       sort,
       indexName,
+      partialFilter,
       limit,
       skip
     })
