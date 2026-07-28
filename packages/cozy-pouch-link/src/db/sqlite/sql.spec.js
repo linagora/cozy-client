@@ -196,14 +196,40 @@ describe('makeSQLQueryFromMango', () => {
       `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
       `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
       `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND (json_extract(data, '$.date') > '2025-01-01')`,
-      `OFFSET 100`,
-      `LIMIT 200;`
+      `LIMIT 200 OFFSET 100;`
     ].join(' ')
     expect(sql).toEqual(expectedSql)
+  })
+
+  it('should not emit an OFFSET without a LIMIT', () => {
+    const sql = makeSQLQueryFromMango({
+      selector: { name: { $gt: null } },
+      indexName: 'by_name',
+      skip: 10
+    })
+
+    expect(sql).toContain('LIMIT -1 OFFSET 10;')
+  })
+
+  it('should fall back to an unbounded LIMIT when limit is null', () => {
+    const sql = makeSQLQueryFromMango({
+      selector: { name: { $gt: null } },
+      indexName: 'by_name',
+      limit: null,
+      skip: 10
+    })
+
+    // `LIMIT null` parses but throws a datatype mismatch when stepped.
+    expect(sql).not.toContain('LIMIT null')
+    expect(sql).toContain('LIMIT -1 OFFSET 10;')
   })
 })
 
 describe('makeSQLQueryAll', () => {
+  it('should fall back to an unbounded LIMIT when limit is null', () => {
+    expect(makeSQLQueryAll({ limit: null })).toContain('LIMIT -1;')
+  })
+
   it('should return a correct sql query to get all docs', () => {
     const sql = makeSQLQueryAll()
     const expectedSql = [
