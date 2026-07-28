@@ -34,6 +34,10 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
 
   openDB(dbName) {
     this.dbName = dbName
+    // The fallback caches a connection to the PREVIOUS dbName; reopening on a
+    // different database has to drop it, or queries would keep being answered
+    // from the database this engine no longer points at.
+    this.pouchFallback = null
     const fileDbName = `${dbName}.sqlite`
     // Resolve the DB handle lazily on first use, opening our OWN op-sqlite
     // connection on the same file the adapter uses. WAL mode + a busy timeout

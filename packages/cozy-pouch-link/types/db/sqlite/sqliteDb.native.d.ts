@@ -6,7 +6,7 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
     doctype: any;
     dbName: any;
     getPouchFallback(): PouchDBQueryEngine;
-    pouchFallback: PouchDBQueryEngine;
+    pouchFallback: PouchDBQueryEngine | null;
 }
 import DatabaseQueryEngine from "../dbInterface";
 import PouchDBQueryEngine from "../pouchdb/pouchdb";

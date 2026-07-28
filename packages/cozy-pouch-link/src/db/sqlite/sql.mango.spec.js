@@ -232,4 +232,59 @@ describe('native SQLite mango — unsupported selectors are routed, never mistra
       })
     ).toThrow(UnsupportedMangoSelectorError)
   })
+
+  it('rejects a list operator whose operand is not an array', () => {
+    for (const operator of ['$in', '$nin', '$all']) {
+      expect(() => makeWhereClause({ tags: { [operator]: 'a' } })).toThrow(
+        UnsupportedMangoSelectorError
+      )
+    }
+  })
+
+  it('rejects a non-finite number', () => {
+    for (const value of [NaN, Infinity, -Infinity]) {
+      expect(() => makeWhereClause({ size: { $gt: value } })).toThrow(
+        UnsupportedMangoSelectorError
+      )
+    }
+  })
+
+  it('rejects a logical operator whose sub-selectors are all empty', () => {
+    expect(() => makeWhereClause({ $or: [{}, {}] })).toThrow(
+      UnsupportedMangoSelectorError
+    )
+  })
+
+  // SQL never matches NULL through IN / NOT IN, so a null member has to become
+  // an explicit IS NULL test.
+  it('tests null members of $in explicitly', () => {
+    expect(makeWhereClause({ name: { $in: [null] } })).toBe(
+      "DELETED = 0 AND (json_extract(data, '$.name') IS NULL)"
+    )
+    expect(makeWhereClause({ name: { $in: ['a', null] } })).toBe(
+      "DELETED = 0 AND ((json_extract(data, '$.name') IN ('a') OR json_extract(data, '$.name') IS NULL))"
+    )
+  })
+
+  it('excludes documents missing the field when $nin excludes null', () => {
+    expect(makeWhereClause({ name: { $nin: ['a', null] } })).toBe(
+      "DELETED = 0 AND ((json_extract(data, '$.name') NOT IN ('a') AND json_extract(data, '$.name') IS NOT NULL))"
+    )
+  })
+
+  it('keeps documents missing the field when $nin does not mention null', () => {
+    expect(makeWhereClause({ name: { $nin: ['a'] } })).toBe(
+      "DELETED = 0 AND ((json_extract(data, '$.name') IS NULL OR json_extract(data, '$.name') NOT IN ('a')))"
+    )
+  })
+
+  it('reads a bare string sort entry as ascending on that field', () => {
+    expect(makeSortClause(['name'])).toBe("json_extract(data, '$.name') ASC")
+  })
+
+  it('drops an empty sub-selector from a logical operator', () => {
+    expect(makeWhereClause({ $or: [{}, { type: 'file' }] })).toBe(
+      "DELETED = 0 AND ((json_extract(data, '$.type') = 'file'))"
+    )
+  })
 })

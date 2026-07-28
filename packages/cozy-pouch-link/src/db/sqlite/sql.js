@@ -101,9 +101,31 @@ export const parseResults = (
 const escapeSQLString = str => str.replace(/'/g, "''")
 
 // Quote a value for inline SQL.
+// $in, $nin and $all are the operators whose operand is a list. A non-array
+// operand would reach .map / .length and either throw a TypeError or, worse,
+// silently iterate a string's characters.
+const requireArrayOperand = (operator, field, value) => {
+  if (!Array.isArray(value)) {
+    throw new UnsupportedMangoSelectorError(
+      `${operator} on "${field}" expects an array, got ${JSON.stringify(value)}`
+    )
+  }
+  return value
+}
+
+const joinTests = (tests, operator) =>
+  tests.length > 1 ? `(${tests.join(` ${operator} `)})` : tests[0]
+
 const quoteSQLValue = value => {
   if (typeof value === 'string') {
     return `'${escapeSQLString(value)}'`
+  }
+  if (typeof value === 'number' && !Number.isFinite(value)) {
+    // NaN and +/-Infinity have no SQL literal: they would be interpolated as the
+    // bare words "NaN" / "Infinity", which SQLite reads as column names.
+    throw new UnsupportedMangoSelectorError(
+      `Cannot express ${String(value)} as a SQL value`
+    )
   }
   if (value === undefined || (typeof value === 'object' && value !== null)) {
     // undefined, objects and arrays have no SQL literal form. A template
@@ -209,18 +231,38 @@ const parseCondition = (field, condition, columnName = 'data') => {
         `(${sqlField} IS NULL OR ${sqlField} != ${quoteSQLValue(value)})`
       )
     } else if (operator === '$in' || operator === '$nin') {
-      const list = value || []
+      const list = requireArrayOperand(operator, field, value)
       if (list.length === 0) {
         // "IN ()" is a syntax error. $in [] matches nothing (0 = false),
         // $nin [] matches everything (1 = true).
         conditions.push(operator === '$in' ? '0' : '1')
       } else {
-        const values = list.map(quoteSQLValue).join(', ')
-        conditions.push(
-          operator === '$in'
-            ? `${sqlField} IN (${values})`
-            : `(${sqlField} IS NULL OR ${sqlField} NOT IN (${values}))`
-        )
+        // SQL never matches NULL through IN / NOT IN, so a null member has to
+        // become an explicit IS NULL test rather than sit in the list.
+        const hasNull = list.some(item => item === null)
+        const values = list.filter(item => item !== null).map(quoteSQLValue)
+        const tests = []
+        if (operator === '$in') {
+          if (values.length > 0) {
+            tests.push(`${sqlField} IN (${values.join(', ')})`)
+          }
+          if (hasNull) {
+            tests.push(`${sqlField} IS NULL`)
+          }
+          conditions.push(joinTests(tests, 'OR'))
+        } else {
+          if (values.length > 0) {
+            tests.push(`${sqlField} NOT IN (${values.join(', ')})`)
+          }
+          // $nin keeps documents missing the field, matching CouchDB - unless
+          // null is itself excluded, which is exactly what those rows hold.
+          tests.push(
+            hasNull ? `${sqlField} IS NOT NULL` : `${sqlField} IS NULL`
+          )
+          conditions.push(
+            hasNull ? joinTests(tests, 'AND') : joinTests(tests.reverse(), 'OR')
+          )
+        }
       }
     } else if (operator === '$exists') {
       conditions.push(`${sqlField} IS ${value ? 'NOT NULL' : 'NULL'}`)
@@ -229,7 +271,7 @@ const parseCondition = (field, condition, columnName = 'data') => {
     } else if (operator === '$elemMatch') {
       conditions.push(parseElemMatch(field, value, columnName))
     } else if (operator === '$all') {
-      const list = value || []
+      const list = requireArrayOperand(operator, field, value)
       // One scan per value: SQLite has no "contains all of" primitive, and the
       // values may sit at any positions in the array.
       conditions.push(
@@ -308,9 +350,17 @@ const parseLogicalOperator = (operator, conditionsArray, columnName) => {
     )
   }
   const sqlOperator = operator === '$and' ? 'AND' : 'OR'
-  const parsedConditions = conditionsArray.map(
-    cond => `(${mangoSelectorToSQL(cond, columnName)})`
-  )
+  // An empty sub-selector translates to an empty string; wrapping it would emit
+  // "()" and break the statement.
+  const parsedConditions = conditionsArray
+    .map(cond => mangoSelectorToSQL(cond, columnName))
+    .filter(Boolean)
+    .map(sql => `(${sql})`)
+  if (parsedConditions.length === 0) {
+    throw new UnsupportedMangoSelectorError(
+      `${operator} expects at least one translatable selector`
+    )
+  }
   return parsedConditions.join(` ${sqlOperator} `)
 }
 
@@ -400,11 +450,19 @@ export const makeSortClause = mangoSortBy => {
   // every field the first entry's way and silently ignore mixed asc/desc sorts.
   return mangoSortBy
     .map(sort => {
-      const attribute = Object.keys(sort)[0]
+      // A bare string is the shorthand for ascending on that field; Object.keys
+      // would otherwise read its first index and sort on the JSON path "$.0".
+      const entry = typeof sort === 'string' ? { [sort]: 'asc' } : sort
+      if (!isPlainObject(entry)) {
+        throw new UnsupportedMangoSelectorError(
+          `Cannot sort on ${JSON.stringify(sort)}`
+        )
+      }
+      const attribute = Object.keys(entry)[0]
       // ASC/DESC are bare SQL keywords, so the direction cannot be quoted the
       // way a value would be - it has to be whitelisted instead.
       const order =
-        String(sort[attribute]).toUpperCase() === 'DESC' ? 'DESC' : 'ASC'
+        String(entry[attribute]).toUpperCase() === 'DESC' ? 'DESC' : 'ASC'
       return `${transformMangoFieldInJSONSQL(attribute)} ${order}`
     })
     .join(', ')
