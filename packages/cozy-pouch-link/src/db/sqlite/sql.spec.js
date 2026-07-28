@@ -8,7 +8,8 @@ import {
   keepDocWitHighestRev,
   makeSQLQueryAll,
   parseResults,
-  makeSQLCreateMangoIndex
+  makeSQLCreateMangoIndex,
+  toWebSQLResult
 } from './sql'
 
 describe('mangoSelectorToSQL', () => {
@@ -508,6 +509,36 @@ describe('_id and _rev selectors', () => {
       partialFilter: { _id: { $nin: ['io.cozy.files.trash-dir'] } }
     })
 
-    expect(sql).toContain(`doc_id NOT IN ('io.cozy.files.trash-dir')`)
+    expect(sql).toContain(`doc_id NOT IN ('io.cozy.files.trash-dir')`),
+describe('toWebSQLResult', () => {
+  it('should rebuild a rows accessor from rawRows and columnNames', () => {
+    const result = toWebSQLResult({
+      rowsAffected: 0,
+      rawRows: [
+        ['{"a":1}', 'id1', '1-abc'],
+        ['{"a":2}', 'id2', '2-def']
+      ],
+      columnNames: ['data', 'doc_id', 'rev']
+    })
+
+    expect(result.rows.length).toBe(2)
+    expect(result.rows.item(0)).toEqual({
+      data: '{"a":1}',
+      doc_id: 'id1',
+      rev: '1-abc'
+    })
+    expect(result.rows.item(1).doc_id).toBe('id2')
+  })
+
+  it('should wrap a plain rows array', () => {
+    const result = toWebSQLResult({ rows: [{ doc_id: 'id1' }] })
+
+    expect(result.rows.length).toBe(1)
+    expect(result.rows.item(0).doc_id).toBe('id1')
+  })
+
+  it('should leave a WebSQL-style result untouched', () => {
+    const rows = { length: 0, item: () => undefined }
+    expect(toWebSQLResult({ rows }).rows).toBe(rows)
   })
 })
