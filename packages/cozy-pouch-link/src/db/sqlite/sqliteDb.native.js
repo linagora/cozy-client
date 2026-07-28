@@ -30,6 +30,13 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
     this.pouchManager = pouchManager
     this.client = pouchManager?.client
     this.doctype = doctype
+    /**
+     * Lazily built by getPouchFallback, and dropped whenever openDB points this
+     * engine at another database.
+     *
+     * @type {PouchDBQueryEngine | null}
+     */
+    this.pouchFallback = null
   }
 
   openDB(dbName) {
