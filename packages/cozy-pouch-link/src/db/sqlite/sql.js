@@ -631,8 +631,38 @@ export const deleteIndex = async (db, indexName) => {
   await executeSQL(db, sql)
 }
 
+/**
+ * op-sqlite answers with positional rows (`rawRows`) and the column names beside
+ * them, while older releases exposed a WebSQL-style `rows` accessor. parseResults
+ * reads `rows.length` and `rows.item(i)`, so every shape is brought back to that
+ * contract: otherwise `rows` is undefined and each query dies reading `length`.
+ *
+ * @param {object} result - A raw op-sqlite result
+ * @returns {object} The same result, with a WebSQL-style `rows` accessor
+ */
+export const toWebSQLResult = result => {
+  if (!result) {
+    return result
+  }
+  const { rows } = result
+  if (rows && typeof rows.item === 'function') {
+    return result
+  }
+  const list = Array.isArray(rows)
+    ? rows
+    : (result.rawRows || []).map(row => {
+        const columnNames = result.columnNames || []
+        const record = {}
+        for (let i = 0; i < columnNames.length; i++) {
+          record[columnNames[i]] = row[i]
+        }
+        return record
+      })
+  return { ...result, rows: { length: list.length, item: i => list[i] } }
+}
+
 export const executeSQL = async (db, sql) => {
-  return db.executeAsync(sql).catch(err => {
+  return db.executeAsync(sql).then(toWebSQLResult).catch(err => {
     const message = (err && err.message) || String(err)
     // Before the adapter has created the by-sequence table, the earliest
     // queries hit a missing table. That is transient (the table appears once
