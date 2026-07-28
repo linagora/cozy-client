@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.30.2](https://github.com/linagora/cozy-client/compare/v60.30.1...v60.30.2) (2026-07-28)
+
+
+### Bug Fixes
+
+* **pouch:** enforce the partialFilter in the sqlite query engine ([17ed5c4](https://github.com/linagora/cozy-client/commit/17ed5c44cf8e1fd955ee8af28dd90c5c507bb79e))
+* **pouch:** resolve _id and _rev to their by-sequence columns ([64ad8af](https://github.com/linagora/cozy-client/commit/64ad8af8be4a7574e1323308b1c36c882ba5989a))
+
+
+
+
+
 ## [60.30.1](https://github.com/linagora/cozy-client/compare/v60.30.0...v60.30.1) (2026-07-27)
 
 **Note:** Version bump only for package cozy-pouch-link
