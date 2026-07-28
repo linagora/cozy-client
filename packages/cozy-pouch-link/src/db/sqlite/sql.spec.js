@@ -458,3 +458,30 @@ describe('partialFilter', () => {
     expect(sql).toContain(`json_extract(data, '$.trashed') = false`)
   })
 })
+
+describe('_id and _rev selectors', () => {
+  it('should resolve _id to the by-sequence column in a query', () => {
+    // PouchDB strips _id from the stored JSON, so json_extract would be NULL.
+    expect(mangoSelectorToSQL({ _id: 'abc' })).toEqual(
+      `'by-sequence'.doc_id = 'abc'`
+    )
+  })
+
+  it('should resolve _rev to the by-sequence column in a query', () => {
+    expect(mangoSelectorToSQL({ _rev: '1-abc' })).toEqual(
+      `'by-sequence'.rev = '1-abc'`
+    )
+  })
+
+  it('should leave the column unqualified in an index context', () => {
+    expect(mangoSelectorToSQL({ _id: 'abc' }, 'json')).toEqual(`doc_id = 'abc'`)
+  })
+
+  it('should keep filtering hidden ids out of a partial index', () => {
+    const sql = makeSQLCreateMangoIndex('by_name', ['name'], {
+      partialFilter: { _id: { $nin: ['io.cozy.files.trash-dir'] } }
+    })
+
+    expect(sql).toContain(`doc_id NOT IN ('io.cozy.files.trash-dir')`)
+  })
+})
