@@ -4,9 +4,15 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
     pouchManager: any;
     client: any;
     doctype: any;
+    /**
+     * Lazily built by getPouchFallback, and dropped whenever openDB points this
+     * engine at another database.
+     *
+     * @type {PouchDBQueryEngine | null}
+     */
+    pouchFallback: PouchDBQueryEngine | null;
     dbName: any;
     getPouchFallback(): PouchDBQueryEngine;
-    pouchFallback: PouchDBQueryEngine | null;
 }
 import DatabaseQueryEngine from "../dbInterface";
 import PouchDBQueryEngine from "../pouchdb/pouchdb";
