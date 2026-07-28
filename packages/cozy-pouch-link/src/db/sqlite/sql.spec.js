@@ -509,7 +509,10 @@ describe('_id and _rev selectors', () => {
       partialFilter: { _id: { $nin: ['io.cozy.files.trash-dir'] } }
     })
 
-    expect(sql).toContain(`doc_id NOT IN ('io.cozy.files.trash-dir')`),
+    expect(sql).toContain(`doc_id NOT IN ('io.cozy.files.trash-dir')`)
+  })
+})
+
 describe('toWebSQLResult', () => {
   it('should rebuild a rows accessor from rawRows and columnNames', () => {
     const result = toWebSQLResult({
