@@ -499,13 +499,16 @@ export const makeSQLQueryFromMango = ({
     `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND ${whereClause}`
   ].join(' ')
 
-  if (skip > 0) {
-    sql += ` OFFSET ${skip}`
-  }
   if (sortClause) {
     sql += ` ORDER BY ${sortClause}`
   }
-  sql += ` LIMIT ${limit}`
+  // OFFSET is a modifier of LIMIT, not a clause of its own: SQL requires it last
+  // and rejects it without a LIMIT. `null` parses but fails at step time with a
+  // datatype mismatch, and the `limit = -1` default only catches `undefined`.
+  sql += ` LIMIT ${limit == null ? -1 : limit}`
+  if (skip > 0) {
+    sql += ` OFFSET ${skip}`
+  }
 
   sql += ';'
   return sql
@@ -542,7 +545,7 @@ export const makeSQLQueryAll = ({ limit = -1, skip = 0 } = {}) => {
     `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
     `FROM 'document-store', 'by-sequence'`,
     `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND 'by-sequence'.deleted=0`,
-    `LIMIT ${limit}`
+    `LIMIT ${limit == null ? -1 : limit}`
   ].join(' ')
   if (skip > 0) {
     sql += ` OFFSET ${skip}`
