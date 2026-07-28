@@ -516,10 +516,7 @@ describe('toWebSQLResult', () => {
   it('should rebuild a rows accessor from rawRows and columnNames', () => {
     const result = toWebSQLResult({
       rowsAffected: 0,
-      rawRows: [
-        ['{"a":1}', 'id1', '1-abc'],
-        ['{"a":2}', 'id2', '2-def']
-      ],
+      rawRows: [['{"a":1}', 'id1', '1-abc'], ['{"a":2}', 'id2', '2-def']],
       columnNames: ['data', 'doc_id', 'rev']
     })
 
