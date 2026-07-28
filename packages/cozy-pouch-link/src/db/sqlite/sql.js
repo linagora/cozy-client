@@ -147,7 +147,22 @@ const parseLogicalOperator = (operator, conditionsArray, columnName) => {
   return parsedConditions.join(` ${sqlOperator} `)
 }
 
+// PouchDB keeps a document's id and rev in by-sequence COLUMNS and strips them
+// from the stored JSON, so json_extract(json, '$._id') is NULL on every row. A
+// selector on `_id` would therefore match nothing it is meant to match, and a
+// `$nin` on it would filter nothing at all.
+const PHYSICAL_COLUMNS = { _id: 'doc_id', _rev: 'rev' }
+
 const transformMangoFieldInJSONSQL = (field, columnName = 'data') => {
+  const physicalColumn = PHYSICAL_COLUMNS[field]
+  if (physicalColumn) {
+    // `data` is the query alias, where by-sequence is joined with document-store
+    // and the column needs qualifying; `json` is the CREATE INDEX context, which
+    // is scoped to by-sequence alone and must stay unqualified.
+    return columnName === 'json'
+      ? physicalColumn
+      : `'by-sequence'.${physicalColumn}`
+  }
   return `json_extract(${columnName}, '$.${field}')`
 }
 
