@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.30.3](https://github.com/linagora/cozy-client/compare/v60.30.2...v60.30.3) (2026-07-28)
+
+
+### Bug Fixes
+
+* **pouch:** adapt the op-sqlite result shape in the sqlite engine ([0958bbb](https://github.com/linagora/cozy-client/commit/0958bbb672638939bc4d81d3dd36ef553b84cc04))
+* **pouch:** declare the lazy pouch fallback on the engine instance ([41c91dc](https://github.com/linagora/cozy-client/commit/41c91dcce6f02c80409b3abd59b844d4ada2fa43))
+* **pouch:** emit OFFSET after LIMIT in the sqlite mango query ([2d271a3](https://github.com/linagora/cozy-client/commit/2d271a3b22a337d907c84165d570e819153bd8be))
+* **pouch:** Escape field names in the sort and index clauses ([32283e1](https://github.com/linagora/cozy-client/commit/32283e1ad5e383afbb7bd2cb64cc777fc7f45ec7))
+* **pouch:** harden the mango translator against malformed operands ([8c5329e](https://github.com/linagora/cozy-client/commit/8c5329ec6166dcab86a2f47421ad162c18ac4508))
+* **pouch:** Route untranslatable selectors to the pouch-find engine ([deea989](https://github.com/linagora/cozy-client/commit/deea989425ab645c4a37b506f14d3f7de965e473))
+* **pouch:** Translate the mango operators the SQLite engine dropped ([0eac452](https://github.com/linagora/cozy-client/commit/0eac45242c9dc3d1779cbd5b2e1bcf0a85e59286))
+
+
+
+
+
 ## [60.30.2](https://github.com/linagora/cozy-client/compare/v60.30.1...v60.30.2) (2026-07-28)
 
 
