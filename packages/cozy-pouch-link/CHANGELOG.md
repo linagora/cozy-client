@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.30.4](https://github.com/linagora/cozy-client/compare/v60.30.3...v60.30.4) (2026-07-30)
+
+
+### Bug Fixes
+
+* **pouch:** apply each setup pragma independently ([bcb6e69](https://github.com/linagora/cozy-client/commit/bcb6e69641355bac5620c619093aa103fdc998be))
+* **pouch:** stop the sqlite engine racing its own connection setup ([a6852ee](https://github.com/linagora/cozy-client/commit/a6852eeb7a45d0add1ace861d5a9244063f81987))
+
+
+
+
+
 ## [60.30.3](https://github.com/linagora/cozy-client/compare/v60.30.2...v60.30.3) (2026-07-28)
 
 
