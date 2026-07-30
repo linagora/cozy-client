@@ -621,6 +621,54 @@ describe('SharingCollection', () => {
     })
   })
 
+  describe('fetchEffectiveRecipients', () => {
+    beforeEach(() => {
+      client.fetch.mockReset()
+    })
+
+    it('should call the classic route when no driveId is given', async () => {
+      client.fetchJSON.mockResolvedValue({
+        data: [
+          {
+            id: 'https://bob.cozy.tools',
+            attributes: {
+              email: 'bob@cozy.tools',
+              can_edit_here: true,
+              sources: [{ kind: 'self' }]
+            }
+          }
+        ],
+        meta: { file_id: 'folder_1' }
+      })
+
+      const resp = await collection.fetchEffectiveRecipients('folder_1')
+
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/recipients/folder_1'
+      )
+      expect(resp.meta).toEqual({ file_id: 'folder_1' })
+      expect(resp.data).toHaveLength(1)
+      expect(resp.data[0].id).toBe('https://bob.cozy.tools')
+      expect(resp.data[0].email).toBe('bob@cozy.tools')
+      expect(resp.data[0].can_edit_here).toBe(true)
+      expect(resp.data[0].sources[0].kind).toBe('self')
+    })
+
+    it('should call the shared-drive route when a driveId is given', async () => {
+      client.fetchJSON.mockResolvedValue({ data: [], meta: {} })
+
+      await collection.fetchEffectiveRecipients('child_1', {
+        driveId: 'drive_1'
+      })
+
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/drive_1/recipients/child_1'
+      )
+    })
+  })
+
   describe('addRecipients', () => {
     beforeEach(() => {
       client.fetch.mockReset()

@@ -311,6 +311,12 @@ not.</p>
 <dt><a href="#RelationshipItem">RelationshipItem</a> : <code>object</code></dt>
 <dd><p>Define a recipient that can be used as target of a sharing</p>
 </dd>
+<dt><a href="#RecipientSource">RecipientSource</a> : <code>object</code></dt>
+<dd><p>Describes one sharing scope through which an EffectiveRecipient has access to a target</p>
+</dd>
+<dt><a href="#EffectiveRecipient">EffectiveRecipient</a> : <code>object</code></dt>
+<dd><p>A deduplicated person who can access a file or folder, either directly or through an inherited ancestor share</p>
+</dd>
 <dt><a href="#CozyStackClient">CozyStackClient</a> : <code>object</code></dt>
 <dd></dd>
 </dl>
@@ -2012,6 +2018,7 @@ Implements the `DocumentCollection` API along with specific methods for
     * [.revokeRecipient(sharing, recipientIndex)](#SharingCollection+revokeRecipient)
     * [.setReadOnly(sharing, recipientIndex)](#SharingCollection+setReadOnly)
     * [.setReadWrite(sharing, recipientIndex)](#SharingCollection+setReadWrite)
+    * [.fetchEffectiveRecipients(fileId, [options])](#SharingCollection+fetchEffectiveRecipients) ⇒ <code>Promise.&lt;{data: Array.&lt;EffectiveRecipient&gt;, meta: {file\_id: string}}&gt;</code>
     * [.revokeGroup(sharing, groupIndex)](#SharingCollection+revokeGroup)
     * [.revokeSelf(sharing)](#SharingCollection+revokeSelf)
     * [.revokeAllRecipients(sharing)](#SharingCollection+revokeAllRecipients)
@@ -2161,6 +2168,25 @@ Upgrade a read-only sharing member to read-write.
 | --- | --- | --- |
 | sharing | [<code>Sharing</code>](#Sharing) | Sharing Object |
 | recipientIndex | <code>number</code> | Index of this recipient in the members array of the sharing |
+
+<a name="SharingCollection+fetchEffectiveRecipients"></a>
+
+### sharingCollection.fetchEffectiveRecipients(fileId, [options]) ⇒ <code>Promise.&lt;{data: Array.&lt;EffectiveRecipient&gt;, meta: {file\_id: string}}&gt;</code>
+Fetch the combined list of people who can access a file or folder,
+including access inherited from parent shared folders.
+
+Wraps `GET /sharings/recipients/:file-id`, or its shared-drive
+equivalent `GET /sharings/drives/:driveId/recipients/:file-id` when
+`options.driveId` is given.
+
+**Kind**: instance method of [<code>SharingCollection</code>](#SharingCollection)  
+**Returns**: <code>Promise.&lt;{data: Array.&lt;EffectiveRecipient&gt;, meta: {file\_id: string}}&gt;</code> - The effective recipients, JSON-API normalized  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fileId | <code>string</code> | Id of the target file or folder |
+| [options] | <code>object</code> | Options |
+| [options.driveId] | <code>string</code> | Id of the shared drive to scope the request to |
 
 <a name="SharingCollection+revokeGroup"></a>
 
@@ -3651,6 +3677,43 @@ Define a recipient that can be used as target of a sharing
 | --- | --- | --- |
 | id | <code>string</code> | Recipient's ID |
 | type | <code>string</code> | Reciptient's type (should be 'io.cozy.contacts') |
+
+<a name="RecipientSource"></a>
+
+## RecipientSource : <code>object</code>
+Describes one sharing scope through which an EffectiveRecipient has access to a target
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| sharing_id | <code>string</code> | Id of the sharing granting the access |
+| root_id | <code>string</code> | Id of the shared root (the target itself, or an ancestor folder) |
+| root_name | <code>string</code> | Name of the shared root |
+| kind | <code>&#x27;self&#x27;</code> \| <code>&#x27;ancestor&#x27;</code> | Whether the source is the target's own share or an inherited ancestor share |
+| member_index | <code>number</code> | Index of this recipient in the members array of the sharing |
+| read_only | <code>boolean</code> | Whether this source grants read-only access |
+| manageable | <code>boolean</code> | Whether this source can be managed (revoked, promoted/demoted) from the target's share modal |
+
+<a name="EffectiveRecipient"></a>
+
+## EffectiveRecipient : <code>object</code>
+A deduplicated person who can access a file or folder, either directly or through an inherited ancestor share
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> |  |
+| name | <code>string</code> |  |
+| email | <code>string</code> |  |
+| instance | <code>string</code> |  |
+| status | <code>string</code> |  |
+| read_only | <code>boolean</code> | Merged across sources: read-write wins over read-only |
+| can_edit_here | <code>boolean</code> | True when at least one source is the target's own share |
+| sources | [<code>Array.&lt;RecipientSource&gt;</code>](#RecipientSource) |  |
 
 <a name="CozyStackClient"></a>
 
