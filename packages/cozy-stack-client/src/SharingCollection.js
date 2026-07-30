@@ -1,7 +1,7 @@
 import DocumentCollection from './DocumentCollection'
 import { normalizeDoctypeJsonApi } from './normalize'
 import { isFile, isDirectory } from './FileCollection'
-import { uri } from './utils'
+import { uri, sharedDriveApiPrefix } from './utils'
 
 export const SHARING_DOCTYPE = 'io.cozy.sharings'
 export const BITWARDEN_ORGANIZATIONS_DOCTYPE = 'com.bitwarden.organizations'
@@ -47,6 +47,29 @@ const normalizeSharing = normalizeDoctypeJsonApi(SHARING_DOCTYPE)
  * @typedef {object} RelationshipItem Define a recipient that can be used as target of a sharing
  * @property {string} id - Recipient's ID
  * @property {string} type - Reciptient's type (should be 'io.cozy.contacts')
+ */
+
+/**
+ * @typedef {object} RecipientSource Describes one sharing scope through which an EffectiveRecipient has access to a target
+ * @property {string} sharing_id - Id of the sharing granting the access
+ * @property {string} root_id - Id of the shared root (the target itself, or an ancestor folder)
+ * @property {string} root_name - Name of the shared root
+ * @property {('self'|'ancestor')} kind - Whether the source is the target's own share or an inherited ancestor share
+ * @property {number} member_index - Index of this recipient in the members array of the sharing
+ * @property {boolean} read_only - Whether this source grants read-only access
+ * @property {boolean} manageable - Whether this source can be managed (revoked, promoted/demoted) from the target's share modal
+ */
+
+/**
+ * @typedef {object} EffectiveRecipient A deduplicated person who can access a file or folder, either directly or through an inherited ancestor share
+ * @property {string} id
+ * @property {string} name
+ * @property {string} email
+ * @property {string} instance
+ * @property {string} status
+ * @property {boolean} read_only - Merged across sources: read-write wins over read-only
+ * @property {boolean} can_edit_here - True when at least one source is the target's own share
+ * @property {Array<RecipientSource>} sources
  */
 
 /**
@@ -322,6 +345,32 @@ class SharingCollection extends DocumentCollection {
       'DELETE',
       uri`/sharings/${sharing._id}/recipients/${recipientIndex}/readonly`
     )
+  }
+
+  /**
+   * Fetch the combined list of people who can access a file or folder,
+   * including access inherited from parent shared folders.
+   *
+   * Wraps `GET /sharings/recipients/:file-id`, or its shared-drive
+   * equivalent `GET /sharings/drives/:driveId/recipients/:file-id` when
+   * `options.driveId` is given.
+   *
+   * @param {string} fileId - Id of the target file or folder
+   * @param {object} [options] - Options
+   * @param {string} [options.driveId] - Id of the shared drive to scope the request to
+   * @returns {Promise<{data: Array<EffectiveRecipient>, meta: {file_id: string}}>} The effective recipients, JSON-API normalized
+   */
+  async fetchEffectiveRecipients(fileId, { driveId } = {}) {
+    const prefix = driveId ? sharedDriveApiPrefix(driveId) : '/sharings'
+    const resp = await this.stackClient.fetchJSON(
+      'GET',
+      prefix + uri`/recipients/${fileId}`
+    )
+    return {
+      ...resp,
+      // Computed recipients are not CouchDB documents.
+      data: resp.data.map(({ id, attributes }) => ({ id, ...attributes }))
+    }
   }
 
   /**
