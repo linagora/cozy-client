@@ -3,6 +3,8 @@ import PouchDBQueryEngine from '../pouchdb/pouchdb'
 import SQLiteQueryEngine from './sqliteDb.native'
 
 jest.mock('@op-engineering/op-sqlite', () => ({ open: jest.fn() }))
+
+import { open } from '@op-engineering/op-sqlite'
 jest.mock('../pouchdb/pouchdb')
 
 // The engine answers a query it cannot translate - or one SQLite rejects - by
@@ -66,5 +68,69 @@ describe('SQLiteQueryEngine find fallback', () => {
     await engine.find({ selector: { type: 'file' } })
 
     expect(PouchDBQueryEngine).not.toHaveBeenCalled()
+  })
+})
+
+describe('SQLiteQueryEngine openDB setup', () => {
+  const setup = ({ createIndexFails = false } = {}) => {
+    const executeSync = jest.fn()
+    const executeAsync = jest.fn(() =>
+      createIndexFails
+        ? Promise.reject(new Error('database is locked'))
+        : Promise.resolve({ rows: { length: 0, item: () => undefined } })
+    )
+    open.mockReturnValue({ executeSync, executeAsync })
+    const engine = new SQLiteQueryEngine({ client: {} }, 'io.cozy.files')
+    engine.openDB('cozy-files')
+    return { engine, executeSync, executeAsync }
+  }
+
+  it('applies the pragmas synchronously so a query cannot outrun them', () => {
+    const { engine, executeSync } = setup()
+
+    expect(engine.db).toBeDefined()
+    expect(executeSync).toHaveBeenCalled()
+  })
+
+  it('sets busy_timeout before switching the journal mode', () => {
+    const { engine, executeSync } = setup()
+    void engine.db
+
+    const statements = executeSync.mock.calls.map(([sql]) => sql)
+    const firstTimeout = statements.findIndex(sql =>
+      sql.includes('busy_timeout')
+    )
+    const journalMode = statements.findIndex(sql =>
+      sql.includes('journal_mode')
+    )
+
+    expect(firstTimeout).toBeGreaterThanOrEqual(0)
+    expect(journalMode).toBeGreaterThan(firstTimeout)
+  })
+
+  it('keeps a locked CREATE INDEX from becoming an unhandled rejection', async () => {
+    const { engine } = setup({ createIndexFails: true })
+    const unhandled = jest.fn()
+    process.on('unhandledRejection', unhandled)
+
+    void engine.db
+    await new Promise(resolve => setImmediate(resolve))
+    await new Promise(resolve => setImmediate(resolve))
+
+    process.off('unhandledRejection', unhandled)
+    expect(unhandled).not.toHaveBeenCalled()
+  })
+
+  it('still returns a usable handle when the pragmas throw', () => {
+    open.mockReturnValue({
+      executeSync: jest.fn(() => {
+        throw new Error('database is locked')
+      }),
+      executeAsync: jest.fn().mockResolvedValue({})
+    })
+    const engine = new SQLiteQueryEngine({ client: {} }, 'io.cozy.files')
+    engine.openDB('cozy-files')
+
+    expect(engine.db).toBeDefined()
   })
 })

@@ -23,6 +23,21 @@ import {
 import PouchDBQueryEngine from '../pouchdb/pouchdb'
 import logger from '../../logger'
 
+// busy_timeout is per-connection, not per-database, and applies to the
+// statements issued after it. Two values are needed because the statements it
+// covers here do not run on the same thread:
+//
+//   - journal_mode=WAL runs through executeSync, ON the JS thread, and needs the
+//     write lock to switch. Under a replication batch it would wait for the
+//     whole timeout, freezing the UI, hence the short value. Losing that race is
+//     harmless: the mode is persistent, so the next open retries it, and it is a
+//     no-op once the database is already in WAL.
+//   - queries run through executeAsync, OFF the JS thread, so waiting costs
+//     latency rather than responsiveness. A short value there would make them
+//     fail during a bulk insert and fall back to pouch-find for no reason.
+const SETUP_BUSY_TIMEOUT_MS = 250
+const QUERY_BUSY_TIMEOUT_MS = 5000
+
 export default class SQLiteQueryEngine extends DatabaseQueryEngine {
   constructor(pouchManager, doctype) {
     super()
@@ -60,15 +75,19 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
       },
       get: () => {
         if (resolved) return resolved
-        resolved = open({ name: fileDbName })
+        const handle = open({ name: fileDbName })
         try {
-          executeSQL(resolved, 'PRAGMA journal_mode=WAL')
-          executeSQL(resolved, 'PRAGMA busy_timeout=5000')
-          executeSQL(resolved, makeSQLCreateDocIDIndex())
-          executeSQL(resolved, makeSQLCreateDeletedIndex())
+          handle.executeSync(`PRAGMA busy_timeout=${SETUP_BUSY_TIMEOUT_MS}`)
+          handle.executeSync('PRAGMA journal_mode=WAL')
+          handle.executeSync(`PRAGMA busy_timeout=${QUERY_BUSY_TIMEOUT_MS}`)
         } catch (err) {
           logger.error(err)
         }
+        resolved = handle
+        Promise.resolve()
+          .then(() => executeSQL(handle, makeSQLCreateDocIDIndex()))
+          .then(() => executeSQL(handle, makeSQLCreateDeletedIndex()))
+          .catch(err => logger.error(err))
         return resolved
       }
     })
