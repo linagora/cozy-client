@@ -76,13 +76,19 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
       get: () => {
         if (resolved) return resolved
         const handle = open({ name: fileDbName })
-        try {
-          handle.executeSync(`PRAGMA busy_timeout=${SETUP_BUSY_TIMEOUT_MS}`)
-          handle.executeSync('PRAGMA journal_mode=WAL')
-          handle.executeSync(`PRAGMA busy_timeout=${QUERY_BUSY_TIMEOUT_MS}`)
-        } catch (err) {
-          logger.error(err)
+        // Each pragma is independent and best-effort: journal_mode can lose the
+        // race for the write lock, and sharing one try/catch would then skip the
+        // query timeout and strand the connection on the setup one.
+        const applyPragma = sql => {
+          try {
+            handle.executeSync(sql)
+          } catch (err) {
+            logger.error(err)
+          }
         }
+        applyPragma(`PRAGMA busy_timeout=${SETUP_BUSY_TIMEOUT_MS}`)
+        applyPragma('PRAGMA journal_mode=WAL')
+        applyPragma(`PRAGMA busy_timeout=${QUERY_BUSY_TIMEOUT_MS}`)
         resolved = handle
         Promise.resolve()
           .then(() => executeSQL(handle, makeSQLCreateDocIDIndex()))

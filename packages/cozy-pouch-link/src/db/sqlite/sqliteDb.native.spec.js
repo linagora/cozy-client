@@ -133,4 +133,26 @@ describe('SQLiteQueryEngine openDB setup', () => {
 
     expect(engine.db).toBeDefined()
   })
+
+  it('still raises the query timeout when the journal-mode switch is refused', () => {
+    const executeSync = jest.fn(sql => {
+      if (sql.includes('journal_mode')) {
+        throw new Error('database is locked')
+      }
+    })
+    open.mockReturnValue({
+      executeSync,
+      executeAsync: jest.fn().mockResolvedValue({})
+    })
+    const engine = new SQLiteQueryEngine({ client: {} }, 'io.cozy.files')
+    engine.openDB('cozy-files')
+
+    void engine.db
+
+    const timeouts = executeSync.mock.calls
+      .map(([sql]) => sql)
+      .filter(sql => sql.includes('busy_timeout'))
+    expect(timeouts).toHaveLength(2)
+    expect(timeouts[timeouts.length - 1]).toContain('5000')
+  })
 })
