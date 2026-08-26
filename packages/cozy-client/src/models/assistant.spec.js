@@ -17,7 +17,31 @@ describe('assistant provider account', () => {
         .mockResolvedValue({ data: { _id: 'account-id', _type: 'whatever' } })
     })
 
-    it('labels the account after the provider, not after the model', async () => {
+    it('stores the model as configuration, not as a credential', async () => {
+      const client = buildClient()
+
+      await createAssistant(client, assistantData)
+
+      const account = client.save.mock.calls[0][0]
+      expect(account.data.model).toBe('gemini-3-pro')
+      // A model in `auth` would be duplicated into `credentials_encrypted`.
+      expect(account.auth.login).toBeUndefined()
+    })
+
+    it('keeps the model next to the other llm_override fields', async () => {
+      const client = buildClient()
+
+      await createAssistant(client, { ...assistantData, apiKey: 'sk-1234' })
+
+      const account = client.save.mock.calls[0][0]
+      expect(account.data).toEqual({
+        model: 'gemini-3-pro',
+        baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai/v1'
+      })
+      expect(account.auth.password).toBe('sk-1234')
+    })
+
+    it('labels the account after the provider', async () => {
       const client = buildClient()
 
       await createAssistant(client, assistantData)
@@ -25,7 +49,8 @@ describe('assistant provider account', () => {
       const account = client.save.mock.calls[0][0]
       expect(account.identifier).toBe('accountName')
       expect(account.auth.accountName).toBe('Google')
-      expect(account.auth.login).toBe('gemini-3-pro')
+      // `name` is computed by the stack from `auth[identifier]` on creation
+      expect(account.name).toBeUndefined()
     })
 
     it('falls back to the provider id when no display name is given', async () => {
@@ -50,11 +75,27 @@ describe('assistant provider account', () => {
       save: jest.fn().mockResolvedValue({ data: { _id: 'account-id' } })
     })
 
-    it('relabels an account named after a previous model', async () => {
+    it('migrates an account that still holds the model in auth.login', async () => {
       const client = buildClient({
         _id: 'account-id',
-        // Label used to be derived from `auth.login`.
-        name: 'gemini-2.5-flash',
+        auth: {
+          login: 'gemini-2.5-flash',
+          credentials_encrypted: 'encrypted-blob'
+        }
+      })
+
+      await editAssistant(client, 'assistant-id', assistantData)
+
+      const account = client.save.mock.calls[0][0]
+      expect(account.data.model).toBe('gemini-3-pro')
+      expect(account.auth.login).toBeUndefined()
+      // Left alone: the stack reads the API key from it, never the model.
+      expect(account.auth.credentials_encrypted).toBe('encrypted-blob')
+    })
+
+    it('relabels an account created before the naming fix', async () => {
+      const client = buildClient({
+        _id: 'account-id',
         auth: { login: 'gemini-2.5-flash' }
       })
 
@@ -115,6 +156,7 @@ describe('assistant provider account', () => {
       const client = buildClient({
         _id: 'account-id',
         _rev: '3-abc',
+        name: 'Google',
         cozyMetadata: { createdAt: 'yesterday' },
         auth: { accountName: 'Google', credentials_encrypted: 'blob' }
       })
@@ -125,6 +167,21 @@ describe('assistant provider account', () => {
       expect(account._rev).toBe('3-abc')
       expect(account.cozyMetadata).toEqual({ createdAt: 'yesterday' })
       expect(account.auth.credentials_encrypted).toBe('blob')
+    })
+
+    it('updates the model of an already migrated account', async () => {
+      const client = buildClient({
+        _id: 'account-id',
+        identifier: 'accountName',
+        auth: { accountName: 'Google' },
+        data: { model: 'gemini-2.5-flash', baseUrl: 'https://example.org' }
+      })
+
+      await editAssistant(client, 'assistant-id', assistantData)
+
+      const account = client.save.mock.calls[0][0]
+      expect(account.data.model).toBe('gemini-3-pro')
+      expect(account.data.baseUrl).toBe(assistantData.baseUrl)
     })
   })
 })
