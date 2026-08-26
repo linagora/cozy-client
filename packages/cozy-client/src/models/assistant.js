@@ -21,16 +21,19 @@ const ACCOUNT_DOCTYPE = 'io.cozy.accounts'
 /**
  * Builds the io.cozy.accounts document backing an assistant.
  *
- * The account label is derived from `auth[identifier]`, falling back to
- * `auth.login` — which holds the model. `identifier` points at `accountName`
- * so the account is labelled after its provider instead.
+ * `auth` is the only part the stack encrypts, so it holds the API key alone.
+ * The model and base URL are configuration and live in `data`, where they map
+ * onto the stack's `llm_override`. `identifier` points at `accountName` so the
+ * account is labelled after its provider rather than after `auth.login`.
  *
  * @param {Assistant} assistantData - Data for the assistant
  * @param {object} [provider] - Existing provider account to update
  * @returns {object} The io.cozy.accounts document to save
  */
 const buildProviderAccount = (assistantData, provider) => {
-  const { password, ...auth } = provider?.auth || {}
+  // `login` used to hold the model: dropped so it stops being encrypted with
+  // the API key, and stops outranking `accountName` as the label.
+  const { login, password, ...auth } = provider?.auth || {}
   const { baseUrl, ...data } = provider?.data || {}
 
   // No new key means keeping the one the stack holds in `credentials_encrypted`.
@@ -44,12 +47,12 @@ const buildProviderAccount = (assistantData, provider) => {
     identifier: 'accountName',
     auth: {
       ...auth,
-      login: assistantData.model,
       accountName: assistantData.providerName || assistantData.providerId,
       ...(apiKey ? { password: apiKey } : {})
     },
     data: {
       ...data,
+      model: assistantData.model,
       ...(assistantData.baseUrl ? { baseUrl: assistantData.baseUrl } : {})
     }
   }
