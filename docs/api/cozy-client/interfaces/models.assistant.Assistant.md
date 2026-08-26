@@ -87,3 +87,16 @@ ID of the provider
 *Defined in*
 
 [packages/cozy-client/src/models/assistant.js:16](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L16)
+
+***
+
+### providerName
+
+• **providerName**: `string`
+
+Display name of the provider, used to
+name the account. Defaults to the provider id.
+
+*Defined in*
+
+[packages/cozy-client/src/models/assistant.js:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L17)

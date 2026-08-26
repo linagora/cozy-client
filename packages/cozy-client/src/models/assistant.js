@@ -14,7 +14,46 @@ const ACCOUNT_DOCTYPE = 'io.cozy.accounts'
  * @property {string} baseUrl - Provider's base URL
  * @property {string} [apiKey] - API key for authentication
  * @property {string} providerId - ID of the provider
+ * @property {string} [providerName] - Display name of the provider, used to
+ * name the account. Defaults to the provider id.
  */
+
+/**
+ * Builds the io.cozy.accounts document backing an assistant.
+ *
+ * The account label is derived from `auth[identifier]`, falling back to
+ * `auth.login` — which holds the model. `identifier` points at `accountName`
+ * so the account is labelled after its provider instead.
+ *
+ * @param {Assistant} assistantData - Data for the assistant
+ * @param {object} [provider] - Existing provider account to update
+ * @returns {object} The io.cozy.accounts document to save
+ */
+const buildProviderAccount = (assistantData, provider) => {
+  const { password, ...auth } = provider?.auth || {}
+  const { baseUrl, ...data } = provider?.data || {}
+
+  // No new key means keeping the one the stack holds in `credentials_encrypted`.
+  const apiKey =
+    assistantData.apiKey || (assistantData.baseUrl ? password : undefined)
+
+  return {
+    ...provider,
+    _type: ACCOUNT_DOCTYPE,
+    account_type: assistantData.providerId,
+    identifier: 'accountName',
+    auth: {
+      ...auth,
+      login: assistantData.model,
+      accountName: assistantData.providerName || assistantData.providerId,
+      ...(apiKey ? { password: apiKey } : {})
+    },
+    data: {
+      ...data,
+      ...(assistantData.baseUrl ? { baseUrl: assistantData.baseUrl } : {})
+    }
+  }
+}
 
 /**
  * Creates a new assistant with the provided data.
@@ -27,23 +66,7 @@ const ACCOUNT_DOCTYPE = 'io.cozy.accounts'
 export const createAssistant = async (client, assistantData) => {
   let createdAccountId = null
   try {
-    const account = {
-      _type: ACCOUNT_DOCTYPE,
-      auth: {
-        login: assistantData.model
-      },
-      account_type: assistantData.providerId
-    }
-
-    if (assistantData.baseUrl) {
-      account.data = {
-        baseUrl: assistantData.baseUrl
-      }
-    }
-
-    if (assistantData.apiKey) {
-      account.auth.password = assistantData.apiKey
-    }
+    const account = buildProviderAccount(assistantData)
     const response = await client.save(account)
 
     if (!response.data || !response.data._id) {
@@ -139,30 +162,7 @@ export const editAssistant = async (client, assistantId, assistantData) => {
       throw new Error('Provider account not found for assistant')
     }
 
-    const account = {
-      ...provider,
-      auth: {
-        ...(provider.auth || {}),
-        login: assistantData.model
-      },
-      account_type: assistantData.providerId,
-      data: {
-        ...(provider.data || {})
-      }
-    }
-
-    if (assistantData.baseUrl) {
-      account.data.baseUrl = assistantData.baseUrl
-    } else {
-      delete account.data?.baseUrl
-    }
-
-    // Only update the password if a new API key is explicitly provided
-    if (assistantData.apiKey) {
-      account.auth.password = assistantData.apiKey
-    } else if (!assistantData.baseUrl) {
-      delete account.auth?.password
-    }
+    const account = buildProviderAccount(assistantData, provider)
     const response = await client.save(account)
 
     if (!response.data || !response.data._id) {
