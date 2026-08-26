@@ -30,5 +30,10 @@ export type Assistant = {
      * - ID of the provider
      */
     providerId: string;
+    /**
+     * - Display name of the provider, used to
+     * name the account. Defaults to the provider id.
+     */
+    providerName?: string;
 };
 import CozyClient from "../CozyClient";

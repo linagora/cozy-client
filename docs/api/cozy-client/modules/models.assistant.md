@@ -33,7 +33,7 @@ Creates a new assistant with the provided data.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:27](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L27)
+[packages/cozy-client/src/models/assistant.js:66](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L66)
 
 ***
 
@@ -60,7 +60,7 @@ Deletes an assistant by its ID.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:96](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L96)
+[packages/cozy-client/src/models/assistant.js:119](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L119)
 
 ***
 
@@ -88,4 +88,4 @@ Edit assistant with the provided data.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:123](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L123)
+[packages/cozy-client/src/models/assistant.js:146](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L146)
