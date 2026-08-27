@@ -19,6 +19,7 @@ import * as geo from './geo'
 import * as doctypes from './doctypes'
 import * as ai from './ai'
 import * as assistant from './assistant'
+import * as banner from './banner'
 
 // For backward compatibility before 9.0.0
 const triggers = trigger
@@ -26,6 +27,7 @@ const accounts = account
 
 export {
   triggers,
+  banner,
   trigger,
   instance,
   applications,
