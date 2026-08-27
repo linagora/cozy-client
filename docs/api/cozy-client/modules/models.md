@@ -8,6 +8,7 @@
 *   [ai](models.ai.md)
 *   [applications](models.applications.md)
 *   [assistant](models.assistant.md)
+*   [banner](models.banner.md)
 *   [contact](models.contact.md)
 *   [dacc](models.dacc.md)
 *   [doctypes](models.doctypes.md)
@@ -34,7 +35,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/index.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/index.js#L25)
+[packages/cozy-client/src/models/index.js:26](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/index.js#L26)
 
 ***
 
@@ -44,4 +45,4 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/index.js:24](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/index.js#L24)
+[packages/cozy-client/src/models/index.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/index.js#L25)

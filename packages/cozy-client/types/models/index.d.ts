@@ -1,4 +1,5 @@
 export const triggers: typeof trigger;
+import * as banner from "./banner";
 import * as trigger from "./trigger";
 import * as instance from "./instance";
 import * as applications from "./applications";
@@ -21,4 +22,4 @@ import * as geo from "./geo";
 import * as doctypes from "./doctypes";
 import * as ai from "./ai";
 import * as assistant from "./assistant";
-export { trigger, instance, applications, file, folder, konnectorFolder, note, account, permission, utils, contact, document, timeseries, sharing, dacc, paper, user, geo, doctypes, ai, assistant };
+export { banner, trigger, instance, applications, file, folder, konnectorFolder, note, account, permission, utils, contact, document, timeseries, sharing, dacc, paper, user, geo, doctypes, ai, assistant };
