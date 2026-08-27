@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.30.5](https://github.com/linagora/cozy-client/compare/v60.30.4...v60.30.5) (2026-08-27)
+
+
+### Bug Fixes
+
+* **assistant:** Label provider account after provider, not model ([e5f6c4f](https://github.com/linagora/cozy-client/commit/e5f6c4f61f140aa70a95354e73ff7ccda2cd65ee))
+* **assistant:** Store the model in the account data, not in auth ([9b0846c](https://github.com/linagora/cozy-client/commit/9b0846c30a888a56a54ac8fe0c317728320822c2)), closes [linagora/cozy-stack#4886](https://github.com/linagora/cozy-stack/issues/4886)
+
+
+
+
+
 ## [60.30.1](https://github.com/linagora/cozy-client/compare/v60.30.0...v60.30.1) (2026-07-27)
 
 **Note:** Version bump only for package cozy-client
