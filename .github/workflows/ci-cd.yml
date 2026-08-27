@@ -34,11 +34,14 @@ jobs:
         run: yarn docs
       - name: Check documentation
         run: |
-          git diff --exit-code -- docs || (echo "Docs are not up-to-date, please run yarn docs and repush" && exit 1)
+          git add -A -- docs
+          git diff --cached --exit-code -- docs || (echo "Docs are not up-to-date, please run yarn docs and repush" && exit 1)
       - name: Make types
         run: yarn types
       - name: Check types
-        run: git diff --exit-code || (echo "Types are not up-to-date, please run cd packages/cozy-client && yarn typecheck and repush" && exit 1)
+        run: |
+          git add -A
+          git diff --cached --exit-code || (echo "Types are not up-to-date, please run cd packages/cozy-client && yarn typecheck and repush" && exit 1)
       - name: Publish to NPM
         if: github.ref == 'refs/heads/master'
         env:
