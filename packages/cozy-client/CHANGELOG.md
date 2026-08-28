@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.31.0](https://github.com/linagora/cozy-client/compare/v60.30.6...v60.31.0) (2026-08-28)
+
+
+### Features
+
+* **models:** Add the io.cozy.banners model ([940bac6](https://github.com/linagora/cozy-client/commit/940bac6cd381bca17922726c9114edfd988ccc09))
+
+
+
+
+
 ## [60.30.6](https://github.com/linagora/cozy-client/compare/v60.30.5...v60.30.6) (2026-08-28)
 
 
