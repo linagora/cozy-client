@@ -53,6 +53,10 @@ export type Banner = {
      */
     text: string;
     /**
+     * - BCP 47 tag of the language `text` and `cta.label` are in
+     */
+    lang: string;
+    /**
      * - Optional call to action
      */
     cta?: BannerCta;
