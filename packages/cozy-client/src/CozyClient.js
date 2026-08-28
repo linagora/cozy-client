@@ -1329,7 +1329,7 @@ client.query(Q('io.cozy.bills'))`)
    * Resolves relationships on a document.
    *
    * The original document is kept in the target attribute of
-   * the relationship
+   * the relationship.
    *
    * @param  {import("./types").CozyClientDocument} document - for which relationships must be resolved
    * @param  {Schema} [schemaArg] - The schema describing the relationships
