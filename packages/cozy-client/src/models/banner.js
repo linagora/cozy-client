@@ -22,6 +22,7 @@ const KNOWN_SURFACES = ['banner', 'modal']
  * @property {string} text - The message, already localized
  * @property {string} lang - BCP 47 tag of the language `text` and `cta.label` are in
  * @property {BannerCta} [cta] - Optional call to action
+ * @property {BannerCta} [secondaryCta] - Optional lesser action, needs a cta
  * @property {boolean} dismissible - Whether the client offers a dismiss control
  * @property {string} [dismissedAt] - When the user dismissed it
  * @property {number} priority - Sort order, highest first
@@ -89,14 +90,23 @@ const isSafeCta = cta =>
  * The doctype allows a new severity or surface without a version bump, so a
  * value this client does not know is rendered rather than dropped.
  */
-const withFallbacks = banner => ({
-  ...banner,
-  severity: KNOWN_SEVERITIES.includes(banner.severity)
-    ? banner.severity
-    : 'warning',
-  surface: KNOWN_SURFACES.includes(banner.surface) ? banner.surface : 'banner',
-  cta: isSafeCta(banner.cta) ? banner.cta : undefined
-})
+const withFallbacks = banner => {
+  const cta = isSafeCta(banner.cta) ? banner.cta : undefined
+  return {
+    ...banner,
+    severity: KNOWN_SEVERITIES.includes(banner.severity)
+      ? banner.severity
+      : 'warning',
+    surface: KNOWN_SURFACES.includes(banner.surface)
+      ? banner.surface
+      : 'banner',
+    cta,
+    // The secondary action is the lesser one, so it is never promoted to the
+    // only thing on offer: without a primary it is dropped rather than shown.
+    secondaryCta:
+      cta && isSafeCta(banner.secondaryCta) ? banner.secondaryCta : undefined
+  }
+}
 
 /**
  * `client.query` resolves undefined instead of rejecting when the client has an

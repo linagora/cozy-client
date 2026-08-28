@@ -47,7 +47,7 @@ whose severity and surface have had the fallbacks applied.
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:168](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L168)
+[packages/cozy-client/src/models/banner.js:178](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L178)
 
 ***
 
@@ -76,7 +76,7 @@ The highest priority banner, or null
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:153](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L153)
+[packages/cozy-client/src/models/banner.js:163](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L163)
 
 ***
 
@@ -102,4 +102,4 @@ The banners to render
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:130](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L130)
+[packages/cozy-client/src/models/banner.js:140](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L140)
