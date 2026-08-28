@@ -1116,7 +1116,7 @@ Emits event when token is refreshed
 Resolves relationships on a document.
 
 The original document is kept in the target attribute of
-the relationship
+the relationship.
 
 *Parameters*
 
