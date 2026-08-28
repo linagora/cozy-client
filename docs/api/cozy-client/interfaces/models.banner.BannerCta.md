@@ -10,11 +10,11 @@
 
 • **label**: `string`
 
-The label, plain text, in the same language as the banner text
+The label, plain text
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:43](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L43)
+[packages/cozy-client/src/models/banner.js:13](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L13)
 
 ***
 
@@ -22,8 +22,8 @@ The label, plain text, in the same language as the banner text
 
 • **url**: `string`
 
-Absolute https URL the label points to
+Where the label points
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:44](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L44)
+[packages/cozy-client/src/models/banner.js:14](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L14)
