@@ -64,7 +64,7 @@ When the user dismissed it
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:26](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L26)
+[packages/cozy-client/src/models/banner.js:27](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L27)
 
 ***
 
@@ -76,7 +76,7 @@ Whether the client offers a dismiss control
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L25)
+[packages/cozy-client/src/models/banner.js:26](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L26)
 
 ***
 
@@ -88,7 +88,7 @@ End of the validity window, exclusive
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:29](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L29)
+[packages/cozy-client/src/models/banner.js:30](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L30)
 
 ***
 
@@ -112,7 +112,19 @@ Sort order, highest first
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:27](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L27)
+[packages/cozy-client/src/models/banner.js:28](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L28)
+
+***
+
+### secondaryCta
+
+• **secondaryCta**: [`BannerCta`](models.banner.BannerCta.md)
+
+Optional lesser action, needs a cta
+
+*Defined in*
+
+[packages/cozy-client/src/models/banner.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L25)
 
 ***
 
@@ -136,7 +148,7 @@ Start of the validity window, inclusive
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:28](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L28)
+[packages/cozy-client/src/models/banner.js:29](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L29)
 
 ***
 

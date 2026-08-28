@@ -61,6 +61,10 @@ export type Banner = {
      */
     cta?: BannerCta;
     /**
+     * - Optional lesser action, needs a cta
+     */
+    secondaryCta?: BannerCta;
+    /**
      * - Whether the client offers a dismiss control
      */
     dismissible: boolean;

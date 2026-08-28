@@ -69,13 +69,15 @@
           "bannerId": "a.high",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         },
         {
           "bannerId": "b.low",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -140,13 +142,15 @@
           "bannerId": "B.upper",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         },
         {
           "bannerId": "a.lower",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -217,7 +221,8 @@
           "bannerId": "starting",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -288,7 +293,8 @@
           "bannerId": "open",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -327,7 +333,8 @@
           "bannerId": "openended",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -365,7 +372,8 @@
           "bannerId": "absentend",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -532,7 +540,8 @@
           "bannerId": "unknowncat",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -571,7 +580,8 @@
           "bannerId": "unknownsev",
           "severity": "warning",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -610,7 +620,8 @@
           "bannerId": "unknownsurface",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     },
@@ -653,7 +664,8 @@
           "bannerId": "withcta",
           "severity": "info",
           "surface": "banner",
-          "cta": true
+          "cta": true,
+          "secondaryCta": false
         }
       ]
     },
@@ -693,7 +705,101 @@
           "bannerId": "nullcta",
           "severity": "info",
           "surface": "banner",
-          "cta": false
+          "cta": false,
+          "secondaryCta": false
+        }
+      ]
+    },
+    {
+      "name": "a secondary call to action renders alongside the primary one",
+      "input": [
+        {
+          "_id": "doc019",
+          "_rev": "1-aaa",
+          "bannerId": "withsecondary",
+          "category": "billing",
+          "severity": "warning",
+          "surface": "modal",
+          "text": "Message.",
+          "lang": "en",
+          "cta": {
+            "label": "Update payment method",
+            "url": "https://example.org/billing"
+          },
+          "dismissible": false,
+          "dismissedAt": null,
+          "priority": 50,
+          "startsAt": "2026-07-01T00:00:00Z",
+          "endsAt": null,
+          "source": {
+            "trigger": "test",
+            "at": "2026-07-01T00:00:00Z"
+          },
+          "cozyMetadata": {
+            "createdAt": "2026-07-01T00:00:00Z",
+            "createdByApp": "stack",
+            "doctypeVersion": "1",
+            "metadataVersion": 1,
+            "updatedAt": "2026-07-01T00:00:00Z"
+          },
+          "secondaryCta": {
+            "label": "Contact support",
+            "url": "https://example.org/support"
+          }
+        }
+      ],
+      "expected": [
+        {
+          "bannerId": "withsecondary",
+          "severity": "warning",
+          "surface": "modal",
+          "cta": true,
+          "secondaryCta": true
+        }
+      ]
+    },
+    {
+      "name": "a secondary call to action without a primary one is ignored",
+      "input": [
+        {
+          "_id": "doc020",
+          "_rev": "1-aaa",
+          "bannerId": "orphansecondary",
+          "category": "billing",
+          "severity": "warning",
+          "surface": "modal",
+          "text": "Message.",
+          "lang": "en",
+          "cta": null,
+          "dismissible": true,
+          "dismissedAt": null,
+          "priority": 50,
+          "startsAt": "2026-07-01T00:00:00Z",
+          "endsAt": null,
+          "source": {
+            "trigger": "test",
+            "at": "2026-07-01T00:00:00Z"
+          },
+          "cozyMetadata": {
+            "createdAt": "2026-07-01T00:00:00Z",
+            "createdByApp": "stack",
+            "doctypeVersion": "1",
+            "metadataVersion": 1,
+            "updatedAt": "2026-07-01T00:00:00Z"
+          },
+          "secondaryCta": {
+            "label": "Contact support",
+            "url": "https://example.org/support"
+          }
+        }
+      ],
+      "expected": [
+        {
+          "bannerId": "orphansecondary",
+          "severity": "warning",
+          "surface": "modal",
+          "cta": false,
+          "secondaryCta": false
         }
       ]
     }

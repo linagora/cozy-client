@@ -35,7 +35,8 @@ describe('io.cozy.banners contract vectors', () => {
         bannerId: banner.bannerId,
         severity: banner.severity,
         surface: banner.surface,
-        cta: Boolean(banner.cta)
+        cta: Boolean(banner.cta),
+        secondaryCta: Boolean(banner.secondaryCta)
       }))
 
       expect(rendered).toEqual(testCase.expected)
