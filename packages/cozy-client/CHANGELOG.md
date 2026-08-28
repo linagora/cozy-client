@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.30.6](https://github.com/linagora/cozy-client/compare/v60.30.5...v60.30.6) (2026-08-28)
+
+
+### Bug Fixes
+
+* Dummy commit for release ([0ac12ea](https://github.com/linagora/cozy-client/commit/0ac12ea6ebb052246fb7c2ae80e7c181c5f1ce36))
+
+
+
+
+
 ## [60.30.5](https://github.com/linagora/cozy-client/compare/v60.30.4...v60.30.5) (2026-08-27)
 
 
