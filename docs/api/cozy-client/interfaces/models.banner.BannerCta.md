@@ -14,7 +14,7 @@ The label, plain text
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:13](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L13)
+[packages/cozy-client/src/models/banner.js:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L10)
 
 ***
 
@@ -26,4 +26,4 @@ Where the label points
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:14](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L14)
+[packages/cozy-client/src/models/banner.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L11)

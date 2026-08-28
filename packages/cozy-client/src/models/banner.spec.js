@@ -90,6 +90,59 @@ describe('getActiveBanners', () => {
     const client = { query: jest.fn().mockResolvedValue(undefined) }
     await expect(getActiveBanners(client)).rejects.toThrow(BANNERS_DOCTYPE)
   })
+
+  it('should drop a call to action that is not an absolute https URL', async () => {
+    // the documents live in a database the applications can write, and a
+    // client renders this straight into an href
+    const urls = [
+      'javascript' + ':alert(document.cookie)',
+      'data:text/html,<script>alert(1)</script>',
+      'http://example.org/plans',
+      '/plans'
+    ]
+
+    for (const url of urls) {
+      const [banner] = await getActiveBanners(
+        clientListing([{ ...stored, cta: { label: 'Go', url } }])
+      )
+      expect(banner.cta).toBeUndefined()
+    }
+
+    const [kept] = await getActiveBanners(
+      clientListing([
+        { ...stored, cta: { label: 'Go', url: 'https://example.org/plans' } }
+      ])
+    )
+    expect(kept.cta.url).toBe('https://example.org/plans')
+  })
+
+  it('should hide a banner whose window bound is not the timestamp the doctype writes', async () => {
+    // Date.parse falls back to an engine specific parser for everything else,
+    // so the same document would be visible in one browser and hidden in
+    // another, and the contract vectors could no longer describe both
+    const bounds = ['2020-01-01', 'Jan 1 2020', '2020/01/01', 0, ['2020-01-01']]
+
+    for (const startsAt of bounds) {
+      await expect(
+        getActiveBanners(clientListing([{ ...stored, startsAt }]))
+      ).resolves.toEqual([])
+    }
+  })
+
+  it('should rank a banner carrying no priority below one that does', async () => {
+    // b.priority - a.priority is NaN without this, and a NaN comparator makes
+    // sort keep insertion order and never reach the bannerId tiebreak
+    const ranked = { ...stored, _id: 'a', bannerId: 'a.ranked', priority: 50 }
+    const unranked = { ...stored, _id: 'b', bannerId: 'b.unranked' }
+    delete unranked.priority
+
+    const banners = await getActiveBanners(clientListing([unranked, ranked]))
+
+    expect(banners.map(banner => banner.bannerId)).toEqual([
+      'a.ranked',
+      'b.unranked'
+    ])
+  })
 })
 
 describe('getActiveBanner', () => {

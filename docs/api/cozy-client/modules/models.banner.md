@@ -17,7 +17,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:6](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L6)
+[packages/cozy-client/src/models/banner.js:3](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L3)
 
 ## Functions
 
@@ -47,7 +47,7 @@ whose severity and surface have had the fallbacks applied.
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:150](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L150)
+[packages/cozy-client/src/models/banner.js:168](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L168)
 
 ***
 
@@ -56,6 +56,9 @@ whose severity and surface have had the fallbacks applied.
 ▸ **getActiveBanner**(`client`, `options`): `Promise`<[`Banner`](../interfaces/models.banner.Banner.md)>
 
 The single banner to display, for a surface that shows one at a time.
+
+A native client rendering one slot reads this rather than taking the head of
+the list itself, so the ordering rules stay in one place.
 
 *Parameters*
 
@@ -73,7 +76,7 @@ The highest priority banner, or null
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:135](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L135)
+[packages/cozy-client/src/models/banner.js:153](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L153)
 
 ***
 
@@ -99,4 +102,4 @@ The banners to render
 
 *Defined in*
 
-[packages/cozy-client/src/models/banner.js:121](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L121)
+[packages/cozy-client/src/models/banner.js:130](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/banner.js#L130)

@@ -1,6 +1,3 @@
-import isValid from 'date-fns/isValid'
-import parseISO from 'date-fns/parseISO'
-
 import { Q } from '../queries/dsl'
 
 export const BANNERS_DOCTYPE = 'io.cozy.banners'
@@ -23,6 +20,7 @@ const KNOWN_SURFACES = ['banner', 'modal']
  * @property {'banner'|'modal'} surface - Where to render it
  * @property {string} [title] - Optional heading, used on the modal surface
  * @property {string} text - The message, already localized
+ * @property {string} lang - BCP 47 tag of the language `text` and `cta.label` are in
  * @property {BannerCta} [cta] - Optional call to action
  * @property {boolean} dismissible - Whether the client offers a dismiss control
  * @property {string} [dismissedAt] - When the user dismissed it
@@ -31,16 +29,20 @@ const KNOWN_SURFACES = ['banner', 'modal']
  * @property {string} [endsAt] - End of the validity window, exclusive
  */
 
-const buildBannersQuery = () => ({
-  definition: Q(BANNERS_DOCTYPE).UNSAFE_noLimit(),
-  options: { as: `${BANNERS_DOCTYPE}/all` }
-})
+/**
+ * The doctype writes an ISO 8601 timestamp with an explicit offset, and nothing
+ * else parses. `Date.parse` on its own falls back to the engine's legacy parser
+ * for anything it does not recognise, so a malformed bound would resolve to a
+ * real instant in one browser and to NaN in another, and the shared contract
+ * vectors could no longer say what every client displays.
+ */
+const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/
 
-/** `new Date(null)` is the epoch rather than "no date", hence the null check. */
+/** A bound that is absent leaves that end of the window open, unlike an unparseable one. */
 const toTime = value => {
-  if (value === null || value === undefined) return null
-  const parsed = parseISO(value)
-  return isValid(parsed) ? parsed.getTime() : NaN
+  if (value == null) return null
+  if (typeof value !== 'string' || !ISO_TIMESTAMP.test(value)) return NaN
+  return Date.parse(value)
 }
 
 const isDismissed = banner => banner?.dismissedAt != null
@@ -63,13 +65,25 @@ const isInWindow = (banner, now) => {
  * that every client orders equal priorities the same way. `localeCompare`
  * would depend on the runtime locale.
  */
+const rankOf = banner =>
+  Number.isFinite(banner?.priority) ? banner.priority : 0
+
 const byPriority = (a, b) => {
-  const byRank = b.priority - a.priority
+  const byRank = rankOf(b) - rankOf(a)
   if (byRank !== 0) return byRank
   if (a.bannerId < b.bannerId) return -1
   if (a.bannerId > b.bannerId) return 1
   return 0
 }
+
+/**
+ * The doctype specifies an absolute `https://` URL, so anything else is dropped
+ * rather than handed to a client that would put it in an `href`: the documents
+ * live in a database the applications can write, and a `javascript:` URL there
+ * would run in the origin of whichever application rendered the banner.
+ */
+const isSafeCta = cta =>
+  typeof cta?.url === 'string' && /^https:\/\//i.test(cta.url)
 
 /**
  * The doctype allows a new severity or surface without a version bump, so a
@@ -80,14 +94,9 @@ const withFallbacks = banner => ({
   severity: KNOWN_SEVERITIES.includes(banner.severity)
     ? banner.severity
     : 'warning',
-  surface: KNOWN_SURFACES.includes(banner.surface) ? banner.surface : 'banner'
+  surface: KNOWN_SURFACES.includes(banner.surface) ? banner.surface : 'banner',
+  cta: isSafeCta(banner.cta) ? banner.cta : undefined
 })
-
-const getVisibleBanners = (banners, now = new Date()) =>
-  banners
-    .filter(banner => !isDismissed(banner) && isInWindow(banner, now))
-    .sort(byPriority)
-    .map(withFallbacks)
 
 /**
  * `client.query` resolves undefined instead of rejecting when the client has an
@@ -118,14 +127,23 @@ const isConflict = error =>
  * @param {Date} [options.now] - The current time
  * @returns {Promise<Banner[]>} The banners to render
  */
-export const getActiveBanners = async (client, { now } = {}) => {
-  const { definition, options } = buildBannersQuery()
-  const data = readData(await client.query(definition, options))
-  return getVisibleBanners(Array.isArray(data) ? data : [], now)
+export const getActiveBanners = async (client, { now = new Date() } = {}) => {
+  const data = readData(
+    await client.query(Q(BANNERS_DOCTYPE).UNSAFE_noLimit(), {
+      as: `${BANNERS_DOCTYPE}/all`
+    })
+  )
+  return (Array.isArray(data) ? data : [])
+    .filter(banner => !isDismissed(banner) && isInWindow(banner, now))
+    .sort(byPriority)
+    .map(withFallbacks)
 }
 
 /**
  * The single banner to display, for a surface that shows one at a time.
+ *
+ * A native client rendering one slot reads this rather than taking the head of
+ * the list itself, so the ordering rules stay in one place.
  *
  * @param {object} client - A CozyClient instance
  * @param {object} [options] - Options
