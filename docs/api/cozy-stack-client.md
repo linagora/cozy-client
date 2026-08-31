@@ -2012,6 +2012,8 @@ Implements the `DocumentCollection` API along with specific methods for
     * [.revokeRecipient(sharing, recipientIndex)](#SharingCollection+revokeRecipient)
     * [.setReadOnly(sharing, recipientIndex)](#SharingCollection+setReadOnly)
     * [.setReadWrite(sharing, recipientIndex)](#SharingCollection+setReadWrite)
+    * [.setGroupReadOnly(sharing, groupIndex)](#SharingCollection+setGroupReadOnly)
+    * [.setGroupReadWrite(sharing, groupIndex)](#SharingCollection+setGroupReadWrite)
     * [.revokeGroup(sharing, groupIndex)](#SharingCollection+revokeGroup)
     * [.revokeSelf(sharing)](#SharingCollection+revokeSelf)
     * [.revokeAllRecipients(sharing)](#SharingCollection+revokeAllRecipients)
@@ -2161,6 +2163,30 @@ Upgrade a read-only sharing member to read-write.
 | --- | --- | --- |
 | sharing | [<code>Sharing</code>](#Sharing) | Sharing Object |
 | recipientIndex | <code>number</code> | Index of this recipient in the members array of the sharing |
+
+<a name="SharingCollection+setGroupReadOnly"></a>
+
+### sharingCollection.setGroupReadOnly(sharing, groupIndex)
+Downgrade a sharing member to read-only.
+
+**Kind**: instance method of [<code>SharingCollection</code>](#SharingCollection)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sharing | [<code>Sharing</code>](#Sharing) | Sharing Object |
+| groupIndex | <code>number</code> | Index of this recipient in the members array of the sharing |
+
+<a name="SharingCollection+setGroupReadWrite"></a>
+
+### sharingCollection.setGroupReadWrite(sharing, groupIndex)
+Upgrade a read-only sharing member to read-write.
+
+**Kind**: instance method of [<code>SharingCollection</code>](#SharingCollection)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sharing | [<code>Sharing</code>](#Sharing) | Sharing Object |
+| groupIndex | <code>number</code> | Index of this recipient in the members array of the sharing |
 
 <a name="SharingCollection+revokeGroup"></a>
 
