@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.32.0](https://github.com/linagora/cozy-client/compare/v60.31.0...v60.32.0) (2026-08-31)
+
+
+### Bug Fixes
+
+* **models:** Keep getActiveBanner and carry the banner lang ([a7ae171](https://github.com/linagora/cozy-client/commit/a7ae1715dfed9cee674030a45f3287902574a5b7))
+
+
+### Features
+
+* **models:** Support the banner secondaryCta ([dcc2fb2](https://github.com/linagora/cozy-client/commit/dcc2fb2f7fff4ffac8662609ea8baf97b2f937db))
+
+
+
+
+
 # [60.31.0](https://github.com/linagora/cozy-client/compare/v60.30.6...v60.31.0) (2026-08-28)
 
 
