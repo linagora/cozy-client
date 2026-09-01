@@ -11,6 +11,15 @@ describe('shouldDocumentBePersisted', () => {
     expect(shouldDocumentBePersisted(doc)).toBe(false)
   })
 
+  it('should not persist effective recipients', () => {
+    const doc = {
+      ...BASE_DOC,
+      _type: 'io.cozy.sharings.recipients'
+    }
+
+    expect(shouldDocumentBePersisted(doc)).toBe(false)
+  })
+
   it('should not persist a doc with rev', () => {
     const doc1 = { ...BASE_DOC, _rev: '123' }
     expect(shouldDocumentBePersisted(doc1)).toBe(false)

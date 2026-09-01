@@ -142,6 +142,36 @@ describe('queries reducer', () => {
 
       expect(state.a.data).toEqual([TODO_1._id])
     })
+
+    it('should replace the previous result for a full snapshot query', () => {
+      const recipient1 = {
+        _id: 'file-1/recipient-1',
+        _type: 'io.cozy.sharings.recipients'
+      }
+      const recipient2 = {
+        _id: 'file-1/recipient-2',
+        _type: 'io.cozy.sharings.recipients'
+      }
+      const queryDefinition = Q(
+        'io.cozy.sharings.recipients'
+      ).effectiveRecipients('file-1')
+      applyAction(initQuery('recipients', queryDefinition))
+
+      applyAction(
+        receiveQueryResult('recipients', {
+          data: [recipient1, recipient2]
+        })
+      )
+      applyAction(
+        receiveQueryResult('recipients', {
+          data: [recipient1]
+        })
+      )
+
+      expect(state.recipients.data).toEqual([recipient1._id])
+      expect(state.recipients.count).toBe(1)
+      expect(state.recipients.hasMore).toBe(false)
+    })
   })
 
   describe('RECEIVE_QUERY_ERROR', () => {

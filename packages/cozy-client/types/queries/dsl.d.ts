@@ -301,6 +301,17 @@ export class QueryDefinition {
      * @returns {QueryDefinition}  The QueryDefinition object.
      */
     sharingById(id: string): QueryDefinition;
+    /**
+     * Query all recipients who can access a file or folder, either through a
+     * direct sharing on the target or through a sharing inherited from an ancestor.
+     *
+     * @param {string} fileId - The target file or folder id
+     * @param {{driveId?: string|null}} [options] - Query options; driveId scopes a shared drive and defaults to null
+     * @returns {QueryDefinition} The QueryDefinition object.
+     */
+    effectiveRecipients(fileId: string, options?: {
+        driveId?: string | null;
+    }): QueryDefinition;
     toDefinition(): {
         doctype: string;
         id: string;

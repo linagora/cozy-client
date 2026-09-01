@@ -1,4 +1,5 @@
 import CozyClient from './CozyClient'
+import { DOCTYPE_SHARING_RECIPIENTS } from './const'
 import { QueryDefinition } from './queries/dsl'
 
 export const ENFORCE_LIST = ['io.cozy.files.shortcuts']
@@ -18,7 +19,11 @@ export const shouldEnforcePersist = definition => {
  * @returns {boolean} whether or not the doc should be persisted
  */
 export const shouldDocumentBePersisted = (document, shouldEnforce = false) => {
-  if (!document || document.cozyLocalOnly) {
+  if (
+    !document ||
+    document.cozyLocalOnly ||
+    document._type === DOCTYPE_SHARING_RECIPIENTS
+  ) {
     return false
   }
   if ((!document.meta?.rev && !document._rev) || shouldEnforce) {

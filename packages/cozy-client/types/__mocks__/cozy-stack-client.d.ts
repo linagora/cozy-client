@@ -13,6 +13,14 @@ export class OAuthClient extends OAuthClient_base {
         updateAll: jest.Mock<Promise<void>, []>;
         destroy: jest.Mock<Promise<void>, []>;
         findReferencedBy: jest.Mock<Promise<void>, []>;
+        fetchEffectiveRecipients: jest.Mock<Promise<{
+            data: object[];
+            meta: {
+                file_id: string;
+            };
+        }>, [fileId: string, options?: {
+            driveId?: string | null;
+        }]>;
     }, []>;
 }
 export default MockedStackClient;
@@ -31,6 +39,14 @@ declare class MockedStackClient extends MockedStackClient_base {
         updateAll: jest.Mock<Promise<void>, []>;
         destroy: jest.Mock<Promise<void>, []>;
         findReferencedBy: jest.Mock<Promise<void>, []>;
+        fetchEffectiveRecipients: jest.Mock<Promise<{
+            data: object[];
+            meta: {
+                file_id: string;
+            };
+        }>, [fileId: string, options?: {
+            driveId?: string | null;
+        }]>;
     }, []>;
 }
 export const normalizeDoc: any;

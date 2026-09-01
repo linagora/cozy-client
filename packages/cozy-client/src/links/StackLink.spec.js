@@ -134,6 +134,96 @@ describe('StackLink', () => {
         expect.anything()
       )
     })
+
+    it('should fetch and normalize effective recipients for a classic sharing', async () => {
+      const query = Q('io.cozy.sharings.recipients').effectiveRecipients(
+        'file/1'
+      )
+      stackClient.collection().fetchEffectiveRecipients.mockResolvedValue({
+        data: [
+          {
+            id: 'https://alice.example',
+            name: 'Alice',
+            read_only: false
+          }
+        ],
+        meta: { file_id: 'file/1' }
+      })
+
+      const response = await link.request(query)
+
+      expect(stackClient.collection).toHaveBeenCalledWith('io.cozy.sharings')
+      expect(
+        stackClient.collection().fetchEffectiveRecipients
+      ).toHaveBeenCalledWith('file/1', { driveId: null })
+      expect(response).toEqual({
+        data: [
+          {
+            id: 'personal/file/file%2F1/recipient/https%3A%2F%2Falice.example',
+            _id: 'personal/file/file%2F1/recipient/https%3A%2F%2Falice.example',
+            _type: 'io.cozy.sharings.recipients',
+            recipient_id: 'https://alice.example',
+            file_id: 'file/1',
+            drive_id: null,
+            name: 'Alice',
+            read_only: false
+          }
+        ],
+        meta: { file_id: 'file/1' }
+      })
+    })
+
+    it('should fetch effective recipients in a shared drive scope', async () => {
+      const query = Q('io.cozy.sharings.recipients').effectiveRecipients(
+        'file-1',
+        { driveId: 'drive/1' }
+      )
+      stackClient.collection().fetchEffectiveRecipients.mockResolvedValue({
+        data: [{ id: 'alice@example.test', name: 'Alice' }]
+      })
+
+      const response = await link.request(query)
+
+      expect(
+        stackClient.collection().fetchEffectiveRecipients
+      ).toHaveBeenCalledWith('file-1', { driveId: 'drive/1' })
+      expect(response.data[0]).toMatchObject({
+        id: 'drive/drive%2F1/file/file-1/recipient/alice%40example.test',
+        recipient_id: 'alice@example.test',
+        file_id: 'file-1',
+        drive_id: 'drive/1'
+      })
+    })
+
+    it('should scope virtual document ids by target', async () => {
+      stackClient.collection().fetchEffectiveRecipients.mockResolvedValue({
+        data: [{ id: 'sharing-1:0', name: 'Alice' }]
+      })
+
+      const fileResponse = await link.request(
+        Q('io.cozy.sharings.recipients').effectiveRecipients('file-1')
+      )
+      const childResponse = await link.request(
+        Q('io.cozy.sharings.recipients').effectiveRecipients('child-1')
+      )
+
+      expect(fileResponse.data[0].recipient_id).toBe('sharing-1:0')
+      expect(childResponse.data[0].recipient_id).toBe('sharing-1:0')
+      expect(fileResponse.data[0].id).not.toBe(childResponse.data[0].id)
+    })
+
+    it('should not forward effective recipients queries when offline', async () => {
+      const query = Q('io.cozy.sharings.recipients').effectiveRecipients(
+        'file-1'
+      )
+      const forward = jest.fn()
+      link.isOnline = jest.fn().mockResolvedValue(false)
+
+      await expect(link.request(query, {}, null, forward)).rejects.toThrow(
+        'Effective recipients cannot be fetched offline'
+      )
+      expect(forward).not.toHaveBeenCalled()
+    })
   })
 
   describe('reset', () => {
