@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.33.0](https://github.com/linagora/cozy-client/compare/v60.32.0...v60.33.0) (2026-09-01)
+
+
+### Features
+
+* **cozy-client:** Add effective recipients query support ([660e5b5](https://github.com/linagora/cozy-client/commit/660e5b5286fc7260d41de8dd93b4058b37129b5a))
+* **cozy-stack-client:** Add SharingCollection.fetchEffectiveRecipients ([794b34b](https://github.com/linagora/cozy-client/commit/794b34b1abf66d22a4d21f4d00ef1d5a1159e965)), closes [linagora/cozy-stack#4885](https://github.com/linagora/cozy-stack/issues/4885)
+
+
+
+
+
 # [60.28.0](https://github.com/linagora/cozy-client/compare/v60.27.0...v60.28.0) (2026-06-15)
 
 

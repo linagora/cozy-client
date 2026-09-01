@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.33.0](https://github.com/linagora/cozy-client/compare/v60.32.0...v60.33.0) (2026-09-01)
+
+
+### Features
+
+* **cozy-client:** Add effective recipients query support ([660e5b5](https://github.com/linagora/cozy-client/commit/660e5b5286fc7260d41de8dd93b4058b37129b5a))
+
+
+
+
+
 # [60.32.0](https://github.com/linagora/cozy-client/compare/v60.31.0...v60.32.0) (2026-08-31)
 
 
