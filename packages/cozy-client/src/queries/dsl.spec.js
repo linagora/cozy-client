@@ -44,6 +44,38 @@ describe('QueryDefinition', () => {
     })
   })
 
+  it('should build an effective recipients query for a classic sharing', () => {
+    const query = Q('io.cozy.sharings.recipients').effectiveRecipients('file-1')
+
+    expect(query).toMatchObject({
+      doctype: 'io.cozy.sharings.recipients',
+      selector: { file_id: 'file-1', drive_id: null }
+    })
+  })
+
+  it('should build an effective recipients query for a shared drive', () => {
+    const query = Q('io.cozy.sharings.recipients').effectiveRecipients(
+      'file-1',
+      { driveId: 'drive-1' }
+    )
+
+    expect(query).toMatchObject({
+      selector: { file_id: 'file-1', drive_id: 'drive-1' }
+    })
+  })
+
+  it('should reject effective recipients queries on another doctype', () => {
+    expect(() => Q('io.cozy.sharings').effectiveRecipients('file-1')).toThrow(
+      'effectiveRecipients must be called on io.cozy.sharings.recipients'
+    )
+  })
+
+  it('should reject effective recipients queries without a file id', () => {
+    expect(() =>
+      Q('io.cozy.sharings.recipients').effectiveRecipients(null)
+    ).toThrow('effectiveRecipients called with undefined fileId')
+  })
+
   it('paginates only one way', () => {
     const q = Q('io.cozy.files')
     const withSkip = q.offset(2)

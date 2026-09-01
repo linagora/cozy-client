@@ -16,6 +16,7 @@ import { getDocumentFromSlice } from './documents'
 import { isReceivingMutationResult } from './mutations'
 import { properId } from './helpers'
 import { isAGetByIdQuery, QueryDefinition } from '../queries/dsl'
+import { DOCTYPE_SHARING_RECIPIENTS } from '../const'
 import logger from '../logger'
 import {
   getCollectionFromState,
@@ -227,6 +228,22 @@ const query = (
         response.meta && response.meta.count
           ? response.meta.count
           : response.data.length
+      if (state.definition.doctype === DOCTYPE_SHARING_RECIPIENTS) {
+        performanceApi.measure({
+          markName: markName,
+          measureName: `${markName} with full snapshot`,
+          category: 'CozyClientStore'
+        })
+        return {
+          ...state,
+          ...common,
+          bookmark: null,
+          hasMore: false,
+          count,
+          fetchedPagesCount: 1,
+          data: response.data.map(properId)
+        }
+      }
       if (action.backgroundFetching) {
         performanceApi.measure({
           markName: markName,

@@ -623,7 +623,7 @@ describe('SharingCollection', () => {
 
   describe('fetchEffectiveRecipients', () => {
     beforeEach(() => {
-      client.fetch.mockReset()
+      client.fetchJSON.mockReset()
     })
 
     it('should call the classic route when no driveId is given', async () => {

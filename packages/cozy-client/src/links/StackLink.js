@@ -2,7 +2,7 @@ import zipWith from 'lodash/zipWith'
 
 import { MutationTypes, QueryDefinition } from '../queries/dsl'
 import CozyLink from './CozyLink'
-import { DOCTYPE_FILES } from '../const'
+import { DOCTYPE_FILES, DOCTYPE_SHARING_RECIPIENTS } from '../const'
 import { BulkEditError } from '../errors'
 import logger from '../logger'
 import { isReactNativeOfflineError } from '../utils'
@@ -100,6 +100,9 @@ export default class StackLink extends CozyLink {
       return forward(operation, options)
     }
     if (forceLink !== 'stack' && this.isOnline && !(await this.isOnline())) {
+      if (operation.doctype === DOCTYPE_SHARING_RECIPIENTS) {
+        throw new Error('Effective recipients cannot be fetched offline')
+      }
       return forward(operation, options)
     }
     try {
@@ -109,6 +112,9 @@ export default class StackLink extends CozyLink {
       return await this.executeQuery(operation)
     } catch (err) {
       if (forceLink !== 'stack' && isReactNativeOfflineError(err)) {
+        if (operation.doctype === DOCTYPE_SHARING_RECIPIENTS) {
+          throw err
+        }
         return forward(operation, options)
       }
       throw err
@@ -123,7 +129,7 @@ export default class StackLink extends CozyLink {
    * @param {QueryDefinition} query - Query to execute
    * @returns {Promise<import("../types").ClientResponse>}
    */
-  executeQuery(query) {
+  async executeQuery(query) {
     const {
       doctype,
       selector,
@@ -140,6 +146,42 @@ export default class StackLink extends CozyLink {
     }
     if (doctype === DOCTYPE_FILES && sharingId) {
       options = { ...options, driveId: sharingId }
+    }
+    if (doctype === DOCTYPE_SHARING_RECIPIENTS) {
+      const fileId = selector?.file_id
+      const driveId = selector?.drive_id ?? null
+      if (!fileId) {
+        throw new Error(
+          `${DOCTYPE_SHARING_RECIPIENTS} must be queried with effectiveRecipients`
+        )
+      }
+      const response = await this.stackClient
+        .collection('io.cozy.sharings')
+        .fetchEffectiveRecipients(fileId, { driveId })
+
+      return {
+        ...response,
+        data: response.data.map(recipient => {
+          const { id: recipientId, ...attributes } = recipient
+          // Recipient attributes vary by target, so IDs include the query scope.
+          const scope = driveId
+            ? `drive/${encodeURIComponent(driveId)}`
+            : 'personal'
+          const id = `${scope}/file/${encodeURIComponent(
+            fileId
+          )}/recipient/${encodeURIComponent(recipientId)}`
+
+          return {
+            id,
+            _id: id,
+            _type: DOCTYPE_SHARING_RECIPIENTS,
+            recipient_id: recipientId,
+            file_id: fileId,
+            drive_id: driveId,
+            ...attributes
+          }
+        })
+      }
     }
     const collection = this.stackClient.collection(doctype, options)
     if (id) {

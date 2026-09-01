@@ -1,5 +1,6 @@
 import findKey from 'lodash/findKey'
 
+import { DOCTYPE_SHARING_RECIPIENTS } from '../const'
 import logger from '../logger'
 
 /**
@@ -368,6 +369,31 @@ class QueryDefinition {
    */
   sharingById(id) {
     return new QueryDefinition({ ...this.toDefinition(), sharingId: id })
+  }
+
+  /**
+   * Query all recipients who can access a file or folder, either through a
+   * direct sharing on the target or through a sharing inherited from an ancestor.
+   *
+   * @param {string} fileId - The target file or folder id
+   * @param {{driveId?: string|null}} [options] - Query options; driveId scopes a shared drive and defaults to null
+   * @returns {QueryDefinition} The QueryDefinition object.
+   */
+  effectiveRecipients(fileId, options = {}) {
+    if (this.doctype !== DOCTYPE_SHARING_RECIPIENTS) {
+      throw new Error(
+        `effectiveRecipients must be called on ${DOCTYPE_SHARING_RECIPIENTS}`
+      )
+    }
+    if (!fileId) {
+      throw new Error('effectiveRecipients called with undefined fileId')
+    }
+    const driveId = options.driveId ?? null
+
+    return new QueryDefinition({
+      ...this.toDefinition(),
+      selector: { file_id: fileId, drive_id: driveId }
+    })
   }
 
   toDefinition() {
