@@ -255,6 +255,34 @@ describe('getIndexNameFromFields', () => {
     )
   })
 
+  it('should sanitize slash characters from index name', () => {
+    const partialFilter = {
+      _id: {
+        $nin: ['io.cozy.files.trash-dir', 'io.cozy.files.shared-drives-dir']
+      },
+      path: {
+        $or: [{ $exists: false }, { $nin: ['/Settings'] }]
+      }
+    }
+
+    const indexName = getIndexNameFromFields(fields, partialFilter)
+    expect(indexName).not.toContain('/')
+    expect(indexName).toContain('%2FSettings')
+  })
+
+  it('should produce different index names for values with and without slash', () => {
+    const withSlash = {
+      path: { $nin: ['/Settings'] }
+    }
+    const withoutSlash = {
+      path: { $nin: ['Settings'] }
+    }
+
+    const nameWithSlash = getIndexNameFromFields(fields, withSlash)
+    const nameWithoutSlash = getIndexNameFromFields(fields, withoutSlash)
+    expect(nameWithSlash).not.toEqual(nameWithoutSlash)
+  })
+
   it('should return index fields with partial filter with $nor inside sub condition', () => {
     const partialFilter = {
       $nor: [
