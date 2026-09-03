@@ -1,47 +1,29 @@
-import useQuery from './useQuery'
-import { Q } from '../queries/dsl'
-import CozyClient from '../CozyClient'
+import { useState, useEffect } from 'react'
 
-const fetchPolicy = CozyClient.fetchPolicies.olderThan(30 * 1000)
+import useClient from './useClient'
 
-const buildHomeMagicFolderQuery = () => {
-  return {
-    query: Q('io.cozy.files')
-      .where({ path: '/Settings/Home' })
-      .indexFields(['path']),
-    as: 'io.cozy.files/path/Settings/Home',
-    fetchPolicy: fetchPolicy
-  }
-}
-
-const buildHomeShortcutsQuery = folderId => {
-  return {
-    query: Q('io.cozy.files')
-      .where({ dir_id: folderId, class: 'shortcut' })
-      .indexFields(['dir_id', 'class']),
-    as: `io.cozy.files/dir_id/${folderId}/class/shortcut`,
-    fetchPolicy: fetchPolicy
-  }
-}
+const HOME_MAGIC_FOLDER_PATH = '/Settings/Home'
 
 const useFetchHomeShortcuts = () => {
-  const homeMagicFolderQuery = buildHomeMagicFolderQuery()
+  const client = useClient()
+  const [shortcuts, setShortcuts] = useState([])
 
-  const magicHomeFolder = useQuery(
-    homeMagicFolderQuery.query,
-    homeMagicFolderQuery
-  )
+  useEffect(() => {
+    const fetchShortcuts = async () => {
+      try {
+        const { included } = await client
+          .collection('io.cozy.files')
+          .statByPath(HOME_MAGIC_FOLDER_PATH)
 
-  const magicHomeFolderId = magicHomeFolder?.data?.[0]?._id
+        setShortcuts((included || []).filter(file => file.class === 'shortcut'))
+      } catch (e) {
+        setShortcuts([])
+      }
+    }
+    fetchShortcuts()
+  }, [client])
 
-  const homeShortcutsQuery = buildHomeShortcutsQuery(magicHomeFolderId)
-
-  const { data: shortcuts } = useQuery(homeShortcutsQuery.query, {
-    ...homeShortcutsQuery,
-    enabled: !!magicHomeFolderId
-  })
-
-  return shortcuts || []
+  return shortcuts
 }
 
 export default useFetchHomeShortcuts

@@ -1,2 +1,2 @@
 export default useFetchHomeShortcuts;
-declare function useFetchHomeShortcuts(): any;
+declare function useFetchHomeShortcuts(): any[];

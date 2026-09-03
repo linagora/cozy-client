@@ -1014,15 +1014,15 @@ Returns the cozy client from the context
 
 ### useFetchHomeShortcuts
 
-▸ **useFetchHomeShortcuts**(): `any`
+▸ **useFetchHomeShortcuts**(): `any`\[]
 
 *Returns*
 
-`any`
+`any`\[]
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useFetchHomeShortcuts.jsx:27](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useFetchHomeShortcuts.jsx#L27)
+[packages/cozy-client/src/hooks/useFetchHomeShortcuts.jsx:7](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useFetchHomeShortcuts.jsx#L7)
 
 ***
 
