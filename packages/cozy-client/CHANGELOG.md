@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.34.0](https://github.com/linagora/cozy-client/compare/v60.33.0...v60.34.0) (2026-09-08)
+
+
+### Features
+
+* Change how useFetchHomeShortcuts fetch shortcuts ([1154f6a](https://github.com/linagora/cozy-client/commit/1154f6a215a5772ae664ca19c55bc6b4e8bb712d))
+
+
+
+
+
 # [60.33.0](https://github.com/linagora/cozy-client/compare/v60.32.0...v60.33.0) (2026-09-01)
 
 
