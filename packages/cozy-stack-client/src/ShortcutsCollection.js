@@ -1,6 +1,6 @@
 import DocumentCollection from './DocumentCollection'
 import { normalizeDoctypeJsonApi } from './normalize'
-import { uri } from './utils'
+import { sharedDriveApiPrefix, uri } from './utils'
 import { getIllegalCharacters } from './getIllegalCharacter'
 
 /**
@@ -16,8 +16,16 @@ const normalizeShortcutsJsonApi = normalizeDoctypeJsonApi(SHORTCUTS_DOCTYPE)
  * Provides helpers to interact with shortcuts documents on the Cozy stack.
  */
 class ShortcutsCollection extends DocumentCollection {
-  constructor(stackClient) {
-    super(SHORTCUTS_DOCTYPE, stackClient)
+  /**
+   * @param {object} stackClient - The client used to make requests to the server
+   * @param {object} [options] - The collection options
+   * @param {string} [options.driveId] - Scopes the collection to a shared drive
+   */
+  constructor(stackClient, options = {}) {
+    super(SHORTCUTS_DOCTYPE, stackClient, options)
+    this.prefix = options.driveId
+      ? `${sharedDriveApiPrefix(options.driveId)}/shortcuts`
+      : '/shortcuts'
   }
 
   /**
@@ -74,7 +82,7 @@ class ShortcutsCollection extends DocumentCollection {
    * @throws {Error} If the fetch fails for any reason.
    */
   async get(id) {
-    const path = uri`/shortcuts/${id}`
+    const path = this.prefix + uri`/${id}`
     const resp = await this.stackClient.fetchJSON('GET', path)
     return {
       data: normalizeShortcutsJsonApi(resp.data)

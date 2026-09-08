@@ -28,7 +28,7 @@ Transfers queries and mutations to a remote stack
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:71](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L71)
+[packages/cozy-client/src/links/StackLink.js:75](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L75)
 
 ## Properties
 
@@ -38,7 +38,7 @@ Transfers queries and mutations to a remote stack
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:79](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L79)
+[packages/cozy-client/src/links/StackLink.js:83](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L83)
 
 ***
 
@@ -48,7 +48,7 @@ Transfers queries and mutations to a remote stack
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:82](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L82)
+[packages/cozy-client/src/links/StackLink.js:86](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L86)
 
 ***
 
@@ -58,7 +58,7 @@ Transfers queries and mutations to a remote stack
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:78](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L78)
+[packages/cozy-client/src/links/StackLink.js:82](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L82)
 
 ## Accessors
 
@@ -76,7 +76,7 @@ CozyLink.name
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:85](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L85)
+[packages/cozy-client/src/links/StackLink.js:89](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L89)
 
 ## Methods
 
@@ -99,7 +99,7 @@ CozyLink.name
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:203](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L203)
+[packages/cozy-client/src/links/StackLink.js:210](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L210)
 
 ***
 
@@ -119,7 +119,7 @@ CozyLink.name
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:132](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L132)
+[packages/cozy-client/src/links/StackLink.js:136](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L136)
 
 ***
 
@@ -146,7 +146,7 @@ Persist the given data into the links storage
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:124](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L124)
+[packages/cozy-client/src/links/StackLink.js:128](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L128)
 
 ***
 
@@ -166,7 +166,7 @@ Persist the given data into the links storage
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:89](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L89)
+[packages/cozy-client/src/links/StackLink.js:93](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L93)
 
 ***
 
@@ -195,7 +195,7 @@ Request the given operation from the link
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:97](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L97)
+[packages/cozy-client/src/links/StackLink.js:101](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L101)
 
 ***
 
@@ -215,4 +215,4 @@ Reset the link data
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:93](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L93)
+[packages/cozy-client/src/links/StackLink.js:97](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L97)

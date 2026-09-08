@@ -112,5 +112,17 @@ describe('ShortcutsCollection', () => {
       await collection.get('1')
       expect(stackClient.fetchJSON).toHaveBeenCalledWith('GET', '/shortcuts/1')
     })
+
+    it('goes through the drive proxy route when scoped to a shared drive', async () => {
+      const driveCollection = new ShortcutsCollection(stackClient, {
+        driveId: 'drive123'
+      })
+      stackClient.fetchJSON.mockResolvedValue({ data: [] })
+      await driveCollection.get('1')
+      expect(stackClient.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/drive123/shortcuts/1'
+      )
+    })
   })
 })

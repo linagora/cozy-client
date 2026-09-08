@@ -1028,14 +1028,17 @@ Returns the cozy client from the context
 
 ### useFetchShortcut
 
-▸ **useFetchShortcut**(`client`, `id`): `Object`
+▸ **useFetchShortcut**(`client`, `id`, `driveId`): `Object`
+
+Fetch a shortcut and the icon to display for it.
 
 *Parameters*
 
-| Name | Type |
-| :------ | :------ |
-| `client` | `any` |
-| `id` | `any` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `client` | [`CozyClient`](classes/CozyClient.md) | A CozyClient instance |
+| `id` | `string` | The shortcut file id |
+| `driveId` | `string` | - |
 
 *Returns*
 
@@ -1049,7 +1052,7 @@ Returns the cozy client from the context
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useFetchShortcut.jsx:8](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useFetchShortcut.jsx#L8)
+[packages/cozy-client/src/hooks/useFetchShortcut.jsx:16](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useFetchShortcut.jsx#L16)
 
 ***
 

@@ -2,7 +2,11 @@ import zipWith from 'lodash/zipWith'
 
 import { MutationTypes, QueryDefinition } from '../queries/dsl'
 import CozyLink from './CozyLink'
-import { DOCTYPE_FILES, DOCTYPE_SHARING_RECIPIENTS } from '../const'
+import {
+  DOCTYPE_FILES,
+  DOCTYPE_FILES_SHORTCUTS,
+  DOCTYPE_SHARING_RECIPIENTS
+} from '../const'
 import { BulkEditError } from '../errors'
 import logger from '../logger'
 import { isReactNativeOfflineError } from '../utils'
@@ -144,7 +148,10 @@ export default class StackLink extends CozyLink {
       logger.warn('Bad query', query)
       throw new Error('No doctype found in a query definition')
     }
-    if (doctype === DOCTYPE_FILES && sharingId) {
+    if (
+      (doctype === DOCTYPE_FILES || doctype === DOCTYPE_FILES_SHORTCUTS) &&
+      sharingId
+    ) {
       options = { ...options, driveId: sharingId }
     }
     if (doctype === DOCTYPE_SHARING_RECIPIENTS) {
