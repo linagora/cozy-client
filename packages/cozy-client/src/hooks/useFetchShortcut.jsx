@@ -2,10 +2,18 @@ import { useState, useEffect } from 'react'
 
 import { Q } from '../queries/dsl'
 import CozyClient from '../CozyClient'
+import { DOCTYPE_FILES_SHORTCUTS } from '../const'
 
 const DEFAULT_CACHE_TIMEOUT_QUERIES = 10 * 60 * 1000 // 10 minutes
 
-const useFetchShortcut = (client, id) => {
+/**
+ * Fetch a shortcut and the icon to display for it.
+ *
+ * @param {import('../CozyClient').default} client - A CozyClient instance
+ * @param {string} id - The shortcut file id
+ * @param {string} [driveId] - Id of the shared drive the shortcut belongs to
+ */
+const useFetchShortcut = (client, id, driveId) => {
   const [shortcutInfos, setShortcutInfos] = useState(null)
   const [shortcutImg, setShortcutImg] = useState(null)
   const [fetchStatus, setFetchStatus] = useState('idle')
@@ -13,10 +21,15 @@ const useFetchShortcut = (client, id) => {
     const fetchData = async () => {
       setFetchStatus('loading')
       try {
+        const baseDefinition = Q(DOCTYPE_FILES_SHORTCUTS).getById(id)
         const shortcutInfosResult = await client.fetchQueryAndGetFromState({
-          definition: Q('io.cozy.files.shortcuts').getById(id),
+          definition: driveId
+            ? baseDefinition.sharingById(driveId)
+            : baseDefinition,
           options: {
-            as: `io.cozy.files.shortcuts/${id}`,
+            as: driveId
+              ? `${DOCTYPE_FILES_SHORTCUTS}/${driveId}/${id}`
+              : `${DOCTYPE_FILES_SHORTCUTS}/${id}`,
             fetchPolicy: CozyClient.fetchPolicies.olderThan(
               DEFAULT_CACHE_TIMEOUT_QUERIES
             ),
@@ -48,7 +61,7 @@ const useFetchShortcut = (client, id) => {
       }
     }
     fetchData()
-  }, [client, id])
+  }, [client, id, driveId])
 
   return {
     shortcutInfos,

@@ -2231,8 +2231,19 @@ Provides helpers to interact with shortcuts documents on the Cozy stack.
 **Kind**: global class  
 
 * [ShortcutsCollection](#ShortcutsCollection)
+    * [new ShortcutsCollection(stackClient, [options])](#new_ShortcutsCollection_new)
     * [.create(attributes)](#ShortcutsCollection+create)
     * [.get(id)](#ShortcutsCollection+get) ⇒ <code>Promise.&lt;{data: object}&gt;</code>
+
+<a name="new_ShortcutsCollection_new"></a>
+
+### new ShortcutsCollection(stackClient, [options])
+
+| Param | Type | Description |
+| --- | --- | --- |
+| stackClient | <code>object</code> | The client used to make requests to the server |
+| [options] | <code>object</code> | The collection options |
+| [options.driveId] | <code>string</code> | Scopes the collection to a shared drive |
 
 <a name="ShortcutsCollection+create"></a>
 
