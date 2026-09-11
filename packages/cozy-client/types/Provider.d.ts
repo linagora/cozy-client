@@ -1,25 +1,19 @@
-export default class CozyProvider extends React.Component<any, any, any> {
-    static propTypes: {
-        store: PropTypes.Requireable<PropTypes.InferProps<{
-            subscribe: PropTypes.Validator<(...args: any[]) => any>;
-            dispatch: PropTypes.Validator<(...args: any[]) => any>;
-            getState: PropTypes.Validator<(...args: any[]) => any>;
-        }>>;
-        client: PropTypes.Validator<object>;
-        children: PropTypes.Validator<PropTypes.ReactElementLike | PropTypes.ReactElementLike[]>;
-    };
-    static childContextTypes: {
-        store: PropTypes.Requireable<object>;
-        client: PropTypes.Validator<object>;
-    };
-    static contextTypes: {
-        store: PropTypes.Requireable<object>;
-    };
-    constructor(props: any, context: any);
-    getChildContext(): {
-        store: any;
-        client: any;
-    };
+export default CozyProvider;
+declare function CozyProvider({ store, client, children }: {
+    store: any;
+    client: any;
+    children: any;
+}): JSX.Element;
+declare namespace CozyProvider {
+    namespace propTypes {
+        export { storePropType as store };
+        export const client: PropTypes.Validator<object>;
+        export const children: PropTypes.Validator<PropTypes.ReactElementLike | PropTypes.ReactElementLike[]>;
+    }
 }
-import React from "react";
+declare const storePropType: PropTypes.Requireable<PropTypes.InferProps<{
+    subscribe: PropTypes.Validator<(...args: any[]) => any>;
+    dispatch: PropTypes.Validator<(...args: any[]) => any>;
+    getState: PropTypes.Validator<(...args: any[]) => any>;
+}>>;
 import PropTypes from "prop-types";
