@@ -2262,7 +2262,7 @@ Create a shortcut
 | attributes.name | <code>string</code> | Filename |
 | attributes.url | <code>string</code> | Shortcut's URL |
 | attributes.dir_id | <code>string</code> | dir_id where to create the shortcut |
-| attributes.type | <code>string</code> \| <code>undefined</code> | shortcut's type |
+| [attributes.type] | <code>string</code> | shortcut's type |
 
 <a name="ShortcutsCollection+get"></a>
 
