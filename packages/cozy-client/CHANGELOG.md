@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.36.0](https://github.com/linagora/cozy-client/compare/v60.35.0...v60.36.0) (2026-09-14)
+
+
+### Bug Fixes
+
+* Avoid race condition in useFetchShortcut ([1b21adb](https://github.com/linagora/cozy-client/commit/1b21adb453a67d76a67c97161632bb2b519b4009))
+
+
+### Features
+
+* Support for shared drive to get shortcuts ([eaeb13b](https://github.com/linagora/cozy-client/commit/eaeb13b84afbfa06b90a95448542169e1e3fde8d))
+
+
+
+
+
 # [60.35.0](https://github.com/linagora/cozy-client/compare/v60.34.0...v60.35.0) (2026-09-14)
 
 
