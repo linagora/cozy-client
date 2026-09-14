@@ -23,8 +23,9 @@ class ShortcutsCollection extends DocumentCollection {
    */
   constructor(stackClient, options = {}) {
     super(SHORTCUTS_DOCTYPE, stackClient, options)
-    this.prefix = options.driveId
-      ? `${sharedDriveApiPrefix(options.driveId)}/shortcuts`
+    this.driveId = options.driveId
+    this.prefix = this.driveId
+      ? `${sharedDriveApiPrefix(this.driveId)}/shortcuts`
       : '/shortcuts'
   }
 
@@ -39,6 +40,9 @@ class ShortcutsCollection extends DocumentCollection {
    * @throws {Error} - explaining reason why creation failed
    */
   async create(attributes) {
+    if (this.driveId) {
+      throw new Error('Creating shortcuts in a shared drive is not supported')
+    }
     if (!attributes.type) {
       attributes.type = SHORTCUTS_DOCTYPE
     }
