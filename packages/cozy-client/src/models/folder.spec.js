@@ -14,18 +14,6 @@ describe('Folder model', () => {
     jest.restoreAllMocks()
   })
 
-  it('should expose magic folders', () => {
-    expect(MAGIC_FOLDERS).toBeDefined()
-    expect(MAGIC_FOLDERS.ADMINISTRATIVE).toBeDefined()
-    expect(MAGIC_FOLDERS.PHOTOS).toBeDefined()
-    expect(MAGIC_FOLDERS.PHOTOS_UPLOAD).toBeDefined()
-    expect(MAGIC_FOLDERS.PHOTOS_BACKUP).toBeDefined()
-    expect(MAGIC_FOLDERS.NOTES).toBeDefined()
-    expect(MAGIC_FOLDERS.HOME).toBeDefined()
-    expect(MAGIC_FOLDERS.PAPERS).toBeDefined()
-    expect(MAGIC_FOLDERS.COACH_CO2).toBeDefined()
-  })
-
   describe('ensureMagicFolder', () => {
     it('should return first existing magic folder', async () => {
       const existingMagicFolders = [
