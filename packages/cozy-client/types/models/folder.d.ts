@@ -4,6 +4,7 @@ export namespace MAGIC_FOLDERS {
     const PHOTOS_BACKUP: string;
     const PHOTOS_UPLOAD: string;
     const NOTES: string;
+    const MAIL: string;
     const HOME: string;
     const PAPERS: string;
     const COACH_CO2: string;
