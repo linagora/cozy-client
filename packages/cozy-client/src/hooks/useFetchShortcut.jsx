@@ -18,6 +18,8 @@ const useFetchShortcut = (client, id, driveId) => {
   const [shortcutImg, setShortcutImg] = useState(null)
   const [fetchStatus, setFetchStatus] = useState('idle')
   useEffect(() => {
+    let isCancelled = false
+
     const fetchData = async () => {
       setFetchStatus('loading')
       try {
@@ -36,6 +38,7 @@ const useFetchShortcut = (client, id, driveId) => {
             singleDocData: true
           }
         })
+        if (isCancelled) return
 
         const targetApp = shortcutInfosResult?.data?.metadata?.target?.app
         if (targetApp) {
@@ -44,6 +47,8 @@ const useFetchShortcut = (client, id, driveId) => {
             slug: targetApp,
             priority: 'stack'
           })
+          if (isCancelled) return
+
           setShortcutImg(targetAppIconUrl)
         } else {
           const shortcutRemoteUrl = new URL(shortcutInfosResult.data.url)
@@ -57,10 +62,16 @@ const useFetchShortcut = (client, id, driveId) => {
         setShortcutInfos({ data: shortcutInfosResult.data })
         setFetchStatus('loaded')
       } catch (e) {
+        if (isCancelled) return
+
         setFetchStatus('failed')
       }
     }
     fetchData()
+
+    return () => {
+      isCancelled = true
+    }
   }, [client, id, driveId])
 
   return {
