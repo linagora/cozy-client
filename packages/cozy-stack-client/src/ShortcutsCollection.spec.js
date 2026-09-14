@@ -14,6 +14,22 @@ describe('ShortcutsCollection', () => {
   })
 
   describe('Create', () => {
+    it('rejects creation when scoped to a shared drive', async () => {
+      const driveCollection = new ShortcutsCollection(stackClient, {
+        driveId: 'drive123'
+      })
+      jest.spyOn(stackClient, 'fetchJSON')
+
+      await expect(
+        driveCollection.create({
+          url: 'https://cozy.io',
+          name: 'cozy.url',
+          dir_id: '1'
+        })
+      ).rejects.toThrow('Creating shortcuts in a shared drive is not supported')
+      expect(stackClient.fetchJSON).not.toHaveBeenCalled()
+    })
+
     it('calls the right route', async () => {
       jest.spyOn(stackClient, 'fetchJSON').mockResolvedValue({ data: [] })
       const data = {
