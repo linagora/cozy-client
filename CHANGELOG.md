@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.35.0](https://github.com/cozy/cozy-client/compare/v60.34.0...v60.35.0) (2026-09-14)
+
+
+### Features
+
+* Add mail magic folder ([9e9ad1c](https://github.com/cozy/cozy-client/commit/9e9ad1c87569fdb3a4a51975d7836607789370f3))
+* Build with node 24 as apps ([d488b2b](https://github.com/cozy/cozy-client/commit/d488b2b6068acec3c9a71d2387e18272a3148fd9))
+
+
+
+
+
 # [60.34.0](https://github.com/cozy/cozy-client/compare/v60.33.0...v60.34.0) (2026-09-08)
 
 
