@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react-hooks'
 
 import useFetchShortcut from './useFetchShortcut'
 import { createMockClient } from '../../dist/mock'
@@ -101,6 +101,36 @@ describe('useFetchShortcut', () => {
     expect(result.current.shortcutImg).toEqual(
       `${mockClient.getStackClient().uri}/bitwarden/icons/cozy.io/icon.png`
     )
+  })
+
+  it('should ignore a drive answer resolving after a newer one', async () => {
+    const makeDeferred = () => {
+      let resolve
+      const promise = new Promise(r => {
+        resolve = r
+      })
+      return { promise, resolve }
+    }
+    const deferred = { driveA: makeDeferred(), driveB: makeDeferred() }
+    const spy = jest
+      .spyOn(mockClient, 'fetchQueryAndGetFromState')
+      .mockImplementation(
+        ({ definition }) => deferred[definition.sharingId].promise
+      )
+
+    const { result, rerender } = renderHook(
+      ({ driveId }) => useFetchShortcut(mockClient, '123', driveId),
+      { initialProps: { driveId: 'driveA' } }
+    )
+    rerender({ driveId: 'driveB' })
+
+    await act(async () => {
+      deferred.driveB.resolve({ data: { _id: '123', url: 'https://b.test' } })
+      deferred.driveA.resolve({ data: { _id: '123', url: 'https://a.test' } })
+    })
+
+    expect(result.current.shortcutInfos.data.url).toEqual('https://b.test')
+    spy.mockRestore()
   })
 
   it('should return shortcutImg for the targeted application icon when available', async () => {
