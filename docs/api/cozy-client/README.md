@@ -615,7 +615,7 @@ Array of references found
 
 *Defined in*
 
-[packages/cozy-client/src/associations/helpers.js:133](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L133)
+[packages/cozy-client/src/associations/helpers.js:134](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L134)
 
 ***
 
@@ -641,7 +641,7 @@ Array of the reference found
 
 *Defined in*
 
-[packages/cozy-client/src/associations/helpers.js:147](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L147)
+[packages/cozy-client/src/associations/helpers.js:148](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L148)
 
 ***
 
@@ -755,7 +755,7 @@ If a reference is found
 
 *Defined in*
 
-[packages/cozy-client/src/associations/helpers.js:101](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L101)
+[packages/cozy-client/src/associations/helpers.js:102](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L102)
 
 ***
 
@@ -781,7 +781,7 @@ If a reference is found
 
 *Defined in*
 
-[packages/cozy-client/src/associations/helpers.js:116](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L116)
+[packages/cozy-client/src/associations/helpers.js:117](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L117)
 
 ***
 
