@@ -41,6 +41,7 @@ export const attachRelationships = (response, relationshipsByDocId) => {
     }
   } else {
     const doc = response.data
+    if (!doc) return response
     return {
       ...response,
       data: attachRelationship(doc, relationshipsByDocId[doc._id])
