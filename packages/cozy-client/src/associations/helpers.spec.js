@@ -68,6 +68,11 @@ describe('Associations helpers', () => {
       })
     })
 
+    it('should leave a missing document untouched', () => {
+      const response = { data: null }
+      expect(attachRelationships(response, {})).toBe(response)
+    })
+
     it('should add missing relationships', () => {
       const doc = {
         _id: 1,
