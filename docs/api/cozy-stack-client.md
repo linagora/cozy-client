@@ -973,7 +973,7 @@ Remove files references to a document — see https://docs.cozy.io/en/cozy-stack
 <a name="FileCollection+destroy"></a>
 
 ### fileCollection.destroy(file, [options]) ⇒ <code>Promise.&lt;{data}&gt;</code>
-Sends file to trash and removes references to it
+Sends file to trash
 
 **Kind**: instance method of [<code>FileCollection</code>](#FileCollection)  
 **Returns**: <code>Promise.&lt;{data}&gt;</code> - The JSON API conformant response.  

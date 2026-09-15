@@ -434,14 +434,14 @@ class FileCollection extends DocumentCollection {
   }
 
   /**
-   * Sends file to trash and removes references to it
+   * Sends file to trash
    *
    * @param  {FileDocument} file - File that will be sent to trash
    * @param  {object} [options] - Optionnal request options
    * @returns {Promise<{data}>} The JSON API conformant response.
    */
   async destroy(file, { ifMatch = '' } = {}) {
-    const { _id, relationships, referenced_by } = file
+    const { _id } = file
 
     const resp = await this.stackClient.fetchJSON(
       'DELETE',
@@ -453,12 +453,6 @@ class FileCollection extends DocumentCollection {
         }
       }
     )
-    // needed because we had a bug in cozy-stack https://github.com/cozy/cozy-stack/pull/3566
-    // FIXME: to remove once the code is deployed everywhere
-    const references = get(relationships, 'referenced_by.data', referenced_by)
-    if (Array.isArray(references)) {
-      await this.removeReferencedBy(file, references)
-    }
     return {
       data: normalizeFile(resp.data)
     }
