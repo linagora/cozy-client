@@ -1296,6 +1296,19 @@ describe('CozyClient', () => {
       expect(requestHandler.mock.calls[0][0]).toBe(query)
     })
 
+    it('should resolve to a null document when a getById with includes misses', async () => {
+      requestHandler.mockResolvedValueOnce({ data: null })
+
+      const resp = await client.query(
+        Q('io.cozy.todos')
+          .getById('missing')
+          .include(['attachments'])
+      )
+
+      expect(requestHandler).toHaveBeenCalledTimes(1)
+      expect(resp.data).toBeNull()
+    })
+
     it('should handle queries with includes', async () => {
       requestHandler.mockReturnValueOnce(
         Promise.resolve({
