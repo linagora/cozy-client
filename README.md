@@ -29,3 +29,21 @@ If you want to better understand the cozy-client concepts, see the [architecture
 - [Link authoring](docs/link-authoring.md)
 
 > This is the documentation for the current version of cozy-client. If you want to check the old version, [go to the old version](http://github.com/cozy/cozy-client-js) 👵👴.
+
+## Contributing
+
+Use Node 24 and Yarn 4
+
+```bash
+yarn install
+yarn build         # required before tests: packages resolve each other from dist/
+yarn lint
+yarn test
+yarn docs          # regenerates docs/api/** (typedoc)
+yarn types         # regenerates packages/*/types/** (tsc, from JSDoc)
+yarn bench         # micro-benchmarks, see packages/cozy-client/benchmarks/README.md
+```
+
+ℹ `docs/api/**` and `packages/*/types/**` are committed. CI regenerates them and fails if they differ from what you pushed, so run `yarn docs` and `yarn types` before every push and commit the result.
+
+Commits follow [Conventional Commits](https://www.conventionalcommits.org) (checked by commitlint). Agent rules live in [AGENTS.md](AGENTS.md), publishing and linking in [docs/dev.md](docs/dev.md).
