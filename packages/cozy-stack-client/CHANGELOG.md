@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.36.1](https://github.com/linagora/cozy-client/compare/v60.36.0...v60.36.1) (2026-09-16)
+
+
+### Bug Fixes
+
+* Allow restoration of magic folder again ([761da9b](https://github.com/linagora/cozy-client/commit/761da9bf00189fb216f8796dc8c2e3ed7525400c))
+
+
+
+
+
 # [60.36.0](https://github.com/linagora/cozy-client/compare/v60.35.0...v60.36.0) (2026-09-14)
 
 
