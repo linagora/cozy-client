@@ -1207,7 +1207,9 @@ client.query(Q('io.cozy.bills'))`)
    */
   async fetchRelationships(response, relationshipsByName) {
     const isSingleDoc = !Array.isArray(response.data)
-    if (!isSingleDoc && response.data.length === 0) {
+    // A query matching no document resolves with a null `data` or an empty
+    // `data` array, depending on whether it is a single or multiple docs query
+    if (isSingleDoc ? !response.data : response.data.length === 0) {
       return response
     }
     const responseDocs = isSingleDoc ? [response.data] : response.data
