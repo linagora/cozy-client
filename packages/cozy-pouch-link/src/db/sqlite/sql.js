@@ -495,7 +495,9 @@ export const makeSQLQueryFromMango = ({
   // only on by-sequence, so the where clause stays unambiguous.
   let sql = [
     `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
-    `FROM 'by-sequence' INDEXED BY '${indexName}', 'document-store'`,
+    `FROM 'by-sequence' INDEXED BY '${escapeSQLString(
+      indexName
+    )}', 'document-store'`,
     `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND ${whereClause}`
   ].join(' ')
 
@@ -555,7 +557,7 @@ export const makeSQLQueryAll = ({ limit = -1, skip = 0 } = {}) => {
 }
 
 export const makeSQLDropIndex = indexName => {
-  return `DROP INDEX IF EXISTS '${indexName}';`
+  return `DROP INDEX IF EXISTS '${escapeSQLString(indexName)}';`
 }
 
 export const makeSQLCreateMangoIndex = (
@@ -565,17 +567,18 @@ export const makeSQLCreateMangoIndex = (
 ) => {
   // Escaped like the where clause's paths, so an index covers exactly the
   // expression makeWhereClause emits for the same field.
-  // The index name is quoted here, in makeSQLDropIndex and in
+  // The index name is quoted and escaped here, in makeSQLDropIndex and in
   // makeSQLQueryFromMango's INDEXED BY. The three must agree: a partial filter
-  // puts parentheses and a dollar in the name, which SQLite refuses to parse as
-  // a bare identifier.
+  // puts its own values in the name, so it can hold parentheses and a dollar,
+  // which SQLite refuses to parse as a bare identifier, and a quote, which
+  // would end the quoted one.
   const jsonAttributes = fieldsToIndex.map(
     field => `json_extract(json, '$.${escapeSQLString(field)}')`
   )
   const jsonIndex = jsonAttributes.join(',')
 
   let sql = `
-    CREATE INDEX IF NOT EXISTS '${indexName}'
+    CREATE INDEX IF NOT EXISTS '${escapeSQLString(indexName)}'
     ON 'by-sequence'
     (${jsonIndex})
   `

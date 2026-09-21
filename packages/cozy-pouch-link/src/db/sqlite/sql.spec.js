@@ -9,6 +9,7 @@ import {
   makeSQLQueryAll,
   parseResults,
   makeSQLCreateMangoIndex,
+  makeSQLDropIndex,
   toWebSQLResult
 } from './sql'
 
@@ -233,6 +234,25 @@ describe('makeSQLQueryFromMango', () => {
     const sql = makeSQLQueryFromMango({ selector, indexName, limit: 100 })
 
     expect(sql).toContain(`INDEXED BY '${indexName}'`)
+  })
+
+  it('escapes a quote a partial filter value put in the index name', () => {
+    const indexName = "by_name_filter_(name_$ne_O'Brien)"
+    const escaped = "by_name_filter_(name_$ne_O''Brien)"
+    const query = makeSQLQueryFromMango({
+      selector: { date: { $gt: '2025-01-01' } },
+      indexName,
+      limit: 100
+    })
+
+    // The three statements must name the same index, so they escape alike.
+    expect(query).toContain(`INDEXED BY '${escaped}'`)
+    expect(makeSQLCreateMangoIndex(indexName, ['name'], {})).toContain(
+      `CREATE INDEX IF NOT EXISTS '${escaped}'`
+    )
+    expect(makeSQLDropIndex(indexName)).toBe(
+      `DROP INDEX IF EXISTS '${escaped}';`
+    )
   })
 })
 
