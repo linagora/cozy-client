@@ -159,7 +159,7 @@ describe('makeSQLQueryFromMango', () => {
 
     const expectedSql = [
       `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
-      `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
+      `FROM 'by-sequence' INDEXED BY 'by_name', 'document-store'`,
       `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND (json_extract(data, '$.date') > '2025-01-01')`,
       `LIMIT 100;`
     ].join(' ')
@@ -175,7 +175,7 @@ describe('makeSQLQueryFromMango', () => {
 
     const expectedSql = [
       `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
-      `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
+      `FROM 'by-sequence' INDEXED BY 'by_name', 'document-store'`,
       `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND (json_extract(data, '$.date') > '2025-01-01')`,
       `ORDER BY json_extract(data, '$.date') ASC`,
       `LIMIT 100;`
@@ -197,7 +197,7 @@ describe('makeSQLQueryFromMango', () => {
 
     const expectedSql = [
       `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
-      `FROM 'by-sequence' INDEXED BY by_name, 'document-store'`,
+      `FROM 'by-sequence' INDEXED BY 'by_name', 'document-store'`,
       `WHERE 'by-sequence'.seq = 'document-store'.winningseq AND DELETED = 0 AND (json_extract(data, '$.date') > '2025-01-01')`,
       `LIMIT 200 OFFSET 100;`
     ].join(' ')
@@ -225,6 +225,14 @@ describe('makeSQLQueryFromMango', () => {
     // `LIMIT null` parses but throws a datatype mismatch when stepped.
     expect(sql).not.toContain('LIMIT null')
     expect(sql).toContain('LIMIT -1 OFFSET 10;')
+  })
+
+  it('should quote an index name a partial filter made non-alphanumeric', () => {
+    const selector = { date: { $gt: '2025-01-01' } }
+    const indexName = 'by_date_filter_(_id_$nin_(io.cozy.files.trash-dir))'
+    const sql = makeSQLQueryFromMango({ selector, indexName, limit: 100 })
+
+    expect(sql).toContain(`INDEXED BY '${indexName}'`)
   })
 })
 
