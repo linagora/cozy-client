@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.36.2](https://github.com/cozy/cozy-client/compare/v60.36.1...v60.36.2) (2026-09-21)
+
+
+### Bug Fixes
+
+* **pouch-link:** Escape the index name the three statements share ([7de0b33](https://github.com/cozy/cozy-client/commit/7de0b3335f46799b2fdf7244356e02bc39760100))
+* **pouch-link:** Quote the index name in INDEXED BY ([f99dcc5](https://github.com/cozy/cozy-client/commit/f99dcc565618925de58b195663d85de00ceaefb6))
+
+
+
+
+
 ## [60.36.1](https://github.com/cozy/cozy-client/compare/v60.36.0...v60.36.1) (2026-09-16)
 
 
