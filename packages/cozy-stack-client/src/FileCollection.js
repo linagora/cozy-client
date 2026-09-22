@@ -804,10 +804,17 @@ class FileCollection extends DocumentCollection {
    * it before doing an operation.
    *
    * @param {string} id Id of the io.cozy.files or io.cozy.files.version
+   * @param {object} [fetchOptions] Options passed to fetch, e.g. `{ cache: 'no-store' }`
+   * to bypass the browser cache, as the stack does not send Cache-Control on this route
    *
    */
-  async fetchFileContentById(id) {
-    return this.stackClient.fetch('GET', this.prefix + uri`/download/${id}`)
+  async fetchFileContentById(id, fetchOptions) {
+    return this.stackClient.fetch(
+      'GET',
+      this.prefix + uri`/download/${id}`,
+      undefined,
+      fetchOptions
+    )
   }
 
   /**
