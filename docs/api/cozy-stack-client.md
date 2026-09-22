@@ -801,7 +801,7 @@ files associated to a specific document
     * [.create(attributes, [options])](#FileCollection+create)
     * [.updateFile(data, params, options)](#FileCollection+updateFile) ⇒ [<code>Promise.&lt;FileAttributes&gt;</code>](#FileAttributes)
     * [.download(file, versionId, filename)](#FileCollection+download)
-    * [.fetchFileContentById(id)](#FileCollection+fetchFileContentById)
+    * [.fetchFileContentById(id, [fetchOptions])](#FileCollection+fetchFileContentById)
     * [.getBeautifulSize(file, decimal)](#FileCollection+getBeautifulSize)
     * [.downloadArchive(fileIds, [notSecureFilename], [options])](#FileCollection+downloadArchive)
     * ~~[.getArchiveLinkByIds()](#FileCollection+getArchiveLinkByIds)~~
@@ -1105,7 +1105,7 @@ Download a file or a specific version of the file
 
 <a name="FileCollection+fetchFileContentById"></a>
 
-### fileCollection.fetchFileContentById(id)
+### fileCollection.fetchFileContentById(id, [fetchOptions])
 Fetch the binary of a file or a specific version of a file
 Useful for instance when you can't download the file directly
 (via a content-disposition attachement header) and need to store
@@ -1116,6 +1116,7 @@ it before doing an operation.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>string</code> | Id of the io.cozy.files or io.cozy.files.version |
+| [fetchOptions] | <code>object</code> | Options passed to fetch, e.g. `{ cache: 'no-store' }` to bypass the browser cache, as the stack does not send Cache-Control on this route |
 
 <a name="FileCollection+getBeautifulSize"></a>
 
