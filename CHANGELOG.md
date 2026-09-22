@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.37.0](https://github.com/cozy/cozy-client/compare/v60.36.2...v60.37.0) (2026-09-22)
+
+
+### Features
+
+* **stack-client:** Accept fetch options in fetchFileContentById ([a1e2797](https://github.com/cozy/cozy-client/commit/a1e2797df6e3307046e014ee3d611a487ecf4d01))
+
+
+
+
+
 ## [60.36.2](https://github.com/cozy/cozy-client/compare/v60.36.1...v60.36.2) (2026-09-21)
 
 
