@@ -2033,7 +2033,21 @@ describe('FileCollection', () => {
       await collection.fetchFileContentById(FILE_ID)
       expect(client.fetch).toHaveBeenCalledWith(
         'GET',
-        '/files/download/d04ab491-2fc6'
+        '/files/download/d04ab491-2fc6',
+        undefined,
+        undefined
+      )
+    })
+
+    it('should pass fetch options', async () => {
+      await collection.fetchFileContentById('d04ab491-2fc6', {
+        cache: 'no-store'
+      })
+      expect(client.fetch).toHaveBeenCalledWith(
+        'GET',
+        '/files/download/d04ab491-2fc6',
+        undefined,
+        { cache: 'no-store' }
       )
     })
   })
