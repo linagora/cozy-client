@@ -514,7 +514,7 @@ The root Cozy URL
 
 *Defined in*
 
-[packages/cozy-client/src/helpers/urlHelper.js:394](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L394)
+[packages/cozy-client/src/helpers/urlHelper.js:409](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L409)
 
 ***
 

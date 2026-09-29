@@ -3,6 +3,7 @@ export {
   deconstructRedirectLink,
   generateWebLink,
   ensureFirstSlash,
+  isHttpUrl,
   fetchRegistrationDetails,
   rootCozyUrl,
   InvalidRedirectLinkError,

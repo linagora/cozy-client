@@ -26,6 +26,7 @@ export class InvalidCozyUrlError extends Error {
     url: any;
 }
 export function rootCozyUrl(url: URL): Promise<URL>;
+export function isHttpUrl(value: any): boolean;
 export function fetchRegistrationDetails(url: URL): Promise<RegistrationDetails>;
 export type RegistrationDetails = {
     /**
