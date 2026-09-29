@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.37.1](https://github.com/linagora/cozy-client/compare/v60.37.0...v60.37.1) (2026-09-29)
+
+
+### Bug Fixes
+
+* Resolve includes on a missing document to a null document ([7fcfb01](https://github.com/linagora/cozy-client/commit/7fcfb01f94a31fd950ca22c63c9715dc79600751))
+
+
+
+
+
 # [60.37.0](https://github.com/linagora/cozy-client/compare/v60.36.2...v60.37.0) (2026-09-22)
 
 **Note:** Version bump only for package cozy-client
