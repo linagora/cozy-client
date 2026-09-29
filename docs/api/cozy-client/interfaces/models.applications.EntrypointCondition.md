@@ -14,7 +14,7 @@ The name of the flag
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:122](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L122)
+[packages/cozy-client/src/models/applications.js:127](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L127)
 
 ***
 
@@ -26,7 +26,7 @@ The type of condition (currently only 'flag' is supported)
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:121](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L121)
+[packages/cozy-client/src/models/applications.js:126](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L126)
 
 ***
 
@@ -38,4 +38,4 @@ The expected value of the flag
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:123](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L123)
+[packages/cozy-client/src/models/applications.js:128](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L128)

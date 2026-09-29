@@ -304,6 +304,21 @@ const isResponseAboutBlockedCozy = async response => {
 }
 
 /**
+ * Check if the given value is an absolute URL using the http or https protocol
+ *
+ * @param {any} value - Value to check
+ * @returns {boolean} true if the value is an absolute http(s) URL
+ */
+export const isHttpUrl = value => {
+  if (typeof value !== 'string') return false
+  try {
+    return ['http:', 'https:'].includes(new URL(value).protocol)
+  } catch (e) {
+    return false
+  }
+}
+
+/**
  * Check if the given url uses the expected protocols (http or https). Throws otherwise
  *
  * @param {URL} url - URL to validate

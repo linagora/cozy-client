@@ -124,6 +124,55 @@ describe('applications model', () => {
     })
   })
 
+  describe('getUrl', () => {
+    const related = 'http://calendar.cozy.tools:8080/'
+
+    beforeEach(() => {
+      flag.mockReset()
+    })
+
+    it('returns links.related when the app has no client_url_flag', () => {
+      expect(applications.getUrl({ links: { related } })).toBe(related)
+    })
+
+    it('returns the flag value of a standalone app when it is a valid URL', () => {
+      flag.mockReturnValue('https://calendar.example.com/')
+      const app = {
+        standalone: true,
+        client_url_flag: 'calendar.embedded-app-url',
+        links: { related }
+      }
+      expect(applications.getUrl(app)).toBe('https://calendar.example.com/')
+      expect(flag).toHaveBeenCalledWith('calendar.embedded-app-url')
+    })
+
+    it.each([null, true, 'not a url', 'javascript:alert(1)'])(
+      'returns links.related when the flag value is %p',
+      value => {
+        flag.mockReturnValue(value)
+        const app = {
+          standalone: true,
+          client_url_flag: 'calendar.embedded-app-url',
+          links: { related }
+        }
+        expect(applications.getUrl(app)).toBe(related)
+      }
+    )
+
+    it.each([undefined, false])(
+      'returns links.related when standalone is %p',
+      standalone => {
+        flag.mockReturnValue('https://mail.example.com/')
+        const app = {
+          standalone,
+          client_url_flag: 'mail.embedded-app-url',
+          links: { related }
+        }
+        expect(applications.getUrl(app)).toBe(related)
+      }
+    )
+  })
+
   describe('get store installation url', () => {
     const contactsApp = { slug: 'contacts' }
 

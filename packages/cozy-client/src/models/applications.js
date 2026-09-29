@@ -1,6 +1,8 @@
 import flag from 'cozy-flags'
 import get from 'lodash/get'
 
+import { isHttpUrl } from '../helpers'
+
 const STORE_SLUG = 'store'
 
 /**
@@ -54,11 +56,14 @@ export const isInstalled = (apps = [], wantedApp = {}) => {
 }
 
 /**
- *
  * @param {object} app io.cozy.apps document
  * @returns {string} url to the app
  */
 export const getUrl = app => {
+  if (app.standalone === true && app.client_url_flag) {
+    const clientUrl = flag(app.client_url_flag)
+    if (isHttpUrl(clientUrl)) return clientUrl
+  }
   return app.links && app.links.related
 }
 
