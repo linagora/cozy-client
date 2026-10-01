@@ -60,7 +60,11 @@ export const isInstalled = (apps = [], wantedApp = {}) => {
  * @returns {string} url to the app
  */
 export const getUrl = app => {
-  if (app.standalone === true && app.client_url_flag) {
+  if (
+    app.standalone === true &&
+    app.client_url_flag &&
+    flag('apps.enable-standalone-apps')
+  ) {
     const clientUrl = flag(app.client_url_flag)
     if (isHttpUrl(clientUrl)) return clientUrl
   }
