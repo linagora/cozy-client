@@ -32,7 +32,7 @@ True if the condition is satisfied
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:146](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L146)
+[packages/cozy-client/src/models/applications.js:150](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L150)
 
 ***
 
@@ -56,7 +56,7 @@ Filtered array of entrypoints that should be displayed
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:183](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L183)
+[packages/cozy-client/src/models/applications.js:187](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L187)
 
 ***
 
@@ -81,7 +81,7 @@ Name of the app suitable for display
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:78](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L78)
+[packages/cozy-client/src/models/applications.js:82](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L82)
 
 ***
 
@@ -201,7 +201,7 @@ Filtered array of entrypoints
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:173](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L173)
+[packages/cozy-client/src/models/applications.js:177](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L177)
 
 ***
 
@@ -225,7 +225,7 @@ True if all conditions are satisfied
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:160](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L160)
+[packages/cozy-client/src/models/applications.js:164](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L164)
 
 ***
 
@@ -251,4 +251,4 @@ io.cozy.apps array
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:104](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L104)
+[packages/cozy-client/src/models/applications.js:108](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L108)

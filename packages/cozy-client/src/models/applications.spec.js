@@ -127,6 +127,8 @@ describe('applications model', () => {
   describe('getUrl', () => {
     const related = 'http://calendar.cozy.tools:8080/'
 
+    const mockFlags = flags => flag.mockImplementation(name => flags[name])
+
     beforeEach(() => {
       flag.mockReset()
     })
@@ -136,7 +138,10 @@ describe('applications model', () => {
     })
 
     it('returns the flag value of a standalone app when it is a valid URL', () => {
-      flag.mockReturnValue('https://calendar.example.com/')
+      mockFlags({
+        'apps.enable-standalone-apps': true,
+        'calendar.embedded-app-url': 'https://calendar.example.com/'
+      })
       const app = {
         standalone: true,
         client_url_flag: 'calendar.embedded-app-url',
@@ -149,7 +154,10 @@ describe('applications model', () => {
     it.each([null, true, 'not a url', 'javascript:alert(1)'])(
       'returns links.related when the flag value is %p',
       value => {
-        flag.mockReturnValue(value)
+        mockFlags({
+          'apps.enable-standalone-apps': true,
+          'calendar.embedded-app-url': value
+        })
         const app = {
           standalone: true,
           client_url_flag: 'calendar.embedded-app-url',
@@ -162,7 +170,10 @@ describe('applications model', () => {
     it.each([undefined, false])(
       'returns links.related when standalone is %p',
       standalone => {
-        flag.mockReturnValue('https://mail.example.com/')
+        mockFlags({
+          'apps.enable-standalone-apps': true,
+          'mail.embedded-app-url': 'https://mail.example.com/'
+        })
         const app = {
           standalone,
           client_url_flag: 'mail.embedded-app-url',
@@ -171,6 +182,18 @@ describe('applications model', () => {
         expect(applications.getUrl(app)).toBe(related)
       }
     )
+
+    it('returns links.related while standalone apps are not enabled', () => {
+      mockFlags({
+        'calendar.embedded-app-url': 'https://calendar.example.com/'
+      })
+      const app = {
+        standalone: true,
+        client_url_flag: 'calendar.embedded-app-url',
+        links: { related }
+      }
+      expect(applications.getUrl(app)).toBe(related)
+    })
   })
 
   describe('get store installation url', () => {
