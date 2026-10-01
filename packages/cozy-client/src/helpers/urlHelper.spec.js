@@ -5,6 +5,7 @@ import {
   deconstructRedirectLink,
   generateWebLink,
   fetchRegistrationDetails,
+  isHttpUrl,
   rootCozyUrl,
   InvalidRedirectLinkError,
   InvalidCozyUrlError,
@@ -131,6 +132,28 @@ describe('deconstructWebLink', () => {
       )
     }
   )
+})
+
+describe('isHttpUrl', () => {
+  it.each([
+    'http://alice.cozy.localhost:8080',
+    'https://calendar.example.com/'
+  ])('accepts %p', value => {
+    expect(isHttpUrl(value)).toBe(true)
+  })
+
+  it.each([
+    undefined,
+    null,
+    true,
+    '',
+    'calendar.example.com',
+    'not a url',
+    'javascript:alert(1)',
+    'ftp://example.com'
+  ])('rejects %p', value => {
+    expect(isHttpUrl(value)).toBe(false)
+  })
 })
 
 describe('deconstructRedirectLink', () => {
