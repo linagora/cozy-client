@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.38.0](https://github.com/cozy/cozy-client/compare/v60.37.1...v60.38.0) (2026-10-01)
+
+
+### Features
+
+* Use client_url_flag value in getUrl when relevant ([f2dbd10](https://github.com/cozy/cozy-client/commit/f2dbd10bf9e56cead07a089cb2b70a2dc5b0ec6a))
+
+
+
+
+
 ## [60.37.1](https://github.com/cozy/cozy-client/compare/v60.37.0...v60.37.1) (2026-09-29)
 
 
