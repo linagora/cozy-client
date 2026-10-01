@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.39.0](https://github.com/linagora/cozy-client/compare/v60.38.0...v60.39.0) (2026-10-01)
+
+
+### Features
+
+* Open standalone apps behind a flag ([5eaac90](https://github.com/linagora/cozy-client/commit/5eaac90257d259e1c8b7ad2824adda63ff0dc079))
+
+
+
+
+
 # [60.38.0](https://github.com/linagora/cozy-client/compare/v60.37.1...v60.38.0) (2026-10-01)
 
 
