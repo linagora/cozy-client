@@ -204,6 +204,36 @@ describe('PouchManager', () => {
     expect(manager.stopReplicationLoop).toHaveBeenCalled()
   })
 
+  it('should start the loop once a database that was busy answers', async () => {
+    jest.spyOn(console, 'warn').mockReturnValue()
+    jest.spyOn(manager, 'replicateOnce')
+    manager.options.ensureDatabasesRetryDelay = 5
+    manager
+      .getPouch(dbName)
+      .info.mockRejectedValueOnce(new Error('database is locked'))
+    await manager.startReplicationLoop()
+    expect(manager.getPouch(dbName).info).toHaveBeenCalledTimes(2)
+    expect(manager.replicateOnce).toHaveBeenCalledTimes(1)
+  })
+
+  it('should report a database that never answers and start on a later call', async () => {
+    jest.spyOn(console, 'warn').mockReturnValue()
+    jest.spyOn(manager, 'replicateOnce')
+    const onError = jest.fn()
+    manager.options.onError = onError
+    manager.options.ensureDatabasesRetryDelay = 5
+    const error = new Error('database is locked')
+    manager.getPouch(dbName).info.mockRejectedValue(error)
+    await expect(manager.startReplicationLoop()).resolves.toBeUndefined()
+    expect(onError).toHaveBeenCalledTimes(1)
+    expect(onError).toHaveBeenCalledWith(error)
+    expect(manager.replicateOnce).not.toHaveBeenCalled()
+
+    manager.getPouch(dbName).info.mockResolvedValue()
+    await manager.startReplicationLoop()
+    expect(manager.replicateOnce).toHaveBeenCalledTimes(1)
+  })
+
   it('should not start replication several times', async () => {
     jest.spyOn(manager, 'replicateOnce')
     manager.options.replicationDelay = 30 * 1000

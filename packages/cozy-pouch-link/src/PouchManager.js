@@ -16,6 +16,8 @@ import { destroyOldDatabases } from './migrations/pouchdb'
 import PouchDBQueryEngine from './db/pouchdb/pouchdb'
 
 const DEFAULT_DELAY = 30 * 1000
+const ENSURE_DATABASES_RETRIES = 3
+const DEFAULT_ENSURE_DATABASES_RETRY_DELAY = 1000
 
 // See view_update_changes_batch_size in https://pouchdb.com/api.html#create_database
 // PouchDB default is 50, which badly hurt performances for large databases
@@ -128,26 +130,54 @@ class PouchManager {
    * Via a call to info() we ensure the database exist on the
    * remote side. This is done only once since after the first
    * call, we are sure that the databases have been created.
+   *
+   * A database can be busy for an instant, typically while another
+   * connection holds a lock on it: the call is tried again a few times
+   * before the error is thrown.
    */
   async ensureDatabasesExist() {
     if (this.ensureDatabasesExistDone) {
       return Promise.resolve()
     }
-    return Promise.all(
-      Object.values(this.pouches).map(pouch => pouch.info())
-    ).then(() => {
-      logger.info('PouchManager: ensure databases exist done')
-      this.ensureDatabasesExistDone = true
-    })
+    const retryDelay =
+      this.options.ensureDatabasesRetryDelay ??
+      DEFAULT_ENSURE_DATABASES_RETRY_DELAY
+    for (let attempt = 0; ; attempt++) {
+      try {
+        await Promise.all(
+          Object.values(this.pouches).map(pouch => pouch.info())
+        )
+        break
+      } catch (err) {
+        if (attempt >= ENSURE_DATABASES_RETRIES) {
+          throw err
+        }
+        logger.warn(
+          `PouchManager: a database did not answer, trying again - ${err.message}`
+        )
+        await new Promise(resolve => setTimeout(resolve, retryDelay))
+      }
+    }
+    logger.info('PouchManager: ensure databases exist done')
+    this.ensureDatabasesExistDone = true
   }
 
   /**
    * Starts periodic syncing of the pouches
    *
+   * When the databases cannot be reached, the loop is not started and the
+   * error goes through `onError`, like an error during a replication: it
+   * needs to be started again by the owner of PouchManager.
+   *
    * @returns {Promise<Loop | void>}
    */
   async startReplicationLoop() {
-    await this.ensureDatabasesExist()
+    try {
+      await this.ensureDatabasesExist()
+    } catch (err) {
+      this.handleReplicationError(err)
+      return
+    }
 
     if (this.replicationLoop) {
       logger.warn('Replication loop already started')

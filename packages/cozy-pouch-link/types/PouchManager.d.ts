@@ -28,6 +28,10 @@ declare class PouchManager {
     /**
      * Starts periodic syncing of the pouches
      *
+     * When the databases cannot be reached, the loop is not started and the
+     * error goes through `onError`, like an error during a replication: it
+     * needs to be started again by the owner of PouchManager.
+     *
      * @returns {Promise<Loop | void>}
      */
     startReplicationLoop(): Promise<Loop | void>;
@@ -53,6 +57,10 @@ declare class PouchManager {
      * Via a call to info() we ensure the database exist on the
      * remote side. This is done only once since after the first
      * call, we are sure that the databases have been created.
+     *
+     * A database can be busy for an instant, typically while another
+     * connection holds a lock on it: the call is tried again a few times
+     * before the error is thrown.
      */
     ensureDatabasesExist(): Promise<void>;
     replicationLoop: Loop;
