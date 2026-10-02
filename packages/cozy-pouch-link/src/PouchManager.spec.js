@@ -249,6 +249,23 @@ describe('PouchManager', () => {
     expect(manager.replicationLoop).toBeFalsy()
   })
 
+  it('should start the loop when asked again after a stop made while a database was busy', async () => {
+    jest.spyOn(console, 'warn').mockReturnValue()
+    jest.spyOn(manager, 'replicateOnce')
+    manager.options.replicationDelay = 30 * 1000
+    manager.options.ensureDatabasesRetryDelay = 20
+    manager
+      .getPouch(dbName)
+      .info.mockRejectedValueOnce(new Error('database is locked'))
+    const stopped = manager.startReplicationLoop()
+    await sleep(1)
+    manager.stopReplicationLoop()
+    const restarted = manager.startReplicationLoop()
+    await Promise.all([stopped, restarted])
+    expect(manager.replicateOnce).toHaveBeenCalledTimes(1)
+    expect(manager.replicationLoop).toBeTruthy()
+  })
+
   it('should share one start between overlapping calls', async () => {
     jest.spyOn(console, 'warn').mockReturnValue()
     jest.spyOn(manager, 'replicateOnce')
