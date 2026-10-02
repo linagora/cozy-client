@@ -234,6 +234,47 @@ describe('PouchManager', () => {
     expect(manager.replicateOnce).toHaveBeenCalledTimes(1)
   })
 
+  it('should not start the loop when it was stopped while a database was busy', async () => {
+    jest.spyOn(console, 'warn').mockReturnValue()
+    jest.spyOn(manager, 'replicateOnce')
+    manager.options.ensureDatabasesRetryDelay = 20
+    manager
+      .getPouch(dbName)
+      .info.mockRejectedValueOnce(new Error('database is locked'))
+    const start = manager.startReplicationLoop()
+    await sleep(1)
+    manager.stopReplicationLoop()
+    await start
+    expect(manager.replicateOnce).not.toHaveBeenCalled()
+    expect(manager.replicationLoop).toBeFalsy()
+  })
+
+  it('should share one start between overlapping calls', async () => {
+    jest.spyOn(console, 'warn').mockReturnValue()
+    jest.spyOn(manager, 'replicateOnce')
+    const onError = jest.fn()
+    manager.options.onError = onError
+    manager.options.ensureDatabasesRetryDelay = 5
+    manager
+      .getPouch(dbName)
+      .info.mockRejectedValue(new Error('database is locked'))
+    await Promise.all([
+      manager.startReplicationLoop(),
+      manager.startReplicationLoop()
+    ])
+    expect(onError).toHaveBeenCalledTimes(1)
+    expect(manager.getPouch(dbName).info).toHaveBeenCalledTimes(4)
+
+    manager.getPouch(dbName).info.mockReset()
+    manager.getPouch(dbName).info.mockResolvedValue()
+    await Promise.all([
+      manager.startReplicationLoop(),
+      manager.startReplicationLoop()
+    ])
+    expect(manager.getPouch(dbName).info).toHaveBeenCalledTimes(1)
+    expect(manager.replicateOnce).toHaveBeenCalledTimes(1)
+  })
+
   it('should not start replication several times', async () => {
     jest.spyOn(manager, 'replicateOnce')
     manager.options.replicationDelay = 30 * 1000
