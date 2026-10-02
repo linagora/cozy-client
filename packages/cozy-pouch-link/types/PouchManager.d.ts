@@ -35,7 +35,9 @@ declare class PouchManager {
      * error goes through `onError`, like an error during a replication: it
      * needs to be started again by the owner of PouchManager.
      *
-     * Calls made while a start is pending share that start.
+     * Calls made while a start is pending share that start. A stop gives up
+     * the pending start: it will not build the loop, and the next call starts
+     * afresh.
      *
      * @returns {Promise<Loop | void>}
      */

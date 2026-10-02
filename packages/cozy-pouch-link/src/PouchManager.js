@@ -172,15 +172,20 @@ class PouchManager {
    * error goes through `onError`, like an error during a replication: it
    * needs to be started again by the owner of PouchManager.
    *
-   * Calls made while a start is pending share that start.
+   * Calls made while a start is pending share that start. A stop gives up
+   * the pending start: it will not build the loop, and the next call starts
+   * afresh.
    *
    * @returns {Promise<Loop | void>}
    */
   startReplicationLoop() {
     if (!this.pendingLoopStart) {
-      this.pendingLoopStart = this.doStartReplicationLoop().finally(() => {
-        this.pendingLoopStart = null
+      const start = this.doStartReplicationLoop().finally(() => {
+        if (this.pendingLoopStart === start) {
+          this.pendingLoopStart = null
+        }
       })
+      this.pendingLoopStart = start
     }
     return this.pendingLoopStart
   }
@@ -221,6 +226,7 @@ class PouchManager {
   /** Stop periodic syncing of the pouches */
   stopReplicationLoop() {
     this.loopStops++
+    this.pendingLoopStart = null
     if (this.replicationLoop) {
       logger.info('PouchManager: Stop replication loop')
       this.replicationLoop.stop()
