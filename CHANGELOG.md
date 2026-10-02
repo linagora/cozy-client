@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.39.1](https://github.com/cozy/cozy-client/compare/v60.39.0...v60.39.1) (2026-10-02)
+
+
+### Bug Fixes
+
+* **pouch-link:** Keep a pending loop start from undoing a stop ([4492d85](https://github.com/cozy/cozy-client/commit/4492d854bc6c69711cb2d5e320d6c7e10fe53ef7))
+* **pouch-link:** Let a start asked after a stop build the loop ([438d7b0](https://github.com/cozy/cozy-client/commit/438d7b0e31b5da5d640ff9a79b8b8400e0d9e263))
+* **pouch-link:** Start the replication loop after a busy database ([8a2abe2](https://github.com/cozy/cozy-client/commit/8a2abe2ca050d61e4adcc1b4abee1972815aea25)), closes [#1731](https://github.com/cozy/cozy-client/issues/1731)
+
+
+
+
+
 # [60.39.0](https://github.com/cozy/cozy-client/compare/v60.38.0...v60.39.0) (2026-10-01)
 
 
