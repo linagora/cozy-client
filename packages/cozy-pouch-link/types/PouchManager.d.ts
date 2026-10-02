@@ -16,6 +16,9 @@ declare class PouchManager {
     isOnline: any;
     events: any;
     dbQueryEngines: Map<any, any>;
+    loopStops: number;
+    /** @type {Promise<Loop | void> | null} */
+    pendingLoopStart: Promise<Loop | void> | null;
     init(): Promise<void>;
     pouches: {};
     doctypesReplicationOptions: any;
@@ -31,6 +34,8 @@ declare class PouchManager {
      * When the databases cannot be reached, the loop is not started and the
      * error goes through `onError`, like an error during a replication: it
      * needs to be started again by the owner of PouchManager.
+     *
+     * Calls made while a start is pending share that start.
      *
      * @returns {Promise<Loop | void>}
      */
@@ -63,6 +68,11 @@ declare class PouchManager {
      * before the error is thrown.
      */
     ensureDatabasesExist(): Promise<void>;
+    /**
+     * @private
+     * @returns {Promise<Loop | void>}
+     */
+    private doStartReplicationLoop;
     replicationLoop: Loop;
     /**
      * If a replication is currently ongoing, will start a replication

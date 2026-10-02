@@ -52,6 +52,9 @@ class PouchManager {
     this.isOnline = options.platform?.isOnline || platformWeb.isOnline
     this.events = options.platform?.events || platformWeb.events
     this.dbQueryEngines = new Map()
+    this.loopStops = 0
+    /** @type {Promise<Loop | void> | null} */
+    this.pendingLoopStart = null
   }
 
   async init() {
@@ -169,13 +172,34 @@ class PouchManager {
    * error goes through `onError`, like an error during a replication: it
    * needs to be started again by the owner of PouchManager.
    *
+   * Calls made while a start is pending share that start.
+   *
    * @returns {Promise<Loop | void>}
    */
-  async startReplicationLoop() {
+  startReplicationLoop() {
+    if (!this.pendingLoopStart) {
+      this.pendingLoopStart = this.doStartReplicationLoop().finally(() => {
+        this.pendingLoopStart = null
+      })
+    }
+    return this.pendingLoopStart
+  }
+
+  /**
+   * @private
+   * @returns {Promise<Loop | void>}
+   */
+  async doStartReplicationLoop() {
+    const stopsBeforeStart = this.loopStops
     try {
       await this.ensureDatabasesExist()
     } catch (err) {
       this.handleReplicationError(err)
+      return
+    }
+
+    if (this.loopStops !== stopsBeforeStart) {
+      logger.info('PouchManager: Replication loop stopped before it started')
       return
     }
 
@@ -196,6 +220,7 @@ class PouchManager {
 
   /** Stop periodic syncing of the pouches */
   stopReplicationLoop() {
+    this.loopStops++
     if (this.replicationLoop) {
       logger.info('PouchManager: Stop replication loop')
       this.replicationLoop.stop()
