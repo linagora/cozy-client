@@ -417,6 +417,55 @@ describe('DocumentCollection', () => {
           { indexId: undefined, limit: 1, partialFilterFields: ['$trashed'] }
         )
       })
+
+      fit('dont know yet but its something about logical operator at first selector', async () => {
+        const partialFilter = {
+          $or: [
+            {
+              'email.address': {
+                $exists: true
+              }
+            },
+            {
+              'phone.number': {
+                $exists: true
+              }
+            }
+          ]
+        }
+        collection.find = jest.fn()
+        collection.find.mockResolvedValueOnce({ data: [] })
+        client.fetchJSON.mockResolvedValueOnce({
+          result: 'dontexistyet'
+        })
+        await collection.createIndex([], {
+          partialFilter
+        })
+
+        expect(client.fetchJSON).toHaveBeenCalledWith(
+          'POST',
+          '/data/io.cozy.todos/_index',
+          {
+            index: {
+              fields: [],
+              partial_filter_selector: partialFilter
+            }
+          }
+        )
+
+        expect(collection.find).toHaveBeenCalledWith(
+          {
+            /* _id: {
+              $gt: null
+            } */
+          },
+          {
+            indexId: undefined,
+            limit: 1,
+            partialFilterFields: ['$or', 'email.address', 'phone.number']
+          }
+        )
+      })
     })
 
     describe('new index', () => {
