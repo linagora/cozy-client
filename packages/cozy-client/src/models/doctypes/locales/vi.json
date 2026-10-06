@@ -1,0 +1,106 @@
+{
+  "com": {
+    "tricount.expenses": "Chi tiêu Tricount",
+    "splitwise.expenses": "Chi tiêu Splitwise",
+    "bitwarden.profiles": "Hồ sơ trình quản lý mật khẩu",
+    "bitwarden.ciphers": "Mục trong trình quản lý mật khẩu",
+    "bitwarden.folders": "Thư mục trình quản lý mật khẩu",
+    "bitwarden.organizations": "Thư mục chia sẻ của trình quản lý mật khẩu",
+    "bitwarden.contacts": "Danh bạ trình quản lý mật khẩu",
+    "grandlyon": {
+      "enedis.*": "Dữ liệu tiêu thụ điện",
+      "grdf.*": "Dữ liệu tiêu thụ khí đốt",
+      "egl.*": "Dữ liệu tiêu thụ nước",
+      "ecolyo.*": "Dữ liệu Ecolyo"
+    }
+  },
+  "cc": {
+    "cozycloud": {
+      "autocategorization": "Tệp bổ sung cho mô hình phân loại",
+      "errors": "Nhật ký ứng dụng",
+      "sentry": "Nhật ký ứng dụng",
+      "dacc": "Thống kê tổng hợp ẩn danh",
+      "dacc_v2": "Thống kê tổng hợp ẩn danh",
+      "dacc.dev": "Thống kê tổng hợp ẩn danh cho phát triển",
+      "dacc.dev_v2": "Thống kê tổng hợp ẩn danh cho phát triển",
+      "announcements": "API lấy thông báo",
+      "announcements.uploads": "API lấy hình ảnh thông báo",
+      "announcements.dev": "API lấy thông báo (phát triển)",
+      "announcements.dev.uploads": "API lấy hình ảnh thông báo (phát triển)"
+    }
+  },
+  "eu": {
+    "mycozy": {
+      "dacc": "Thống kê tổng hợp ẩn danh",
+      "dacc_v2": "Thống kê tổng hợp ẩn danh"
+    }
+  },
+  "io": {
+    "cozy": {
+      "accounts": "Thông tin đăng nhập",
+      "ai.chat.conversations": "Cuộc trò chuyện với AI",
+      "ai.chat.events": "Sự kiện AI",
+      "apps": "Danh sách ứng dụng đã cài đặt",
+      "apps.suggestions": "Ứng dụng được đề xuất",
+      "bank.accounts": "Tài khoản ngân hàng",
+      "bank.accounts.stats": "Thống kê tài khoản ngân hàng",
+      "bank.balancehistories": "Số dư ngân hàng",
+      "bank.groups": "Nhóm tài khoản ngân hàng",
+      "bank.operations": "Giao dịch ngân hàng",
+      "bank.settings": "Cài đặt ứng dụng Banks",
+      "bank.recipients": "Người nhận chuyển khoản",
+      "bank.recurrence": "Nhóm giao dịch định kỳ của Banks",
+      "bills": "Hóa đơn",
+      "calendar": "Lịch",
+      "certified.carbon_copy": "Bản sao có chứng thực",
+      "certified.electronic_safe": "Két sắt điện tử",
+      "coachco2.settings": "Cài đặt ứng dụng CoachCO2",
+      "contacts": "Danh bạ",
+      "contacts.groups": "Nhóm danh bạ",
+      "contacts.accounts": "Tài khoản liên kết với danh bạ",
+      "files": "Tệp",
+      "files.versions": "Phiên bản tệp",
+      "files.*": "Dữ liệu liên quan đến tệp (tệp, thư mục, phiên bản, ...)",
+      "identities": "Danh tính",
+      "jobs": "Tác vụ",
+      "konnectors": "Trình kết nối để nhập dữ liệu",
+      "konnectors.result": "Kết quả của trình kết nối",
+      "netflix.views": "Lịch sử xem Netflix",
+      "netflix.opinions": "Đánh giá Netflix",
+      "notes.documents": "Ghi chú",
+      "notifications": "Thông báo",
+      "oauth.clients": "Thiết bị đã kết nối",
+      "permissions": "Ủy quyền",
+      "photos.albums": "Album ảnh",
+      "photos.settings": "Cài đặt ảnh",
+      "settings": "Cài đặt",
+      "sharings": "Chia sẻ",
+      "support": "Hỗ trợ",
+      "tags": "Thẻ",
+      "timeseries.geojson": "Chuyến đi",
+      "timeseries.grades": "Điểm học tập",
+      "triggers": "Lập lịch tác vụ",
+      "drive.settings": "Cài đặt Drive"
+    }
+  },
+  "fr": {
+    "maif": {
+      "events": "Sự kiện (Maif)",
+      "maifuser": {
+        "contrat": "Hợp đồng (Maif)",
+        "home": "Nhà ở (Maif)",
+        "family": "Gia đình (Maif)",
+        "paymentterms": "Điều khoản thanh toán (Maif)",
+        "sinistre": "Sự cố bảo hiểm (Maif)",
+        "societaire": "Thành viên (Maif)"
+      }
+    }
+  },
+  "org": {
+    "fing": {
+      "mesinfos": {
+        "insuranceclaim": "Yêu cầu bồi thường bảo hiểm (Maif)"
+      }
+    }
+  }
+}

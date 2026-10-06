@@ -1,0 +1,261 @@
+{
+  "country": {
+    "foreign": "Nước ngoài"
+  },
+  "Scan": {
+    "scan_a_doc": "Quét tài liệu",
+    "save_doc": "Lưu tài liệu",
+    "filename": "Tên tệp",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "qualify": "Mô tả",
+    "apply": "Áp dụng",
+    "error": {
+      "offline": "Hiện bạn đang ngoại tuyến nên không thể dùng chức năng này. Vui lòng thử lại sau.",
+      "uploading": "Đang có một tệp được tải lên. Vui lòng chờ tải lên xong rồi thử lại.",
+      "generic": "Đã xảy ra lỗi. Vui lòng thử lại."
+    },
+    "successful": {
+      "qualified_ok": "Đã mô tả tệp thành công!"
+    },
+    "items": {
+      "accommodation_proof": "Giấy xác nhận chỗ ở",
+      "appliance_invoice": "Hóa đơn đồ gia dụng",
+      "bank_details": "Thông tin tài khoản ngân hàng",
+      "bank_statement": "Sao kê ngân hàng",
+      "birth_certificate": "Giấy khai sinh",
+      "building_permit": "Giấy phép xây dựng",
+      "caf": "Giấy xác nhận trợ cấp xã hội",
+      "car_insurance": "Giấy chứng nhận bảo hiểm ô tô",
+      "citizen_registration_certificate": "Giấy xác nhận đăng ký công dân",
+      "condition_report": "Biên bản hiện trạng nhà ở",
+      "diploma": "Bằng cấp",
+      "divorce": "Giấy chứng nhận ly hôn",
+      "driver_license": "Giấy phép lái xe",
+      "electoral_card": "Thẻ cử tri",
+      "employment_center_certificate": "Giấy xác nhận của trung tâm việc làm",
+      "energy_contract": "Hợp đồng với nhà cung cấp năng lượng",
+      "energy_invoice": "Hóa đơn năng lượng",
+      "expense_claim": "Phiếu đề nghị thanh toán chi phí",
+      "family_record_book": "Sổ gia đình",
+      "family": "Gia đình",
+      "fidelity_card": "Thẻ khách hàng thân thiết",
+      "fine": "Phiếu phạt",
+      "gradebook": "Bảng điểm",
+      "grocery_invoice": "Hóa đơn mua sắm thực phẩm",
+      "health_book": "Sổ sức khỏe",
+      "health_certificate": "Giấy chứng nhận sức khỏe/tiêm chủng",
+      "health_insurance_card": "Thẻ bảo hiểm",
+      "health_invoice": "Hóa đơn y tế",
+      "health": "Sức khỏe",
+      "home": "Nhà ở",
+      "house_insurance": "Bảo hiểm nhà ở",
+      "house_sale_agreeement": "Hợp đồng mua bán nhà",
+      "identity_photo": "Ảnh thẻ",
+      "identity": "Giấy tờ tùy thân",
+      "invoice": "Hóa đơn",
+      "isp_invoice": "Hóa đơn internet",
+      "large_family_card": "Thẻ gia đình đông con",
+      "lease": "Hợp đồng thuê nhà",
+      "loan_agreement": "Hợp đồng vay",
+      "mechanic_invoice": "Hóa đơn sửa chữa",
+      "motivation_letter": "Thư xin việc",
+      "national_health_insurance_card": "Thẻ bảo hiểm y tế quốc gia",
+      "national_health_insurance_right_certificate": "Giấy xác nhận quyền lợi bảo hiểm y tế quốc gia",
+      "national_id_card": "Căn cước công dân",
+      "note_identity_document": "Ghi chú Giấy tờ tùy thân",
+      "note_family_document": "Ghi chú Gia đình",
+      "note_work_document": "Ghi chú Công việc & Học tập",
+      "note_health_document": "Ghi chú Sức khỏe",
+      "note_house_document": "Ghi chú Nhà ở",
+      "note_transport_document": "Ghi chú Đi lại",
+      "note_activity_document": "Ghi chú Hoạt động",
+      "note_finance": "Ghi chú Tài chính",
+      "note_invoice": "Ghi chú Hóa đơn",
+      "other_activity_document": "Tài liệu hoạt động khác",
+      "other_bank_document": "Tài liệu tài chính khác",
+      "other_family_document": "Tài liệu gia đình khác",
+      "other_health_document": "Tài liệu sức khỏe khác",
+      "other_house_document": "Tài liệu nhà ở khác",
+      "other_identity_document": "Giấy tờ tùy thân khác",
+      "other_invoice": "Hóa đơn khác",
+      "other_revenue": "Thu nhập khác",
+      "other_tax_document": "Tài liệu thuế khác",
+      "other_transport_document": "Tài liệu đi lại khác",
+      "other_work_document": "Tài liệu công việc khác",
+      "other_administrative_document": "Tài liệu hành chính khác",
+      "others": "Khác",
+      "pacs": "Giấy xác nhận kết hợp dân sự",
+      "passport": "Hộ chiếu",
+      "pay_sheet": "Phiếu lương",
+      "payment_proof_family_allowance": "Giấy xác nhận chi trả trợ cấp gia đình",
+      "pension": "Lương hưu",
+      "person_insurance": "Giấy chứng nhận bảo hiểm cá nhân",
+      "personal_sporting_licence": "Thẻ vận động viên",
+      "phone_invoice": "Hóa đơn điện thoại",
+      "pregnancy_medical_certificate": "Giấy xác nhận mang thai",
+      "prescription": "Đơn thuốc",
+      "real_estate_insurance" : "Giấy chứng nhận bảo hiểm bất động sản",
+      "real_estate_tax": "Thuế bất động sản",
+      "receipt": "Biên nhận",
+      "rent_receipt": "Biên nhận tiền thuê nhà",
+      "residence_permit": "Thẻ cư trú",
+      "restaurant_invoice": "Hóa đơn nhà hàng",
+      "resume": "Sơ yếu lý lịch",
+      "school_attendance_certificate": "Giấy xác nhận học sinh, sinh viên",
+      "school_insurance_certificate": "Giấy chứng nhận bảo hiểm học đường",
+      "single_parent_benefit": "Trợ cấp cha mẹ đơn thân",
+      "student_card": "Thẻ sinh viên",
+      "tax_certificate": "Giấy xác nhận thuế",
+      "tax_notice": "Thông báo thuế",
+      "tax_return": "Tờ khai thuế",
+      "tax_timetable": "Lịch nộp thuế",
+      "technical_diagnostic_record": "Hồ sơ chẩn đoán kỹ thuật",
+      "telecom_invoice": "Hóa đơn viễn thông",
+      "transport_card": "Thẻ đi lại",
+      "transport_invoice": "Hóa đơn đi lại",
+      "transport": "Đi lại",
+      "unemployment_benefit": "Trợ cấp thất nghiệp",
+      "unfit_for_habitation_declaration": "Quyết định nhà không đủ điều kiện ở",
+      "vehicle_registration": "Giấy đăng ký xe",
+      "water_invoice": "Hóa đơn tiền nước",
+      "web_service_invoice": "Hóa đơn dịch vụ web",
+      "wedding": "Hợp đồng hôn nhân",
+      "work_contract": "Hợp đồng lao động",
+      "work_disability_recognition": "Giấy xác nhận khuyết tật",
+      "work_invoice": "Hóa đơn thi công",
+      "work_quote": "Báo giá thi công",
+      "work_study": "Công việc & Học tập"
+    },
+    "attributes":{
+      "contractType": {
+        "cdi": "Không xác định thời hạn",
+        "cdd": "Xác định thời hạn",
+        "alternate": "Vừa học vừa làm",
+        "internship": "Thực tập",
+        "other": "Khác"
+      },
+      "noticePeriod": {
+        "oneWeek": "Trước 1 tuần",
+        "oneMonth": "Trước 1 tháng",
+        "threeMonth": "Trước 3 tháng",
+        "oneYear": "Trước 1 năm",
+        "custom": "Tùy chỉnh",
+        "noAlert": "Không nhận cảnh báo"
+      }
+    },
+    "themes": {
+      "none": "Không có",
+      "activity": "Hoạt động",
+      "family": "Gia đình",
+      "finance": "Tài chính",
+      "health": "Sức khỏe",
+      "home": "Nhà ở",
+      "identity": "Giấy tờ tùy thân",
+      "invoice": "Hóa đơn",
+      "others": "Khác",
+      "transport": "Đi lại",
+      "undefined": "Chưa xác định",
+      "work_study": "Công việc & Học tập"
+    },
+    "expiration": {
+      "expired": "Đã hết hạn",
+      "expiresIn": "Hết hạn sau %{duration}",
+      "description": "Tài liệu này sẽ hết hạn sau %{duration}, hãy cân nhắc gia hạn"
+    },
+    "qualification": {
+      "date": {
+        "title": {
+          "datetime": "Ngày thêm",
+          "AObtentionDate": "Bằng hạng A, cấp ngày",
+          "BObtentionDate": "Bằng hạng B, cấp ngày",
+          "CObtentionDate": "Bằng hạng C, cấp ngày",
+          "DObtentionDate": "Bằng hạng D, cấp ngày",
+          "issueDate": "Ngày cấp",
+          "expirationDate": "Ngày hết hạn",
+          "referencedDate": "Ngày tham chiếu",
+          "shootingDate": "Ngày chụp",
+          "obtentionDate": "Ngày nhận",
+          "date": "Ngày của tài liệu"
+        }
+      },
+      "information": {
+        "title": {
+          "fine": {
+            "number": "Số tiền phạt"
+          },
+          "fidelity_card": {
+            "number": "Số thẻ"
+          },
+          "caf": {
+            "number": "Số hồ sơ CAF"
+          },
+          "payment_proof_family_allowance": {
+            "number":"Số hồ sơ CAF"
+          },
+          "vehicle": {
+            "licenseNumber": "Biển số xe",
+            "confidentialNumber": "Mã đăng ký xe bảo mật"
+          },
+          "vehicle_registration": {
+            "number": "Số khung xe (VIN)"
+          },
+          "national_id_card": {
+            "number": "Số căn cước công dân"
+          },
+          "bank_details": {
+            "number": "Số IBAN"
+          },
+          "passport": {
+            "number": "Số hộ chiếu"
+          },
+          "driver_license": {
+            "number": "Số giấy phép"
+          },
+          "residence_permit": {
+            "number": "Số giấy phép"
+          },
+          "national_health_insurance_card": {
+            "number": "Số thẻ bảo hiểm y tế quốc gia"
+          },
+          "pay_sheet": {
+            "number": "Tổng thu nhập trước khấu trừ"
+          },
+          "tax_return": {
+            "number": "Mã số thuế tham chiếu"
+          },
+          "tax_notice": {
+            "number": "Mã số thuế tham chiếu"
+          },
+          "real_estate_tax": {
+            "number": "Mã số thuế tham chiếu"
+          },
+          "tax_timetable": {
+            "number": "Mã số thuế tham chiếu"
+          },
+          "country": "Quốc gia cấp tài liệu",
+          "refTaxIncome": "Thu nhập tính thuế tham chiếu",
+          "contractType": "Loại hợp đồng",
+          "noticePeriod": "Cảnh báo hết hạn",
+          "netSocialAmount": "Số tiền ròng tính an sinh xã hội",
+          "employerName": "Tên người sử dụng lao động",
+          "employer": "Tên người sử dụng lao động",
+          "amount": "Số tiền chi tiêu",
+          "subtype": "Mục đích chi tiêu",
+          "bicNumber": "Mã BIC"
+        },
+        "day": "ngày"
+      },
+      "contact": "Chủ sở hữu",
+      "page": "Mặt của tài liệu",
+      "front": "Mặt trước",
+      "back": "Mặt sau",
+      "qualification": "Phân loại",
+      "noInfo": "Không có thông tin"
+    }
+  },
+  "MagicFolders": {
+    "administrative": "Hành chính",
+    "photos": "Ảnh"
+  }
+}

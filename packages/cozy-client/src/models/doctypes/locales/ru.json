@@ -1,0 +1,106 @@
+{
+  "com": {
+    "tricount.expenses": "Расходы Tricount",
+    "splitwise.expenses": "Расходы Splitwise",
+    "bitwarden.profiles": "Профили менеджера паролей",
+    "bitwarden.ciphers": "Записи менеджера паролей",
+    "bitwarden.folders": "Папки менеджера паролей",
+    "bitwarden.organizations": "Общие папки менеджера паролей",
+    "bitwarden.contacts": "Контакты менеджера паролей",
+    "grandlyon": {
+      "enedis.*": "Данные о потреблении электроэнергии",
+      "grdf.*": "Данные о потреблении газа",
+      "egl.*": "Данные о потреблении воды",
+      "ecolyo.*": "Данные Ecolyo"
+    }
+  },
+  "cc": {
+    "cozycloud": {
+      "autocategorization": "Файл для улучшения модели категоризации",
+      "errors": "Журналы приложения",
+      "sentry": "Журналы приложения",
+      "dacc": "Анонимная сводная статистика",
+      "dacc_v2": "Анонимная сводная статистика",
+      "dacc.dev": "Анонимная сводная статистика для разработки",
+      "dacc.dev_v2": "Анонимная сводная статистика для разработки",
+      "announcements": "API для получения объявлений",
+      "announcements.uploads": "API для получения изображений объявлений",
+      "announcements.dev": "API для получения объявлений (разработка)",
+      "announcements.dev.uploads": "API для получения изображений объявлений (разработка)"
+    }
+  },
+  "eu": {
+    "mycozy": {
+      "dacc": "Анонимная сводная статистика",
+      "dacc_v2": "Анонимная сводная статистика"
+    }
+  },
+  "io": {
+    "cozy": {
+      "accounts": "Данные для входа",
+      "ai.chat.conversations": "Беседы с ИИ",
+      "ai.chat.events": "События ИИ",
+      "apps": "Список установленных приложений",
+      "apps.suggestions": "Рекомендуемые приложения",
+      "bank.accounts": "Банковские счета",
+      "bank.accounts.stats": "Статистика по банковским счетам",
+      "bank.balancehistories": "Остатки на банковских счетах",
+      "bank.groups": "Группы банковских счетов",
+      "bank.operations": "Банковские операции",
+      "bank.settings": "Настройки приложения Banks",
+      "bank.recipients": "Получатели банковских переводов",
+      "bank.recurrence": "Группы регулярных операций Banks",
+      "bills": "Счета",
+      "calendar": "Календарь",
+      "certified.carbon_copy": "Заверенная копия",
+      "certified.electronic_safe": "Электронный сейф",
+      "coachco2.settings": "Настройки приложения CoachCO2",
+      "contacts": "Контакты",
+      "contacts.groups": "Группы контактов",
+      "contacts.accounts": "Учётные записи, связанные с контактами",
+      "files": "Файлы",
+      "files.versions": "Версии файлов",
+      "files.*": "Данные о файлах (файлы, папки, версии, ...)",
+      "identities": "Личные данные",
+      "jobs": "Задачи",
+      "konnectors": "Коннекторы для импорта данных",
+      "konnectors.result": "Результаты коннекторов",
+      "netflix.views": "История просмотров Netflix",
+      "netflix.opinions": "Оценки Netflix",
+      "notes.documents": "Заметки",
+      "notifications": "Уведомления",
+      "oauth.clients": "Подключённые устройства",
+      "permissions": "Делегирование разрешений",
+      "photos.albums": "Фотоальбомы",
+      "photos.settings": "Настройки фотографий",
+      "settings": "Настройки",
+      "sharings": "Общий доступ",
+      "support": "Поддержка",
+      "tags": "Теги",
+      "timeseries.geojson": "Поездки",
+      "timeseries.grades": "Школьные оценки",
+      "triggers": "Планирование задач",
+      "drive.settings": "Настройки Drive"
+    }
+  },
+  "fr": {
+    "maif": {
+      "events": "События (Maif)",
+      "maifuser": {
+        "contrat": "Договор (Maif)",
+        "home": "Жильё (Maif)",
+        "family": "Семья (Maif)",
+        "paymentterms": "Условия оплаты (Maif)",
+        "sinistre": "Страховой случай (Maif)",
+        "societaire": "Член общества (Maif)"
+      }
+    }
+  },
+  "org": {
+    "fing": {
+      "mesinfos": {
+        "insuranceclaim": "Страховые требования (Maif)"
+      }
+    }
+  }
+}
