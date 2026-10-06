@@ -2223,6 +2223,110 @@ describe('file creation', () => {
       })
     )
   })
+
+  it('should create a file from sourceURL via real StackLink/FileCollection HTTP boundary and update store cache', async () => {
+    const { client } = setup()
+    jest.spyOn(client, 'dispatch')
+    client.stackClient.fetchJSON = jest.fn().mockResolvedValue({
+      data: {
+        id: 'file-42',
+        _id: 'file-42',
+        type: 'io.cozy.files',
+        attributes: {
+          name: 'remote.pdf',
+          dir_id: 'folder-123'
+        },
+        meta: {
+          rev: '1-xyz'
+        }
+      }
+    })
+
+    const { data: doc } = await client.create('io.cozy.files', {
+      type: 'file',
+      sourceURL:
+        'https://example.com/remote.pdf?token=abc+123&secret=xyz%20foo',
+      dirId: 'folder-123',
+      name: 'remote.pdf'
+    })
+
+    expect(doc._id).toEqual('file-42')
+    expect(doc.name).toEqual('remote.pdf')
+    expect(doc.dir_id).toEqual('folder-123')
+    expect(client.stackClient.fetchJSON).toHaveBeenCalledWith(
+      'POST',
+      '/files/folder-123?Name=remote.pdf&Type=file&Executable=false&Encrypted=false&MetadataID=&Size=&SourceAccount=&SourceAccountIdentifier=&SourceURL=https%3A%2F%2Fexample.com%2Fremote.pdf%3Ftoken%3Dabc%2B123%26secret%3Dxyz%2520foo',
+      '',
+      {
+        headers: {
+          'Content-Type': 'application/octet-stream'
+        }
+      }
+    )
+    expect(client.dispatch.mock.calls.map(x => x[0].type)).toEqual([
+      'INIT_MUTATION',
+      'RECEIVE_MUTATION_RESULT'
+    ])
+
+    const cachedDoc = client.getDocumentFromState('io.cozy.files', 'file-42')
+    expect(cachedDoc).toBeDefined()
+    expect(cachedDoc._id).toBe('file-42')
+    expect(cachedDoc.name).toBe('remote.pdf')
+    expect(cachedDoc.dir_id).toBe('folder-123')
+  })
+
+  it('should reject file creation when both binary data and sourceURL are provided', async () => {
+    const { client } = setup()
+    jest.spyOn(client, 'dispatch')
+    await expect(
+      client.create('io.cozy.files', {
+        type: 'file',
+        data: 'content',
+        sourceURL: 'https://example.com/remote.pdf',
+        name: 'remote.pdf',
+        dirId: 'folder-123'
+      })
+    ).rejects.toThrow('Cannot pass both data and sourceURL')
+
+    expect(client.dispatch.mock.calls.map(x => x[0].type)).toEqual([
+      'INIT_MUTATION',
+      'RECEIVE_MUTATION_ERROR'
+    ])
+  })
+
+  it('should reject file creation when sourceURL is empty', async () => {
+    const { client } = setup()
+    await expect(
+      client.create('io.cozy.files', {
+        type: 'file',
+        sourceURL: '',
+        name: 'remote.pdf',
+        dirId: 'folder-123'
+      })
+    ).rejects.toThrow('sourceURL cannot be empty')
+  })
+
+  it('should dispatch mutation error and throw when stack HTTP call fails', async () => {
+    const { client } = setup()
+    jest.spyOn(client, 'dispatch')
+    client.stackClient.fetchJSON.mockRejectedValueOnce(
+      new Error('502 could not download SourceURL')
+    )
+
+    await expect(
+      client.create('io.cozy.files', {
+        type: 'file',
+        sourceURL: 'https://example.com/remote.pdf',
+        name: 'remote.pdf',
+        dirId: 'folder-123'
+      })
+    ).rejects.toThrow('502 could not download SourceURL')
+
+    expect(client.dispatch.mock.calls.map(x => x[0].type)).toEqual([
+      'INIT_MUTATION',
+      'RECEIVE_MUTATION_ERROR'
+    ])
+  })
 })
 
 describe('file update', () => {

@@ -296,6 +296,94 @@ describe('FileCollection', () => {
       ).toMatchSnapshot()
     })
 
+    it('file with sourceURL - should create a file via sourceURL', async () => {
+      client.fetchJSON.mockReturnValueOnce({
+        data: {
+          id: 'file-123',
+          type: 'io.cozy.files',
+          attributes: {
+            name: 'remote-doc.pdf',
+            dir_id: 'dir-456'
+          }
+        }
+      })
+      const result = await collection.create({
+        name: 'remote-doc.pdf',
+        dirId: 'dir-456',
+        sourceURL:
+          'https://example.com/files/remote-doc.pdf?signature=secret+123&token=abc%20def'
+      })
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/files/dir-456?Name=remote-doc.pdf&Type=file&Executable=false&Encrypted=false&MetadataID=&Size=&SourceAccount=&SourceAccountIdentifier=&SourceURL=https%3A%2F%2Fexample.com%2Ffiles%2Fremote-doc.pdf%3Fsignature%3Dsecret%2B123%26token%3Dabc%2520def',
+        '',
+        {
+          headers: {
+            'Content-Type': 'application/octet-stream'
+          }
+        }
+      )
+      expect(result).toEqual({
+        data: {
+          id: 'file-123',
+          _id: 'file-123',
+          _type: 'io.cozy.files',
+          _rev: undefined,
+          type: 'io.cozy.files',
+          attributes: {
+            name: 'remote-doc.pdf',
+            dir_id: 'dir-456'
+          },
+          name: 'remote-doc.pdf',
+          dir_id: 'dir-456'
+        }
+      })
+    })
+
+    it('file with sourceURL - should throw when both data and sourceURL are provided', async () => {
+      await expect(
+        collection.create({
+          name: 'file.pdf',
+          data: 'some content',
+          sourceURL: 'https://example.com/file.pdf'
+        })
+      ).rejects.toThrow('Cannot pass both data and sourceURL')
+    })
+
+    it('file with sourceURL - should throw when sourceURL is empty', async () => {
+      await expect(
+        collection.create({
+          name: 'file.pdf',
+          sourceURL: ''
+        })
+      ).rejects.toThrow('sourceURL cannot be empty')
+
+      await expect(
+        collection.create({
+          name: 'file.pdf',
+          sourceURL: '   '
+        })
+      ).rejects.toThrow('sourceURL cannot be empty')
+    })
+
+    it('file with sourceURL - should throw when name is missing', async () => {
+      await expect(
+        collection.create({
+          sourceURL: 'https://example.com/file.pdf'
+        })
+      ).rejects.toThrow('Missing name argument')
+    })
+
+    it('directory with sourceURL - should throw when sourceURL is provided for a directory', async () => {
+      await expect(
+        collection.create({
+          name: 'my-folder',
+          type: 'directory',
+          sourceURL: 'https://example.com/folder'
+        })
+      ).rejects.toThrow('You cannot pass a sourceURL for a directory')
+    })
+
     it('directory - should throw illegal characters errors when invalid file name', async () => {
       expect.assertions(1)
       try {
@@ -1756,6 +1844,113 @@ describe('FileCollection', () => {
       expect(
         client.fetchJSON.mock.calls[client.fetchJSON.mock.calls.length - 1]
       ).toMatchSnapshot()
+    })
+
+    it('should create a file from sourceURL with empty body and application/octet-stream', async () => {
+      client.fetchJSON.mockReturnValueOnce({
+        data: {
+          id: id,
+          _id: id,
+          dir_id: dirId
+        }
+      })
+      const result = await collection.createFile(null, {
+        name: 'from-url.pdf',
+        dirId,
+        sourceURL: 'https://example.com/test.pdf?key=val'
+      })
+      const expectedPath = `/files/${dirId}?Name=from-url.pdf&Type=file&Executable=false&Encrypted=false&MetadataID=&Size=&SourceAccount=&SourceAccountIdentifier=&SourceURL=https%3A%2F%2Fexample.com%2Ftest.pdf%3Fkey%3Dval`
+      expect(client.fetchJSON).toHaveBeenCalledWith('POST', expectedPath, '', {
+        headers: {
+          'Content-Type': 'application/octet-stream'
+        }
+      })
+      expect(result).toEqual({
+        data: {
+          id: id,
+          _id: id,
+          _type: 'io.cozy.files',
+          dir_id: dirId
+        }
+      })
+    })
+
+    it('should support metadata and lastModifiedDate when creating from sourceURL', async () => {
+      const metadataId = 'meta-789'
+      client.fetchJSON
+        .mockReturnValueOnce({
+          data: {
+            id: metadataId
+          }
+        })
+        .mockReturnValueOnce({
+          data: {
+            id: id,
+            _id: id,
+            dir_id: dirId
+          }
+        })
+      const lastModifiedDate = new Date('2026-10-06T12:00:00.000Z')
+      await collection.createFile(undefined, {
+        name: 'with-meta.pdf',
+        dirId,
+        metadata: { qualification: { label: 'invoice' } },
+        lastModifiedDate,
+        sourceURL: 'https://example.com/invoice.pdf'
+      })
+      expect(client.fetchJSON).toHaveBeenNthCalledWith(
+        1,
+        'POST',
+        '/files/upload/metadata',
+        {
+          data: {
+            attributes: { qualification: { label: 'invoice' } },
+            type: 'io.cozy.files.metadata'
+          }
+        }
+      )
+      const expectedPath = `/files/${dirId}?Name=with-meta.pdf&Type=file&Executable=false&Encrypted=false&MetadataID=${metadataId}&Size=&SourceAccount=&SourceAccountIdentifier=&SourceURL=https%3A%2F%2Fexample.com%2Finvoice.pdf&UpdatedAt=${lastModifiedDate.toISOString()}&CreatedAt=${lastModifiedDate.toISOString()}`
+      expect(client.fetchJSON).toHaveBeenNthCalledWith(
+        2,
+        'POST',
+        expectedPath,
+        '',
+        {
+          headers: {
+            'Content-Type': 'application/octet-stream'
+          }
+        }
+      )
+    })
+
+    it('should reject ambiguous data and sourceURL in createFile', async () => {
+      await expect(
+        collection.createFile(data, {
+          name: 'test.pdf',
+          sourceURL: 'https://example.com/test.pdf'
+        })
+      ).rejects.toThrow('Cannot pass both data and sourceURL')
+    })
+
+    it('should reject empty sourceURL in createFile', async () => {
+      await expect(
+        collection.createFile(null, {
+          name: 'test.pdf',
+          sourceURL: ''
+        })
+      ).rejects.toThrow('sourceURL cannot be empty')
+    })
+
+    it('should reject missing name when sourceURL is provided even with sanitizeName: false', async () => {
+      await expect(
+        collection.createFile(
+          null,
+          {
+            sourceURL: 'https://example.com/test.pdf'
+          },
+          { sanitizeName: false }
+        )
+      ).rejects.toThrow('Missing name argument')
     })
   })
 
