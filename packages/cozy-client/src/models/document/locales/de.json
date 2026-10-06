@@ -1,0 +1,261 @@
+{
+  "country": {
+    "foreign": "Ausland"
+  },
+  "Scan": {
+    "scan_a_doc": "Dokument scannen",
+    "save_doc": "Dokument speichern",
+    "filename": "Dateiname",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "qualify": "Beschreiben",
+    "apply": "Anwenden",
+    "error": {
+      "offline": "Sie sind derzeit offline und können diese Funktion nicht nutzen. Bitte versuchen Sie es später erneut.",
+      "uploading": "Sie laden bereits eine Datei hoch. Bitte warten Sie, bis der Upload abgeschlossen ist, und versuchen Sie es erneut.",
+      "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    },
+    "successful": {
+      "qualified_ok": "Sie haben Ihre Datei erfolgreich beschrieben!"
+    },
+    "items": {
+      "accommodation_proof": "Unterkunftsnachweis |||| Unterkunftsnachweise",
+      "appliance_invoice": "Rechnung für Haushaltsgerät |||| Rechnungen für Haushaltsgeräte",
+      "bank_details": "Bankverbindung |||| Bankverbindungen",
+      "bank_statement": "Kontoauszug |||| Kontoauszüge",
+      "birth_certificate": "Geburtsurkunde |||| Geburtsurkunden",
+      "building_permit": "Baugenehmigung |||| Baugenehmigungen",
+      "caf": "Bescheinigung über Sozialleistungen |||| Bescheinigungen über Sozialleistungen",
+      "car_insurance": "Kfz-Versicherungsnachweis |||| Kfz-Versicherungsnachweise",
+      "citizen_registration_certificate": "Meldebescheinigung |||| Meldebescheinigungen",
+      "condition_report": "Übergabeprotokoll |||| Übergabeprotokolle",
+      "diploma": "Abschlusszeugnis |||| Abschlusszeugnisse",
+      "divorce": "Scheidung |||| Scheidungen",
+      "driver_license": "Führerschein |||| Führerscheine",
+      "electoral_card": "Wahlbenachrichtigung |||| Wahlbenachrichtigungen",
+      "employment_center_certificate": "Bescheinigung der Arbeitsagentur |||| Bescheinigungen der Arbeitsagentur",
+      "energy_contract": "Energieliefervertrag |||| Energielieferverträge",
+      "energy_invoice": "Energierechnung |||| Energierechnungen",
+      "expense_claim": "Spesenabrechnung |||| Spesenabrechnungen",
+      "family_record_book": "Familienstammbuch |||| Familienstammbücher",
+      "family": "Familie",
+      "fidelity_card": "Kundenkarte |||| Kundenkarten",
+      "fine": "Bußgeld |||| Bußgelder",
+      "gradebook": "Zeugnis |||| Zeugnisse",
+      "grocery_invoice": "Einkaufsrechnung |||| Einkaufsrechnungen",
+      "health_book": "Gesundheitsheft |||| Gesundheitshefte",
+      "health_certificate": "Gesundheits-/Impfbescheinigung |||| Gesundheits-/Impfbescheinigungen",
+      "health_insurance_card": "Versicherungskarte |||| Versicherungskarten",
+      "health_invoice": "Arztrechnung |||| Arztrechnungen",
+      "health": "Gesundheit",
+      "home": "Wohnen",
+      "house_insurance": "Hausratversicherung |||| Hausratversicherungen",
+      "house_sale_agreeement": "Immobilienkaufvertrag |||| Immobilienkaufverträge",
+      "identity_photo": "Passfoto |||| Passfotos",
+      "identity": "Identität",
+      "invoice": "Rechnung |||| Rechnungen",
+      "isp_invoice": "Internetrechnung |||| Internetrechnungen",
+      "large_family_card": "Ausweis für kinderreiche Familien |||| Ausweise für kinderreiche Familien",
+      "lease": "Mietvertrag |||| Mietverträge",
+      "loan_agreement": "Darlehensvertrag |||| Darlehensverträge",
+      "mechanic_invoice": "Reparaturrechnung |||| Reparaturrechnungen",
+      "motivation_letter": "Anschreiben |||| Anschreiben",
+      "national_health_insurance_card": "Gesundheitskarte |||| Gesundheitskarten",
+      "national_health_insurance_right_certificate": "Krankenversicherungsbescheinigung |||| Krankenversicherungsbescheinigungen",
+      "national_id_card": "Personalausweis |||| Personalausweise",
+      "note_identity_document": "Notiz Identität |||| Notizen Identität",
+      "note_family_document": "Notiz Familie |||| Notizen Familie",
+      "note_work_document": "Notiz Arbeit & Studium |||| Notizen Arbeit & Studium",
+      "note_health_document": "Notiz Gesundheit |||| Notizen Gesundheit",
+      "note_house_document": "Notiz Wohnen |||| Notizen Wohnen",
+      "note_transport_document": "Notiz Mobilität |||| Notizen Mobilität",
+      "note_activity_document": "Notiz Freizeit |||| Notizen Freizeit",
+      "note_finance": "Notiz Finanzen |||| Notizen Finanzen",
+      "note_invoice": "Notiz Rechnungen |||| Notizen Rechnungen",
+      "other_activity_document": "Sonstiges Freizeitdokument |||| Sonstige Freizeitdokumente",
+      "other_bank_document": "Sonstiges Finanzdokument |||| Sonstige Finanzdokumente",
+      "other_family_document": "Sonstiges Familiendokument |||| Sonstige Familiendokumente",
+      "other_health_document": "Sonstiges Gesundheitsdokument |||| Sonstige Gesundheitsdokumente",
+      "other_house_document": "Sonstiges Wohndokument |||| Sonstige Wohndokumente",
+      "other_identity_document": "Sonstiges Identitätsdokument |||| Sonstige Identitätsdokumente",
+      "other_invoice": "Sonstige Rechnung |||| Sonstige Rechnungen",
+      "other_revenue": "Sonstiges Einkommen |||| Sonstige Einkommen",
+      "other_tax_document": "Sonstiges Steuerdokument |||| Sonstige Steuerdokumente",
+      "other_transport_document": "Sonstiges Mobilitätsdokument |||| Sonstige Mobilitätsdokumente",
+      "other_work_document": "Sonstiges Arbeitsdokument |||| Sonstige Arbeitsdokumente",
+      "other_administrative_document": "Sonstiges Verwaltungsdokument |||| Sonstige Verwaltungsdokumente",
+      "others": "Sonstiges",
+      "pacs": "Eingetragene Partnerschaft |||| Eingetragene Partnerschaften",
+      "passport": "Reisepass |||| Reisepässe",
+      "pay_sheet": "Gehaltsabrechnung |||| Gehaltsabrechnungen",
+      "payment_proof_family_allowance": "Zahlungsnachweis Familienleistungen |||| Zahlungsnachweise Familienleistungen",
+      "pension": "Rente |||| Renten",
+      "person_insurance": "Nachweis der Einzelversicherung |||| Nachweise der Einzelversicherung",
+      "personal_sporting_licence": "Sportlizenz |||| Sportlizenzen",
+      "phone_invoice": "Telefonrechnung |||| Telefonrechnungen",
+      "pregnancy_medical_certificate": "Schwangerschaftsbescheinigung |||| Schwangerschaftsbescheinigungen",
+      "prescription": "Rezept |||| Rezepte",
+      "real_estate_insurance" : "Nachweis der Gebäudeversicherung |||| Nachweise der Gebäudeversicherung",
+      "real_estate_tax": "Grundsteuer |||| Grundsteuern",
+      "receipt": "Quittung |||| Quittungen",
+      "rent_receipt": "Mietquittung |||| Mietquittungen",
+      "residence_permit": "Aufenthaltstitel |||| Aufenthaltstitel",
+      "restaurant_invoice": "Restaurantrechnung |||| Restaurantrechnungen",
+      "resume": "Lebenslauf |||| Lebensläufe",
+      "school_attendance_certificate": "Schulbescheinigung |||| Schulbescheinigungen",
+      "school_insurance_certificate": "Nachweis der Schülerversicherung |||| Nachweise der Schülerversicherung",
+      "single_parent_benefit": "Leistung für Alleinerziehende |||| Leistungen für Alleinerziehende",
+      "student_card": "Studierendenausweis |||| Studierendenausweise",
+      "tax_certificate": "Steuerbescheinigung |||| Steuerbescheinigungen",
+      "tax_notice": "Steuerbescheid |||| Steuerbescheide",
+      "tax_return": "Steuererklärung |||| Steuererklärungen",
+      "tax_timetable": "Ratenzahlungsplan |||| Ratenzahlungspläne",
+      "technical_diagnostic_record": "Technisches Gutachten |||| Technische Gutachten",
+      "telecom_invoice": "Telekommunikationsrechnung |||| Telekommunikationsrechnungen",
+      "transport_card": "Fahrkarte |||| Fahrkarten",
+      "transport_invoice": "Fahrtkostenrechnung |||| Fahrtkostenrechnungen",
+      "transport": "Mobilität",
+      "unemployment_benefit": "Arbeitslosengeldbescheid |||| Arbeitslosengeldbescheide",
+      "unfit_for_habitation_declaration": "Unbewohnbarkeitserklärung |||| Unbewohnbarkeitserklärungen",
+      "vehicle_registration": "Fahrzeugschein |||| Fahrzeugscheine",
+      "water_invoice": "Wasserrechnung |||| Wasserrechnungen",
+      "web_service_invoice": "Rechnung für Webdienst |||| Rechnungen für Webdienste",
+      "wedding": "Ehevertrag |||| Eheverträge",
+      "work_contract": "Arbeitsvertrag |||| Arbeitsverträge",
+      "work_disability_recognition": "Schwerbehindertenausweis |||| Schwerbehindertenausweise",
+      "work_invoice": "Handwerkerrechnung |||| Handwerkerrechnungen",
+      "work_quote": "Kostenvoranschlag |||| Kostenvoranschläge",
+      "work_study": "Arbeit & Studium"
+    },
+    "attributes":{
+      "contractType": {
+        "cdi": "Unbefristet",
+        "cdd": "Befristet",
+        "alternate": "Duale Ausbildung",
+        "internship": "Praktikum",
+        "other": "Sonstiges"
+      },
+      "noticePeriod": {
+        "oneWeek": "1 Woche vorher",
+        "oneMonth": "1 Monat vorher",
+        "threeMonth": "3 Monate vorher",
+        "oneYear": "1 Jahr vorher",
+        "custom": "Benutzerdefiniert",
+        "noAlert": "Nicht benachrichtigen"
+      }
+    },
+    "themes": {
+      "none": "Keines",
+      "activity": "Freizeit",
+      "family": "Familie",
+      "finance": "Finanzen",
+      "health": "Gesundheit",
+      "home": "Wohnen",
+      "identity": "Identität",
+      "invoice": "Rechnungen",
+      "others": "Sonstiges",
+      "transport": "Mobilität",
+      "undefined": "Nicht definiert",
+      "work_study": "Arbeit & Studium"
+    },
+    "expiration": {
+      "expired": "Abgelaufen",
+      "expiresIn": "Läuft in %{duration} ab",
+      "description": "Dieses Dokument läuft in %{duration} ab, denken Sie an die Verlängerung"
+    },
+    "qualification": {
+      "date": {
+        "title": {
+          "datetime": "Hinzugefügt am",
+          "AObtentionDate": "Führerschein Klasse A, ausgestellt am",
+          "BObtentionDate": "Führerschein Klasse B, ausgestellt am",
+          "CObtentionDate": "Führerschein Klasse C, ausgestellt am",
+          "DObtentionDate": "Führerschein Klasse D, ausgestellt am",
+          "issueDate": "Ausgestellt am",
+          "expirationDate": "Ablaufdatum",
+          "referencedDate": "Referenzdatum",
+          "shootingDate": "Aufnahmedatum",
+          "obtentionDate": "Erhalten am",
+          "date": "Dokumentdatum"
+        }
+      },
+      "information": {
+        "title": {
+          "fine": {
+            "number": "Höhe des Bußgelds"
+          },
+          "fidelity_card": {
+            "number": "Kartennummer"
+          },
+          "caf": {
+            "number": "CAF-Aktenzeichen"
+          },
+          "payment_proof_family_allowance": {
+            "number":"CAF-Aktenzeichen"
+          },
+          "vehicle": {
+            "licenseNumber": "Kfz-Kennzeichen",
+            "confidentialNumber": "Vertraulicher Code der Zulassungsbescheinigung"
+          },
+          "vehicle_registration": {
+            "number": "Fahrzeug-Identifizierungsnummer (VIN)"
+          },
+          "national_id_card": {
+            "number": "Personalausweisnummer"
+          },
+          "bank_details": {
+            "number": "IBAN"
+          },
+          "passport": {
+            "number": "Reisepassnummer"
+          },
+          "driver_license": {
+            "number": "Führerscheinnummer"
+          },
+          "residence_permit": {
+            "number": "Nummer des Aufenthaltstitels"
+          },
+          "national_health_insurance_card": {
+            "number": "Nummer der Gesundheitskarte"
+          },
+          "pay_sheet": {
+            "number": "Bruttovergütung"
+          },
+          "tax_return": {
+            "number": "Steuernummer"
+          },
+          "tax_notice": {
+            "number": "Steuernummer"
+          },
+          "real_estate_tax": {
+            "number": "Steuernummer"
+          },
+          "tax_timetable": {
+            "number": "Steuernummer"
+          },
+          "country": "Ausstellungsland des Dokuments",
+          "refTaxIncome": "Zu versteuerndes Referenzeinkommen",
+          "contractType": "Vertragsart",
+          "noticePeriod": "Ablaufbenachrichtigung",
+          "netSocialAmount": "Sozialer Nettobetrag",
+          "employerName": "Name des Arbeitgebers",
+          "employer": "Name des Arbeitgebers",
+          "amount": "Betrag der Ausgabe",
+          "subtype": "Zweck der Ausgabe",
+          "bicNumber": "BIC"
+        },
+        "day": "Tag |||| Tage"
+      },
+      "contact": "Inhaber",
+      "page": "Seite des Dokuments",
+      "front": "Vorderseite",
+      "back": "Rückseite",
+      "qualification": "Klassifizierung",
+      "noInfo": "Keine Angaben"
+    }
+  },
+  "MagicFolders": {
+    "administrative": "Verwaltung",
+    "photos": "Fotos"
+  }
+}

@@ -30,6 +30,9 @@ describe('getBoundT', () => {
     ${'Scan.items.national_id_card'} | ${'fr'}      | ${2}         | ${'en'} | ${'ID cards 🇫🇷'}
     ${'Scan.items.national_id_card'} | ${undefined} | ${1}         | ${'en'} | ${'ID card'}
     ${'Scan.items.national_id_card'} | ${undefined} | ${2}         | ${'en'} | ${'ID cards'}
+    ${'Scan.items.national_id_card'} | ${undefined} | ${2}         | ${'es'} | ${'Documentos de identidad'}
+    ${'Scan.items.national_id_card'} | ${'fr'}      | ${1}         | ${'de'} | ${'Personalausweis 🇫🇷'}
+    ${'Scan.items.national_id_card'} | ${'foreign'} | ${1}         | ${'it'} | ${"Carta d'identità Estero"}
   `(
     'should test if the translation is suitable with the param country: $country and with the param smart_count: $smart_count',
     ({ translationKey, country, smart_count, lang, expected }) => {

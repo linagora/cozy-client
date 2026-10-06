@@ -1,0 +1,106 @@
+{
+  "com": {
+    "tricount.expenses": "Spese Tricount",
+    "splitwise.expenses": "Spese Splitwise",
+    "bitwarden.profiles": "Profili del gestore di password",
+    "bitwarden.ciphers": "Voci del gestore di password",
+    "bitwarden.folders": "Cartelle del gestore di password",
+    "bitwarden.organizations": "Cartelle condivise del gestore di password",
+    "bitwarden.contacts": "Contatti del gestore di password",
+    "grandlyon": {
+      "enedis.*": "Dati sul consumo di elettricità",
+      "grdf.*": "Dati sul consumo di gas",
+      "egl.*": "Dati sul consumo di acqua",
+      "ecolyo.*": "Dati Ecolyo"
+    }
+  },
+  "cc": {
+    "cozycloud": {
+      "autocategorization": "File di arricchimento del modello di categorizzazione",
+      "errors": "Log dell'applicazione",
+      "sentry": "Log dell'applicazione",
+      "dacc": "Statistiche aggregate anonime",
+      "dacc_v2": "Statistiche aggregate anonime",
+      "dacc.dev": "Statistiche aggregate anonime per lo sviluppo",
+      "dacc.dev_v2": "Statistiche aggregate anonime per lo sviluppo",
+      "announcements": "API per recuperare gli annunci",
+      "announcements.uploads": "API per recuperare le immagini degli annunci",
+      "announcements.dev": "API per recuperare gli annunci (sviluppo)",
+      "announcements.dev.uploads": "API per recuperare le immagini degli annunci (sviluppo)"
+    }
+  },
+  "eu": {
+    "mycozy": {
+      "dacc": "Statistiche aggregate anonime",
+      "dacc_v2": "Statistiche aggregate anonime"
+    }
+  },
+  "io": {
+    "cozy": {
+      "accounts": "Credenziali di accesso",
+      "ai.chat.conversations": "Conversazioni con l'IA",
+      "ai.chat.events": "Eventi dell'IA",
+      "apps": "Elenco delle applicazioni installate",
+      "apps.suggestions": "Suggerimenti di applicazioni",
+      "bank.accounts": "Conti bancari",
+      "bank.accounts.stats": "Statistiche sui conti bancari",
+      "bank.balancehistories": "Saldi bancari",
+      "bank.groups": "Gruppi bancari",
+      "bank.operations": "Operazioni bancarie",
+      "bank.settings": "Impostazioni dell'app Banks",
+      "bank.recipients": "Beneficiari dei bonifici",
+      "bank.recurrence": "Gruppi di operazioni ricorrenti di Banks",
+      "bills": "Fatture",
+      "calendar": "Calendario",
+      "certified.carbon_copy": "Copia certificata",
+      "certified.electronic_safe": "Cassaforte elettronica",
+      "coachco2.settings": "Impostazioni dell'app CoachCO2",
+      "contacts": "Contatti",
+      "contacts.groups": "Gruppi di contatti",
+      "contacts.accounts": "Account collegati ai contatti",
+      "files": "File",
+      "files.versions": "Versioni dei file",
+      "files.*": "Dati relativi ai file (file, cartelle, versioni, ...)",
+      "identities": "Identità",
+      "jobs": "Attività",
+      "konnectors": "Connettori per importare dati",
+      "konnectors.result": "Risultati dei connettori",
+      "netflix.views": "Cronologia di Netflix",
+      "netflix.opinions": "Opinioni di Netflix",
+      "notes.documents": "Note",
+      "notifications": "Notifiche",
+      "oauth.clients": "Dispositivi connessi",
+      "permissions": "Delega dei permessi",
+      "photos.albums": "Album fotografici",
+      "photos.settings": "Impostazioni delle foto",
+      "settings": "Impostazioni",
+      "sharings": "Condivisioni",
+      "support": "Assistenza",
+      "tags": "Tag",
+      "timeseries.geojson": "Spostamenti",
+      "timeseries.grades": "Voti",
+      "triggers": "Pianificazione delle attività",
+      "drive.settings": "Impostazioni di Drive"
+    }
+  },
+  "fr": {
+    "maif": {
+      "events": "Eventi (Maif)",
+      "maifuser": {
+        "contrat": "Contratto (Maif)",
+        "home": "Casa (Maif)",
+        "family": "Famiglia (Maif)",
+        "paymentterms": "Condizioni di pagamento (Maif)",
+        "sinistre": "Sinistro (Maif)",
+        "societaire": "Socio (Maif)"
+      }
+    }
+  },
+  "org": {
+    "fing": {
+      "mesinfos": {
+        "insuranceclaim": "Sinistri denunciati (Maif)"
+      }
+    }
+  }
+}

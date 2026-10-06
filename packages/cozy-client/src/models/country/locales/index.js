@@ -2,11 +2,20 @@ import Polyglot from 'node-polyglot'
 
 import enLocale from './en.json'
 import frLocale from './fr.json'
+import esLocale from './es.json'
+import deLocale from './de.json'
+import itLocale from './it.json'
 
-const locales = { en: enLocale, fr: frLocale }
+const locales = {
+  en: enLocale,
+  fr: frLocale,
+  es: esLocale,
+  de: deLocale,
+  it: itLocale
+}
 
 const polyglots = {}
-const langs = ['fr', 'en']
+const langs = ['fr', 'en', 'es', 'de', 'it']
 for (const lang of langs) {
   const polyglot = new Polyglot()
   polyglot.extend(locales[lang])

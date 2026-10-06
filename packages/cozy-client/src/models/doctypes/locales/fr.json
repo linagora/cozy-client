@@ -31,7 +31,8 @@
   },
   "eu": {
     "mycozy": {
-      "dacc": "Statistiques agrégées anonymes"
+      "dacc": "Statistiques agrégées anonymes",
+      "dacc_v2": "Statistiques agrégées anonymes"
     }
   },
   "io": {
