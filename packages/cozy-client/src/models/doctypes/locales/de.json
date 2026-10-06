@@ -1,0 +1,106 @@
+{
+  "com": {
+    "tricount.expenses": "Tricount-Ausgaben",
+    "splitwise.expenses": "Splitwise-Ausgaben",
+    "bitwarden.profiles": "Profile des Passwort-Managers",
+    "bitwarden.ciphers": "Einträge des Passwort-Managers",
+    "bitwarden.folders": "Ordner des Passwort-Managers",
+    "bitwarden.organizations": "Geteilte Ordner des Passwort-Managers",
+    "bitwarden.contacts": "Kontakte des Passwort-Managers",
+    "grandlyon": {
+      "enedis.*": "Stromverbrauchsdaten",
+      "grdf.*": "Gasverbrauchsdaten",
+      "egl.*": "Wasserverbrauchsdaten",
+      "ecolyo.*": "Ecolyo-Daten"
+    }
+  },
+  "cc": {
+    "cozycloud": {
+      "autocategorization": "Anreicherungsdatei für das Kategorisierungsmodell",
+      "errors": "Protokolle der Anwendung",
+      "sentry": "Protokolle der Anwendung",
+      "dacc": "Anonyme aggregierte Statistiken",
+      "dacc_v2": "Anonyme aggregierte Statistiken",
+      "dacc.dev": "Anonyme aggregierte Statistiken für die Entwicklung",
+      "dacc.dev_v2": "Anonyme aggregierte Statistiken für die Entwicklung",
+      "announcements": "API zum Abrufen von Ankündigungen",
+      "announcements.uploads": "API zum Abrufen von Bildern zu Ankündigungen",
+      "announcements.dev": "API zum Abrufen von Ankündigungen (Entwicklung)",
+      "announcements.dev.uploads": "API zum Abrufen von Bildern zu Ankündigungen (Entwicklung)"
+    }
+  },
+  "eu": {
+    "mycozy": {
+      "dacc": "Anonyme aggregierte Statistiken",
+      "dacc_v2": "Anonyme aggregierte Statistiken"
+    }
+  },
+  "io": {
+    "cozy": {
+      "accounts": "Anmeldedaten",
+      "ai.chat.conversations": "KI-Unterhaltungen",
+      "ai.chat.events": "KI-Ereignisse",
+      "apps": "Liste der installierten Anwendungen",
+      "apps.suggestions": "Anwendungsvorschläge",
+      "bank.accounts": "Bankkonten",
+      "bank.accounts.stats": "Statistiken zu Bankkonten",
+      "bank.balancehistories": "Kontostände",
+      "bank.groups": "Bankgruppen",
+      "bank.operations": "Bankumsätze",
+      "bank.settings": "Einstellungen der App Banks",
+      "bank.recipients": "Überweisungsempfänger",
+      "bank.recurrence": "Gruppen wiederkehrender Umsätze in Banks",
+      "bills": "Rechnungen",
+      "calendar": "Kalender",
+      "certified.carbon_copy": "Beglaubigte Kopie",
+      "certified.electronic_safe": "Elektronischer Tresor",
+      "coachco2.settings": "Einstellungen der App CoachCO2",
+      "contacts": "Kontakte",
+      "contacts.groups": "Kontaktgruppen",
+      "contacts.accounts": "Mit den Kontakten verknüpfte Konten",
+      "files": "Dateien",
+      "files.versions": "Dateiversionen",
+      "files.*": "Dateibezogene Daten (Dateien, Ordner, Versionen, ...)",
+      "identities": "Identitäten",
+      "jobs": "Aufgaben",
+      "konnectors": "Konnektoren zum Importieren von Daten",
+      "konnectors.result": "Ergebnisse der Konnektoren",
+      "netflix.views": "Netflix-Verlauf",
+      "netflix.opinions": "Netflix-Bewertungen",
+      "notes.documents": "Notizen",
+      "notifications": "Benachrichtigungen",
+      "oauth.clients": "Verbundene Geräte",
+      "permissions": "Delegierung von Berechtigungen",
+      "photos.albums": "Fotoalben",
+      "photos.settings": "Foto-Einstellungen",
+      "settings": "Einstellungen",
+      "sharings": "Freigaben",
+      "support": "Support",
+      "tags": "Schlagwörter",
+      "timeseries.geojson": "Fahrten",
+      "timeseries.grades": "Schulnoten",
+      "triggers": "Aufgabenplanung",
+      "drive.settings": "Drive-Einstellungen"
+    }
+  },
+  "fr": {
+    "maif": {
+      "events": "Ereignisse (Maif)",
+      "maifuser": {
+        "contrat": "Vertrag (Maif)",
+        "home": "Wohnung (Maif)",
+        "family": "Familie (Maif)",
+        "paymentterms": "Zahlungsbedingungen (Maif)",
+        "sinistre": "Schadensfall (Maif)",
+        "societaire": "Mitglied (Maif)"
+      }
+    }
+  },
+  "org": {
+    "fing": {
+      "mesinfos": {
+        "insuranceclaim": "Versicherungsfälle (Maif)"
+      }
+    }
+  }
+}

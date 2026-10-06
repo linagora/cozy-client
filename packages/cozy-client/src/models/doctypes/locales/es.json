@@ -1,0 +1,106 @@
+{
+  "com": {
+    "tricount.expenses": "Gastos de Tricount",
+    "splitwise.expenses": "Gastos de Splitwise",
+    "bitwarden.profiles": "Perfiles del gestor de contraseñas",
+    "bitwarden.ciphers": "Entradas del gestor de contraseñas",
+    "bitwarden.folders": "Carpetas del gestor de contraseñas",
+    "bitwarden.organizations": "Carpetas compartidas del gestor de contraseñas",
+    "bitwarden.contacts": "Contactos del gestor de contraseñas",
+    "grandlyon": {
+      "enedis.*": "Datos de consumo de electricidad",
+      "grdf.*": "Datos de consumo de gas",
+      "egl.*": "Datos de consumo de agua",
+      "ecolyo.*": "Datos de Ecolyo"
+    }
+  },
+  "cc": {
+    "cozycloud": {
+      "autocategorization": "Archivo de enriquecimiento del modelo de categorización",
+      "errors": "Registros de la aplicación",
+      "sentry": "Registros de la aplicación",
+      "dacc": "Estadísticas agregadas anónimas",
+      "dacc_v2": "Estadísticas agregadas anónimas",
+      "dacc.dev": "Estadísticas agregadas anónimas para desarrollo",
+      "dacc.dev_v2": "Estadísticas agregadas anónimas para desarrollo",
+      "announcements": "API para obtener los anuncios",
+      "announcements.uploads": "API para obtener las imágenes de los anuncios",
+      "announcements.dev": "API para obtener los anuncios (desarrollo)",
+      "announcements.dev.uploads": "API para obtener las imágenes de los anuncios (desarrollo)"
+    }
+  },
+  "eu": {
+    "mycozy": {
+      "dacc": "Estadísticas agregadas anónimas",
+      "dacc_v2": "Estadísticas agregadas anónimas"
+    }
+  },
+  "io": {
+    "cozy": {
+      "accounts": "Datos de inicio de sesión",
+      "ai.chat.conversations": "Conversaciones con la IA",
+      "ai.chat.events": "Eventos de la IA",
+      "apps": "Lista de aplicaciones instaladas",
+      "apps.suggestions": "Sugerencias de aplicaciones",
+      "bank.accounts": "Cuentas bancarias",
+      "bank.accounts.stats": "Estadísticas de las cuentas bancarias",
+      "bank.balancehistories": "Saldos bancarios",
+      "bank.groups": "Grupos bancarios",
+      "bank.operations": "Operaciones bancarias",
+      "bank.settings": "Ajustes de la aplicación Banks",
+      "bank.recipients": "Beneficiarios de transferencias",
+      "bank.recurrence": "Grupos de operaciones recurrentes de Banks",
+      "bills": "Facturas",
+      "calendar": "Calendario",
+      "certified.carbon_copy": "Copia certificada",
+      "certified.electronic_safe": "Caja fuerte electrónica",
+      "coachco2.settings": "Ajustes de la aplicación CoachCO2",
+      "contacts": "Contactos",
+      "contacts.groups": "Grupos de contactos",
+      "contacts.accounts": "Cuentas vinculadas a los contactos",
+      "files": "Archivos",
+      "files.versions": "Versiones de archivos",
+      "files.*": "Datos relacionados con los archivos (archivos, carpetas, versiones, ...)",
+      "identities": "Identidades",
+      "jobs": "Tareas",
+      "konnectors": "Conectores para importar datos",
+      "konnectors.result": "Resultados de los conectores",
+      "netflix.views": "Historial de Netflix",
+      "netflix.opinions": "Opiniones de Netflix",
+      "notes.documents": "Notas",
+      "notifications": "Notificaciones",
+      "oauth.clients": "Dispositivos conectados",
+      "permissions": "Delegación de permisos",
+      "photos.albums": "Álbumes de fotos",
+      "photos.settings": "Ajustes de fotos",
+      "settings": "Ajustes",
+      "sharings": "Uso compartido",
+      "support": "Soporte",
+      "tags": "Etiquetas",
+      "timeseries.geojson": "Trayectos",
+      "timeseries.grades": "Notas escolares",
+      "triggers": "Programación de tareas",
+      "drive.settings": "Ajustes de Drive"
+    }
+  },
+  "fr": {
+    "maif": {
+      "events": "Eventos (Maif)",
+      "maifuser": {
+        "contrat": "Contrato (Maif)",
+        "home": "Vivienda (Maif)",
+        "family": "Familia (Maif)",
+        "paymentterms": "Condiciones de pago (Maif)",
+        "sinistre": "Siniestro (Maif)",
+        "societaire": "Socio (Maif)"
+      }
+    }
+  },
+  "org": {
+    "fing": {
+      "mesinfos": {
+        "insuranceclaim": "Siniestros declarados (Maif)"
+      }
+    }
+  }
+}

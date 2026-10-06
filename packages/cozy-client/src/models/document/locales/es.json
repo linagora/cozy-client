@@ -1,0 +1,261 @@
+{
+  "country": {
+    "foreign": "Extranjero"
+  },
+  "Scan": {
+    "scan_a_doc": "Escanear un documento",
+    "save_doc": "Guardar el documento",
+    "filename": "Nombre del archivo",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "qualify": "Describir",
+    "apply": "Aplicar",
+    "error": {
+      "offline": "Actualmente no tiene conexión y no puede usar esta función. Vuelva a intentarlo más tarde.",
+      "uploading": "Ya está subiendo un archivo. Espere a que termine la subida y vuelva a intentarlo.",
+      "generic": "Se ha producido un error. Vuelva a intentarlo."
+    },
+    "successful": {
+      "qualified_ok": "¡Ha descrito su archivo correctamente!"
+    },
+    "items": {
+      "accommodation_proof": "Certificado de alojamiento |||| Certificados de alojamiento",
+      "appliance_invoice": "Factura de electrodoméstico |||| Facturas de electrodomésticos",
+      "bank_details": "Datos bancarios |||| Datos bancarios",
+      "bank_statement": "Extracto bancario |||| Extractos bancarios",
+      "birth_certificate": "Partida de nacimiento |||| Partidas de nacimiento",
+      "building_permit": "Licencia de obras |||| Licencias de obras",
+      "caf": "Certificado de prestaciones sociales |||| Certificados de prestaciones sociales",
+      "car_insurance": "Certificado de seguro de coche |||| Certificados de seguro de coche",
+      "citizen_registration_certificate": "Certificado de empadronamiento |||| Certificados de empadronamiento",
+      "condition_report": "Informe de estado del inmueble |||| Informes de estado del inmueble",
+      "diploma": "Diploma |||| Diplomas",
+      "divorce": "Divorcio |||| Divorcios",
+      "driver_license": "Permiso de conducir |||| Permisos de conducir",
+      "electoral_card": "Tarjeta electoral |||| Tarjetas electorales",
+      "employment_center_certificate": "Certificado de la oficina de empleo |||| Certificados de la oficina de empleo",
+      "energy_contract": "Contrato de suministro de energía |||| Contratos de suministro de energía",
+      "energy_invoice": "Factura de energía |||| Facturas de energía",
+      "expense_claim": "Nota de gastos |||| Notas de gastos",
+      "family_record_book": "Libro de familia |||| Libros de familia",
+      "family": "Familia",
+      "fidelity_card": "Tarjeta de fidelidad |||| Tarjetas de fidelidad",
+      "fine": "Multa |||| Multas",
+      "gradebook": "Boletín de notas |||| Boletines de notas",
+      "grocery_invoice": "Factura de la compra |||| Facturas de la compra",
+      "health_book": "Cartilla de salud |||| Cartillas de salud",
+      "health_certificate": "Certificado de salud/vacunación |||| Certificados de salud/vacunación",
+      "health_insurance_card": "Tarjeta de seguro |||| Tarjetas de seguro",
+      "health_invoice": "Factura médica |||| Facturas médicas",
+      "health": "Salud",
+      "home": "Vivienda",
+      "house_insurance": "Seguro de hogar |||| Seguros de hogar",
+      "house_sale_agreeement": "Contrato de compraventa de vivienda |||| Contratos de compraventa de vivienda",
+      "identity_photo": "Foto de carné |||| Fotos de carné",
+      "identity": "Identidad",
+      "invoice": "Factura |||| Facturas",
+      "isp_invoice": "Factura de internet |||| Facturas de internet",
+      "large_family_card": "Título de familia numerosa |||| Títulos de familia numerosa",
+      "lease": "Contrato de alquiler |||| Contratos de alquiler",
+      "loan_agreement": "Contrato de préstamo |||| Contratos de préstamo",
+      "mechanic_invoice": "Factura de reparación |||| Facturas de reparación",
+      "motivation_letter": "Carta de motivación |||| Cartas de motivación",
+      "national_health_insurance_card": "Tarjeta sanitaria |||| Tarjetas sanitarias",
+      "national_health_insurance_right_certificate": "Certificado de derecho a asistencia sanitaria |||| Certificados de derecho a asistencia sanitaria",
+      "national_id_card": "Documento de identidad |||| Documentos de identidad",
+      "note_identity_document": "Nota Identidad |||| Notas Identidad",
+      "note_family_document": "Nota Familia |||| Notas Familia",
+      "note_work_document": "Nota Trabajo y estudios |||| Notas Trabajo y estudios",
+      "note_health_document": "Nota Salud |||| Notas Salud",
+      "note_house_document": "Nota Vivienda |||| Notas Vivienda",
+      "note_transport_document": "Nota Transporte |||| Notas Transporte",
+      "note_activity_document": "Nota Actividades |||| Notas Actividades",
+      "note_finance": "Nota Finanzas |||| Notas Finanzas",
+      "note_invoice": "Nota Facturas |||| Notas Facturas",
+      "other_activity_document": "Otro documento de actividades |||| Otros documentos de actividades",
+      "other_bank_document": "Otro documento financiero |||| Otros documentos financieros",
+      "other_family_document": "Otro documento familiar |||| Otros documentos familiares",
+      "other_health_document": "Otro documento de salud |||| Otros documentos de salud",
+      "other_house_document": "Otro documento de vivienda |||| Otros documentos de vivienda",
+      "other_identity_document": "Otro documento de identidad |||| Otros documentos de identidad",
+      "other_invoice": "Otra factura |||| Otras facturas",
+      "other_revenue": "Otro ingreso |||| Otros ingresos",
+      "other_tax_document": "Otro documento fiscal |||| Otros documentos fiscales",
+      "other_transport_document": "Otro documento de transporte |||| Otros documentos de transporte",
+      "other_work_document": "Otro documento laboral |||| Otros documentos laborales",
+      "other_administrative_document": "Otro documento administrativo |||| Otros documentos administrativos",
+      "others": "Otros",
+      "pacs": "Pareja de hecho |||| Parejas de hecho",
+      "passport": "Pasaporte |||| Pasaportes",
+      "pay_sheet": "Nómina |||| Nóminas",
+      "payment_proof_family_allowance": "Justificante de pago de prestación familiar |||| Justificantes de pago de prestación familiar",
+      "pension": "Pensión |||| Pensiones",
+      "person_insurance": "Certificado de seguro individual |||| Certificados de seguro individual",
+      "personal_sporting_licence": "Licencia deportiva |||| Licencias deportivas",
+      "phone_invoice": "Factura de teléfono |||| Facturas de teléfono",
+      "pregnancy_medical_certificate": "Certificado de embarazo |||| Certificados de embarazo",
+      "prescription": "Receta médica |||| Recetas médicas",
+      "real_estate_insurance" : "Certificado de seguro inmobiliario |||| Certificados de seguro inmobiliario",
+      "real_estate_tax": "Impuesto sobre bienes inmuebles |||| Impuestos sobre bienes inmuebles",
+      "receipt": "Recibo |||| Recibos",
+      "rent_receipt": "Recibo de alquiler |||| Recibos de alquiler",
+      "residence_permit": "Permiso de residencia |||| Permisos de residencia",
+      "restaurant_invoice": "Factura de restaurante |||| Facturas de restaurante",
+      "resume": "Currículum |||| Currículums",
+      "school_attendance_certificate": "Certificado de escolaridad |||| Certificados de escolaridad",
+      "school_insurance_certificate": "Certificado de seguro escolar |||| Certificados de seguro escolar",
+      "single_parent_benefit": "Prestación por familia monoparental |||| Prestaciones por familia monoparental",
+      "student_card": "Carné de estudiante |||| Carnés de estudiante",
+      "tax_certificate": "Certificado fiscal |||| Certificados fiscales",
+      "tax_notice": "Notificación tributaria |||| Notificaciones tributarias",
+      "tax_return": "Declaración de la renta |||| Declaraciones de la renta",
+      "tax_timetable": "Plan de pago a plazos |||| Planes de pago a plazos",
+      "technical_diagnostic_record": "Informe de diagnóstico técnico |||| Informes de diagnóstico técnico",
+      "telecom_invoice": "Factura de telecomunicaciones |||| Facturas de telecomunicaciones",
+      "transport_card": "Tarjeta de transporte |||| Tarjetas de transporte",
+      "transport_invoice": "Factura de transporte |||| Facturas de transporte",
+      "transport": "Transporte",
+      "unemployment_benefit": "Prestación por desempleo |||| Prestaciones por desempleo",
+      "unfit_for_habitation_declaration": "Declaración de inhabitabilidad |||| Declaraciones de inhabitabilidad",
+      "vehicle_registration": "Permiso de circulación |||| Permisos de circulación",
+      "water_invoice": "Factura del agua |||| Facturas del agua",
+      "web_service_invoice": "Factura de servicio web |||| Facturas de servicios web",
+      "wedding": "Capitulaciones matrimoniales |||| Capitulaciones matrimoniales",
+      "work_contract": "Contrato de trabajo |||| Contratos de trabajo",
+      "work_disability_recognition": "Reconocimiento de discapacidad |||| Reconocimientos de discapacidad",
+      "work_invoice": "Factura de obras |||| Facturas de obras",
+      "work_quote": "Presupuesto de obras |||| Presupuestos de obras",
+      "work_study": "Trabajo y estudios"
+    },
+    "attributes":{
+      "contractType": {
+        "cdi": "Indefinido",
+        "cdd": "Temporal",
+        "alternate": "Formación en alternancia",
+        "internship": "Prácticas",
+        "other": "Otro"
+      },
+      "noticePeriod": {
+        "oneWeek": "1 semana antes",
+        "oneMonth": "1 mes antes",
+        "threeMonth": "3 meses antes",
+        "oneYear": "1 año antes",
+        "custom": "Personalizado",
+        "noAlert": "No recibir alertas"
+      }
+    },
+    "themes": {
+      "none": "Ninguno",
+      "activity": "Actividades",
+      "family": "Familia",
+      "finance": "Finanzas",
+      "health": "Salud",
+      "home": "Vivienda",
+      "identity": "Identidad",
+      "invoice": "Facturas",
+      "others": "Otros",
+      "transport": "Transporte",
+      "undefined": "Sin definir",
+      "work_study": "Trabajo y estudios"
+    },
+    "expiration": {
+      "expired": "Caducado",
+      "expiresIn": "Caduca en %{duration}",
+      "description": "Este documento caduca en %{duration}, piense en renovarlo"
+    },
+    "qualification": {
+      "date": {
+        "title": {
+          "datetime": "Añadido el",
+          "AObtentionDate": "Permiso A, expedido el",
+          "BObtentionDate": "Permiso B, expedido el",
+          "CObtentionDate": "Permiso C, expedido el",
+          "DObtentionDate": "Permiso D, expedido el",
+          "issueDate": "Expedido el",
+          "expirationDate": "Fecha de caducidad",
+          "referencedDate": "Fecha de referencia",
+          "shootingDate": "Fecha de la toma",
+          "obtentionDate": "Fecha de obtención",
+          "date": "Fecha del documento"
+        }
+      },
+      "information": {
+        "title": {
+          "fine": {
+            "number": "Importe de la multa"
+          },
+          "fidelity_card": {
+            "number": "Número de tarjeta"
+          },
+          "caf": {
+            "number": "Número de expediente CAF"
+          },
+          "payment_proof_family_allowance": {
+            "number":"Número de expediente CAF"
+          },
+          "vehicle": {
+            "licenseNumber": "Matrícula del vehículo",
+            "confidentialNumber": "Código confidencial del permiso de circulación"
+          },
+          "vehicle_registration": {
+            "number": "Número de identificación del vehículo (VIN)"
+          },
+          "national_id_card": {
+            "number": "Número del documento de identidad"
+          },
+          "bank_details": {
+            "number": "Número IBAN"
+          },
+          "passport": {
+            "number": "Número de pasaporte"
+          },
+          "driver_license": {
+            "number": "Número de permiso"
+          },
+          "residence_permit": {
+            "number": "Número de permiso"
+          },
+          "national_health_insurance_card": {
+            "number": "Número de la tarjeta sanitaria"
+          },
+          "pay_sheet": {
+            "number": "Remuneración bruta"
+          },
+          "tax_return": {
+            "number": "Número de referencia fiscal"
+          },
+          "tax_notice": {
+            "number": "Número de referencia fiscal"
+          },
+          "real_estate_tax": {
+            "number": "Número de referencia fiscal"
+          },
+          "tax_timetable": {
+            "number": "Número de referencia fiscal"
+          },
+          "country": "País de expedición del documento",
+          "refTaxIncome": "Renta fiscal de referencia",
+          "contractType": "Tipo de contrato",
+          "noticePeriod": "Alerta de caducidad",
+          "netSocialAmount": "Importe neto social",
+          "employerName": "Nombre del empleador",
+          "employer": "Nombre del empleador",
+          "amount": "Importe del gasto",
+          "subtype": "Motivo del gasto",
+          "bicNumber": "Código BIC"
+        },
+        "day": "día |||| días"
+      },
+      "contact": "Titular",
+      "page": "Cara del documento",
+      "front": "Anverso",
+      "back": "Reverso",
+      "qualification": "Clasificación",
+      "noInfo": "Sin información"
+    }
+  },
+  "MagicFolders": {
+    "administrative": "Administrativo",
+    "photos": "Fotos"
+  }
+}

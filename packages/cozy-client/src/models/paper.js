@@ -2,11 +2,16 @@ import add from 'date-fns/add'
 import sub from 'date-fns/sub'
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
 import fr from 'date-fns/locale/fr'
+import es from 'date-fns/locale/es'
+import de from 'date-fns/locale/de'
+import it from 'date-fns/locale/it'
 import { getLocalizer as localizerDocument } from './document/locales'
 import { getLocalizer as localizerCountry } from './country/locales'
 import { getDisplayName } from './contact'
 import get from 'lodash/get'
 import { isValidCountryCodeTranslation } from './country/countries'
+
+const DATE_FNS_LOCALES = { fr, es, de, it }
 
 /**
  * @typedef {import("../types").IOCozyFile} IOCozyFile
@@ -476,7 +481,7 @@ export const makeExpiresInMessage = (expirationDate, { lang }) => {
   const t = localizerDocument(lang)
 
   const distance = formatDistanceToNowStrict(new Date(expirationDate), {
-    locale: lang === 'fr' ? fr : undefined // fallbacks to english if undefined
+    locale: DATE_FNS_LOCALES[lang] // fallbacks to english if undefined
   })
 
   return t('Scan.expiration.expiresIn', { duration: distance })
@@ -492,7 +497,7 @@ export const makeExpirationDescription = (expirationDate, { lang }) => {
   const t = localizerDocument(lang)
 
   const distance = formatDistanceToNowStrict(new Date(expirationDate), {
-    locale: lang === 'fr' ? fr : undefined // fallbacks to english if undefined
+    locale: DATE_FNS_LOCALES[lang] // fallbacks to english if undefined
   })
 
   return t('Scan.expiration.description', { duration: distance })
