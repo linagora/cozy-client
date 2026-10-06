@@ -5,6 +5,8 @@ import frLocale from './fr.json'
 import esLocale from './es.json'
 import deLocale from './de.json'
 import itLocale from './it.json'
+import ruLocale from './ru.json'
+import viLocale from './vi.json'
 import { getEmojiByCountry } from '../../country/countries'
 
 const locales = {
@@ -12,13 +14,15 @@ const locales = {
   fr: frLocale,
   es: esLocale,
   de: deLocale,
-  it: itLocale
+  it: itLocale,
+  ru: ruLocale,
+  vi: viLocale
 }
 
 const polyglots = {}
-const langs = ['fr', 'en', 'es', 'de', 'it']
+const langs = ['fr', 'en', 'es', 'de', 'it', 'ru', 'vi']
 for (const lang of langs) {
-  const polyglot = new Polyglot()
+  const polyglot = new Polyglot({ locale: lang })
   polyglot.extend(locales[lang])
   polyglots[lang] = polyglot
 }

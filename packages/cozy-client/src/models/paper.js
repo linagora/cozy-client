@@ -5,13 +5,15 @@ import fr from 'date-fns/locale/fr'
 import es from 'date-fns/locale/es'
 import de from 'date-fns/locale/de'
 import it from 'date-fns/locale/it'
+import ru from 'date-fns/locale/ru'
+import vi from 'date-fns/locale/vi'
 import { getLocalizer as localizerDocument } from './document/locales'
 import { getLocalizer as localizerCountry } from './country/locales'
 import { getDisplayName } from './contact'
 import get from 'lodash/get'
 import { isValidCountryCodeTranslation } from './country/countries'
 
-const DATE_FNS_LOCALES = { fr, es, de, it }
+const DATE_FNS_LOCALES = { fr, es, de, it, ru, vi }
 
 /**
  * @typedef {import("../types").IOCozyFile} IOCozyFile
