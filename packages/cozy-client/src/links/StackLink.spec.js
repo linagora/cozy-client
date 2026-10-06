@@ -1,4 +1,4 @@
-import { Q } from '../queries/dsl'
+import { Q, MutationTypes } from '../queries/dsl'
 import CozyClient from '../CozyClient'
 import StackLink, { transformBulkDocsResponse } from './StackLink'
 import { SCHEMA } from '../__tests__/fixtures'
@@ -281,6 +281,31 @@ describe('StackLink', () => {
         id: '2',
         doc: expect.objectContaining(originalDocuments[1])
       })
+    })
+  })
+
+  describe('mutations', () => {
+    it('should delegate CREATE_DOCUMENT with sourceURL to collection.create without modifying or dropping sourceURL', async () => {
+      const doc = {
+        _type: 'io.cozy.files',
+        type: 'file',
+        name: 'remote.pdf',
+        dirId: '123',
+        sourceURL: 'https://example.com/file.pdf'
+      }
+      const fakeCollection = {
+        create: jest.fn().mockResolvedValue({ data: { id: 'created-id' } })
+      }
+      stackClient.collection = jest.fn().mockReturnValue(fakeCollection)
+
+      const result = await link.executeMutation({
+        mutationType: MutationTypes.CREATE_DOCUMENT,
+        document: doc
+      })
+
+      expect(stackClient.collection).toHaveBeenCalledWith('io.cozy.files')
+      expect(fakeCollection.create).toHaveBeenCalledWith(doc)
+      expect(result).toEqual({ data: { id: 'created-id' } })
     })
   })
 })

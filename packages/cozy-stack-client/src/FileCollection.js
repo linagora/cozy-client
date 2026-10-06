@@ -60,6 +60,7 @@ import logger from './logger'
  * @property {string} _id - Id of the document
  * @property {string} dirId - Id of the parent directory.
  * @property {string} name - Name of the created file.
+ * @property {string} [sourceURL] - The source URL to download the file from (server-side via Cozy Stack)
  * @property {Date} lastModifiedDate - Can be used to set the last modified date of a file.
  * @property {boolean} executable - Whether or not the file is executable
  * @property {boolean} encrypted - Whether or not the file is client-side encrypted
@@ -570,12 +571,16 @@ class FileCollection extends DocumentCollection {
    * - Used by StackLink to support CozyClient.create('io.cozy.files', options)
    *
    * @param {FileAttributes|DirectoryAttributes} attributes - Attributes of the created file/directory
-   * @param {File|Blob|string|ArrayBuffer} attributes.data Will be used as content of the created file
+   * @param {File|Blob|string|ArrayBuffer} [attributes.data] Will be used as content of the created file
+   * @param {string} [attributes.sourceURL] The source URL to download the file from (server-side via Cozy Stack)
    * @param {object} [options] Optionnal request options
    * @throws {Error} - explaining reason why creation failed
    */
   async create(attributes, { sanitizeName = true } = {}) {
     if (attributes.type === 'directory') {
+      if (attributes.sourceURL) {
+        throw new Error('You cannot pass a sourceURL for a directory')
+      }
       return this.createDirectory(attributes, { sanitizeName })
     } else {
       const { data, ...createFileOptions } = attributes
@@ -614,9 +619,10 @@ class FileCollection extends DocumentCollection {
    *
    *
    * @private
-   * @param {File|Blob|Stream|string|ArrayBuffer} data file to be uploaded
-   * @param {FileAttributes & SpecificFileAttributesForKonnector} params Additional parameters
-   * @param {object} params.options Options to pass to doUpload method (additional headers)
+   * @param {File|Blob|Stream|string|ArrayBuffer} [data] file to be uploaded
+   * @param {FileAttributes & SpecificFileAttributesForKonnector} [params] Additional parameters
+   * @param {string} [params.sourceURL] The source URL to download the file from (server-side via Cozy Stack)
+   * @param {object} [params.options] Options to pass to doUpload method (additional headers)
    * @param {object} [options] Optionnal request options
    * @throws {Error} - explaining reason why creation failed
    */
@@ -630,18 +636,33 @@ class FileCollection extends DocumentCollection {
       metadata,
       sourceAccount = '',
       sourceAccountIdentifier = '',
+      sourceURL,
       ...options
     } = {},
     { sanitizeName = true } = {}
   ) {
+    if (sourceURL !== undefined) {
+      if (data !== undefined && data !== null) {
+        throw new Error('Cannot pass both data and sourceURL')
+      }
+      if (typeof sourceURL !== 'string' || sourceURL.trim() === '') {
+        throw new Error('sourceURL cannot be empty')
+      }
+    }
+
     let name = nameOption
     // handle case where data is a file and contains the name
-    if (!name && typeof data.name === 'string') {
+    if (!name && data && typeof data.name === 'string') {
       name = data.name
     }
 
     if (sanitizeName) {
       name = sanitizeAndValidateFileName(name)
+    } else if (
+      sourceURL !== undefined &&
+      (!name || typeof name !== 'string' || name.trim() === '')
+    ) {
+      throw new Error('Missing name argument')
     }
 
     let metadataId = ''
@@ -653,6 +674,34 @@ class FileCollection extends DocumentCollection {
     if (options.contentLength) {
       size = String(options.contentLength)
     }
+
+    if (sourceURL !== undefined) {
+      let path =
+        this.prefix +
+        uri`/${dirId}?Name=${name}&Type=file&Executable=${executable}&Encrypted=${encrypted}&MetadataID=${metadataId}&Size=${size}&SourceAccount=${sourceAccount}&SourceAccountIdentifier=${sourceAccountIdentifier}&SourceURL=${sourceURL}`
+
+      let lastModifiedDate = options.lastModifiedDate
+      if (lastModifiedDate) {
+        const date = new Date(lastModifiedDate).toISOString()
+        path = `${path}&UpdatedAt=${date}&CreatedAt=${date}`
+      }
+
+      const headers = {
+        ...(options.headers || {}),
+        'Content-Type': CONTENT_TYPE_OCTET_STREAM
+      }
+      if (options.ifMatch) {
+        headers['If-Match'] = options.ifMatch
+      }
+
+      const resp = await this.stackClient.fetchJSON('POST', path, '', {
+        headers
+      })
+      return {
+        data: normalizeFile(resp.data)
+      }
+    }
+
     const path =
       this.prefix +
       uri`/${dirId}?Name=${name}&Type=file&Executable=${executable}&Encrypted=${encrypted}&MetadataID=${metadataId}&Size=${size}&SourceAccount=${sourceAccount}&SourceAccountIdentifier=${sourceAccountIdentifier}`
