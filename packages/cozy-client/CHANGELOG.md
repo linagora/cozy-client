@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.40.0](https://github.com/linagora/cozy-client/compare/v60.39.1...v60.40.0) (2026-10-06)
+
+
+### Features
+
+* **models:** Add Russian and Vietnamese locales ([56ffd0c](https://github.com/linagora/cozy-client/commit/56ffd0c10d34d00754c2c84f3f48fe03326bb262))
+* **models:** Add Spanish, German and Italian locales ([d4b237d](https://github.com/linagora/cozy-client/commit/d4b237dab66cee88ccb185a4f354d19f9f934dbf))
+
+
+
+
+
 # [60.39.0](https://github.com/linagora/cozy-client/compare/v60.38.0...v60.39.0) (2026-10-01)
 
 
