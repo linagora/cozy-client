@@ -1069,7 +1069,8 @@ Creates directory or file.
 | Param | Type | Description |
 | --- | --- | --- |
 | attributes | [<code>FileAttributes</code>](#FileAttributes) \| [<code>DirectoryAttributes</code>](#DirectoryAttributes) | Attributes of the created file/directory |
-| attributes.data | <code>File</code> \| <code>Blob</code> \| <code>string</code> \| <code>ArrayBuffer</code> | Will be used as content of the created file |
+| [attributes.data] | <code>File</code> \| <code>Blob</code> \| <code>string</code> \| <code>ArrayBuffer</code> | Will be used as content of the created file |
+| [attributes.sourceURL] | <code>string</code> | The source URL to download the file from (server-side via Cozy Stack) |
 | [options] | <code>object</code> | Optionnal request options |
 
 <a name="FileCollection+updateFile"></a>
@@ -3026,6 +3027,7 @@ Attributes used for file creation
 | _id | <code>string</code> | Id of the document |
 | dirId | <code>string</code> | Id of the parent directory. |
 | name | <code>string</code> | Name of the created file. |
+| [sourceURL] | <code>string</code> | The source URL to download the file from (server-side via Cozy Stack) |
 | lastModifiedDate | <code>Date</code> | Can be used to set the last modified date of a file. |
 | executable | <code>boolean</code> | Whether or not the file is executable |
 | encrypted | <code>boolean</code> | Whether or not the file is client-side encrypted |
