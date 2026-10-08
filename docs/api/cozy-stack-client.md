@@ -796,6 +796,7 @@ files associated to a specific document
     * [.emptyTrash()](#FileCollection+emptyTrash) ⇒ <code>Promise.&lt;{data}&gt;</code>
     * [.restore(id)](#FileCollection+restore) ⇒ <code>Promise.&lt;{data}&gt;</code>
     * [.copy(id, [name], [dirId], [options])](#FileCollection+copy) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.getDirectorySize(id)](#FileCollection+getDirectorySize) ⇒ <code>Promise.&lt;{size: number, filesCount: (number\|null)}&gt;</code>
     * [.deleteFilePermanently(id, [options])](#FileCollection+deleteFilePermanently) ⇒ <code>Promise.&lt;{data}&gt;</code>
     * [.upload(data, dirPath, [options])](#FileCollection+upload) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.create(attributes, [options])](#FileCollection+create)
@@ -1028,6 +1029,19 @@ Copy a file.
 | [name] | <code>string</code> | The file copy name |
 | [dirId] | <code>string</code> | The destination directory id |
 | [options] | <code>object</code> | Optionnal request options |
+
+<a name="FileCollection+getDirectorySize"></a>
+
+### fileCollection.getDirectorySize(id) ⇒ <code>Promise.&lt;{size: number, filesCount: (number\|null)}&gt;</code>
+Get the size and the number of files of a directory, including those in
+its subdirectories
+
+**Kind**: instance method of [<code>FileCollection</code>](#FileCollection)  
+**Returns**: <code>Promise.&lt;{size: number, filesCount: (number\|null)}&gt;</code> - The size in bytes and the number of files (null on stacks that do not return it)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | The id of the directory |
 
 <a name="FileCollection+deleteFilePermanently"></a>
 
