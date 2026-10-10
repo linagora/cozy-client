@@ -382,6 +382,14 @@ describe('FileCollection', () => {
           sourceURL: 'https://example.com/folder'
         })
       ).rejects.toThrow('You cannot pass a sourceURL for a directory')
+
+      await expect(
+        collection.create({
+          name: 'my-folder',
+          type: 'directory',
+          sourceURL: ''
+        })
+      ).rejects.toThrow('You cannot pass a sourceURL for a directory')
     })
 
     it('directory - should throw illegal characters errors when invalid file name', async () => {

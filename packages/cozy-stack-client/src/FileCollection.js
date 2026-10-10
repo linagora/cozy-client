@@ -578,7 +578,7 @@ class FileCollection extends DocumentCollection {
    */
   async create(attributes, { sanitizeName = true } = {}) {
     if (attributes.type === 'directory') {
-      if (attributes.sourceURL) {
+      if (attributes.sourceURL !== undefined) {
         throw new Error('You cannot pass a sourceURL for a directory')
       }
       return this.createDirectory(attributes, { sanitizeName })
