@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.41.0](https://github.com/linagora/cozy-client/compare/v60.40.0...v60.41.0) (2026-10-10)
+
+
+### Bug Fixes
+
+* **stack-client:** Reject empty sourceURL when creating directory ([6e8ea24](https://github.com/linagora/cozy-client/commit/6e8ea24d3f1f4f0c8bcf39936ff8981f36e827d6))
+
+
+### Features
+
+* **stack-client:** Support sourceURL in FileCollection file creation ([5887acf](https://github.com/linagora/cozy-client/commit/5887acf7835d50e6483d840db2eb354ca8463fa7))
+
+
+
+
+
 # [60.37.0](https://github.com/linagora/cozy-client/compare/v60.36.2...v60.37.0) (2026-09-22)
 
 
