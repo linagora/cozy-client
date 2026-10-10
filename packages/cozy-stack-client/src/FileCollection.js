@@ -525,6 +525,22 @@ class FileCollection extends DocumentCollection {
   }
 
   /**
+   * Get the size and the number of files of a directory, including those in
+   * its subdirectories
+   *
+   * @param {string} id - The id of the directory
+   * @returns {Promise<{size: number, filesCount: number|null}>} The size in bytes and the number of files (null on stacks that do not return it)
+   */
+  async getDirectorySize(id) {
+    const resp = await this.stackClient.fetchJSON(
+      'GET',
+      this.prefix + uri`/${id}/size`
+    )
+    const { size, files_count } = resp.data.attributes
+    return { size: Number(size), filesCount: files_count ?? null }
+  }
+
+  /**
    * async deleteFilePermanently - Definitely delete a file
    *
    * @param  {string} id - The id of the file to delete
@@ -609,7 +625,10 @@ class FileCollection extends DocumentCollection {
         throw new Error('You cannot pass a data object for a directory')
       }
       updateFileOptions.fileId = fileId
-      return this.updateFile(data, updateFileOptions, { ifMatch, sanitizeName })
+      return this.updateFile(data, updateFileOptions, {
+        ifMatch,
+        sanitizeName
+      })
     }
     return this.updateAttributes(fileId, attributes, { ifMatch, sanitizeName })
   }

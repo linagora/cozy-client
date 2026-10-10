@@ -1405,6 +1405,40 @@ describe('FileCollection', () => {
     })
   })
 
+  describe('getDirectorySize', () => {
+    afterEach(() => {
+      client.fetchJSON.mockClear()
+    })
+
+    it('should return the size and the number of files of a directory', async () => {
+      client.fetchJSON.mockReturnValue({
+        data: {
+          type: 'io.cozy.files.sizes',
+          id: 'dir-id',
+          attributes: { size: '1234567890', files_count: 42 }
+        }
+      })
+      const result = await collection.getDirectorySize('dir-id')
+      expect(client.fetchJSON).toHaveBeenCalledWith('GET', '/files/dir-id/size')
+      expect(result).toEqual({ size: 1234567890, filesCount: 42 })
+    })
+
+    it('should use the shared drive route when the collection has a driveId', async () => {
+      const driveCollection = new FileCollection('io.cozy.files', client, {
+        driveId: 'drive-id'
+      })
+      client.fetchJSON.mockReturnValue({
+        data: { attributes: { size: '3' } }
+      })
+      const result = await driveCollection.getDirectorySize('dir-id')
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/drive-id/dir-id/size'
+      )
+      expect(result).toEqual({ size: 3, filesCount: null })
+    })
+  })
+
   describe('copy', () => {
     afterEach(() => {
       client.fetchJSON.mockClear()
