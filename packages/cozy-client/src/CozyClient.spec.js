@@ -2306,6 +2306,17 @@ describe('file creation', () => {
     ).rejects.toThrow('sourceURL cannot be empty')
   })
 
+  it('should reject directory creation when sourceURL is provided', async () => {
+    const { client } = setup()
+    await expect(
+      client.create('io.cozy.files', {
+        type: 'directory',
+        sourceURL: '',
+        name: 'my-folder'
+      })
+    ).rejects.toThrow('You cannot pass a sourceURL for a directory')
+  })
+
   it('should dispatch mutation error and throw when stack HTTP call fails', async () => {
     const { client } = setup()
     jest.spyOn(client, 'dispatch')
