@@ -76,6 +76,19 @@ describe('QueryDefinition', () => {
     ).toThrow('effectiveRecipients called with undefined fileId')
   })
 
+  it('builds a scoped contact suggestion query', () => {
+    expect(
+      Q('io.cozy.contacts.suggestions').suggestContacts(' al ')
+    ).toMatchObject({
+      doctype: 'io.cozy.contacts.suggestions',
+      id: '["al",20]',
+      selector: { q: 'al', limit: 20 }
+    })
+    expect(() => Q('io.cozy.contacts').suggestContacts('al')).toThrow(
+      'suggestContacts must be called on io.cozy.contacts.suggestions'
+    )
+  })
+
   it('paginates only one way', () => {
     const q = Q('io.cozy.files')
     const withSkip = q.offset(2)

@@ -11,6 +11,9 @@
 <dd><p>Utility class to abstract an regroup identical methods and logics for
 specific collections.</p>
 </dd>
+<dt><a href="#ContactsCollection">ContactsCollection</a></dt>
+<dd><p>Contact documents and recipient suggestions from the stack.</p>
+</dd>
 <dt><a href="#CozyStackClient">CozyStackClient</a></dt>
 <dd><p>Main API against the <code>cozy-stack</code> server.</p>
 </dd>
@@ -204,6 +207,15 @@ CouchDB transforms $nor into $and with $ne operators</p>
 ## Typedefs
 
 <dl>
+<dt><a href="#ContactSuggestion">ContactSuggestion</a> : <code>Partial.&lt;IOCozyContact&gt;</code> | <code><a href="#SuggestionOrigin">SuggestionOrigin</a></code></dt>
+<dd><p>A suggestion uses existing contact fields, without requiring a stored document.</p>
+</dd>
+<dt><a href="#SuggestionOrigin">SuggestionOrigin</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#GroupSuggestion">GroupSuggestion</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#RecipientSuggestion">RecipientSuggestion</a> : <code><a href="#ContactSuggestion">ContactSuggestion</a></code> | <code><a href="#GroupSuggestion">GroupSuggestion</a></code></dt>
+<dd></dd>
 <dt><a href="#FetchChangesReturnValue">FetchChangesReturnValue</a> ⇒ <code><a href="#FetchChangesReturnValue">Promise.&lt;FetchChangesReturnValue&gt;</a></code></dt>
 <dd><p>Use Couch _changes API
 Deleted and design docs are filtered by default, thus documents are retrieved in the response
@@ -385,6 +397,47 @@ document as data attribute
 | options | <code>object</code> |  | Options of the collection |
 | options.normalize | <code>function</code> |  | Callback to normalize response data (default `data => data`) |
 | [options.method] | <code>string</code> | <code>&quot;GET&quot;</code> | HTTP method |
+
+<a name="ContactsCollection"></a>
+
+## ContactsCollection
+Contact documents and recipient suggestions from the stack.
+
+**Kind**: global class  
+
+* [ContactsCollection](#ContactsCollection)
+    * [.suggest(q, [options])](#ContactsCollection+suggest) ⇒ <code>Promise.&lt;{data: Array.&lt;RecipientSuggestion&gt;, next: boolean}&gt;</code>
+    * [.destroy(contact)](#ContactsCollection+destroy) ⇒ <code>Promise.&lt;{data: IOCozyContact}&gt;</code>
+
+<a name="ContactsCollection+suggest"></a>
+
+### contactsCollection.suggest(q, [options]) ⇒ <code>Promise.&lt;{data: Array.&lt;RecipientSuggestion&gt;, next: boolean}&gt;</code>
+Fetch groups and people the user can share with, in server order.
+The stack chooses local or organization sources from its configuration.
+
+**Kind**: instance method of [<code>ContactsCollection</code>](#ContactsCollection)  
+**Returns**: <code>Promise.&lt;{data: Array.&lt;RecipientSuggestion&gt;, next: boolean}&gt;</code> - Partial contact and group suggestions  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| q | <code>string</code> |  | Search text, at least two Unicode characters after trimming |
+| [options] | <code>object</code> |  | Search options |
+| [options.limit] | <code>number</code> | <code>20</code> | Combined result limit, from 1 to 256 |
+
+<a name="ContactsCollection+destroy"></a>
+
+### contactsCollection.destroy(contact) ⇒ <code>Promise.&lt;{data: IOCozyContact}&gt;</code>
+Destroys a contact
+
+If the contact is linked to accounts, it will be trashed instead of being
+destroyed.
+
+**Kind**: instance method of [<code>ContactsCollection</code>](#ContactsCollection)  
+**Returns**: <code>Promise.&lt;{data: IOCozyContact}&gt;</code> - - Resolves when contact has been destroyed  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| contact | <code>IOCozyContact</code> | Contact to destroy. IT MUST BE THE FULL CONTACT OBJECT |
 
 <a name="CozyStackClient"></a>
 
@@ -2889,6 +2942,41 @@ Join two paths together ensuring there is only one slash between them
 | start | <code>string</code> | The starting part of the path |
 | end | <code>string</code> | The ending part of the path |
 
+<a name="ContactSuggestion"></a>
+
+## ContactSuggestion : <code>Partial.&lt;IOCozyContact&gt;</code> \| [<code>SuggestionOrigin</code>](#SuggestionOrigin)
+A suggestion uses existing contact fields, without requiring a stored document.
+
+**Kind**: global typedef  
+<a name="SuggestionOrigin"></a>
+
+## SuggestionOrigin : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [meta] | <code>object</code> |  |
+| [meta.kind] | <code>&#x27;member&#x27;</code> \| <code>&#x27;contact&#x27;</code> | Organization member or local contact |
+
+<a name="GroupSuggestion"></a>
+
+## GroupSuggestion : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| _type | <code>&#x27;io.cozy.contacts.groups&#x27;</code> | 
+| _id | <code>string</code> | 
+| id | <code>string</code> | 
+| name | <code>string</code> | 
+| color | <code>string</code> | 
+
+<a name="RecipientSuggestion"></a>
+
+## RecipientSuggestion : [<code>ContactSuggestion</code>](#ContactSuggestion) \| [<code>GroupSuggestion</code>](#GroupSuggestion)
+**Kind**: global typedef  
 <a name="FetchChangesReturnValue"></a>
 
 ## FetchChangesReturnValue ⇒ [<code>Promise.&lt;FetchChangesReturnValue&gt;</code>](#FetchChangesReturnValue)
@@ -3723,8 +3811,9 @@ Define a recipient that can be used as target of a sharing
 
 | Name | Type | Description |
 | --- | --- | --- |
-| id | <code>string</code> | Recipient's ID |
-| type | <code>string</code> | Reciptient's type (should be 'io.cozy.contacts') |
+| [id] | <code>string</code> | Local contact or group ID |
+| [email] | <code>string</code> | Email for an organization contact or a person without a local document |
+| type | <code>string</code> | Contact or group doctype |
 
 <a name="RecipientSource"></a>
 

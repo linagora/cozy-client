@@ -61,7 +61,7 @@ cozy-client
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:572](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L572)
+[packages/cozy-client/src/queries/dsl.js:598](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L598)
 
 ***
 
@@ -87,7 +87,7 @@ cozy-client
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:558](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L558)
+[packages/cozy-client/src/queries/dsl.js:584](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L584)
 
 ***
 
@@ -197,7 +197,7 @@ query definitions.
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:433](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L433)
+[packages/cozy-client/src/queries/dsl.js:459](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L459)
 
 ***
 
@@ -569,7 +569,7 @@ Generated URL
 
 *Defined in*
 
-[packages/cozy-client/src/queries/dsl.js:530](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L530)
+[packages/cozy-client/src/queries/dsl.js:556](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/queries/dsl.js#L556)
 
 ***
 

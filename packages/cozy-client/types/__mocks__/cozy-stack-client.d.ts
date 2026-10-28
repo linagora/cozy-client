@@ -8,6 +8,10 @@ export class OAuthClient extends OAuthClient_base {
             data: any[];
         }>, []>;
         find: jest.Mock<Promise<void>, []>;
+        suggest: jest.Mock<Promise<{
+            data: any[];
+            next: boolean;
+        }>, []>;
         create: jest.Mock<Promise<void>, []>;
         update: jest.Mock<Promise<void>, []>;
         updateAll: jest.Mock<Promise<void>, []>;
@@ -34,6 +38,10 @@ declare class MockedStackClient extends MockedStackClient_base {
             data: any[];
         }>, []>;
         find: jest.Mock<Promise<void>, []>;
+        suggest: jest.Mock<Promise<{
+            data: any[];
+            next: boolean;
+        }>, []>;
         create: jest.Mock<Promise<void>, []>;
         update: jest.Mock<Promise<void>, []>;
         updateAll: jest.Mock<Promise<void>, []>;

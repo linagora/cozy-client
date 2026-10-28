@@ -1,6 +1,10 @@
 import findKey from 'lodash/findKey'
 
-import { DOCTYPE_FILES, DOCTYPE_SHARING_RECIPIENTS } from '../const'
+import {
+  DOCTYPE_FILES,
+  DOCTYPE_SHARING_RECIPIENTS,
+  DOCTYPE_CONTACT_SUGGESTIONS
+} from '../const'
 import logger from '../logger'
 
 /**
@@ -393,6 +397,28 @@ class QueryDefinition {
     return new QueryDefinition({
       ...this.toDefinition(),
       selector: { file_id: fileId, drive_id: driveId }
+    })
+  }
+
+  /**
+   * Query a search result containing partial contact and group suggestions.
+   * Use singleDocData to read data.suggestions without caching partial contacts.
+   *
+   * @param {string} q - Search text, at least two characters after trimming
+   * @param {{limit?: number}} [options] - Combined result limit, defaults to 20
+   * @returns {QueryDefinition} The QueryDefinition object.
+   */
+  suggestContacts(q, { limit = 20 } = {}) {
+    if (this.doctype !== DOCTYPE_CONTACT_SUGGESTIONS) {
+      throw new Error(
+        `suggestContacts must be called on ${DOCTYPE_CONTACT_SUGGESTIONS}`
+      )
+    }
+    const text = q.trim()
+    return new QueryDefinition({
+      doctype: DOCTYPE_CONTACT_SUGGESTIONS,
+      id: JSON.stringify([text, limit]),
+      selector: { q: text, limit }
     })
   }
 

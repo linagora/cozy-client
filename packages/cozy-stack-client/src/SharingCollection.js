@@ -45,8 +45,9 @@ const normalizeSharing = normalizeDoctypeJsonApi(SHARING_DOCTYPE)
 
 /**
  * @typedef {object} RelationshipItem Define a recipient that can be used as target of a sharing
- * @property {string} id - Recipient's ID
- * @property {string} type - Reciptient's type (should be 'io.cozy.contacts')
+ * @property {string} [id] - Local contact or group ID
+ * @property {string} [email] - Email for an organization contact or a person without a local document
+ * @property {string} type - Contact or group doctype
  */
 
 /**
@@ -612,10 +613,22 @@ const getSharingRulesForOrganizations = document => {
  * @returns {RelationshipItem} The RelationshipItem that can be referenced as a sharing recipient
  */
 const toRelationshipItem = item => {
-  return {
-    id: item._id,
-    type: item._type
+  if (item._id && item.meta?.kind !== 'member') {
+    return { id: item._id, type: item._type }
   }
+  const email = Array.isArray(item.email)
+    ? (item.email.find(address => address.primary) || item.email[0])?.address
+    : item.email
+  if (
+    item._type === 'io.cozy.contacts.groups' ||
+    typeof email !== 'string' ||
+    !email.trim()
+  ) {
+    throw new Error(
+      'A sharing recipient requires a contact/group ID or an email'
+    )
+  }
+  return { type: 'io.cozy.contacts', email: email.trim() }
 }
 
 export default SharingCollection
