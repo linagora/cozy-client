@@ -17,7 +17,12 @@ const useQueryAll = (queryDefinition, options) => {
 
   useEffect(() => {
     const checkToFetchMore = async () => {
-      if (res.fetchStatus === 'loaded' && res.hasMore && !fetching) {
+      if (
+        options?.enabled !== false &&
+        res.fetchStatus === 'loaded' &&
+        res.hasMore &&
+        !fetching
+      ) {
         setFetching(true)
         await res.fetchMore()
         setFetching(false)
@@ -25,7 +30,7 @@ const useQueryAll = (queryDefinition, options) => {
     }
     checkToFetchMore()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [res.hasMore, res.fetchStatus, fetching])
+  }, [res.hasMore, res.fetchStatus, fetching, options?.enabled])
 
   return res
 }

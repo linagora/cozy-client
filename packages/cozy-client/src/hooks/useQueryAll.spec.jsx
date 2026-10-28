@@ -10,7 +10,7 @@ import useQueryAll from './useQueryAll'
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay))
 
 describe('useQueryAll', () => {
-  const setup = ({ todosResult }) => {
+  const setup = ({ todosResult, enabled = true }) => {
     const client = createMockClient({
       queries: {
         todos: todosResult
@@ -29,7 +29,8 @@ describe('useQueryAll', () => {
     )
     const query = Q('io.cozy.todos')
     const options = {
-      as: 'todos'
+      as: 'todos',
+      enabled
     }
     const hook = renderHook(() => useQueryAll(query, options), {
       wrapper
@@ -56,6 +57,19 @@ describe('useQueryAll', () => {
 
     // one for the initial query and one for the fetchMore
     expect(client.query).toHaveBeenCalledTimes(2)
+  })
+
+  it('does not paginate a disabled query with cached pages remaining', () => {
+    const { client, hook } = setup({
+      enabled: false,
+      todosResult: {
+        data: [{ _id: '1' }],
+        next: true,
+        doctype: 'io.cozy.todos'
+      }
+    })
+    hook.rerender()
+    expect(client.query).not.toHaveBeenCalled()
   })
 
   it('should not run fetch if there are no more results', () => {

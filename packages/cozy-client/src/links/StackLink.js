@@ -5,7 +5,8 @@ import CozyLink from './CozyLink'
 import {
   DOCTYPE_FILES,
   DOCTYPE_FILES_SHORTCUTS,
-  DOCTYPE_SHARING_RECIPIENTS
+  DOCTYPE_SHARING_RECIPIENTS,
+  DOCTYPE_CONTACT_SUGGESTIONS
 } from '../const'
 import { BulkEditError } from '../errors'
 import logger from '../logger'
@@ -104,6 +105,9 @@ export default class StackLink extends CozyLink {
       return forward(operation, options)
     }
     if (forceLink !== 'stack' && this.isOnline && !(await this.isOnline())) {
+      if (operation.doctype === DOCTYPE_CONTACT_SUGGESTIONS) {
+        throw new Error('Contact suggestions cannot be fetched offline')
+      }
       if (operation.doctype === DOCTYPE_SHARING_RECIPIENTS) {
         throw new Error('Effective recipients cannot be fetched offline')
       }
@@ -134,7 +138,10 @@ export default class StackLink extends CozyLink {
       return response
     } catch (err) {
       if (forceLink !== 'stack' && isReactNativeOfflineError(err)) {
-        if (operation.doctype === DOCTYPE_SHARING_RECIPIENTS) {
+        if (
+          operation.doctype === DOCTYPE_SHARING_RECIPIENTS ||
+          operation.doctype === DOCTYPE_CONTACT_SUGGESTIONS
+        ) {
           throw err
         }
         return forward(operation, options)
@@ -165,6 +172,26 @@ export default class StackLink extends CozyLink {
     if (!doctype) {
       logger.warn('Bad query', query)
       throw new Error('No doctype found in a query definition')
+    }
+    if (doctype === DOCTYPE_CONTACT_SUGGESTIONS) {
+      const q = selector?.q
+      const limit = selector?.limit ?? 20
+      const response = await this.stackClient
+        .collection('io.cozy.contacts')
+        .suggest(q, { limit })
+      const id = JSON.stringify([q.trim(), limit])
+      // Keep partial and ID-less results out of the ordinary document caches.
+      return {
+        data: {
+          _id: id,
+          id,
+          _type: DOCTYPE_CONTACT_SUGGESTIONS,
+          q: q.trim(),
+          limit,
+          suggestions: response.data
+        },
+        next: false
+      }
     }
     if (
       (doctype === DOCTYPE_FILES || doctype === DOCTYPE_FILES_SHORTCUTS) &&

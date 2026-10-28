@@ -906,3 +906,13 @@ describe('CozyPouchLink', () => {
     })
   })
 })
+
+it('forwards contact suggestion searches without querying local contact documents', async () => {
+  await setup()
+  link.executeQuery.mockClear()
+  const query = Q('io.cozy.contacts.suggestions').where({ q: 'al', limit: 20 })
+  const forward = jest.fn().mockResolvedValue({ data: {} })
+  await link.request(query, {}, null, forward)
+  expect(forward).toHaveBeenCalledWith(query, {})
+  expect(link.executeQuery).not.toHaveBeenCalled()
+})

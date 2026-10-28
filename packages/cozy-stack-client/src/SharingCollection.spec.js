@@ -893,3 +893,59 @@ describe('SharingCollection', () => {
     })
   })
 })
+
+describe('sharing suggestion recipients', () => {
+  it.each(['create', 'addRecipients', 'createSharedDrive'])(
+    'serializes local contacts and groups by ID and other people by email in %s',
+    async method => {
+      const client = new CozyStackClient()
+      client.fetchJSON.mockResolvedValue({ data: {} })
+      const collection = new SharingCollection('io.cozy.sharings', client)
+      const recipients = [
+        { _type: 'io.cozy.contacts.groups', _id: 'b2b-group' },
+        { _type: 'io.cozy.contacts', _id: 'local', meta: { kind: 'contact' } },
+        {
+          _type: 'io.cozy.contacts',
+          _id: 'org',
+          meta: { kind: 'member' },
+          email: [
+            { address: 'other@example.org' },
+            { address: 'member@example.org', primary: true }
+          ]
+        },
+        {
+          _type: 'io.cozy.contacts',
+          email: [{ address: 'external@example.org' }]
+        },
+        { email: ' typed@example.org ' }
+      ]
+      await collection[method]({
+        document: FOLDER,
+        recipients,
+        readOnlyRecipients: recipients
+      })
+      const relationships = client.fetchJSON.mock.calls[0][2].data.relationships
+      const expected = [
+        { type: 'io.cozy.contacts.groups', id: 'b2b-group' },
+        { type: 'io.cozy.contacts', id: 'local' },
+        { type: 'io.cozy.contacts', email: 'member@example.org' },
+        { type: 'io.cozy.contacts', email: 'external@example.org' },
+        { type: 'io.cozy.contacts', email: 'typed@example.org' }
+      ]
+      expect(relationships.recipients.data).toEqual(expected)
+      expect(relationships.read_only_recipients.data).toEqual(expected)
+    }
+  )
+
+  it('rejects recipients with neither an ID nor an email before sending', async () => {
+    const client = new CozyStackClient()
+    const collection = new SharingCollection('io.cozy.sharings', client)
+    await expect(
+      collection.addRecipients({
+        document: SHARING,
+        recipients: [{ _type: 'io.cozy.contacts.groups' }]
+      })
+    ).rejects.toThrow('requires')
+    expect(client.fetchJSON).not.toHaveBeenCalled()
+  })
+})

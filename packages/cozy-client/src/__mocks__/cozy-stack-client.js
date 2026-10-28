@@ -25,6 +25,7 @@ const collectionMock = {
   // so we can't define it during the test
   get: jest.fn(() => Promise.resolve({ data: [] })),
   find: jest.fn(() => Promise.resolve()),
+  suggest: jest.fn(async () => ({ data: [], next: false })),
   create: jest.fn(() => Promise.resolve()),
   update: jest.fn(() => Promise.resolve()),
   updateAll: jest.fn(() => Promise.resolve()),

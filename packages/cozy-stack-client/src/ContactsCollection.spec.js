@@ -149,3 +149,87 @@ describe('ContactsCollection', () => {
     })
   })
 })
+
+describe('contact suggestions', () => {
+  let stackClient, collection
+  beforeEach(() => {
+    stackClient = new CozyStackClient({})
+    stackClient.fetchJSON = jest.fn()
+    collection = new ContactsCollection('io.cozy.contacts', stackClient)
+  })
+
+  it('normalizes mixed results without inventing IDs or group members', async () => {
+    stackClient.fetchJSON.mockResolvedValue({
+      data: [
+        {
+          type: 'io.cozy.contacts.groups',
+          id: 'b2b-team',
+          attributes: { name: 'Team', color: '', member_count: 2 }
+        },
+        {
+          type: 'io.cozy.contacts',
+          id: 'org-person',
+          attributes: {
+            fullname: 'Alice',
+            email: [{ address: 'alice@example.org' }]
+          },
+          meta: { kind: 'member' }
+        },
+        {
+          type: 'io.cozy.contacts',
+          attributes: {
+            fullname: 'Bob',
+            email: [{ address: 'bob@example.org' }]
+          }
+        }
+      ]
+    })
+    const result = await collection.suggest('  É &+  ', { limit: 7 })
+    expect(stackClient.fetchJSON).toHaveBeenCalledWith(
+      'GET',
+      '/contacts/suggest?q=%C3%89%20%26%2B&limit=7'
+    )
+    expect(result.next).toBe(false)
+    expect(result.data[0]).toMatchObject({
+      _id: 'b2b-team',
+      _type: 'io.cozy.contacts.groups',
+      name: 'Team',
+      color: '',
+      member_count: 2
+    })
+    expect(result.data[0]).not.toHaveProperty('members')
+    expect(result.data[1]).toMatchObject({
+      _id: 'org-person',
+      displayName: 'Alice',
+      meta: { kind: 'member' }
+    })
+    expect(result.data[2]).toMatchObject({
+      displayName: 'Bob',
+      _type: 'io.cozy.contacts'
+    })
+    expect(result.data[2]).not.toHaveProperty('_id')
+    expect(result.data[2]).not.toHaveProperty('id')
+  })
+
+  it.each(['', ' a ', '😀'])('rejects short queries: %s', async q => {
+    await expect(collection.suggest(q)).rejects.toThrow('at least 2')
+    expect(stackClient.fetchJSON).not.toHaveBeenCalled()
+  })
+
+  it.each([0, 257, 1.5])('rejects invalid limits: %s', async limit => {
+    await expect(collection.suggest('ab', { limit })).rejects.toThrow(
+      'between 1 and 256'
+    )
+    expect(stackClient.fetchJSON).not.toHaveBeenCalled()
+  })
+
+  it('uses the default limit and propagates permission errors', async () => {
+    const error = Object.assign(new Error('Forbidden'), { status: 403 })
+    stackClient.fetchJSON.mockRejectedValue(error)
+    await expect(collection.suggest('😀é')).rejects.toBe(error)
+    expect(stackClient.fetchJSON).toHaveBeenCalledWith(
+      'GET',
+      '/contacts/suggest?q=%F0%9F%98%80%C3%A9&limit=20'
+    )
+  })
+})

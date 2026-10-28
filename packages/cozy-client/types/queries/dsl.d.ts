@@ -312,6 +312,17 @@ export class QueryDefinition {
     effectiveRecipients(fileId: string, options?: {
         driveId?: string | null;
     }): QueryDefinition;
+    /**
+     * Query a search result containing partial contact and group suggestions.
+     * Use singleDocData to read data.suggestions without caching partial contacts.
+     *
+     * @param {string} q - Search text, at least two characters after trimming
+     * @param {{limit?: number}} [options] - Combined result limit, defaults to 20
+     * @returns {QueryDefinition} The QueryDefinition object.
+     */
+    suggestContacts(q: string, { limit }?: {
+        limit?: number;
+    }): QueryDefinition;
     toDefinition(): {
         doctype: string;
         id: string;
