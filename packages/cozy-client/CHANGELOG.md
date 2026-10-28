@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [61.0.1](https://github.com/linagora/cozy-client/compare/v61.0.0...v61.0.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* Do not open plain text files unsupported by OnlyOffice with it ([8dfd580](https://github.com/linagora/cozy-client/commit/8dfd58055e20099e3ba24076a5c439c4eedbaefe)), closes [linagora/twake-drive#4251](https://github.com/linagora/twake-drive/issues/4251)
+
+
+
+
+
 # [61.0.0](https://github.com/linagora/cozy-client/compare/v60.45.0...v61.0.0) (2026-10-23)
 
 
