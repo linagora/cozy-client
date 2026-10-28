@@ -2965,13 +2965,14 @@ A suggestion uses existing contact fields, without requiring a stored document.
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| _type | <code>&#x27;io.cozy.contacts.groups&#x27;</code> | 
-| _id | <code>string</code> | 
-| id | <code>string</code> | 
-| name | <code>string</code> | 
-| color | <code>string</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| _type | <code>&#x27;io.cozy.contacts.groups&#x27;</code> |  |
+| _id | <code>string</code> |  |
+| id | <code>string</code> |  |
+| name | <code>string</code> |  |
+| color | <code>string</code> |  |
+| member_count | <code>number</code> | Number of non-trashed group contacts |
 
 <a name="RecipientSuggestion"></a>
 

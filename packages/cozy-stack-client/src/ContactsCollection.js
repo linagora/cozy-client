@@ -27,6 +27,7 @@ const normalizeContactJsonApi = normalizeDoctypeJsonApi(CONTACTS_DOCTYPE)
  * @property {string} id
  * @property {string} name
  * @property {string} color
+ * @property {number} member_count - Number of non-trashed group contacts
  */
 
 /** @typedef {ContactSuggestion|GroupSuggestion} RecipientSuggestion */

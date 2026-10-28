@@ -23,7 +23,7 @@ a new contact model. It caches one search result per trimmed query and limit.
 Its nested suggestions use the existing contact and group fields, preserving
 the stack's order. Partial suggestions never overwrite stored contacts/groups.
 People without a local document have no `_id` or `id`. Groups contain their ID,
-name and color, without members or a member count.
+name, color and member count, without member documents.
 
 For callers that do not use the query cache, the transport method is
 `client.collection('io.cozy.contacts').suggest(q, { limit })`; it returns

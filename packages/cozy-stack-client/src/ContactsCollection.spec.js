@@ -164,7 +164,7 @@ describe('contact suggestions', () => {
         {
           type: 'io.cozy.contacts.groups',
           id: 'b2b-team',
-          attributes: { name: 'Team', color: '' }
+          attributes: { name: 'Team', color: '', member_count: 2 }
         },
         {
           type: 'io.cozy.contacts',
@@ -194,7 +194,8 @@ describe('contact suggestions', () => {
       _id: 'b2b-team',
       _type: 'io.cozy.contacts.groups',
       name: 'Team',
-      color: ''
+      color: '',
+      member_count: 2
     })
     expect(result.data[0]).not.toHaveProperty('members')
     expect(result.data[1]).toMatchObject({
