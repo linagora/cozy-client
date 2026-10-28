@@ -163,6 +163,28 @@ describe('File Model', () => {
     expect(fileModel.shouldBeOpenedByOnlyOffice(mdFile)).toBe(false)
   })
 
+  it.each`
+    name             | mime                                                                         | result
+    ${'test.docx'}   | ${'application/vnd.openxmlformats-officedocument.wordprocessingml.document'} | ${true}
+    ${'test.odt'}    | ${'application/vnd.oasis.opendocument.text'}                                 | ${true}
+    ${'test.rtf'}    | ${'text/rtf'}                                                                | ${true}
+    ${'test.csv'}    | ${'text/csv'}                                                                | ${true}
+    ${'test.csv'}    | ${'text/x-csv'}                                                              | ${true}
+    ${'test.tsv'}    | ${'text/tab-separated-values'}                                               | ${true}
+    ${'test.txt'}    | ${'text/plain'}                                                              | ${false}
+    ${'test.md'}     | ${'text/markdown'}                                                           | ${false}
+    ${'contact.vcf'} | ${'text/vcard'}                                                              | ${false}
+    ${'contact.vcf'} | ${'text/x-vcard'}                                                            | ${false}
+    ${'event.ics'}   | ${'text/calendar'}                                                           | ${false}
+    ${'server.log'}  | ${'text/plain'}                                                              | ${false}
+  `(
+    'should return $result for $name ($mime) with only office',
+    ({ name, mime, result }) => {
+      const file = { type: 'file', class: 'text', name, mime }
+      expect(fileModel.shouldBeOpenedByOnlyOffice(file)).toBe(result)
+    }
+  )
+
   it('should test if a file has a specific metadata', () => {
     const doc = {
       metadata: {
