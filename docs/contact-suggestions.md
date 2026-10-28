@@ -12,6 +12,7 @@ const result = await client.fetchQueryAndGetFromState({
   options: {
     as: `contact-suggestions/${encodeURIComponent(q)}/${limit}`,
     singleDocData: true,
+    forceLink: 'stack',
     fetchPolicy: fetchPolicies.olderThan(30 * 1000)
   }
 })
@@ -36,7 +37,8 @@ The stack requires read access to all `io.cozy.contacts` and
 `centralized_org_directory=false` searches local contacts/groups only, regardless
 of `common_contacts`. Enable the picker only on a stack supporting this API.
 
-Suggestion queries are online only and are not routed to a local PouchDB database.
+Suggestion queries are online only; `forceLink: 'stack'` routes them past the data
+proxy and local PouchDB to the stack.
 Offline applications should use their existing synced contact/group queries.
 
 Sharing creation, recipient addition and shared-drive creation accept these
