@@ -46,7 +46,7 @@ Copies a file to a specified destination.
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:744](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L744)
+[packages/cozy-client/src/models/file.js:757](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L757)
 
 ***
 
@@ -78,7 +78,7 @@ that will process the download
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:799](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L799)
+[packages/cozy-client/src/models/file.js:812](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L812)
 
 ***
 
@@ -103,7 +103,7 @@ file object with path attribute
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:201](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L201)
+[packages/cozy-client/src/models/file.js:214](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L214)
 
 ***
 
@@ -126,7 +126,7 @@ file object with path attribute
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:725](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L725)
+[packages/cozy-client/src/models/file.js:738](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L738)
 
 ***
 
@@ -151,7 +151,7 @@ The files found by the rules
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:328](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L328)
+[packages/cozy-client/src/models/file.js:341](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L341)
 
 ***
 
@@ -175,7 +175,7 @@ Generate a file name for a revision
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:611](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L611)
+[packages/cozy-client/src/models/file.js:624](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L624)
 
 ***
 
@@ -200,7 +200,7 @@ A filename with the right suffix
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:574](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L574)
+[packages/cozy-client/src/models/file.js:587](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L587)
 
 ***
 
@@ -249,7 +249,7 @@ The full path of the file in the cozy
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:363](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L363)
+[packages/cozy-client/src/models/file.js:376](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L376)
 
 ***
 
@@ -273,7 +273,7 @@ id of the parent folder, if any
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:215](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L215)
+[packages/cozy-client/src/models/file.js:228](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L228)
 
 ***
 
@@ -297,7 +297,7 @@ A description of the status
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:227](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L227)
+[packages/cozy-client/src/models/file.js:240](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L240)
 
 ***
 
@@ -321,7 +321,7 @@ A doctype
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:247](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L247)
+[packages/cozy-client/src/models/file.js:260](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L260)
 
 ***
 
@@ -345,7 +345,7 @@ The mime-type of the target file, or an empty string is the target is not a file
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:237](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L237)
+[packages/cozy-client/src/models/file.js:250](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L250)
 
 ***
 
@@ -367,7 +367,7 @@ image src that can be used in an <img> tag
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:161](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L161)
+[packages/cozy-client/src/models/file.js:174](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L174)
 
 ***
 
@@ -387,7 +387,7 @@ image src that can be used in an <img> tag
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:703](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L703)
+[packages/cozy-client/src/models/file.js:716](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L716)
 
 ***
 
@@ -411,7 +411,7 @@ Whether the file's metadata attribute exists
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:352](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L352)
+[packages/cozy-client/src/models/file.js:365](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L365)
 
 ***
 
@@ -431,7 +431,7 @@ Whether the file's metadata attribute exists
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:695](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L695)
+[packages/cozy-client/src/models/file.js:708](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L708)
 
 ***
 
@@ -579,7 +579,7 @@ Whether the folder is client-side encrypted
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:714](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L714)
+[packages/cozy-client/src/models/file.js:727](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L727)
 
 ***
 
@@ -644,7 +644,7 @@ Whether the file is supported by Only Office
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:687](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L687)
+[packages/cozy-client/src/models/file.js:700](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L700)
 
 ***
 
@@ -668,7 +668,7 @@ Returns whether the file is a shortcut to a sharing
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:267](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L267)
+[packages/cozy-client/src/models/file.js:280](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L280)
 
 ***
 
@@ -692,7 +692,7 @@ Returns whether the sharing shortcut is new
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:292](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L292)
+[packages/cozy-client/src/models/file.js:305](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L305)
 
 ***
 
@@ -714,7 +714,7 @@ Returns whether the file is a shortcut to a sharing
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:257](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L257)
+[packages/cozy-client/src/models/file.js:270](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L270)
 
 ***
 
@@ -736,7 +736,7 @@ Returns whether the sharing shortcut is new
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:281](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L281)
+[packages/cozy-client/src/models/file.js:294](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L294)
 
 ***
 
@@ -758,7 +758,7 @@ true if the file is a shortcut
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:152](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L152)
+[packages/cozy-client/src/models/file.js:165](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L165)
 
 ***
 
@@ -794,7 +794,7 @@ Manage 4 cases :
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:398](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L398)
+[packages/cozy-client/src/models/file.js:411](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L411)
 
 ***
 
@@ -833,7 +833,7 @@ Manage 3 cases :
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:504](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L504)
+[packages/cozy-client/src/models/file.js:517](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L517)
 
 ***
 
@@ -859,7 +859,7 @@ full normalized object
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:187](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L187)
+[packages/cozy-client/src/models/file.js:200](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L200)
 
 ***
 
@@ -888,7 +888,7 @@ The overrided file
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:534](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L534)
+[packages/cozy-client/src/models/file.js:547](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L547)
 
 ***
 
@@ -916,7 +916,7 @@ The saved file
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:309](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L309)
+[packages/cozy-client/src/models/file.js:322](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L322)
 
 ***
 
@@ -926,7 +926,8 @@ The saved file
 
 Whether the file should be opened by only office
 We want to be consistent with the stack so we check the class attributes
-But we want to exclude .txt and .md because the CozyUI Viewer can already show them
+But we want to exclude .txt, .md and other plain text files not supported
+by only office (.vcf, .ics...) because the CozyUI Viewer can already show them
 
 *Parameters*
 
@@ -940,7 +941,7 @@ But we want to exclude .txt and .md because the CozyUI Viewer can already show t
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:142](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L142)
+[packages/cozy-client/src/models/file.js:153](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L153)
 
 ***
 
@@ -1000,4 +1001,4 @@ If there is a conflict, then we apply the conflict strategy : `erase` or `rename
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:645](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L645)
+[packages/cozy-client/src/models/file.js:658](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L658)

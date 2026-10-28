@@ -131,10 +131,21 @@ export const isOnlyOfficeFile = file =>
     file.class === 'spreadsheet' ||
     file.class === 'slide')
 
+// text/* types OnlyOffice can edit, from https://github.com/ONLYOFFICE/document-formats
+const ONLY_OFFICE_TEXT_MIME_TYPES = [
+  'text/rtf',
+  'text/csv',
+  'text/x-csv',
+  'text/x-comma-separated-values',
+  'text/tab-separated-values',
+  'text/fb2+xml'
+]
+
 /**
  * Whether the file should be opened by only office
  * We want to be consistent with the stack so we check the class attributes
- * But we want to exclude .txt and .md because the CozyUI Viewer can already show them
+ * But we want to exclude .txt, .md and other plain text files not supported
+ * by only office (.vcf, .ics...) because the CozyUI Viewer can already show them
  *
  * @param {import("../types").IOCozyFile} file - io.cozy.file document
  * @returns {boolean}
@@ -142,7 +153,9 @@ export const isOnlyOfficeFile = file =>
 export const shouldBeOpenedByOnlyOffice = file =>
   isOnlyOfficeFile(file) &&
   !file.name.endsWith('.txt') &&
-  !file.name.endsWith('.md')
+  !file.name.endsWith('.md') &&
+  (!isPlainText(file.mime, file.name) ||
+    ONLY_OFFICE_TEXT_MIME_TYPES.includes(file.mime))
 
 /**
  *

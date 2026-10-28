@@ -14,7 +14,7 @@ Conflict options
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:626](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L626)
+[packages/cozy-client/src/models/file.js:639](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L639)
 
 ***
 
@@ -26,7 +26,7 @@ Erase / rename
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:625](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L625)
+[packages/cozy-client/src/models/file.js:638](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L638)
 
 ***
 
@@ -38,7 +38,7 @@ The file Content-Type
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:624](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L624)
+[packages/cozy-client/src/models/file.js:637](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L637)
 
 ***
 
@@ -50,7 +50,7 @@ The dirId to upload the file to
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:622](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L622)
+[packages/cozy-client/src/models/file.js:635](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L635)
 
 ***
 
@@ -62,7 +62,7 @@ ID of the shared drive in which the file should be saved
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:627](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L627)
+[packages/cozy-client/src/models/file.js:640](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L640)
 
 ***
 
@@ -74,7 +74,7 @@ An object containing the metadata to attach
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:623](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L623)
+[packages/cozy-client/src/models/file.js:636](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L636)
 
 ***
 
@@ -86,4 +86,4 @@ The file name to upload
 
 *Defined in*
 
-[packages/cozy-client/src/models/file.js:621](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L621)
+[packages/cozy-client/src/models/file.js:634](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L634)
