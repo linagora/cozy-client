@@ -153,6 +153,11 @@ drive&#39;s files.</p>
 <dd><p>Get Icon URL using blob mechanism if OAuth connected
 or using preloaded url when blob not needed</p>
 </dd>
+<dt><a href="#sanitizeIndexName">sanitizeIndexName(name)</a> ⇒ <code>string</code></dt>
+<dd><p>Sanitize an index name to remove characters that are not compatible with
+CouchDB design document naming conventions (e.g. &quot;/&quot; breaks CouchDB &gt; 3.3.3)
+<a href="https://github.com/linagora/cozy-client/issues/1667">https://github.com/linagora/cozy-client/issues/1667</a></p>
+</dd>
 <dt><a href="#handleNorOperator">handleNorOperator(conditions)</a> ⇒ <code>Array</code></dt>
 <dd><p>Handle the $nor operator in a query
 CouchDB transforms $nor into $and with $ne operators</p>
@@ -2733,6 +2738,20 @@ Get Icon URL using blob mechanism if OAuth connected
 or using preloaded url when blob not needed
 
 **Kind**: global function  
+<a name="sanitizeIndexName"></a>
+
+## sanitizeIndexName(name) ⇒ <code>string</code>
+Sanitize an index name to remove characters that are not compatible with
+CouchDB design document naming conventions (e.g. "/" breaks CouchDB > 3.3.3)
+https://github.com/linagora/cozy-client/issues/1667
+
+**Kind**: global function  
+**Returns**: <code>string</code> - The sanitized index name  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The index name to sanitize |
+
 <a name="handleNorOperator"></a>
 
 ## handleNorOperator(conditions) ⇒ <code>Array</code>
