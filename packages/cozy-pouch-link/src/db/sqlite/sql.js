@@ -516,7 +516,7 @@ export const makeSQLQueryFromMango = ({
   return sql
 }
 
-export const makeSQLQueryForId = id => {
+export const makeSQLQueryForId = () => {
   // Join document-store on its winningseq so we return the WINNING revision
   // (PouchDB keeps every rev in by-sequence; document-store.winningseq points at
   // the winning one). Both sides are indexed: by-sequence.seq is the PK and the
@@ -525,14 +525,14 @@ export const makeSQLQueryForId = id => {
     `SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev`,
     `FROM 'document-store', 'by-sequence'`,
     `WHERE 'by-sequence'.seq = 'document-store'.winningseq`,
-    `AND 'document-store'.id = "${id}" AND 'by-sequence'.deleted = 0`,
+    `AND 'document-store'.id = ? AND 'by-sequence'.deleted = 0`,
     `;`
   ].join(' ')
   return sql
 }
 
 export const makeSQLQueryForIds = ids => {
-  const doc_ids = ids.map(id => `"${id}"`).join(', ')
+  const doc_ids = ids.map(() => '?').join(', ')
   const sql = `
     SELECT 'by-sequence'.json AS data, 'by-sequence'.doc_id, 'by-sequence'.rev
     FROM 'document-store', 'by-sequence'
@@ -664,9 +664,15 @@ export const toWebSQLResult = result => {
   return { ...result, rows: { length: list.length, item: i => list[i] } }
 }
 
-export const executeSQL = async (db, sql) => {
+/**
+ * @param {any} db - An op-sqlite connection
+ * @param {string} sql - A single statement, values being bound with `?`
+ * @param {Array<any>} [params] - Values bound to the placeholders of `sql`
+ * @returns {Promise<any>} The WebSQL-style result
+ */
+export const executeSQL = async (db, sql, params) => {
   return db
-    .executeAsync(sql)
+    .executeAsync(sql, params)
     .then(toWebSQLResult)
     .catch(err => {
       const message = (err && err.message) || String(err)

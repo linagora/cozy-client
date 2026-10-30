@@ -55,8 +55,8 @@ describe('native SQLite mango — correctness fixes', () => {
     )
   })
 
-  it('quotes each id separately in getByIds', () => {
-    expect(makeSQLQueryForIds(['a', 'b'])).toContain('IN ("a", "b")')
+  it('binds each id separately in getByIds', () => {
+    expect(makeSQLQueryForIds(['a', 'b'])).toContain('IN (?, ?)')
   })
 })
 
