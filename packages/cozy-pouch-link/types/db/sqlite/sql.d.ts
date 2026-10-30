@@ -27,7 +27,7 @@ export function makeSQLQueryFromMango({ selector, sort, indexName, partialFilter
     limit?: number;
     skip?: number;
 }): string;
-export function makeSQLQueryForId(id: any): string;
+export function makeSQLQueryForId(): string;
 export function makeSQLQueryForIds(ids: any): string;
 export function makeSQLQueryAll({ limit, skip }?: {
     limit?: number;
@@ -44,4 +44,4 @@ export function createMangoIndex(db: any, indexName: any, fieldsToIndex: any, { 
 }): Promise<any>;
 export function deleteIndex(db: any, indexName: any): Promise<void>;
 export function toWebSQLResult(result: object): object;
-export function executeSQL(db: any, sql: any): Promise<any>;
+export function executeSQL(db: any, sql: string, params?: Array<any>): Promise<any>;

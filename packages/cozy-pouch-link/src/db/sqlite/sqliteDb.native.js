@@ -38,6 +38,10 @@ import logger from '../../logger'
 const SETUP_BUSY_TIMEOUT_MS = 250
 const QUERY_BUSY_TIMEOUT_MS = 5000
 
+// Ids are bound, one variable each. 999 is SQLite's historical limit on bound
+// variables per statement, safe whatever SQLite build the app ships.
+const MAX_IDS_PER_QUERY = 999
+
 export default class SQLiteQueryEngine extends DatabaseQueryEngine {
   constructor(pouchManager, doctype) {
     super()
@@ -130,8 +134,8 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
 
   async getById(id) {
     try {
-      const sql = makeSQLQueryForId(id)
-      const result = await executeSQL(this.db, sql)
+      const sql = makeSQLQueryForId()
+      const result = await executeSQL(this.db, sql, [id])
       const doc = parseResults(this.client, result, this.doctype, {
         isSingleDoc: true
       })
@@ -144,10 +148,23 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
 
   async getByIds(ids) {
     try {
-      const sql = makeSQLQueryForIds(ids)
-      const result = await executeSQL(this.db, sql)
-      const docs = parseResults(this.client, result, this.doctype)
-      return docs
+      const rows = []
+      for (let i = 0; i < ids.length; i += MAX_IDS_PER_QUERY) {
+        const chunk = ids.slice(i, i + MAX_IDS_PER_QUERY)
+        const result = await executeSQL(
+          this.db,
+          makeSQLQueryForIds(chunk),
+          chunk
+        )
+        for (let j = 0; j < result.rows.length; j++) {
+          rows.push(result.rows.item(j))
+        }
+      }
+      return parseResults(
+        this.client,
+        { rows: { length: rows.length, item: i => rows[i] } },
+        this.doctype
+      )
     } catch (err) {
       logger.error(err)
       return null

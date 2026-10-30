@@ -287,16 +287,17 @@ describe('makeSQLQueryAll', () => {
 
 describe('makeSQLQueryForId', () => {
   it('joins document-store on winningseq to return the winning revision', () => {
-    const sql = makeSQLQueryForId('abc')
+    const sql = makeSQLQueryForId()
     expect(sql).toContain(`'by-sequence'.seq = 'document-store'.winningseq`)
-    expect(sql).toContain(`'document-store'.id = "abc"`)
+    expect(sql).toContain(`'document-store'.id = ?`)
   })
 })
 
 describe('makeSQLQueryForIds', () => {
-  it('emits one quoted value per id in the IN clause', () => {
+  it('emits one placeholder per id in the IN clause', () => {
     const sql = makeSQLQueryForIds(['a', 'b'])
-    expect(sql).toContain(`'document-store'.id IN ("a", "b")`)
+    expect(sql).toContain(`'document-store'.id IN (?, ?)`)
+    expect(makeSQLQueryForIds(['x"y'])).not.toContain('x"y')
     expect(sql).toContain(`'by-sequence'.seq = 'document-store'.winningseq`)
   })
 })
