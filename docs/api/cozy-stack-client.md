@@ -394,12 +394,22 @@ Main API against the `cozy-stack` server.
 **Kind**: global class  
 
 * [CozyStackClient](#CozyStackClient)
+    * [new CozyStackClient([options])](#new_CozyStackClient_new)
     * [.collection(doctype, options)](#CozyStackClient+collection) ⇒ [<code>DocumentCollection</code>](#DocumentCollection)
     * [.fetch(method, path, [body], [opts])](#CozyStackClient+fetch) ⇒ <code>object</code>
     * [.refreshToken()](#CozyStackClient+refreshToken) ⇒ <code>Promise</code>
     * [.fetchJSON(method, path, body, options)](#CozyStackClient+fetchJSON) ⇒ <code>object</code>
     * [.setToken(token)](#CozyStackClient+setToken)
     * [.getAccessToken()](#CozyStackClient+getAccessToken) ⇒ <code>string</code>
+
+<a name="new_CozyStackClient_new"></a>
+
+### new CozyStackClient([options])
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | Client options |
+| [options.timeout] | <code>number</code> | Time in milliseconds given to each request, from sending it to the end of its response body, large transfers included. A request over it rejects with an error named `TimeoutError`. Without it, requests have no time limit. |
 
 <a name="CozyStackClient+collection"></a>
 
@@ -2922,12 +2932,22 @@ You should use fetchChangesRaw to have low level control on _changes parameters.
 **Kind**: global typedef  
 
 * [CozyStackClient](#CozyStackClient) : <code>module:&quot;./CozyStackClient.js&quot;</code>
+    * [new CozyStackClient([options])](#new_CozyStackClient_new)
     * [.collection(doctype, options)](#CozyStackClient+collection) ⇒ [<code>DocumentCollection</code>](#DocumentCollection)
     * [.fetch(method, path, [body], [opts])](#CozyStackClient+fetch) ⇒ <code>object</code>
     * [.refreshToken()](#CozyStackClient+refreshToken) ⇒ <code>Promise</code>
     * [.fetchJSON(method, path, body, options)](#CozyStackClient+fetchJSON) ⇒ <code>object</code>
     * [.setToken(token)](#CozyStackClient+setToken)
     * [.getAccessToken()](#CozyStackClient+getAccessToken) ⇒ <code>string</code>
+
+<a name="new_CozyStackClient_new"></a>
+
+### new CozyStackClient([options])
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | Client options |
+| [options.timeout] | <code>number</code> | Time in milliseconds given to each request, from sending it to the end of its response body, large transfers included. A request over it rejects with an error named `TimeoutError`. Without it, requests have no time limit. |
 
 <a name="CozyStackClient+collection"></a>
 
@@ -3493,12 +3513,22 @@ Attributes representing a design doc
 **Kind**: global typedef  
 
 * [CozyStackClient](#CozyStackClient) : <code>module:&quot;./CozyStackClient.js&quot;</code>
+    * [new CozyStackClient([options])](#new_CozyStackClient_new)
     * [.collection(doctype, options)](#CozyStackClient+collection) ⇒ [<code>DocumentCollection</code>](#DocumentCollection)
     * [.fetch(method, path, [body], [opts])](#CozyStackClient+fetch) ⇒ <code>object</code>
     * [.refreshToken()](#CozyStackClient+refreshToken) ⇒ <code>Promise</code>
     * [.fetchJSON(method, path, body, options)](#CozyStackClient+fetchJSON) ⇒ <code>object</code>
     * [.setToken(token)](#CozyStackClient+setToken)
     * [.getAccessToken()](#CozyStackClient+getAccessToken) ⇒ <code>string</code>
+
+<a name="new_CozyStackClient_new"></a>
+
+### new CozyStackClient([options])
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | Client options |
+| [options.timeout] | <code>number</code> | Time in milliseconds given to each request, from sending it to the end of its response body, large transfers included. A request over it rejects with an error named `TimeoutError`. Without it, requests have no time limit. |
 
 <a name="CozyStackClient+collection"></a>
 
@@ -3778,12 +3808,22 @@ A deduplicated person who can access a file or folder, either directly or throug
 
 
 * [CozyStackClient](#CozyStackClient) : <code>object</code>
+    * [new CozyStackClient([options])](#new_CozyStackClient_new)
     * [.collection(doctype, options)](#CozyStackClient+collection) ⇒ [<code>DocumentCollection</code>](#DocumentCollection)
     * [.fetch(method, path, [body], [opts])](#CozyStackClient+fetch) ⇒ <code>object</code>
     * [.refreshToken()](#CozyStackClient+refreshToken) ⇒ <code>Promise</code>
     * [.fetchJSON(method, path, body, options)](#CozyStackClient+fetchJSON) ⇒ <code>object</code>
     * [.setToken(token)](#CozyStackClient+setToken)
     * [.getAccessToken()](#CozyStackClient+getAccessToken) ⇒ <code>string</code>
+
+<a name="new_CozyStackClient_new"></a>
+
+### new CozyStackClient([options])
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | Client options |
+| [options.timeout] | <code>number</code> | Time in milliseconds given to each request, from sending it to the end of its response body, large transfers included. A request over it rejects with an error named `TimeoutError`. Without it, requests have no time limit. |
 
 <a name="CozyStackClient+collection"></a>
 
