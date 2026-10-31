@@ -6764,7 +6764,6 @@ __metadata:
     typescript: "npm:4.1.5"
   peerDependencies:
     "@cozy/minilog": 1.0.0
-    "@op-engineering/op-sqlite": "*"
     cozy-device-helper: ">=2.1.0"
   languageName: unknown
   linkType: soft
