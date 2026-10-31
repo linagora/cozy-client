@@ -6688,6 +6688,15 @@ __metadata:
     react-native-google-play-integrity: ^1.1.0
     react-native-inappbrowser-reborn: ^3.5.1
     react-native-ios11-devicecheck: ^0.0.3
+  peerDependenciesMeta:
+    react-native:
+      optional: true
+    react-native-google-play-integrity:
+      optional: true
+    react-native-inappbrowser-reborn:
+      optional: true
+    react-native-ios11-devicecheck:
+      optional: true
   languageName: unknown
   linkType: soft
 
