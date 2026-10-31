@@ -47,10 +47,25 @@ const getResponseData = async response => {
   return isJson ? response.json() : response.text()
 }
 
+// The signal stays attached to the response, so it also cuts a body that stalls.
+const withTimeout = (options, timeout) => {
+  if (!timeout) return options
+  const signal = AbortSignal.timeout(timeout)
+  return {
+    ...options,
+    timeout,
+    signal: options.signal ? AbortSignal.any([options.signal, signal]) : signal
+  }
+}
+
 /**
  * Main API against the `cozy-stack` server.
  */
 class CozyStackClient {
+  /**
+   * @param {object} [options] - Client options
+   * @param {number} [options.timeout] - Time in milliseconds given to each request, from sending it to the end of its response body, large transfers included. A request over it rejects with an error named `TimeoutError`. Without it, requests have no time limit.
+   */
   constructor(options) {
     const opts = { ...options }
     const { token, uri = '' } = opts
@@ -158,7 +173,10 @@ class CozyStackClient {
       : fetch
 
     try {
-      const response = await fetcher(fullPath, options)
+      const response = await fetcher(
+        fullPath,
+        withTimeout(options, this.options.timeout)
+      )
       if (!response.ok) {
         const reason = await getResponseData(response)
         const err = new FetchError(response, reason)
@@ -213,7 +231,10 @@ class CozyStackClient {
       credentials: 'include'
     }
 
-    const response = await fetch('/?refreshToken', options)
+    const response = await fetch(
+      '/?refreshToken',
+      withTimeout(options, this.options.timeout)
+    )
 
     if (!response.ok) {
       throw new Error(
