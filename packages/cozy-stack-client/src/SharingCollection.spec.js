@@ -893,3 +893,106 @@ describe('SharingCollection', () => {
     })
   })
 })
+
+describe('sharing suggestion recipients', () => {
+  it.each(['create', 'addRecipients', 'createSharedDrive'])(
+    'serializes local contacts and groups by ID and other people by email in %s',
+    async method => {
+      const client = new CozyStackClient()
+      client.fetchJSON.mockResolvedValue({ data: {} })
+      const collection = new SharingCollection('io.cozy.sharings', client)
+      const recipients = [
+        { _type: 'io.cozy.contacts.groups', _id: 'b2b-group' },
+        { _type: 'io.cozy.contacts', _id: 'existing-local' },
+        { _type: 'io.cozy.contacts', _id: 'local', meta: { kind: 'contact' } },
+        {
+          _type: 'io.cozy.contacts',
+          _id: 'org',
+          meta: { kind: 'org_member' },
+          email: [
+            { address: 'other@example.org' },
+            { address: 'member@example.org', primary: true }
+          ]
+        },
+        {
+          _type: 'io.cozy.contacts',
+          email: [{ address: 'external@example.org' }]
+        },
+        { email: ' typed@example.org ' }
+      ]
+      await collection[method]({
+        document: FOLDER,
+        recipients,
+        readOnlyRecipients: recipients
+      })
+      const relationships = client.fetchJSON.mock.calls[0][2].data.relationships
+      const expected = [
+        { type: 'io.cozy.contacts.groups', id: 'b2b-group' },
+        { type: 'io.cozy.contacts', id: 'existing-local' },
+        { type: 'io.cozy.contacts', id: 'local' },
+        { type: 'io.cozy.contacts', email: 'member@example.org' },
+        { type: 'io.cozy.contacts', email: 'external@example.org' },
+        { type: 'io.cozy.contacts', email: 'typed@example.org' }
+      ]
+      expect(relationships.recipients.data).toEqual(expected)
+      expect(relationships.read_only_recipients.data).toEqual(expected)
+    }
+  )
+
+  it.each(
+    [
+      [{ address: '' }, { address: 'alice@example.org' }],
+      [{ address: '  ', primary: true }, { address: 'alice@example.org' }],
+      [null, {}, { address: 42 }, { address: ' alice@example.org ' }],
+      [
+        { address: 'other@example.org' },
+        { address: '', primary: true },
+        { address: 'alice@example.org', primary: true }
+      ]
+    ].map(email => [email])
+  )(
+    'skips unusable email entries when serializing an organization member: %j',
+    async email => {
+      const client = new CozyStackClient()
+      client.fetchJSON.mockResolvedValue({ data: {} })
+      const collection = new SharingCollection('io.cozy.sharings', client)
+      await collection.addRecipients({
+        document: SHARING,
+        recipients: [
+          {
+            _type: 'io.cozy.contacts',
+            _id: 'org-member',
+            meta: { kind: 'org_member' },
+            email
+          }
+        ]
+      })
+      expect(
+        client.fetchJSON.mock.calls[0][2].data.relationships.recipients.data
+      ).toEqual([{ type: 'io.cozy.contacts', email: 'alice@example.org' }])
+    }
+  )
+
+  it.each([
+    { _type: 'io.cozy.contacts.groups' },
+    {
+      _type: 'io.cozy.contacts',
+      _id: 'org-member',
+      meta: { kind: 'org_member' },
+      email: [null, { address: ' ', primary: true }]
+    }
+  ])(
+    'rejects recipients with neither a local ID nor a usable email: %j',
+    async recipient => {
+      const client = new CozyStackClient()
+      const collection = new SharingCollection('io.cozy.sharings', client)
+      await expect(
+        collection.addRecipients({
+          document: SHARING,
+          recipients: [recipient]
+        })
+      ).rejects.toThrow('requires')
+      expect(client.fetchJSON).not.toHaveBeenCalled()
+    }
+  )
+})
