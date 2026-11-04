@@ -80,7 +80,16 @@
       "timeseries.geojson": "Trips",
       "timeseries.grades": "Grades",
       "triggers": "Scheduling jobs",
-      "drive.settings": "Drive settings"
+      "drive.settings": "Drive settings",
+      "banners": "Banners",
+      "doctypes": "Data types",
+      "exports": "Data exports",
+      "home.settings": "Home settings",
+      "imports": "Data imports",
+      "nextcloud.migrations": "Nextcloud migrations",
+      "remote.requests": "Remote requests",
+      "sessions": "Web sessions",
+      "sessions.logins": "Login history"
     }
   },
   "fr": {

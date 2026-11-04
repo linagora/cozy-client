@@ -80,7 +80,16 @@
       "timeseries.geojson": "Trayectos",
       "timeseries.grades": "Notas escolares",
       "triggers": "Programación de tareas",
-      "drive.settings": "Ajustes de Drive"
+      "drive.settings": "Ajustes de Drive",
+      "banners": "Banners",
+      "doctypes": "Tipos de datos",
+      "exports": "Exportaciones de datos",
+      "home.settings": "Ajustes de la página de inicio",
+      "imports": "Importaciones de datos",
+      "nextcloud.migrations": "Migraciones de Nextcloud",
+      "remote.requests": "Solicitudes remotas",
+      "sessions": "Sesiones web",
+      "sessions.logins": "Historial de inicios de sesión"
     }
   },
   "fr": {

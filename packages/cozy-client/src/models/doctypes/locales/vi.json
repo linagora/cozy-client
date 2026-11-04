@@ -80,7 +80,16 @@
       "timeseries.geojson": "Chuyến đi",
       "timeseries.grades": "Điểm học tập",
       "triggers": "Lập lịch tác vụ",
-      "drive.settings": "Cài đặt Drive"
+      "drive.settings": "Cài đặt Drive",
+      "banners": "Biểu ngữ",
+      "doctypes": "Loại dữ liệu",
+      "exports": "Xuất dữ liệu",
+      "home.settings": "Cài đặt trang chủ",
+      "imports": "Nhập dữ liệu",
+      "nextcloud.migrations": "Di chuyển Nextcloud",
+      "remote.requests": "Yêu cầu từ xa",
+      "sessions": "Phiên web",
+      "sessions.logins": "Lịch sử đăng nhập"
     }
   },
   "fr": {
