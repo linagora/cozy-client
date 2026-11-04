@@ -80,7 +80,16 @@
       "timeseries.geojson": "Поездки",
       "timeseries.grades": "Школьные оценки",
       "triggers": "Планирование задач",
-      "drive.settings": "Настройки Drive"
+      "drive.settings": "Настройки Drive",
+      "banners": "Баннеры",
+      "doctypes": "Типы данных",
+      "exports": "Экспорт данных",
+      "home.settings": "Настройки главного экрана",
+      "imports": "Импорт данных",
+      "nextcloud.migrations": "Миграции Nextcloud",
+      "remote.requests": "Удалённые запросы",
+      "sessions": "Веб-сеансы",
+      "sessions.logins": "История входов"
     }
   },
   "fr": {

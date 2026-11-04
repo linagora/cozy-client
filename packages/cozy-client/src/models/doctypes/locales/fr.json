@@ -80,7 +80,16 @@
       "timeseries.geojson": "Déplacements",
       "timeseries.grades": "Notes",
       "triggers": "Planification de tâches à exécuter dans le futur",
-      "drive.settings": "Paramètres de Drive"
+      "drive.settings": "Paramètres de Drive",
+      "banners": "Bannières",
+      "doctypes": "Types de données",
+      "exports": "Exports de données",
+      "home.settings": "Réglages de l'accueil",
+      "imports": "Imports de données",
+      "nextcloud.migrations": "Migrations Nextcloud",
+      "remote.requests": "Requêtes distantes",
+      "sessions": "Sessions web",
+      "sessions.logins": "Historique de connexions"
     }
   },
   "fr": {
