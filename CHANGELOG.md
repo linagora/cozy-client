@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [61.1.1](https://github.com/cozy/cozy-client/compare/v61.1.0...v61.1.1) (2026-11-05)
+
+
+### Bug Fixes
+
+* **cozy-client:** Preserve latest version during manifest sanitization ([a216c6e](https://github.com/cozy/cozy-client/commit/a216c6e657ceeb11b3fe9ad0d25c7d17d5418872))
+
+
+
+
+
 # [61.1.0](https://github.com/cozy/cozy-client/compare/v61.0.2...v61.1.0) (2026-11-05)
 
 
