@@ -65,6 +65,25 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
           yarn lerna publish --yes -m "chore: Publish [skip ci]"
 
+  zizmor:
+    name: Audit workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+        with:
+          # Security tab mode never fails the job on findings.
+          advanced-security: false
+          annotations: true
+          min-severity: low
+
   perf:
     name: Performance benchmarks
     if: github.event_name == 'pull_request'
