@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.1.0](https://github.com/cozy/cozy-client/compare/v61.0.2...v61.1.0) (2026-11-05)
+
+
+### Bug Fixes
+
+* **ci:** Avoid concurrent runs on the same ref ([0535bd4](https://github.com/cozy/cozy-client/commit/0535bd49e5193496b7e80a0d0c5a5f461d0dbfba))
+* **ci:** Don't let the benchmark comment fail the job ([0ee1706](https://github.com/cozy/cozy-client/commit/0ee1706095755eebe185bbfa45e0b2480a59e43d))
+* **ci:** Don't persist checkout credentials in CodeQL ([b9637d6](https://github.com/cozy/cozy-client/commit/b9637d654a4b9a07b3362f5fd5c05a2faceee305))
+* **ci:** Don't persist checkout credentials in the build job ([58e3bcd](https://github.com/cozy/cozy-client/commit/58e3bcd376523e9bebc7c3677a13f5b98868de43))
+* **ci:** Limit job duration ([6699f8a](https://github.com/cozy/cozy-client/commit/6699f8adf5994dbcf6d13d0d3375548ec7aac600))
+* **ci:** Only pass the publish PAT to checkout on master ([2aa6229](https://github.com/cozy/cozy-client/commit/2aa622927356d3f31be3438347488bc1bd9c16dc))
+* **ci:** Pin actions to commit hashes ([8242083](https://github.com/cozy/cozy-client/commit/82420832f7a1d98ba55f08b534a06c49a547eba3))
+* **ci:** Restrict the workflow token permissions ([7ae28ea](https://github.com/cozy/cozy-client/commit/7ae28eaecbf72db7e1b8f0c41e1356854150d544))
+* **ci:** Skip the benchmark comment on fork pull requests ([254e86c](https://github.com/cozy/cozy-client/commit/254e86c9387dce2e73c025c28785b859195726a3))
+
+
+### Features
+
+* **contacts:** Support mixed recipient suggestions ([12d2b76](https://github.com/cozy/cozy-client/commit/12d2b760e0d9c88deb02e7d25f7080973e870fa7))
+
+
+
+
+
 ## [61.0.2](https://github.com/cozy/cozy-client/compare/v61.0.1...v61.0.2) (2026-11-04)
 
 

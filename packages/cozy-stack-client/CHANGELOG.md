@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.1.0](https://github.com/linagora/cozy-client/compare/v61.0.2...v61.1.0) (2026-11-05)
+
+
+### Features
+
+* **contacts:** Support mixed recipient suggestions ([12d2b76](https://github.com/linagora/cozy-client/commit/12d2b760e0d9c88deb02e7d25f7080973e870fa7))
+
+
+
+
+
 # [61.0.0](https://github.com/linagora/cozy-client/compare/v60.45.0...v61.0.0) (2026-10-23)
 
 **Note:** Version bump only for package cozy-stack-client
