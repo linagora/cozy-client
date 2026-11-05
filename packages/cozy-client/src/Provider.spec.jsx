@@ -1,12 +1,12 @@
 jest.mock('./CozyClient')
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import configureStore from 'redux-mock-store'
 import { fireEvent, render } from '@testing-library/react'
 
 import Provider from './Provider'
 import CozyClient from './CozyClient'
+import useClient from './hooks/useClient'
 
 describe('Provider', () => {
   const client = new CozyClient()
@@ -21,21 +21,14 @@ describe('Provider', () => {
     expect(wrapper.getByText('Component')).toBeTruthy()
   })
 
-  it('should provide the client in the context', () => {
-    class FakeComponent extends Component {
-      static contextTypes = {
-        client: PropTypes.object
-      }
-      onClick = () => {
-        this.context.client.query('foo')
-      }
-      render() {
-        return <button onClick={this.onClick} />
-      }
+  it('should provide the client through React context', () => {
+    const ConsumerComponent = () => {
+      const ctxClient = useClient()
+      return <button onClick={() => ctxClient.query('foo')} />
     }
     const wrapper = render(
       <Provider client={client} store={store}>
-        <FakeComponent />
+        <ConsumerComponent />
       </Provider>
     )
     fireEvent.click(wrapper.getByRole('button'))
