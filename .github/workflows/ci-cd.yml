@@ -122,11 +122,12 @@ jobs:
           node packages/cozy-client/benchmarks/compare.js base.bench.json pr.bench.json --md=perf-comment.md
           echo "status=$?" >> "$GITHUB_OUTPUT"
       - name: Write benchmark summary
-        if: always()
+        if: always() && hashFiles('perf-comment.md') != ''
         run: cat perf-comment.md >> "$GITHUB_STEP_SUMMARY"
       - name: Post benchmark comment
         # Fork pull requests get a read-only GITHUB_TOKEN and cannot comment.
-        if: always() && github.event.pull_request.head.repo.full_name == github.repository
+        if: always() && hashFiles('perf-comment.md') != '' && github.event.pull_request.head.repo.full_name == github.repository
+        continue-on-error: true
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
