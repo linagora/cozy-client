@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ github.ref == 'refs/heads/master' && secrets.GH_TOKEN || github.token }}
+          persist-credentials: false
           fetch-depth: 0
       - name: Enable Corepack
         run: corepack enable
