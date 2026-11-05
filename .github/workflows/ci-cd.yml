@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           token: ${{ github.ref == 'refs/heads/master' && secrets.GH_TOKEN || github.token }}
           persist-credentials: false
@@ -20,7 +20,7 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - name: Use Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
       - name: Install dependencies
@@ -64,7 +64,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout PR
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           # Don't leave the workflow token in .git/config where the untrusted
@@ -74,7 +74,7 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - name: Use Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
       - name: Record PR ref
@@ -116,7 +116,7 @@ jobs:
       - name: Post benchmark comment
         # Fork pull requests get a read-only GITHUB_TOKEN and cannot comment.
         if: always() && github.event.pull_request.head.repo.full_name == github.repository
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs')
