@@ -81,6 +81,16 @@ describe('sanitizeManifest', () => {
     expect(man).not.toHaveProperty('available_version')
   })
 
+  it('should transform latest_version property to latestVersion', () => {
+    const testVersion = '1.2.3'
+    const man = sanitizeManifest({
+      slug: 'edf',
+      latest_version: testVersion
+    })
+    expect(man.latestVersion).toBe('1.2.3')
+    expect(man).not.toHaveProperty('latest_version')
+  })
+
   it('should remove "fields" if fields is null', () => {
     const current = {
       fields: null

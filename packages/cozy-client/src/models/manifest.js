@@ -100,7 +100,7 @@ export function sanitize(manifest) {
 
   // Fix camelCase from cozy-stack
   if (manifest.latest_version) {
-    sanitized.latestVersion = manifest.latestVersion
+    sanitized.latestVersion = manifest.latest_version
     delete sanitized.latest_version
   }
 
