@@ -1088,7 +1088,7 @@ Retrieve intance info like context, uuid, disk usage etc
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useQuery.js:95](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useQuery.js#L95)
+[packages/cozy-client/src/hooks/useQuery.js:114](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useQuery.js#L114)
 
 ***
 
@@ -1134,7 +1134,7 @@ Fetches a queryDefinition and run fetchMore on the query until the query is full
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useQueryAll.jsx:14](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useQueryAll.jsx#L14)
+[packages/cozy-client/src/hooks/useQueryAll.jsx:21](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useQueryAll.jsx#L21)
 
 ***
 

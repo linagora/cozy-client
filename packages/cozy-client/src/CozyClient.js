@@ -142,6 +142,9 @@ const DOC_UPDATE = 'update'
  * - Associations
  */
 class CozyClient {
+  #queryGenerations = new Map()
+  #nextQueryGeneration = 0
+
   /**
    * @param  {ClientOptions} rawOptions - Options
    *
@@ -566,6 +569,7 @@ class CozyClient {
     }
 
     if (this.store) {
+      this.#queryGenerations.clear()
       this.dispatch(resetState())
     }
     this.emit('logout')
@@ -1028,17 +1032,40 @@ client.query(Q('io.cozy.bills'))`)
         return
       }
     }
+    const isPagination = Boolean(
+      existingQuery?.definition &&
+        (definition.skip || definition.bookmark) &&
+        (definition.skip !== existingQuery.definition.skip ||
+          definition.bookmark !== existingQuery.definition.bookmark)
+    )
+    let generation = this.#queryGenerations.get(queryId)
+    if (isPagination && generation === undefined) {
+      generation = ++this.#nextQueryGeneration
+      this.#queryGenerations.set(queryId, generation)
+    }
+    const requestKey = isPagination
+      ? stringify({ definition, queryId, generation })
+      : stringify(definition)
     // If we already have the same query in loading state, no
     // need to refetch it. We return the promise we already
     // have in the promiseCache
     if (existingQuery && Object.keys(existingQuery).length > 0) {
       if (existingQuery.fetchStatus === 'loading') {
-        return this._promiseCache.get(() => stringify(definition))
+        const pendingRequest = this._promiseCache.get(() => requestKey)
+        if (pendingRequest || !options.backgroundFetching) {
+          return pendingRequest
+        }
       }
     }
     if (!this.disableStoreForQueries) {
       this.ensureQueryExists(queryId, definition, options)
+      if (!isPagination) {
+        generation = ++this.#nextQueryGeneration
+        this.#queryGenerations.set(queryId, generation)
+      }
     }
+    const isStalePage = () =>
+      isPagination && generation !== this.#queryGenerations.get(queryId)
 
     try {
       const backgroundFetching =
@@ -1055,17 +1082,19 @@ client.query(Q('io.cozy.bills'))`)
               executeQueryFromState(this.store.getState(), definition)
             )
         : () => this.requestQuery(definition, linkOptions)
-      const response = await this._promiseCache.exec(requestFn, () =>
-        stringify(definition)
+      const response = await this._promiseCache.exec(
+        requestFn,
+        () => requestKey
       )
-      if (this.disableStoreForQueries) {
+      if (this.disableStoreForQueries || isStalePage()) {
         return response
       }
 
       this.dispatch(
         receiveQueryResult(queryId, response, {
           update,
-          backgroundFetching
+          // Pagination appends even when loading happens in the background.
+          backgroundFetching: isPagination ? false : backgroundFetching
         })
       )
       this.performanceApi.measure({
@@ -1075,6 +1104,9 @@ client.query(Q('io.cozy.bills'))`)
       })
       return response
     } catch (error) {
+      if (isStalePage()) {
+        return null
+      }
       this.performanceApi.measure({
         markName: markQuery,
         measureName: `${markQuery} error`,
@@ -1680,6 +1712,7 @@ instantiation of the client.`
       )
     }
 
+    this.#queryGenerations.clear()
     this.store = store
   }
 
