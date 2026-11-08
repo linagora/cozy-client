@@ -61,6 +61,7 @@ export const ensureKonnectorFolder = async (
       mainFolder: alreadyExistingKonnectorMainFolder,
       konnector,
       sourceAccountIdentifier,
+      folderName: toPathSegment(sourceAccountIdentifier, account._id),
       reservedFolderIds
     })
   }
@@ -175,8 +176,7 @@ export const statDirectoryByPath = async (client, path) => {
 export const buildFolderPath = (konnector, account, magicFolders = {}) => {
   const fullPath =
     konnector?.folders?.[0]?.defaultDir || '$administrative/$konnector/$account'
-  // Trim `/` and avoid multiple `/` characters with regexp
-  let sanitizedPath = trim(fullPath.replace(/(\/+)/g, '/'), '/')
+  let sanitizedPath = normalizeDefaultDir(fullPath)
   // If the konnector doesn't have any of our base dir, we set it to $administrative
   if (!hasBaseDir(sanitizedPath)) {
     sanitizedPath = '$administrative/' + sanitizedPath
@@ -197,8 +197,8 @@ export const buildFolderPath = (konnector, account, magicFolders = {}) => {
   const renderedPath = renderSubDir(buildedSubDir, {
     // When adding a new allowed variable here, please keep documentation
     // of `renderSubDir` function up to date.
-    konnector: konnector.name,
-    account: getAccountName(account).replace(sanitizeAccountIdentifierRx, '-')
+    konnector: toPathSegment(konnector.name, konnector.slug),
+    account: toPathSegment(getAccountName(account), account._id)
   })
   return `/${renderedBaseDir}/${renderedPath}`
 }
@@ -224,25 +224,26 @@ export const buildFolderPath = (konnector, account, magicFolders = {}) => {
  */
 export const buildMainFolderPath = (konnector, magicFolders = {}) => {
   const fullPath =
-    konnector?.folders?.[0]?.defaultDir
-      ?.split('/')
-      ?.slice(0, -1)
-      ?.join('/') || '$administrative/$konnector'
-  let sanitizedPath = trim(fullPath.replace(/(\/+)/g, '/'), '/')
+    konnector?.folders?.[0]?.defaultDir || '$administrative/$konnector/$account'
+  let sanitizedPath = normalizeDefaultDir(fullPath)
   if (!hasBaseDir(sanitizedPath)) {
     sanitizedPath = '$administrative/' + sanitizedPath
   }
   /**
    * Now that we have our sanitizedPath, we can split it in two strings
    * * `baseDir` containing the baseDir path
-   * * `buildedSubDir` containing the rest of the path (ie the path without baseDir)
+   * * `buildedSubDir` containing the parent of the account folder, without baseDir
    */
   const baseDir = sanitizedPath.split('/', 1)
-  const buildedSubDir = buildSubDir(sanitizedPath, baseDir[0], '$konnector')
+  const parentPath = sanitizedPath
+    .split('/')
+    .slice(0, -1)
+    .join('/')
+  const buildedSubDir = buildSubDir(parentPath, baseDir[0], '$konnector')
 
   const renderedBaseDir = renderBaseDir(baseDir[0], magicFolders)
   const renderedPath = renderSubDir(buildedSubDir, {
-    konnector: konnector.name
+    konnector: toPathSegment(konnector.name, konnector.slug)
   })
   return `/${renderedBaseDir}/${renderedPath}`
 }
@@ -321,7 +322,37 @@ const renderSubDir = (path, variables) => {
     .join('/')
 }
 
-const sanitizeAccountIdentifierRx = /\//g
+/**
+ * Splits a defaultDir in segments without empty or "." ones
+ *
+ * @param {string} path - defaultDir from the konnector manifest
+ * @returns {string}
+ * @throws if the path has a ".." segment
+ */
+const normalizeDefaultDir = path => {
+  const segments = path
+    .split('/')
+    .filter(segment => segment.trim() !== '' && segment.trim() !== '.')
+  if (segments.some(segment => segment.trim() === '..')) {
+    throw new Error(`Konnector defaultDir cannot contain "..": ${path}`)
+  }
+  return segments.join('/')
+}
+
+/**
+ * Turns a name into a single folder name, using the fallback when the name
+ * would be empty or a dot segment
+ *
+ * @param {string} name - konnector or account name
+ * @param {string} fallback - value used instead of an unusable name
+ * @returns {string}
+ */
+const toPathSegment = (name, fallback) => {
+  const segment = (name || '').replace(/\//g, '-').trim()
+  return segment === '' || segment === '.' || segment === '..'
+    ? fallback
+    : segment
+}
 
 /**
  * Returns a permission ready to be passed to
@@ -484,6 +515,7 @@ const findKonnectorMainFolderByReference = async ({ client, slug }) => {
  * @param {import('../types').IOCozyFolder} options.mainFolder - Main konnector folder where the account folder may be created
  * @param {import('../types').IOCozyKonnector} options.konnector - Konnector associated to the main folder
  * @param {string} options.sourceAccountIdentifier - source account identifier
+ * @param {string} options.folderName - name of the account folder
  * @param {Array<string>} options.reservedFolderIds - ids of the root and magic folders
  * @returns {Promise<import('../types').IOCozyFolder>}
  */
@@ -492,9 +524,10 @@ async function saveKonnectorAccountFolder({
   mainFolder,
   konnector,
   sourceAccountIdentifier,
+  folderName,
   reservedFolderIds
 }) {
-  const path = mainFolder.path + '/' + sourceAccountIdentifier
+  const path = mainFolder.path + '/' + folderName
   const folder =
     (await statDirectoryByPath(client, path)) ||
     (await createDirectoryByPath(client, path))

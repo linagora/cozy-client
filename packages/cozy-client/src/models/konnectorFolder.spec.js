@@ -524,4 +524,123 @@ describe('ensureKonnectorFolder destination', () => {
     ).rejects.toThrow()
     expect(client.addReferencesTo).not.toHaveBeenCalled()
   })
+
+  const hasDotSegment = path =>
+    path.split('/').some(segment => segment === '.' || segment === '..')
+
+  it.each(['.', '..'])(
+    'creates the account folder below the main folder for account name %p',
+    async accountName => {
+      const mainFolder = { _id: 'main-id', path: '/Administratif/EDF' }
+      const client = setup({ konnectorFolders: [mainFolder] })
+      const folder = await ensureKonnectorFolder(client, {
+        konnector: { slug: 'k', name: 'EDF' },
+        account: { _id: 'abc', auth: { accountName } },
+        lang: 'fr'
+      })
+      expect(folder.path).toBe('/Administratif/EDF/abc')
+      for (const [path] of client.statByPath.mock.calls) {
+        expect(hasDotSegment(path)).toBe(false)
+      }
+    }
+  )
+
+  it.each(['.', '..'])(
+    'creates folders below the magic folder for konnector name %p',
+    async name => {
+      const client = setup()
+      const folder = await ensureKonnectorFolder(client, {
+        konnector: { slug: 'k', name },
+        account,
+        lang: 'fr'
+      })
+      expect(folder.path).toBe('/Administratif/k/john')
+      for (const [path] of client.statByPath.mock.calls) {
+        expect(hasDotSegment(path)).toBe(false)
+      }
+    }
+  )
+})
+
+describe('konnector folder path segments', () => {
+  const magicFolders = { administrative: '/Administratif', photos: '/Photos' }
+  const account = { _id: 'abc', auth: { accountName: 'john' } }
+
+  it.each(['.', '..', ' .. '])(
+    'replaces konnector name %p by its slug',
+    name => {
+      const konnector = { slug: 'k', name }
+      expect(buildFolderPath(konnector, account, magicFolders)).toBe(
+        '/Administratif/k/john'
+      )
+      expect(buildMainFolderPath(konnector, magicFolders)).toBe(
+        '/Administratif/k'
+      )
+    }
+  )
+
+  it.each(['.', '..'])('replaces account name %p by the account id', name => {
+    const konnector = { slug: 'k', name: 'EDF' }
+    expect(
+      buildFolderPath(
+        konnector,
+        { _id: 'abc', auth: { accountName: name } },
+        magicFolders
+      )
+    ).toBe('/Administratif/EDF/abc')
+  })
+
+  it('keeps a konnector name with a slash in one segment', () => {
+    const konnector = { slug: 'k', name: 'a/../..' }
+    expect(buildFolderPath(konnector, account, magicFolders)).toBe(
+      '/Administratif/a-..-../john'
+    )
+    expect(buildMainFolderPath(konnector, magicFolders)).toBe(
+      '/Administratif/a-..-..'
+    )
+  })
+
+  it('keeps names that contain dots', () => {
+    const konnector = { slug: 'k', name: 'E.Leclerc' }
+    expect(
+      buildFolderPath(
+        konnector,
+        { _id: 'abc', auth: { accountName: 'john.doe@mail.fr' } },
+        magicFolders
+      )
+    ).toBe('/Administratif/E.Leclerc/john.doe@mail.fr')
+  })
+
+  it.each([
+    '$administrative/./$konnector/$account',
+    '$administrative/.',
+    './$konnector/$account'
+  ])('ignores "." segments of defaultDir %p', defaultDir => {
+    const konnector = { slug: 'k', name: 'EDF', folders: [{ defaultDir }] }
+    expect(buildFolderPath(konnector, account, magicFolders)).toBe(
+      '/Administratif/EDF/john'
+    )
+  })
+
+  it.each([
+    '$administrative/$konnector/$account/.',
+    '$administrative/$konnector/$account/'
+  ])('builds the main folder as the parent of defaultDir %p', defaultDir => {
+    const konnector = { slug: 'k', name: 'EDF', folders: [{ defaultDir }] }
+    expect(buildFolderPath(konnector, account, magicFolders)).toBe(
+      '/Administratif/EDF/john'
+    )
+    expect(buildMainFolderPath(konnector, magicFolders)).toBe(
+      '/Administratif/EDF'
+    )
+  })
+
+  it.each(['$administrative/../$konnector/$account', '../$account'])(
+    'rejects ".." segments in defaultDir %p',
+    defaultDir => {
+      const konnector = { slug: 'k', name: 'EDF', folders: [{ defaultDir }] }
+      expect(() => buildFolderPath(konnector, account, magicFolders)).toThrow()
+      expect(() => buildMainFolderPath(konnector, magicFolders)).toThrow()
+    }
+  )
 })
