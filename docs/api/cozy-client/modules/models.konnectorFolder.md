@@ -44,7 +44,7 @@ The result path
 
 *Defined in*
 
-[packages/cozy-client/src/models/konnectorFolder.js:175](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L175)
+[packages/cozy-client/src/models/konnectorFolder.js:176](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L176)
 
 ***
 
@@ -69,7 +69,7 @@ Permission object
 
 *Defined in*
 
-[packages/cozy-client/src/models/konnectorFolder.js:333](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L333)
+[packages/cozy-client/src/models/konnectorFolder.js:364](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L364)
 
 ***
 
@@ -134,7 +134,7 @@ Directory attributes
 
 *Defined in*
 
-[packages/cozy-client/src/models/konnectorFolder.js:112](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L112)
+[packages/cozy-client/src/models/konnectorFolder.js:113](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L113)
 
 ***
 
@@ -185,7 +185,7 @@ try to find a konnector account folder using file references
 
 *Defined in*
 
-[packages/cozy-client/src/models/konnectorFolder.js:441](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L441)
+[packages/cozy-client/src/models/konnectorFolder.js:472](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L472)
 
 ***
 
@@ -212,4 +212,4 @@ Created io.cozy.files document
 
 *Defined in*
 
-[packages/cozy-client/src/models/konnectorFolder.js:139](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L139)
+[packages/cozy-client/src/models/konnectorFolder.js:140](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L140)
