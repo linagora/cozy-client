@@ -1,4 +1,10 @@
-import { ensureKonnectorFolder } from './konnectorFolder'
+import { posix } from 'path'
+
+import {
+  buildFolderPath,
+  buildMainFolderPath,
+  ensureKonnectorFolder
+} from './konnectorFolder'
 
 describe('ensureKonnectorFolder', () => {
   const mockClient = {
@@ -403,5 +409,119 @@ describe('ensureKonnectorFolder', () => {
       [existingAccountFolder]
     )
     expect(mockClient.createDirectoryByPath).not.toHaveBeenCalled()
+  })
+})
+
+describe('konnector folder paths', () => {
+  const magicFolders = { administrative: '/Administratif', photos: '/Photos' }
+  const account = { _id: 'abc', auth: { accountName: 'john' } }
+
+  it.each(['/', '//', '///', '$administrative', '$administrative/'])(
+    'falls back to the default sub dir for a defaultDir %p',
+    defaultDir => {
+      const konnector = { slug: 'k', name: 'EDF', folders: [{ defaultDir }] }
+      expect(buildFolderPath(konnector, account, magicFolders)).toBe(
+        '/Administratif/EDF/john'
+      )
+      expect(buildMainFolderPath(konnector, magicFolders)).toBe(
+        '/Administratif/EDF'
+      )
+    }
+  )
+
+  it('keeps the photos base dir when defaultDir has no sub dir', () => {
+    const konnector = {
+      slug: 'k',
+      name: 'EDF',
+      folders: [{ defaultDir: '$photos/' }]
+    }
+    expect(buildFolderPath(konnector, account, magicFolders)).toBe(
+      '/Photos/EDF/john'
+    )
+    expect(buildMainFolderPath(konnector, magicFolders)).toBe('/Photos/EDF')
+  })
+})
+
+describe('ensureKonnectorFolder destination', () => {
+  const adminFolder = { _id: 'admin-id', path: '/Administratif' }
+  const photosFolder = { _id: 'photos-id', path: '/Photos' }
+  const account = { _id: 'abc', auth: { accountName: 'john' } }
+
+  // statByPath resolves dot segments like cozy-stack does (path.Clean)
+  const setup = ({ konnectorFolders = [] } = {}) => {
+    const folders = new Map([
+      ['/', { _id: 'io.cozy.files.root-dir', path: '/' }],
+      [adminFolder.path, adminFolder],
+      [photosFolder.path, photosFolder]
+    ])
+    const client = {
+      collection: () => client,
+      query: jest.fn(async def => {
+        const { _type, _id } = def.referenced
+        if (_type === 'io.cozy.apps') {
+          return {
+            included: [
+              _id.endsWith('administrative') ? adminFolder : photosFolder
+            ]
+          }
+        }
+        return { included: konnectorFolders }
+      }),
+      statByPath: jest.fn(async path => {
+        const folder = folders.get(
+          posix.normalize(path).replace(/(.)\/$/, '$1')
+        )
+        if (!folder) throw { status: 404 }
+        return { data: folder }
+      }),
+      createDirectoryByPath: jest.fn(async path => {
+        const folder = { _id: `id:${path}`, path }
+        folders.set(path, folder)
+        return { data: folder }
+      }),
+      add: jest.fn(),
+      addReferencesTo: jest.fn()
+    }
+    return client
+  }
+
+  it.each(['/', '//'])(
+    'does not give the magic folder to a konnector with defaultDir %p',
+    async defaultDir => {
+      const client = setup()
+      const konnector = { slug: 'k', name: 'EDF', folders: [{ defaultDir }] }
+      const folder = await ensureKonnectorFolder(client, {
+        konnector,
+        account,
+        lang: 'fr'
+      })
+      expect(folder.path).toBe('/Administratif/EDF/john')
+      expect(client.add).toHaveBeenCalledWith(konnector, {
+        saveFolder: expect.objectContaining({
+          values: ['id:/Administratif/EDF/john']
+        })
+      })
+    }
+  )
+
+  it('refuses a destination that resolves to a magic folder', async () => {
+    const client = setup()
+    client.statByPath.mockResolvedValue({ data: adminFolder })
+    const konnector = { slug: 'k', name: 'EDF' }
+    await expect(
+      ensureKonnectorFolder(client, { konnector, account, lang: 'fr' })
+    ).rejects.toThrow()
+    expect(client.add).not.toHaveBeenCalled()
+  })
+
+  it('refuses an account folder that resolves to a magic folder', async () => {
+    const mainFolder = { _id: 'main-id', path: '/Administratif/EDF' }
+    const client = setup({ konnectorFolders: [mainFolder] })
+    client.statByPath.mockResolvedValue({ data: adminFolder })
+    const konnector = { slug: 'k', name: 'EDF' }
+    await expect(
+      ensureKonnectorFolder(client, { konnector, account, lang: 'fr' })
+    ).rejects.toThrow()
+    expect(client.addReferencesTo).not.toHaveBeenCalled()
   })
 })
