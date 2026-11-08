@@ -10,6 +10,7 @@ import { Q } from '../queries/dsl'
 
 const FILES_DOCTYPE = 'io.cozy.files'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
+const ROOT_DIR_ID = 'io.cozy.files.root-dir'
 
 // Default name for base directory
 const DEFAULT_LOCALIZED_BASE_DIR = 'Administrative'
@@ -38,6 +39,7 @@ export const ensureKonnectorFolder = async (
     ),
     ensureMagicFolder(client, MAGIC_FOLDERS.PHOTOS, t('MagicFolders.photos'))
   ])
+  const reservedFolderIds = [ROOT_DIR_ID, adminFolder._id, photosFolder._id]
 
   const sourceAccountIdentifier = getAccountName(account)
 
@@ -58,7 +60,8 @@ export const ensureKonnectorFolder = async (
       client,
       mainFolder: alreadyExistingKonnectorMainFolder,
       konnector,
-      sourceAccountIdentifier
+      sourceAccountIdentifier,
+      reservedFolderIds
     })
   }
 
@@ -69,6 +72,7 @@ export const ensureKonnectorFolder = async (
   const mainFolder =
     (await statDirectoryByPath(client, mainPath)) ||
     (await createDirectoryByPath(client, mainPath))
+  assertNotReservedFolder(mainFolder, reservedFolderIds)
 
   ensureKonnectorReference({
     client,
@@ -83,6 +87,7 @@ export const ensureKonnectorFolder = async (
   const folder =
     (await statDirectoryByPath(client, path)) ||
     (await createDirectoryByPath(client, path))
+  assertNotReservedFolder(folder, reservedFolderIds)
 
   await Promise.all([
     permissions.add(konnector, buildFolderPermission(folder)),
@@ -109,6 +114,18 @@ export const createDirectoryByPath = async (client, path) => {
     .collection(FILES_DOCTYPE)
     .createDirectoryByPath(path)
   return data
+}
+
+/**
+ * Throws if a konnector destination resolved to the root or a magic folder
+ *
+ * @param {import('../types').IOCozyFolder} folder - folder to test
+ * @param {Array<string>} reservedFolderIds - ids of the root and magic folders
+ */
+const assertNotReservedFolder = (folder, reservedFolderIds) => {
+  if (reservedFolderIds.includes(folder._id)) {
+    throw new Error(`Konnector folder cannot be ${folder.path}`)
+  }
 }
 
 /**
@@ -170,7 +187,11 @@ export const buildFolderPath = (konnector, account, magicFolders = {}) => {
    * * `buildedSubDir` containing the rest of the path (ie the path without baseDir)
    */
   const baseDir = sanitizedPath.split('/', 1)
-  const buildedSubDir = buildSubDir(sanitizedPath, baseDir[0])
+  const buildedSubDir = buildSubDir(
+    sanitizedPath,
+    baseDir[0],
+    '$konnector/$account'
+  )
 
   const renderedBaseDir = renderBaseDir(baseDir[0], magicFolders)
   const renderedPath = renderSubDir(buildedSubDir, {
@@ -217,7 +238,7 @@ export const buildMainFolderPath = (konnector, magicFolders = {}) => {
    * * `buildedSubDir` containing the rest of the path (ie the path without baseDir)
    */
   const baseDir = sanitizedPath.split('/', 1)
-  const buildedSubDir = buildSubDir(sanitizedPath, baseDir[0])
+  const buildedSubDir = buildSubDir(sanitizedPath, baseDir[0], '$konnector')
 
   const renderedBaseDir = renderBaseDir(baseDir[0], magicFolders)
   const renderedPath = renderSubDir(buildedSubDir, {
@@ -246,18 +267,16 @@ const allowedBaseDirVariables = ['$administrative', '$photos']
 
 /**
  * This method creates the subDir. We can't have an empty subDir, so we set
- * it to our default '$konnector/$account'
+ * it to the given fallback
  *
  * @param {string} fullPath String containing potentially the defaultDir
  * @param {string} defaultDir String to remove from the fullPath
+ * @param {string} fallback Sub dir used when the rest of the path is empty
  * @returns {string}
  */
-const buildSubDir = (fullPath, defaultDir) => {
-  let buildedSubDir = fullPath.substring(defaultDir.length)
-  if (buildedSubDir === '') {
-    buildedSubDir = '$konnector/$account'
-  }
-  return buildedSubDir
+const buildSubDir = (fullPath, defaultDir, fallback) => {
+  const buildedSubDir = fullPath.substring(defaultDir.length)
+  return trim(buildedSubDir, '/') === '' ? fallback : buildedSubDir
 }
 
 /**
@@ -465,18 +484,21 @@ const findKonnectorMainFolderByReference = async ({ client, slug }) => {
  * @param {import('../types').IOCozyFolder} options.mainFolder - Main konnector folder where the account folder may be created
  * @param {import('../types').IOCozyKonnector} options.konnector - Konnector associated to the main folder
  * @param {string} options.sourceAccountIdentifier - source account identifier
+ * @param {Array<string>} options.reservedFolderIds - ids of the root and magic folders
  * @returns {Promise<import('../types').IOCozyFolder>}
  */
 async function saveKonnectorAccountFolder({
   client,
   mainFolder,
   konnector,
-  sourceAccountIdentifier
+  sourceAccountIdentifier,
+  reservedFolderIds
 }) {
   const path = mainFolder.path + '/' + sourceAccountIdentifier
   const folder =
     (await statDirectoryByPath(client, path)) ||
     (await createDirectoryByPath(client, path))
+  assertNotReservedFolder(folder, reservedFolderIds)
   await ensureKonnectorReference({ client, folder, konnector })
   await ensureSourceAccountIdentifierReference({
     client,
