@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [62.0.4](https://github.com/cozy/cozy-client/compare/v62.0.3...v62.0.4) (2026-11-10)
+
+
+### Bug Fixes
+
+* **cozy-client:** Reject redirect links whose hash leaves the app ([9c90f1c](https://github.com/cozy/cozy-client/commit/9c90f1c49eec9851f8665d6e59ca6abbb92f35ff))
+
+
+
+
+
 ## [62.0.3](https://github.com/cozy/cozy-client/compare/v62.0.2...v62.0.3) (2026-11-10)
 
 
