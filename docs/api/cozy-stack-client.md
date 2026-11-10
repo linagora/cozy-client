@@ -1901,6 +1901,7 @@ Adds a permission to the given document. Document type must be
 | options | <code>object</code> | options |
 | [options.expiresAt] | <code>string</code> | Date at which the permission will expire. Set to "" to remove it. |
 | [options.password] | <code>string</code> | To generate a password-protected link. Set to "" to remove it. |
+| [options.activityReportEnabled] | <code>boolean</code> | Whether to send an activity report when the link expires. |
 
 **Example**  
 ```
@@ -1958,6 +1959,7 @@ Create a share link
 | options | <code>object</code> | options |
 | [options.ttl] | <code>string</code> | Time to live (bigduration format, e.g. "4Y3M2D1h30m15s") |
 | [options.password] | <code>string</code> | To generate a password-protected link |
+| [options.activityReportEnabled] | <code>boolean</code> | Whether to send an activity report when the link expires. |
 | [options.verbs] | <code>Array.&lt;string&gt;</code> | explicit permissions to use |
 | [options.codes] | <code>string</code> | A comma separed list of values (defaulted to code) |
 | [options.tiny] | <code>boolean</code> | If set to true then the generated shortcode will be 6 digits Cozy-Stack has a few conditions to be able to use this tiny shortcode ATM you have to specifiy a ttl < 1h, but it can change. see https://docs.cozy.io/en/cozy-stack/permissions/#post-permissions for exact informations |
