@@ -85,6 +85,7 @@ class PermissionCollection extends DocumentCollection {
    * @param {object} options - options
    * @param {string} [options.expiresAt] - Date at which the permission will expire. Set to "" to remove it.
    * @param {string} [options.password] - To generate a password-protected link. Set to "" to remove it.
+   * @param {boolean} [options.activityReportEnabled] - Whether to send an activity report when the link expires.
    * @returns {Promise}
    *
    * @example
@@ -120,7 +121,7 @@ class PermissionCollection extends DocumentCollection {
         )
     }
 
-    const { expiresAt, password } = options
+    const { expiresAt, password, activityReportEnabled } = options
     // We need to pass password and expires_at even if they are empty strings because the API expects them.
     // If value is a empty string, the stack will remove the password or expires_at.
     const hasPassword = password || password === ''
@@ -132,7 +133,10 @@ class PermissionCollection extends DocumentCollection {
         attributes: {
           permissions: permission,
           ...(hasPassword && { password }),
-          ...(hasExpiresAt && { expires_at: expiresAt })
+          ...(hasExpiresAt && { expires_at: expiresAt }),
+          ...(typeof activityReportEnabled === 'boolean' && {
+            activity_report_enabled: activityReportEnabled
+          })
         }
       }
     })
@@ -217,6 +221,7 @@ class PermissionCollection extends DocumentCollection {
    * @param {object} options - options
    * @param {string} [options.ttl] - Time to live (bigduration format, e.g. "4Y3M2D1h30m15s")
    * @param {string} [options.password] - To generate a password-protected link
+   * @param {boolean} [options.activityReportEnabled] - Whether to send an activity report when the link expires.
    * @param {string[]} [options.verbs] - explicit permissions to use
    * @param {string} [options.codes] A comma separed list of values (defaulted to code)
    * @param {boolean} [options.tiny] If set to true then the generated shortcode will be 6 digits
@@ -225,7 +230,14 @@ class PermissionCollection extends DocumentCollection {
    * see https://docs.cozy.io/en/cozy-stack/permissions/#post-permissions for exact informations
    */
   async createSharingLink(document, options = {}) {
-    const { ttl, password, verbs, tiny, codes = 'code' } = options
+    const {
+      ttl,
+      password,
+      verbs,
+      tiny,
+      codes = 'code',
+      activityReportEnabled
+    } = options
     const searchParams = new URLSearchParams()
     searchParams.append('codes', codes)
     if (ttl) searchParams.append('ttl', ttl)
@@ -243,7 +255,10 @@ class PermissionCollection extends DocumentCollection {
               true,
               verbs ? { verbs } : {}
             ),
-            ...(password && { password })
+            ...(password && { password }),
+            ...(typeof activityReportEnabled === 'boolean' && {
+              activity_report_enabled: activityReportEnabled
+            })
           }
         }
       }
