@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.2.0](https://github.com/cozy/cozy-client/compare/v61.1.1...v61.2.0) (2026-11-10)
+
+
+### Features
+
+* Add a timeout option to CozyStackClient ([cf538f4](https://github.com/cozy/cozy-client/commit/cf538f4e944fb26122d5134879c65af9e61a5b79))
+
+
+
+
+
 ## [61.1.1](https://github.com/cozy/cozy-client/compare/v61.1.0...v61.1.1) (2026-11-05)
 
 
