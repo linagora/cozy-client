@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.0.0](https://github.com/cozy/cozy-client/compare/v61.2.0...v62.0.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* **cozy-client:** Make the native peers optional ([70aa625](https://github.com/cozy/cozy-client/commit/70aa625d7c77b703320176f60489a49d15dd4c74))
+* **pouch:** Remove op-sqlite from the peers ([835f405](https://github.com/cozy/cozy-client/commit/835f405b297a78d37f5888986a41808df2bdb559))
+
+
+### BREAKING CHANGES
+
+* **cozy-client:** a React Native app must declare react-native,
+react-native-google-play-integrity, react-native-inappbrowser-reborn and
+react-native-ios11-devicecheck in its own dependencies.
+
+Signed-off-by: Crash-- <quentin.valmori@gmail.com>
+* **pouch:** index.js re-exports SQLiteQuery, so a React Native app
+importing cozy-pouch-link resolves sqliteDb.native.js and must declare
+@op-engineering/op-sqlite in its own dependencies.
+
+Signed-off-by: Crash-- <quentin.valmori@gmail.com>
+
+
+
+
+
 # [61.2.0](https://github.com/cozy/cozy-client/compare/v61.1.1...v61.2.0) (2026-11-10)
 
 

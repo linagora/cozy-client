@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.0.0](https://github.com/linagora/cozy-client/compare/v61.2.0...v62.0.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* **pouch:** Remove op-sqlite from the peers ([835f405](https://github.com/linagora/cozy-client/commit/835f405b297a78d37f5888986a41808df2bdb559))
+
+
+### BREAKING CHANGES
+
+* **pouch:** index.js re-exports SQLiteQuery, so a React Native app
+importing cozy-pouch-link resolves sqliteDb.native.js and must declare
+@op-engineering/op-sqlite in its own dependencies.
+
+Signed-off-by: Crash-- <quentin.valmori@gmail.com>
+
+
+
+
+
 # [61.2.0](https://github.com/linagora/cozy-client/compare/v61.1.1...v61.2.0) (2026-11-10)
 
 **Note:** Version bump only for package cozy-pouch-link

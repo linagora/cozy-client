@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.0.0](https://github.com/linagora/cozy-client/compare/v61.2.0...v62.0.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* **cozy-client:** Make the native peers optional ([70aa625](https://github.com/linagora/cozy-client/commit/70aa625d7c77b703320176f60489a49d15dd4c74))
+
+
+### BREAKING CHANGES
+
+* **cozy-client:** a React Native app must declare react-native,
+react-native-google-play-integrity, react-native-inappbrowser-reborn and
+react-native-ios11-devicecheck in its own dependencies.
+
+Signed-off-by: Crash-- <quentin.valmori@gmail.com>
+
+
+
+
+
 # [61.2.0](https://github.com/linagora/cozy-client/compare/v61.1.1...v61.2.0) (2026-11-10)
 
 **Note:** Version bump only for package cozy-client
