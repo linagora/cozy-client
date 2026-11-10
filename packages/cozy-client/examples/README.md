@@ -1,4 +1,4 @@
-This folder contains scripts to run cozy-client requests and a folder with `web` environment
+This folder contains scripts to run cozy-client requests.
 
 ## How to run a script
 
