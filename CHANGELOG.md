@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [62.0.1](https://github.com/cozy/cozy-client/compare/v62.0.0...v62.0.1) (2026-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Raise lodash, qs and pouchdb floors for security advisories ([64bd750](https://github.com/cozy/cozy-client/commit/64bd7503351586d4ec2d19c1940d181dbd097324))
+
+
+
+
+
 # [62.0.0](https://github.com/cozy/cozy-client/compare/v61.2.0...v62.0.0) (2026-11-10)
 
 
