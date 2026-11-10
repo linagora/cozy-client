@@ -18,8 +18,9 @@
   "sideEffects": false,
   "dependencies": {
     "detect-node": "^2.0.4",
+    "lodash": "^4.18.1",
     "mime": "^2.4.0",
-    "qs": "^6.7.0"
+    "qs": "^6.16.1"
   },
   "devDependencies": {
     "@babel/cli": "7.12.8",
