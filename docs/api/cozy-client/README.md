@@ -319,7 +319,7 @@ Deconstructed link
 
 Deconstruct the given redirect link in order to retrieve slug, pathname and hash
 
-**`throws`** {InvalidRedirectLinkError} Thrown when redirect link is invalid
+**`throws`** {InvalidRedirectLinkError} Thrown when the slug is invalid or the hash is not a path inside the app (it must start with a single '/', also once dot segments are resolved, and contain no backslash, tab or newline)
 
 *Parameters*
 
@@ -335,7 +335,7 @@ Deconstructed link
 
 *Defined in*
 
-[packages/cozy-client/src/helpers/urlHelper.js:106](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L106)
+[packages/cozy-client/src/helpers/urlHelper.js:123](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L123)
 
 ***
 
@@ -514,7 +514,7 @@ The root Cozy URL
 
 *Defined in*
 
-[packages/cozy-client/src/helpers/urlHelper.js:409](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L409)
+[packages/cozy-client/src/helpers/urlHelper.js:426](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L426)
 
 ***
 
@@ -919,7 +919,7 @@ The root Cozy URL
 
 *Defined in*
 
-[packages/cozy-client/src/helpers/urlHelper.js:280](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L280)
+[packages/cozy-client/src/helpers/urlHelper.js:297](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L297)
 
 ***
 
