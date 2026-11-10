@@ -25,7 +25,7 @@
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.18.1",
     "microee": "^0.0.6",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "node-polyglot": "2.4.2",
     "open": "7.4.2",
     "prop-types": "^15.6.2",
