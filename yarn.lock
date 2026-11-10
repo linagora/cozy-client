@@ -6706,7 +6706,7 @@ __metadata:
     lodash: "npm:^4.18.1"
     microee: "npm:^0.0.6"
     mockdate: "npm:2.0.5"
-    node-fetch: "npm:^2.6.1"
+    node-fetch: "npm:^2.6.7"
     node-polyglot: "npm:2.4.2"
     open: "npm:7.4.2"
     prop-types: "npm:^15.6.2"
@@ -13672,7 +13672,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.7, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
+"node-fetch@npm:2.6.7, node-fetch@npm:^2.6.7":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
   dependencies:
