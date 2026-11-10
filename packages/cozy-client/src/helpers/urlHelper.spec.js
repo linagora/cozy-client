@@ -197,6 +197,46 @@ describe('deconstructRedirectLink', () => {
         pathname: 'long/pathname/',
         hash: '/long/hash'
       }
+    ],
+    [
+      'drive/folder/123',
+      {
+        slug: 'drive',
+        pathname: 'folder/123',
+        hash: undefined
+      }
+    ],
+    [
+      'drive#',
+      {
+        slug: 'drive',
+        pathname: undefined,
+        hash: ''
+      }
+    ],
+    [
+      'drive#/folder/123?sort=name',
+      {
+        slug: 'drive',
+        pathname: undefined,
+        hash: '/folder/123?sort=name'
+      }
+    ],
+    [
+      'drive/#/sharings',
+      {
+        slug: 'drive',
+        pathname: '',
+        hash: '/sharings'
+      }
+    ],
+    [
+      'drive/#/folder/io.cozy.files.root-dir',
+      {
+        slug: 'drive',
+        pathname: '',
+        hash: '/folder/io.cozy.files.root-dir'
+      }
     ]
   ])('should deconstruct %p redirect link', (link, result) => {
     expect(deconstructRedirectLink(link)).toEqual(result)
@@ -204,8 +244,22 @@ describe('deconstructRedirectLink', () => {
 
   it.each([
     ['camillenimbus-photos.mycozy.cloud'],
-    ['http://camillenimbus-photos.mycozy.cloud']
-  ])('should throw when redirect link is invalid', link => {
+    ['http://camillenimbus-photos.mycozy.cloud'],
+    ['drive#//evil.example'],
+    ['drive#/\\evil.example'],
+    ['drive#/folder\\..\\evil'],
+    ['drive#\\evil.example'],
+    ['drive#/\t/evil.example'],
+    ['drive#/\n/evil.example'],
+    ['drive#/..//evil.example'],
+    ['drive#/%2e%2e//evil.example'],
+    ['drive#/%2E%2E//evil.example'],
+    ['drive#/./..//evil.example'],
+    ['drive#/a/../..//evil.example'],
+    ['drive#https://evil.example'],
+    ['drive#javascript:alert(1)'],
+    ['drive/#folder/123']
+  ])('should throw when redirect link %p is invalid', link => {
     expect(() => deconstructRedirectLink(link)).toThrow(
       InvalidRedirectLinkError
     )

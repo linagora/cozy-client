@@ -95,19 +95,36 @@ export const deconstructCozyWebLinkWithSlug = (
 
 const isValidSlug = slug => slug.match(/^[a-z0-9]+$/)
 
+// The hash may reach a router's navigate(): react-router 6 resolves '//host'
+// and '/\host' to another origin, and URL parsing drops tabs and newlines
+// ('/\t/host') and resolves dot segments ('/..//host', '/%2e%2e//host'), so
+// the resolved pathname must not start with '//' either.
+const isValidHash = hash => {
+  if (!hash) return true
+  if (
+    !hash.startsWith('/') ||
+    hash.startsWith('//') ||
+    /[\\\t\n\r]/.test(hash)
+  ) {
+    return false
+  }
+  const url = new URL(hash, 'https://x.invalid')
+  return url.host === 'x.invalid' && !url.pathname.startsWith('//')
+}
+
 /**
  * Deconstruct the given redirect link in order to retrieve slug, pathname and hash
  *
  * @param {string} redirectLink - redirect link to deconstruct (i.e. 'drive/public/#/folder/SOME_ID')
  * @returns {import("../types").RedirectLinkData} Deconstructed link
- * @throws {InvalidRedirectLinkError} Thrown when redirect link is invalid
+ * @throws {InvalidRedirectLinkError} Thrown when the slug is invalid or the hash is not a path inside the app (it must start with a single '/', also once dot segments are resolved, and contain no backslash, tab or newline)
  */
 
 export const deconstructRedirectLink = redirectLink => {
   const [splits, hash] = redirectLink.split('#')
   const [slug, pathname] = splits.split(/\/(.*)/)
 
-  if (!isValidSlug(slug)) {
+  if (!isValidSlug(slug) || !isValidHash(hash)) {
     throw new InvalidRedirectLinkError(redirectLink)
   }
 
