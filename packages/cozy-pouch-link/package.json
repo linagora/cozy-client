@@ -1,6 +1,6 @@
 {
   "name": "cozy-pouch-link",
-  "version": "62.0.2",
+  "version": "62.0.3",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/linagora/cozy-client.git"
   },
   "dependencies": {
-    "cozy-client": "^62.0.2",
+    "cozy-client": "^62.0.3",
     "pouchdb-browser": "^7.3.1",
     "pouchdb-find": "^7.3.1"
   },

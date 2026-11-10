@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [62.0.3](https://github.com/linagora/cozy-client/compare/v62.0.2...v62.0.3) (2026-11-10)
+
+
+### Bug Fixes
+
+* **pouch:** Bind document ids in SQLite id queries ([1b831f5](https://github.com/linagora/cozy-client/commit/1b831f5e3e2928db2bb1f3e9029e5516d662f675))
+
+
+
+
+
 ## [62.0.2](https://github.com/linagora/cozy-client/compare/v62.0.1...v62.0.2) (2026-11-10)
 
 **Note:** Version bump only for package cozy-pouch-link
