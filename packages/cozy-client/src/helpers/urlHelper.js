@@ -95,20 +95,28 @@ export const deconstructCozyWebLinkWithSlug = (
 
 const isValidSlug = slug => slug.match(/^[a-z0-9]+$/)
 
-// The hash may reach a router's navigate(): react-router 6 resolves '//host'
-// and '/\host' to another origin, and URL parsing drops tabs and newlines
-// ('/\t/host') and resolves dot segments ('/..//host', '/%2e%2e//host'), so
-// the resolved pathname must not start with '//' either.
-const isValidHash = hash => {
-  if (!hash) return true
+/**
+ * Check that a path taken from a URL (a query parameter, the hash of a
+ * redirect link) stays inside the app once given to a router's navigate()
+ *
+ * The path must start with a single '/', also once dot segments are resolved,
+ * and contain no backslash, tab or newline: react-router 6 resolves '//host'
+ * and '/\host' to another origin, and URL parsing drops tabs and newlines
+ * ('/\t/host') and resolves dot segments ('/..//host', '/%2e%2e//host').
+ *
+ * @param {any} path - Path to check
+ * @returns {boolean} true if the path is a non-empty string that stays inside the app, false otherwise (including an empty or missing path)
+ */
+export const isInAppPath = path => {
+  if (typeof path !== 'string' || !path) return false
   if (
-    !hash.startsWith('/') ||
-    hash.startsWith('//') ||
-    /[\\\t\n\r]/.test(hash)
+    !path.startsWith('/') ||
+    path.startsWith('//') ||
+    /[\\\t\n\r]/.test(path)
   ) {
     return false
   }
-  const url = new URL(hash, 'https://x.invalid')
+  const url = new URL(path, 'https://x.invalid')
   return url.host === 'x.invalid' && !url.pathname.startsWith('//')
 }
 
@@ -124,7 +132,7 @@ export const deconstructRedirectLink = redirectLink => {
   const [splits, hash] = redirectLink.split('#')
   const [slug, pathname] = splits.split(/\/(.*)/)
 
-  if (!isValidSlug(slug) || !isValidHash(hash)) {
+  if (!isValidSlug(slug) || (hash && !isInAppPath(hash))) {
     throw new InvalidRedirectLinkError(redirectLink)
   }
 

@@ -29,6 +29,7 @@ export {
 export {
   deconstructCozyWebLinkWithSlug,
   deconstructRedirectLink,
+  isInAppPath,
   dehydrate,
   generateWebLink,
   ensureFirstSlash,

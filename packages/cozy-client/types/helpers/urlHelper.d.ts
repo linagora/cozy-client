@@ -8,6 +8,7 @@ export function generateWebLink({ cozyUrl, searchParams: searchParamsOption, pat
     subDomainType: string;
 }): string;
 export function deconstructCozyWebLinkWithSlug(webLink: string, subDomainType?: import("../types").SubdomainType): import("../types").CozyLinkData;
+export function isInAppPath(path: any): boolean;
 export function deconstructRedirectLink(redirectLink: string): import("../types").RedirectLinkData;
 export class InvalidRedirectLinkError extends Error {
     constructor(redirectLink: any);

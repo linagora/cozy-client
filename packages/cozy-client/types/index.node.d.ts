@@ -18,4 +18,4 @@ import * as models from "./models";
 export { manifest, models };
 export { QueryDefinition, Mutations, MutationTypes, getDoctypeFromOperation, Q } from "./queries/dsl";
 export { Association, HasMany, HasOne, HasOneInPlace, HasManyInPlace, HasManyTriggers } from "./associations";
-export { deconstructCozyWebLinkWithSlug, deconstructRedirectLink, dehydrate, generateWebLink, ensureFirstSlash, rootCozyUrl, InvalidCozyUrlError, InvalidProtocolError, BlockedCozyError } from "./helpers";
+export { deconstructCozyWebLinkWithSlug, deconstructRedirectLink, isInAppPath, dehydrate, generateWebLink, ensureFirstSlash, rootCozyUrl, InvalidCozyUrlError, InvalidProtocolError, BlockedCozyError } from "./helpers";

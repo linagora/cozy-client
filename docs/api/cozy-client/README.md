@@ -335,7 +335,7 @@ Deconstructed link
 
 *Defined in*
 
-[packages/cozy-client/src/helpers/urlHelper.js:123](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L123)
+[packages/cozy-client/src/helpers/urlHelper.js:131](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L131)
 
 ***
 
@@ -514,7 +514,7 @@ The root Cozy URL
 
 *Defined in*
 
-[packages/cozy-client/src/helpers/urlHelper.js:426](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L426)
+[packages/cozy-client/src/helpers/urlHelper.js:434](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L434)
 
 ***
 
@@ -686,6 +686,36 @@ Returns whether a query has been loaded at least once
 *Defined in*
 
 [packages/cozy-client/src/utils.js:51](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L51)
+
+***
+
+### isInAppPath
+
+▸ **isInAppPath**(`path`): `boolean`
+
+Check that a path taken from a URL (a query parameter, the hash of a
+redirect link) stays inside the app once given to a router's navigate()
+
+The path must start with a single '/', also once dot segments are resolved,
+and contain no backslash, tab or newline: react-router 6 resolves '//host'
+and '/\host' to another origin, and URL parsing drops tabs and newlines
+('/\t/host') and resolves dot segments ('/..//host', '/%2e%2e//host').
+
+*Parameters*
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `path` | `any` | Path to check |
+
+*Returns*
+
+`boolean`
+
+true if the path is a non-empty string that stays inside the app, false otherwise (including an empty or missing path)
+
+*Defined in*
+
+[packages/cozy-client/src/helpers/urlHelper.js:110](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L110)
 
 ***
 
@@ -919,7 +949,7 @@ The root Cozy URL
 
 *Defined in*
 
-[packages/cozy-client/src/helpers/urlHelper.js:297](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L297)
+[packages/cozy-client/src/helpers/urlHelper.js:305](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L305)
 
 ***
 
