@@ -21,6 +21,7 @@ export { getReferencedBy } from './associations/helpers'
 export {
   deconstructCozyWebLinkWithSlug,
   deconstructRedirectLink,
+  isInAppPath,
   dehydrate,
   generateWebLink,
   ensureFirstSlash,

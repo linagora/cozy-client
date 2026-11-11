@@ -1,6 +1,7 @@
 export {
   deconstructCozyWebLinkWithSlug,
   deconstructRedirectLink,
+  isInAppPath,
   generateWebLink,
   ensureFirstSlash,
   isHttpUrl,

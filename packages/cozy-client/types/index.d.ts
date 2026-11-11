@@ -23,7 +23,7 @@ export { manifest, models };
 export { QueryDefinition, Q, Mutations, MutationTypes, getDoctypeFromOperation } from "./queries/dsl";
 export { Association, HasMany, HasOne, HasOneInPlace, HasManyInPlace, HasManyTriggers } from "./associations";
 export { isReferencedBy, isReferencedById, getReferencedBy, getReferencedById } from "./associations/helpers";
-export { deconstructCozyWebLinkWithSlug, deconstructRedirectLink, dehydrate, generateWebLink, ensureFirstSlash, fetchRegistrationDetails, rootCozyUrl, InvalidRedirectLinkError, InvalidCozyUrlError, InvalidProtocolError, BlockedCozyError } from "./helpers";
+export { deconstructCozyWebLinkWithSlug, deconstructRedirectLink, isInAppPath, dehydrate, generateWebLink, ensureFirstSlash, fetchRegistrationDetails, rootCozyUrl, InvalidRedirectLinkError, InvalidCozyUrlError, InvalidProtocolError, BlockedCozyError } from "./helpers";
 export { cancelable, isQueryLoading, hasQueryBeenLoaded, isQueriesLoading, hasQueriesBeenLoaded } from "./utils";
 export { getQueryFromState, dispatchCreate, dispatchUpdate, dispatchDelete } from "./store";
 export { queryConnect, queryConnectFlat, withClient } from "./hoc";

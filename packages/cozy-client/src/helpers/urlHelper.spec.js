@@ -6,6 +6,7 @@ import {
   generateWebLink,
   fetchRegistrationDetails,
   isHttpUrl,
+  isInAppPath,
   rootCozyUrl,
   InvalidRedirectLinkError,
   InvalidCozyUrlError,
@@ -153,6 +154,39 @@ describe('isHttpUrl', () => {
     'ftp://example.com'
   ])('rejects %p', value => {
     expect(isHttpUrl(value)).toBe(false)
+  })
+})
+
+describe('isInAppPath', () => {
+  it.each([
+    '/',
+    '/sharings',
+    '/folder/io.cozy.files.root-dir',
+    '/folder/x?y=1',
+    '/a/../b'
+  ])('accepts %p', value => {
+    expect(isInAppPath(value)).toBe(true)
+  })
+
+  it.each([
+    undefined,
+    null,
+    42,
+    '',
+    'folder/123',
+    '//evil.example',
+    '/\\evil.example',
+    '\\evil.example',
+    '/\t/evil.example',
+    '/\n/evil.example',
+    '/\r/evil.example',
+    '/..//evil.example',
+    '/%2e%2e//evil.example',
+    '/a/../..//evil.example',
+    'https://evil.example',
+    'javascript:alert(1)'
+  ])('rejects %p', value => {
+    expect(isInAppPath(value)).toBe(false)
   })
 })
 
