@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.1.0](https://github.com/linagora/cozy-client/compare/v62.0.5...v62.1.0) (2026-11-11)
+
+**Note:** Version bump only for package cozy-pouch-link
+
+
+
+
+
 ## [62.0.5](https://github.com/linagora/cozy-client/compare/v62.0.4...v62.0.5) (2026-11-10)
 
 **Note:** Version bump only for package cozy-pouch-link

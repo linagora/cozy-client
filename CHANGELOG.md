@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.1.0](https://github.com/cozy/cozy-client/compare/v62.0.5...v62.1.0) (2026-11-11)
+
+
+### Features
+
+* **cozy-client:** Export isInAppPath to check a path taken from a URL ([6a50402](https://github.com/cozy/cozy-client/commit/6a50402d6d03bd66245f06c631a456ebc2a57e88))
+
+
+
+
+
 ## [62.0.5](https://github.com/cozy/cozy-client/compare/v62.0.4...v62.0.5) (2026-11-10)
 
 **Note:** Version bump only for package cozy-client
