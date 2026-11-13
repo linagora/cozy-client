@@ -106,16 +106,43 @@ const CONTENT_TYPE_OCTET_STREAM = 'application/octet-stream'
 const normalizeFileJsonApi = normalizeDoctypeJsonApi('io.cozy.files')
 
 /**
+ * Give the refs of the old_versions relationship the `_id` and `_type` that
+ * cozy-client associations read, so that the versions of a file resolve from
+ * the store
+ *
+ * @param  {FileDocument} file - Normalized file
+ * @returns {FileDocument} file with normalized old_versions refs
+ * @private
+ */
+const normalizeOldVersionsRefs = file => {
+  const refs = file.relationships?.old_versions?.data
+  if (!Array.isArray(refs)) {
+    return file
+  }
+  return {
+    ...file,
+    relationships: {
+      ...file.relationships,
+      old_versions: {
+        ...file.relationships.old_versions,
+        data: refs.map(ref => ({ ...ref, _id: ref.id, _type: ref.type }))
+      }
+    }
+  }
+}
+
+/**
  * Normalize a file, adding document's doctype if needed
  *
  * @param  {FileDocument} file - File to normalize
  * @returns {FileDocument} normalized file
  * @private
  */
-const normalizeFile = file => ({
-  ...normalizeFileJsonApi(file),
-  _rev: file?.meta?.rev // Beware of JSON-API
-})
+const normalizeFile = file =>
+  normalizeOldVersionsRefs({
+    ...normalizeFileJsonApi(file),
+    _rev: file?.meta?.rev // Beware of JSON-API
+  })
 
 /**
  * Normalize a document included in a file response according to its own
@@ -133,6 +160,34 @@ const normalizeIncludedDoc = doc => {
   return {
     ...normalizeDoctypeJsonApi(doc.type)(doc),
     _rev: doc.meta?.rev
+  }
+}
+
+/**
+ * Normalize a file response in which the stack lists the versions of the
+ * file. The stack omits old_versions once a file has no version left: an
+ * empty relationship replaces the refs kept in the store. Responses without
+ * versions, like the ones of a rename, must not go through it.
+ *
+ * @param  {object} resp - File response in JSON:API format
+ * @returns {object} normalized response, with `data` and, when the stack
+ * sends it, `included`
+ * @private
+ */
+const normalizeFileWithVersions = resp => {
+  const file = normalizeFile(resp.data)
+  const data =
+    file.type === 'file' && !file.relationships?.old_versions
+      ? {
+          ...file,
+          relationships: { ...file.relationships, old_versions: { data: [] } }
+        }
+      : file
+  return {
+    data,
+    ...(resp.included && {
+      included: resp.included.map(normalizeIncludedDoc)
+    })
   }
 }
 
@@ -1052,8 +1107,7 @@ class FileCollection extends DocumentCollection {
     const url = querystring.buildURL(path, params)
     const resp = await this.stackClient.fetchJSON('GET', url)
     return {
-      data: normalizeFile(resp.data),
-      included: resp.included && resp.included.map(normalizeIncludedDoc),
+      ...normalizeFileWithVersions(resp),
       links: resp.links
     }
   }
@@ -1063,10 +1117,7 @@ class FileCollection extends DocumentCollection {
       'GET',
       this.prefix + uri`/metadata?Path=${path}`
     )
-    return {
-      data: normalizeFile(resp.data),
-      included: resp.included && resp.included.map(normalizeIncludedDoc)
-    }
+    return normalizeFileWithVersions(resp)
   }
 
   /**
@@ -1379,9 +1430,7 @@ class FileCollection extends DocumentCollection {
       headers,
       onUploadProgress: options.onUploadProgress
     })
-    return {
-      data: normalizeFile(resp.data)
-    }
+    return normalizeFileWithVersions(resp)
   }
 
   /**
