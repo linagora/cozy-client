@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.2.0](https://github.com/linagora/cozy-client/compare/v62.1.0...v62.2.0) (2026-11-13)
+
+
+### Features
+
+* **cozy-stack-client:** Add link activity report option ([4423142](https://github.com/linagora/cozy-client/commit/44231423c1a02b1ecb6de6d72e0d9a120d4a521a))
+
+
+
+
+
 ## [62.0.1](https://github.com/linagora/cozy-client/compare/v62.0.0...v62.0.1) (2026-11-10)
 
 
