@@ -63,6 +63,13 @@ const STAT_FILE_WITH_VERSIONS_RESPONSE = {
   ]
 }
 
+const STAT_FILE_WITHOUT_VERSIONS_RESPONSE = {
+  data: {
+    ...STAT_FILE_WITH_VERSIONS_RESPONSE.data,
+    relationships: {}
+  }
+}
+
 const STAT_DIRECTORY_WITH_CHILD_RESPONSE = {
   ...STAT_BY_ID_RESPONSE,
   included: [
@@ -192,6 +199,38 @@ describe('FileCollection', () => {
         'io.cozy.files.versions'
       ])
     })
+
+    it('should give the old_versions relationship refs a store identity', async () => {
+      client.fetchJSON.mockResolvedValueOnce(STAT_FILE_WITH_VERSIONS_RESPONSE)
+      const resp = await collection.statById('file-id')
+      expect(resp.data.relationships.old_versions.data).toEqual([
+        {
+          type: 'io.cozy.files.versions',
+          id: 'file-id/v1',
+          _type: 'io.cozy.files.versions',
+          _id: 'file-id/v1'
+        },
+        {
+          type: 'io.cozy.files.versions',
+          id: 'file-id/v2',
+          _type: 'io.cozy.files.versions',
+          _id: 'file-id/v2'
+        }
+      ])
+    })
+
+    it('should leave the relationships of a directory unchanged', async () => {
+      const resp = await collection.statById(42)
+      expect(resp.data.relationships).toEqual({})
+    })
+
+    it('should give a file without versions an empty old_versions relationship', async () => {
+      client.fetchJSON.mockResolvedValueOnce(
+        STAT_FILE_WITHOUT_VERSIONS_RESPONSE
+      )
+      const resp = await collection.statById('file-id')
+      expect(resp.data.relationships.old_versions).toEqual({ data: [] })
+    })
   })
 
   describe('statByPath', () => {
@@ -217,6 +256,28 @@ describe('FileCollection', () => {
           _rev: '1-def'
         })
       ])
+    })
+
+    it('should give the old_versions relationship refs a store identity', async () => {
+      client.fetchJSON.mockResolvedValueOnce(STAT_FILE_WITH_VERSIONS_RESPONSE)
+      const resp = await collection.statByPath('/notes.txt')
+      expect(
+        resp.data.relationships.old_versions.data.map(({ _id, _type }) => ({
+          _id,
+          _type
+        }))
+      ).toEqual([
+        { _id: 'file-id/v1', _type: 'io.cozy.files.versions' },
+        { _id: 'file-id/v2', _type: 'io.cozy.files.versions' }
+      ])
+    })
+
+    it('should give a file without versions an empty old_versions relationship', async () => {
+      client.fetchJSON.mockResolvedValueOnce(
+        STAT_FILE_WITHOUT_VERSIONS_RESPONSE
+      )
+      const resp = await collection.statByPath('/notes.txt')
+      expect(resp.data.relationships.old_versions).toEqual({ data: [] })
     })
   })
 
@@ -1098,6 +1159,16 @@ describe('FileCollection', () => {
       client.fetchJSON.mockClear()
     })
 
+    it('should not empty the versions of a renamed file', async () => {
+      client.fetchJSON.mockResolvedValueOnce(
+        STAT_FILE_WITHOUT_VERSIONS_RESPONSE
+      )
+      const resp = await collection.updateAttributes('file-id', {
+        name: 'renamed.txt'
+      })
+      expect(resp.data.relationships).toEqual({})
+    })
+
     it('should not fetch json when file name is not valid', async () => {
       try {
         await collection.updateAttributes('42', {
@@ -1247,6 +1318,25 @@ describe('FileCollection', () => {
 
     afterEach(() => {
       client.fetchJSON.mockClear()
+    })
+
+    it('should return the versions of the updated file ready for the store', async () => {
+      client.fetchJSON.mockResolvedValueOnce(STAT_FILE_WITH_VERSIONS_RESPONSE)
+      const data = new File([''], 'notes.txt')
+      const resp = await collection.updateFile(data, { fileId: 'file-id' })
+      expect(
+        resp.data.relationships.old_versions.data.map(({ _id, _type }) => ({
+          _id,
+          _type
+        }))
+      ).toEqual([
+        { _id: 'file-id/v1', _type: 'io.cozy.files.versions' },
+        { _id: 'file-id/v2', _type: 'io.cozy.files.versions' }
+      ])
+      expect(resp.included.map(({ _id, _type }) => ({ _id, _type }))).toEqual([
+        { _id: 'file-id/v1', _type: 'io.cozy.files.versions' },
+        { _id: 'file-id/v2', _type: 'io.cozy.files.versions' }
+      ])
     })
 
     it('should not fetch json when file name is not valid', async () => {
