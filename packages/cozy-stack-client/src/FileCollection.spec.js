@@ -23,6 +23,60 @@ const STAT_BY_ID_RESPONSE = {
   included: []
 }
 
+const makeVersion = (id, rev) => ({
+  type: 'io.cozy.files.versions',
+  id,
+  attributes: {
+    size: '12',
+    md5sum: 'NjhkYzFiNWY3YzE4Y2Q2Ng==',
+    updated_at: '2016-11-25T16:07:45.398867198+01:00',
+    tags: []
+  },
+  meta: { rev },
+  links: {}
+})
+
+const STAT_FILE_WITH_VERSIONS_RESPONSE = {
+  data: {
+    type: 'io.cozy.files',
+    id: 'file-id',
+    attributes: {
+      type: 'file',
+      name: 'notes.txt',
+      dir_id: 'io.cozy.files.root-dir',
+      size: '12'
+    },
+    meta: { rev: '3-ghi' },
+    links: {},
+    relationships: {
+      old_versions: {
+        data: [
+          { type: 'io.cozy.files.versions', id: 'file-id/v1' },
+          { type: 'io.cozy.files.versions', id: 'file-id/v2' }
+        ]
+      }
+    }
+  },
+  included: [
+    makeVersion('file-id/v1', '1-abc'),
+    makeVersion('file-id/v2', '1-def')
+  ]
+}
+
+const STAT_DIRECTORY_WITH_CHILD_RESPONSE = {
+  ...STAT_BY_ID_RESPONSE,
+  included: [
+    {
+      type: 'io.cozy.files',
+      id: 'child-id',
+      attributes: { type: 'file', name: 'bill.pdf', dir_id: '42' },
+      meta: { rev: '1-xyz' },
+      links: {},
+      relationships: {}
+    }
+  ]
+}
+
 const CREATE_DIRECTORY_RESPONSE = {
   data: {
     type: 'io.cozy.files',
@@ -87,6 +141,82 @@ describe('FileCollection', () => {
     it('should return normalized documents', async () => {
       const resp = await collection.statById(42)
       expect(resp.data).toHaveDocumentIdentity()
+    })
+
+    it('should store the included versions of a file as io.cozy.files.versions', async () => {
+      client.fetchJSON.mockResolvedValueOnce(STAT_FILE_WITH_VERSIONS_RESPONSE)
+      const resp = await collection.statById('file-id')
+      expect(resp.included).toEqual([
+        expect.objectContaining({
+          id: 'file-id/v1',
+          _id: 'file-id/v1',
+          _type: 'io.cozy.files.versions',
+          _rev: '1-abc',
+          size: '12',
+          md5sum: 'NjhkYzFiNWY3YzE4Y2Q2Ng=='
+        }),
+        expect.objectContaining({
+          _id: 'file-id/v2',
+          _type: 'io.cozy.files.versions',
+          _rev: '1-def'
+        })
+      ])
+    })
+
+    it('should keep the included children of a directory as io.cozy.files', async () => {
+      client.fetchJSON.mockResolvedValueOnce(STAT_DIRECTORY_WITH_CHILD_RESPONSE)
+      const resp = await collection.statById(42)
+      expect(resp.included).toEqual([
+        expect.objectContaining({
+          _id: 'child-id',
+          _type: 'io.cozy.files',
+          _rev: '1-xyz',
+          type: 'file',
+          name: 'bill.pdf'
+        })
+      ])
+    })
+
+    it('should store the included versions of a shared drive file as io.cozy.files.versions', async () => {
+      const driveCollection = new FileCollection('io.cozy.files', client, {
+        driveId: 'drive-id'
+      })
+      client.fetchJSON.mockResolvedValueOnce(STAT_FILE_WITH_VERSIONS_RESPONSE)
+      const resp = await driveCollection.statById('file-id')
+      expect(client.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/sharings/drives/drive-id/file-id'
+      )
+      expect(resp.included.map(doc => doc._type)).toEqual([
+        'io.cozy.files.versions',
+        'io.cozy.files.versions'
+      ])
+    })
+  })
+
+  describe('statByPath', () => {
+    afterEach(() => {
+      client.fetchJSON.mockReset()
+    })
+
+    it('should store the included versions of a file as io.cozy.files.versions', async () => {
+      client.fetchJSON.mockResolvedValueOnce(STAT_FILE_WITH_VERSIONS_RESPONSE)
+      const resp = await collection.statByPath('/notes.txt')
+      expect(resp.data).toEqual(
+        expect.objectContaining({ _id: 'file-id', _type: 'io.cozy.files' })
+      )
+      expect(resp.included).toEqual([
+        expect.objectContaining({
+          _id: 'file-id/v1',
+          _type: 'io.cozy.files.versions',
+          _rev: '1-abc'
+        }),
+        expect.objectContaining({
+          _id: 'file-id/v2',
+          _type: 'io.cozy.files.versions',
+          _rev: '1-def'
+        })
+      ])
     })
   })
 

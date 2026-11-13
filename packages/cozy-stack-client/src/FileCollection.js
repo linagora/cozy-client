@@ -118,6 +118,25 @@ const normalizeFile = file => ({
 })
 
 /**
+ * Normalize a document included in a file response according to its own
+ * JSON:API type, since the stack includes the versions of a file along with
+ * the children of a directory
+ *
+ * @param  {object} doc - Included document in JSON:API format
+ * @returns {object} normalized document
+ * @private
+ */
+const normalizeIncludedDoc = doc => {
+  if (!doc.type || doc.type === 'io.cozy.files') {
+    return normalizeFile(doc)
+  }
+  return {
+    ...normalizeDoctypeJsonApi(doc.type)(doc),
+    _rev: doc.meta?.rev
+  }
+}
+
+/**
  * Normalize references, expliciting _type and _id — see https://docs.cozy.io/en/cozy-stack/references-docs-in-vfs/
  *
  * @param  {Array<object>} references - The list of files referenced by a document to normalize
@@ -1034,7 +1053,7 @@ class FileCollection extends DocumentCollection {
     const resp = await this.stackClient.fetchJSON('GET', url)
     return {
       data: normalizeFile(resp.data),
-      included: resp.included && resp.included.map(f => normalizeFile(f)),
+      included: resp.included && resp.included.map(normalizeIncludedDoc),
       links: resp.links
     }
   }
@@ -1046,7 +1065,7 @@ class FileCollection extends DocumentCollection {
     )
     return {
       data: normalizeFile(resp.data),
-      included: resp.included && resp.included.map(f => normalizeFile(f))
+      included: resp.included && resp.included.map(normalizeIncludedDoc)
     }
   }
 
