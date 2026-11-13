@@ -192,6 +192,30 @@ describe('FileCollection', () => {
         'io.cozy.files.versions'
       ])
     })
+
+    it('should give the old_versions relationship refs a store identity', async () => {
+      client.fetchJSON.mockResolvedValueOnce(STAT_FILE_WITH_VERSIONS_RESPONSE)
+      const resp = await collection.statById('file-id')
+      expect(resp.data.relationships.old_versions.data).toEqual([
+        {
+          type: 'io.cozy.files.versions',
+          id: 'file-id/v1',
+          _type: 'io.cozy.files.versions',
+          _id: 'file-id/v1'
+        },
+        {
+          type: 'io.cozy.files.versions',
+          id: 'file-id/v2',
+          _type: 'io.cozy.files.versions',
+          _id: 'file-id/v2'
+        }
+      ])
+    })
+
+    it('should leave the relationships of a document without versions unchanged', async () => {
+      const resp = await collection.statById(42)
+      expect(resp.data.relationships).toEqual({})
+    })
   })
 
   describe('statByPath', () => {
@@ -216,6 +240,20 @@ describe('FileCollection', () => {
           _type: 'io.cozy.files.versions',
           _rev: '1-def'
         })
+      ])
+    })
+
+    it('should give the old_versions relationship refs a store identity', async () => {
+      client.fetchJSON.mockResolvedValueOnce(STAT_FILE_WITH_VERSIONS_RESPONSE)
+      const resp = await collection.statByPath('/notes.txt')
+      expect(
+        resp.data.relationships.old_versions.data.map(({ _id, _type }) => ({
+          _id,
+          _type
+        }))
+      ).toEqual([
+        { _id: 'file-id/v1', _type: 'io.cozy.files.versions' },
+        { _id: 'file-id/v2', _type: 'io.cozy.files.versions' }
       ])
     })
   })
