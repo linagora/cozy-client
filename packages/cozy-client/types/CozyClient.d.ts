@@ -863,6 +863,7 @@ declare class CozyClient {
      * @returns {Promise<import("./types").QueryState|null>} - Query state or null if the query does not exist
      */
     resetQuery(queryId: string): Promise<import("./types").QueryState | null>;
+    #private;
 }
 declare namespace CozyClient {
     export const hooks: {};

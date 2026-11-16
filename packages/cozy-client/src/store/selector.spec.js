@@ -38,6 +38,13 @@ const defaultQueryResult = {
 }
 
 describe('equalityCheckForQuery', () => {
+  it('ignores background activity when the documents and fetch status are unchanged', () => {
+    const loaded = { ...defaultQueryResult, storeData: [], isFetching: false }
+    const refreshing = { ...loaded, isFetching: true }
+    expect(equalityCheckForQuery(loaded, refreshing)).toBe(true)
+    expect(equalityCheckForQuery(refreshing, loaded)).toBe(true)
+  })
+
   const queryResultA1 = {
     id: 1,
     storeData: mapIdsToDocuments(state.documents, 'io.cozy.files', [

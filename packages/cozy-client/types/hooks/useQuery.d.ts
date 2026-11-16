@@ -1,5 +1,8 @@
+export function useQueryWithEqualityCheck(queryDefinition: QueryDefinition | (() => QueryDefinition), options: import("../types").QueryOptions, equalityCheck: typeof equalityCheckForQuery): import("../types").UseQueryReturnValue;
 export function useQueries(querySpecs: any): {};
 export default useQuery;
+import { QueryDefinition } from "../queries/dsl";
+import { equalityCheckForQuery } from "../store/selector";
 /**
  * Fetches a queryDefinition and returns the queryState
  *
@@ -8,4 +11,3 @@ export default useQuery;
  * @returns {import("../types").UseQueryReturnValue}
  */
 declare function useQuery(queryDefinition: QueryDefinition | (() => QueryDefinition), options: import("../types").QueryOptions): import("../types").UseQueryReturnValue;
-import { QueryDefinition } from "../queries/dsl";

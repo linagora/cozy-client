@@ -28,6 +28,25 @@ const generateFetchMoreQueryDefinition = queryResult => {
  * @returns {import("../types").UseQueryReturnValue}
  */
 const useQuery = (queryDefinition, options) => {
+  return useQueryWithEqualityCheck(
+    queryDefinition,
+    options,
+    equalityCheckForQuery
+  )
+}
+
+/**
+ * @private
+ * @param {QueryDefinition|(() => QueryDefinition)} queryDefinition - Query to execute
+ * @param {import("../types").QueryOptions} options - Query options
+ * @param {typeof equalityCheckForQuery} equalityCheck - Subscription comparison
+ * @returns {import("../types").UseQueryReturnValue} Query state and fetch methods
+ */
+export const useQueryWithEqualityCheck = (
+  queryDefinition,
+  options,
+  equalityCheck
+) => {
   if (!useSelector) {
     throw new Error(
       'You must use react-redux > 7.1.0 to use useQuery (uses useSelector) under the hood'
@@ -63,7 +82,7 @@ const useQuery = (queryDefinition, options) => {
       hydrated: get(options, 'hydrated', true),
       singleDocData: get(options, 'singleDocData', false)
     })
-  }, equalityCheckForQuery)
+  }, equalityCheck)
 
   useEffect(
     () => {
