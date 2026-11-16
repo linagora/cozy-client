@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [62.2.1](https://github.com/linagora/cozy-client/compare/v62.2.0...v62.2.1) (2026-11-16)
+
+
+### Bug Fixes
+
+* **cozy-stack-client:** Resolve old_versions refs ([81a174d](https://github.com/linagora/cozy-client/commit/81a174d499da72c8a4c5fb1ac4baba8512817141))
+
+
+
+
+
 # [62.2.0](https://github.com/linagora/cozy-client/compare/v62.1.0...v62.2.0) (2026-11-13)
 
 **Note:** Version bump only for package cozy-client
