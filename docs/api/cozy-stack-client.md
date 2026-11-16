@@ -27,6 +27,11 @@ specific collections.</p>
 special routes are to be used, and there is a notion of referenced files, aka
 files associated to a specific document</p>
 </dd>
+<dt><a href="#FileRecentsCollection">FileRecentsCollection</a></dt>
+<dd><p>Lists the personal recents of the user through <code>GET /files/recents</code>.</p>
+<p>Each recent points to its <code>io.cozy.files</code> document through a <code>file</code>
+relationship, and the documents come in <code>included</code>.</p>
+</dd>
 <dt><a href="#NotesCollection">NotesCollection</a></dt>
 <dd><p>Implements <code>DocumentCollection</code> API to interact with the /notes endpoint of the stack</p>
 </dd>
@@ -89,6 +94,10 @@ See cozy-stack&#39;s timeout value for couchdb request: <a href="https://github.
 </dd>
 <dt><a href="#isDirectory">isDirectory</a> ⇒ <code>boolean</code></dt>
 <dd><p>Returns true when parameters has type directory</p>
+</dd>
+<dt><a href="#FILE_RECENTS_DOCTYPE">FILE_RECENTS_DOCTYPE</a> : <code>string</code></dt>
+<dd><p>Doctype of the personal recents of the user: the files and folders they
+edited or opened, sorted by their last activity.</p>
 </dd>
 <dt><a href="#getIllegalCharacters">getIllegalCharacters</a> ⇒ <code>string</code></dt>
 <dd><p>Get the list of illegal characters in the file name</p>
@@ -1435,6 +1444,50 @@ Manage 3 cases :
 | dest.dir_id | <code>string</code> | destination directory id (required) |
 | isCopy | <code>boolean</code> | controls whether the operation is a move (default) or copy. When `copy: false` (default): The source file/directory is moved to the destination and deleted from the source. When `copy: true`: The source file/directory is copied to the destination but remains in the source location. |
 
+<a name="FileRecentsCollection"></a>
+
+## FileRecentsCollection
+Lists the personal recents of the user through `GET /files/recents`.
+
+Each recent points to its `io.cozy.files` document through a `file`
+relationship, and the documents come in `included`.
+
+**Kind**: global class  
+
+* [FileRecentsCollection](#FileRecentsCollection)
+    * [new FileRecentsCollection(stackClient, [options])](#new_FileRecentsCollection_new)
+    * [.all([options])](#FileRecentsCollection+all) ⇒ <code>Promise.&lt;{data: Array.&lt;object&gt;, included: Array.&lt;object&gt;, meta: object, next: boolean, bookmark: (string\|null)}&gt;</code>
+
+<a name="new_FileRecentsCollection_new"></a>
+
+### new FileRecentsCollection(stackClient, [options])
+
+| Param | Type | Description |
+| --- | --- | --- |
+| stackClient | <code>object</code> | The client used to make requests to the server |
+| [options] | <code>object</code> | The collection options |
+
+<a name="FileRecentsCollection+all"></a>
+
+### fileRecentsCollection.all([options]) ⇒ <code>Promise.&lt;{data: Array.&lt;object&gt;, included: Array.&lt;object&gt;, meta: object, next: boolean, bookmark: (string\|null)}&gt;</code>
+Fetch a page of recents, the most recent activity first.
+
+A page can hold fewer recents than the limit, or none, and still have a
+next page: only `next` tells whether there is one.
+
+**Kind**: instance method of [<code>FileRecentsCollection</code>](#FileRecentsCollection)  
+**Returns**: <code>Promise.&lt;{data: Array.&lt;object&gt;, included: Array.&lt;object&gt;, meta: object, next: boolean, bookmark: (string\|null)}&gt;</code> - The page  
+**Throws**:
+
+- <code>Error</code> A 404 when the recents are disabled on the stack
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | The options |
+| [options.limit] | <code>number</code> | Size of the page (50 by default on the stack, 100 at most) |
+| [options.bookmark] | <code>string</code> | Cursor of the page, returned by the previous one |
+
 <a name="NotesCollection"></a>
 
 ## NotesCollection
@@ -2598,6 +2651,13 @@ Returns true when parameters has type directory
 | args | <code>object</code> | File |
 | args.type | <code>string</code> | The type of the file |
 
+<a name="FILE_RECENTS_DOCTYPE"></a>
+
+## FILE\_RECENTS\_DOCTYPE : <code>string</code>
+Doctype of the personal recents of the user: the files and folders they
+edited or opened, sorted by their last activity.
+
+**Kind**: global constant  
 <a name="getIllegalCharacters"></a>
 
 ## getIllegalCharacters ⇒ <code>string</code>

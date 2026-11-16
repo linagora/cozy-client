@@ -4,6 +4,9 @@ import AppToken from './AppToken'
 import AccessToken from './AccessToken'
 import DocumentCollection from './DocumentCollection'
 import FileCollection from './FileCollection'
+import FileRecentsCollection, {
+  FILE_RECENTS_DOCTYPE
+} from './FileRecentsCollection'
 import JobCollection, { JOBS_DOCTYPE } from './JobCollection'
 import KonnectorCollection, { KONNECTORS_DOCTYPE } from './KonnectorCollection'
 import SharingCollection from './SharingCollection'
@@ -107,6 +110,8 @@ class CozyStackClient {
         return new KonnectorCollection(this, options)
       case 'io.cozy.files':
         return new FileCollection(doctype, this, options)
+      case FILE_RECENTS_DOCTYPE:
+        return new FileRecentsCollection(this, options)
       case 'io.cozy.sharings':
         return new SharingCollection(doctype, this, options)
       case 'io.cozy.permissions':

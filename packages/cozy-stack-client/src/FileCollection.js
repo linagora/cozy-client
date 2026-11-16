@@ -138,7 +138,7 @@ const normalizeOldVersionsRefs = file => {
  * @returns {FileDocument} normalized file
  * @private
  */
-const normalizeFile = file =>
+export const normalizeFile = file =>
   normalizeOldVersionsRefs({
     ...normalizeFileJsonApi(file),
     _rev: file?.meta?.rev // Beware of JSON-API
