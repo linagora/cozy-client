@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.3.0](https://github.com/cozy/cozy-client/compare/v62.2.1...v62.3.0) (2026-11-16)
+
+
+### Features
+
+* Add an io.cozy.files.recents collection ([3d2c191](https://github.com/cozy/cozy-client/commit/3d2c19162543b061bb4516f6a2ef00848cf1e9f3))
+
+
+
+
+
 ## [62.2.1](https://github.com/cozy/cozy-client/compare/v62.2.0...v62.2.1) (2026-11-16)
 
 
