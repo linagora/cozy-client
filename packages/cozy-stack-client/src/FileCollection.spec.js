@@ -329,6 +329,65 @@ describe('FileCollection', () => {
     })
   })
 
+  describe('search', () => {
+    const client = new CozyStackClient()
+    const collection = new FileCollection('io.cozy.files', client)
+    const spy = jest.spyOn(client, 'fetchJSON')
+
+    beforeEach(() => {
+      spy.mockClear()
+    })
+
+    const hit = {
+      type: 'io.cozy.files',
+      id: 'f1',
+      attributes: {
+        name: 'Report.pdf',
+        type: 'file',
+        dir_id: 'd1',
+        path: '/Team',
+        drive_id: 's1'
+      }
+    }
+
+    it('should post the query and normalize the hits', async () => {
+      spy.mockResolvedValue({ data: [hit], links: {} })
+      const result = await collection.search('report', { limit: 10 })
+      expect(spy).toHaveBeenCalledWith('POST', '/files/search', {
+        q: 'report',
+        limit: 10,
+        cursor: undefined
+      })
+      expect(result.data[0]).toMatchObject({
+        _id: 'f1',
+        _type: 'io.cozy.files',
+        name: 'Report.pdf',
+        path: '/Team',
+        drive_id: 's1'
+      })
+      expect(result.next).toBe(false)
+      expect(result.cursor).toBe(null)
+    })
+
+    it('should return the cursor of the next page', async () => {
+      spy.mockResolvedValue({
+        data: [hit],
+        links: { next: '/files/search?page[cursor]=abc%3D%3D' }
+      })
+      const result = await collection.search('report')
+      expect(result.next).toBe(true)
+      expect(result.cursor).toBe('abc==')
+
+      spy.mockResolvedValue({ data: [], links: {} })
+      await collection.search('report', { cursor: result.cursor })
+      expect(spy).toHaveBeenLastCalledWith('POST', '/files/search', {
+        q: 'report',
+        limit: undefined,
+        cursor: 'abc=='
+      })
+    })
+  })
+
   describe('find', () => {
     client.uri = 'http://cozy.tools'
     const FIND_RESPONSE = {

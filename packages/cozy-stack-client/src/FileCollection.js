@@ -382,6 +382,37 @@ class FileCollection extends DocumentCollection {
   }
 
   /**
+   * Searches the files and folders of the user, and those of the shared
+   * drives they are a member of, by their name.
+   *
+   * The hits have a `path` (the folder of the file, empty when it cannot be
+   * known) and a `drive_id` for the files of a shared drive.
+   *
+   * @param {string} q - The searched text
+   * @param {object} [options] - Search options
+   * @param {number} [options.limit] - The maximal number of results
+   * @param {string} [options.cursor] - The cursor of the page to fetch
+   * @returns {Promise<{data: Array<object>, next: boolean, cursor: string|null}>} The hits, and the cursor of the next page
+   * @throws {FetchError} 503 when the search is not configured on the stack
+   */
+  async search(q, { limit, cursor } = {}) {
+    const resp = await this.stackClient.fetchJSON('POST', '/files/search', {
+      q,
+      limit,
+      cursor
+    })
+    const nextLink = get(resp, 'links.next', '')
+    const nextCursor = nextLink
+      ? new URL(nextLink, 'http://stack').searchParams.get('page[cursor]')
+      : null
+    return {
+      data: resp.data.map(f => normalizeFile(f)),
+      next: !!nextCursor,
+      cursor: nextCursor
+    }
+  }
+
+  /**
    * async findReferencedBy - Returns the list of files referenced by a document — see https://docs.cozy.io/en/cozy-stack/references-docs-in-vfs/
    *
    * @param  {object}       document          A JSON representing a document, with at least a `_type` and `_id` field.
