@@ -150,6 +150,28 @@ describe('getIndexFields', () => {
     expect(getIndexFields({ partialFilter })).toEqual(['date', 'trashed'])
   })
 
+  it('should return fields from partial filter even with logicial operator', () => {
+    const partialFilter = {
+      $or: [
+        {
+          'email.address': {
+            $exists: true
+          }
+        },
+        {
+          'phone.number': {
+            $exists: true
+          }
+        }
+      ]
+    }
+    expect(getIndexFields({ partialFilter })).toEqual([
+      '$or',
+      'email.address',
+      'phone.number'
+    ])
+  })
+
   it('should return all fields', () => {
     const selector = {
       _id: {
