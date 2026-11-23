@@ -1532,12 +1532,8 @@ client.query(Q('io.cozy.bills'))`)
    * @returns {Promise<import("./types").QueryState>} Query state
    */
   fetchQueryAndGetFromState = async ({ definition, options }) => {
-    try {
-      await this.query(definition, options)
-      return this.getQueryFromState(options.as, options)
-    } catch (error) {
-      throw error
-    }
+    await this.query(definition, options)
+    return this.getQueryFromState(options.as, options)
   }
 
   /**
@@ -1969,18 +1965,14 @@ instantiation of the client.`
    * @returns {Promise<import("./types").QueryState|null>} - Query state or null if the query does not exist
    */
   async resetQuery(queryId) {
-    try {
-      if (!isQueryExisting(this.store.getState(), queryId)) {
-        return Promise.resolve(null)
-      }
-      this.dispatch(resetQuery(queryId))
-      const query = this.getQueryFromState(queryId)
-      return await this.query(query.definition, {
-        as: queryId
-      })
-    } catch (error) {
-      throw error
+    if (!isQueryExisting(this.store.getState(), queryId)) {
+      return Promise.resolve(null)
     }
+    this.dispatch(resetQuery(queryId))
+    const query = this.getQueryFromState(queryId)
+    return await this.query(query.definition, {
+      as: queryId
+    })
   }
 }
 

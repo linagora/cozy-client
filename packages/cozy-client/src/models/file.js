@@ -414,44 +414,40 @@ export const move = async (
   destination,
   { force = false, driveId } = {}
 ) => {
-  try {
-    if (file._type === 'io.cozy.remote.nextcloud.files') {
-      // Move inside a Nextcloud server
-      if (destination._type === 'io.cozy.remote.nextcloud.files') {
-        await client
-          .collection('io.cozy.remote.nextcloud.files')
-          .move(file, destination)
-
-        return {
-          moved: undefined,
-          deleted: null
-        }
-      }
-
-      // Move from a Nextcloud server to Cozy
-      await client
-        .collection('io.cozy.remote.nextcloud.files')
-        .moveToCozy(file, destination)
-
-      return {
-        moved: undefined,
-        deleted: null
-      }
-    }
-
-    // Move from a Cozy to a Nextcloud server
+  if (file._type === 'io.cozy.remote.nextcloud.files') {
+    // Move inside a Nextcloud server
     if (destination._type === 'io.cozy.remote.nextcloud.files') {
       await client
         .collection('io.cozy.remote.nextcloud.files')
-        .moveFromCozy(destination, file)
+        .move(file, destination)
 
       return {
         moved: undefined,
         deleted: null
       }
     }
-  } catch (e) {
-    throw e
+
+    // Move from a Nextcloud server to Cozy
+    await client
+      .collection('io.cozy.remote.nextcloud.files')
+      .moveToCozy(file, destination)
+
+    return {
+      moved: undefined,
+      deleted: null
+    }
+  }
+
+  // Move from a Cozy to a Nextcloud server
+  if (destination._type === 'io.cozy.remote.nextcloud.files') {
+    await client
+      .collection('io.cozy.remote.nextcloud.files')
+      .moveFromCozy(destination, file)
+
+    return {
+      moved: undefined,
+      deleted: null
+    }
   }
 
   // Move inside a Cozy server
@@ -516,19 +512,15 @@ export const move = async (
  */
 export const moveRelateToSharedDrive = async (client, source, dest, isCopy) => {
   const filesCollection = client.collection(DOCTYPE_FILES, { driveId: 'move' })
-  try {
-    const resp = await filesCollection.moveRelateToSharedDrive(
-      source,
-      dest,
-      isCopy
-    )
+  const resp = await filesCollection.moveRelateToSharedDrive(
+    source,
+    dest,
+    isCopy
+  )
 
-    return {
-      moved: resp.data,
-      deleted: null
-    }
-  } catch (e) {
-    throw e
+  return {
+    moved: resp.data,
+    deleted: null
   }
 }
 
@@ -755,41 +747,37 @@ export const fetchBlobFileById = async (client, fileId, { driveId } = {}) => {
  * @throws {Error} - If an error occurs during the API request.
  */
 export const copy = async (client, file, destination, { driveId } = {}) => {
-  try {
-    if (
-      file._type === 'io.cozy.remote.nextcloud.files' &&
-      destination._type === 'io.cozy.remote.nextcloud.files'
-    ) {
-      const resp = await client
-        .collection('io.cozy.remote.nextcloud.files')
-        .copy(file, destination)
-      return resp
-    }
-
-    if (
-      file._type === 'io.cozy.remote.nextcloud.files' &&
-      destination._type === 'io.cozy.files'
-    ) {
-      const resp = await client
-        .collection('io.cozy.remote.nextcloud.files')
-        .moveToCozy(file, destination, { copy: true })
-      return resp
-    }
-
-    if (destination._type === 'io.cozy.remote.nextcloud.files') {
-      const resp = await client
-        .collection('io.cozy.remote.nextcloud.files')
-        .moveFromCozy(destination, file, { copy: true })
-      return resp
-    }
-
+  if (
+    file._type === 'io.cozy.remote.nextcloud.files' &&
+    destination._type === 'io.cozy.remote.nextcloud.files'
+  ) {
     const resp = await client
-      .collection(DOCTYPE_FILES, { driveId })
-      .copy(file._id, file.name, destination._id)
+      .collection('io.cozy.remote.nextcloud.files')
+      .copy(file, destination)
     return resp
-  } catch (e) {
-    throw e
   }
+
+  if (
+    file._type === 'io.cozy.remote.nextcloud.files' &&
+    destination._type === 'io.cozy.files'
+  ) {
+    const resp = await client
+      .collection('io.cozy.remote.nextcloud.files')
+      .moveToCozy(file, destination, { copy: true })
+    return resp
+  }
+
+  if (destination._type === 'io.cozy.remote.nextcloud.files') {
+    const resp = await client
+      .collection('io.cozy.remote.nextcloud.files')
+      .moveFromCozy(destination, file, { copy: true })
+    return resp
+  }
+
+  const resp = await client
+    .collection(DOCTYPE_FILES, { driveId })
+    .copy(file._id, file.name, destination._id)
+  return resp
 }
 
 /**
