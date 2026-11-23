@@ -1,5 +1,5 @@
-import ShortcutsCollection from './ShortcutsCollection'
 import CozyStackClient from './CozyStackClient'
+import ShortcutsCollection from './ShortcutsCollection'
 
 describe('ShortcutsCollection', () => {
   const stackClient = new CozyStackClient()

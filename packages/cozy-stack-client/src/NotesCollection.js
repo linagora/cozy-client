@@ -1,7 +1,7 @@
 import DocumentCollection from './DocumentCollection'
+import { getDefaultSchema as modelDefaultSchema } from './NotesSchema'
 import { normalizeDoctypeJsonApi } from './normalize'
 import { uri, sharedDriveApiPrefix } from './utils'
-import { getDefaultSchema as modelDefaultSchema } from './NotesSchema'
 export const NOTES_DOCTYPE = 'io.cozy.notes'
 export const NOTES_URL_DOCTYPE = 'io.cozy.notes.url'
 

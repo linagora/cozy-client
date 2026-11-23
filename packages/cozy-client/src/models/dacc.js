@@ -1,4 +1,5 @@
 import log from 'cozy-logger'
+
 import CozyClient from '../CozyClient'
 
 /**

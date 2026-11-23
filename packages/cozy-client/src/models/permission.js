@@ -1,10 +1,11 @@
-import intersection from 'lodash/intersection'
 import get from 'lodash/get'
+import intersection from 'lodash/intersection'
+
 import CozyClient from '../CozyClient'
-import { Q } from '../queries/dsl'
-import { getParentFolderId } from './file'
 import { DOCTYPE_FILES } from '../const'
 import logger from '../logger'
+import { Q } from '../queries/dsl'
+import { getParentFolderId } from './file'
 
 /**
  * @typedef {object} Document - Couchdb document like an io.cozy.files

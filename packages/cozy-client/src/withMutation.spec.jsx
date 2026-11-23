@@ -1,10 +1,10 @@
-import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
+import React from 'react'
 
 import CozyClient from './CozyClient'
+import Provider from './Provider'
 import CozyLink from './links/CozyLink'
 import withMutation from './withMutation'
-import Provider from './Provider'
 
 describe('withMutation', () => {
   const NEW_TODO = {

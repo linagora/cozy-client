@@ -1,10 +1,10 @@
+import * as qualificationModel from '../../assets/qualifications.json'
+import logger from '../../logger'
 import {
   Qualification,
   setQualification,
   getQualification
 } from './qualification'
-import * as qualificationModel from '../../assets/qualifications.json'
-import logger from '../../logger'
 
 jest.mock('../../assets/qualifications.json', () => ({
   qualifications: [

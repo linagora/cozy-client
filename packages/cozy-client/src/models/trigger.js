@@ -1,5 +1,5 @@
-import { getMutedErrors } from './account'
 import logger from '../logger'
+import { getMutedErrors } from './account'
 
 const actionableErrors = [
   'CHALLENGE_ASKED',

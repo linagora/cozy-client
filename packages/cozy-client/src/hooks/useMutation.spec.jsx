@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 
-import { useMutation } from './useMutation'
 import useClient from './useClient'
+import { useMutation } from './useMutation'
 
 jest.mock('./useClient')
 

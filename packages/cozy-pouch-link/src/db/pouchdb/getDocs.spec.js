@@ -1,8 +1,9 @@
-import { getDocs } from './getDocs'
-
+import adapter from 'pouchdb-adapter-memory'
 import PouchDB from 'pouchdb-browser'
 import PouchDBFind from 'pouchdb-find'
-import adapter from 'pouchdb-adapter-memory'
+
+import { getDocs } from './getDocs'
+
 PouchDB.plugin(PouchDBFind)
 PouchDB.plugin(adapter)
 

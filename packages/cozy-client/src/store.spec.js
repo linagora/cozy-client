@@ -1,7 +1,17 @@
-import { createStore, combineReducers } from 'redux'
 import sortBy from 'lodash/sortBy'
+import { createStore, combineReducers } from 'redux'
 
+import {
+  TODO_1,
+  TODO_2,
+  TODO_3,
+  TODO_4,
+  TODO_WITH_RELATION,
+  FILE_1,
+  FILE_2
+} from './__tests__/fixtures'
 import { defaultPerformanceApi } from './performances/defaultPerformanceApi'
+import { QueryDefinition as Q } from './queries/dsl'
 import reducer, {
   initQuery,
   getCollectionFromState,
@@ -12,16 +22,6 @@ import reducer, {
   receiveMutationResult,
   StoreProxy
 } from './store'
-import { QueryDefinition as Q } from './queries/dsl'
-import {
-  TODO_1,
-  TODO_2,
-  TODO_3,
-  TODO_4,
-  TODO_WITH_RELATION,
-  FILE_1,
-  FILE_2
-} from './__tests__/fixtures'
 
 describe('Store', () => {
   let store

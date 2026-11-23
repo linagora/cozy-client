@@ -1,8 +1,9 @@
+// @ts-ignore Need to import it to be used in jsdoc
+import { IOCozyContact } from 'cozy-client/dist/types'
+
 import DocumentCollection from './DocumentCollection'
 import { normalizeDoctypeJsonApi } from './normalize'
 import { uri } from './utils'
-// @ts-ignore Need to import it to be used in jsdoc
-import { IOCozyContact } from 'cozy-client/dist/types'
 
 export const CONTACTS_DOCTYPE = 'io.cozy.contacts'
 export const GROUPS_DOCTYPE = 'io.cozy.contacts.groups'

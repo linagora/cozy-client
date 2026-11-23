@@ -34,7 +34,7 @@ Build parameters to request DACC aggregate
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:95](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L95)
+[packages/cozy-client/src/models/dacc.js:96](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L96)
 
 ***
 
@@ -56,7 +56,7 @@ Throw an errror if a DACC parameter is incorrect.
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:24](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L24)
+[packages/cozy-client/src/models/dacc.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L25)
 
 ***
 
@@ -80,7 +80,7 @@ Send measures to a DACC through a remote doctype
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:120](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L120)
+[packages/cozy-client/src/models/dacc.js:121](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L121)
 
 ***
 
@@ -102,7 +102,7 @@ Check whether or not the given date is in YYYY-MM-DD format
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L10)
+[packages/cozy-client/src/models/dacc.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L11)
 
 ***
 
@@ -126,4 +126,4 @@ Send measures to a DACC through a remote doctype
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:64](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L64)
+[packages/cozy-client/src/models/dacc.js:65](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L65)

@@ -1,6 +1,7 @@
 import merge from 'lodash/merge'
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+
 import logger from './logger'
 
 const makeMutationsObject = (mutations, client, props) => {

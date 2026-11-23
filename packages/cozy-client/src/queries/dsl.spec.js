@@ -1,5 +1,5 @@
-import { QueryDefinition, Q } from '../queries/dsl'
 import logger from '../logger'
+import { QueryDefinition, Q } from '../queries/dsl'
 
 describe('QueryDefinition', () => {
   beforeEach(() => {

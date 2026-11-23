@@ -1,4 +1,5 @@
 const { ArgumentParser } = require('argparse')
+
 const CozyClient = require('cozy-client').default
 const { createClientInteractive } = require('cozy-client')
 

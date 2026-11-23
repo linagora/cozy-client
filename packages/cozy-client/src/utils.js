@@ -1,4 +1,5 @@
 import flag from 'cozy-flags'
+
 import logger from './logger'
 
 /**

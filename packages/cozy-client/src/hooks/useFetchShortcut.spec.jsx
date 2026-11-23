@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks'
 
-import useFetchShortcut from './useFetchShortcut'
 import { createMockClient } from '../../dist/mock'
+import useFetchShortcut from './useFetchShortcut'
 
 describe('useFetchShortcut', () => {
   const mockClient = createMockClient({

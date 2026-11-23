@@ -1,4 +1,5 @@
 const { ArgumentParser } = require('argparse')
+
 const {
   QueryDefinition,
   HasManyInPlace,

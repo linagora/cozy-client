@@ -1,7 +1,8 @@
-import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
-import useFetchJSON from './useFetchJSON'
+import React from 'react'
+
 import Provider from '../Provider'
+import useFetchJSON from './useFetchJSON'
 
 const makeWrapper = client => {
   const Wrapper = ({ children }) => (

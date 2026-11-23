@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import compose from 'lodash/flowRight'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+
 import Query from './Query'
 import useClient from './hooks/useClient'
 import { useQueries } from './hooks/useQuery'

@@ -1,7 +1,8 @@
-import React from 'react'
-import useClient from './useClient'
-import Provider from '../Provider'
 import { screen, render } from '@testing-library/react'
+import React from 'react'
+
+import Provider from '../Provider'
+import useClient from './useClient'
 
 describe('useClient', () => {
   const Component = () => {

@@ -1,8 +1,9 @@
 import get from 'lodash/get'
 import set from 'lodash/set'
+
+import logger from '../logger'
 import { Q, QueryDefinition } from '../queries/dsl'
 import Association from './Association'
-import logger from '../logger'
 
 export default class HasOne extends Association {
   get raw() {

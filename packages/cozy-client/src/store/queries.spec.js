@@ -1,4 +1,6 @@
+import { TODO_1, TODO_2, TODO_3 } from '../__tests__/fixtures'
 import { defaultPerformanceApi } from '../performances/defaultPerformanceApi'
+import { Q } from '../queries/dsl'
 import queries, {
   initQuery,
   receiveQueryResult,
@@ -13,8 +15,6 @@ import queries, {
   executeQueryFromState,
   mapIdsToDocuments
 } from './queries'
-import { Q } from '../queries/dsl'
-import { TODO_1, TODO_2, TODO_3 } from '../__tests__/fixtures'
 
 describe('queries reducer', () => {
   let state

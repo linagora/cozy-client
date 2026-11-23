@@ -1,4 +1,5 @@
 import PouchDB from 'pouchdb-browser'
+
 import { LOCALSTORAGE_STORAGE_KEYS } from './localStorage'
 
 const events = {

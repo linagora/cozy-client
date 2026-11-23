@@ -1,4 +1,5 @@
 import get from 'lodash/get'
+
 import {
   transformRegistryFormatToStackFormat,
   registryEndpoint
@@ -6,8 +7,8 @@ import {
 
 import Collection from './Collection'
 import DocumentCollection from './DocumentCollection'
-import { normalizeDoctypeJsonApi } from './normalize'
 import logger from './logger'
+import { normalizeDoctypeJsonApi } from './normalize'
 
 export const APPS_DOCTYPE = 'io.cozy.apps'
 

@@ -1,5 +1,5 @@
-import HasMany from './HasMany'
 import { Q } from '../queries/dsl'
+import HasMany from './HasMany'
 
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 

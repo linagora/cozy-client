@@ -1,5 +1,6 @@
-const { QueryDefinition, createClientInteractive } = require('cozy-client')
 const { ArgumentParser } = require('argparse')
+
+const { QueryDefinition, createClientInteractive } = require('cozy-client')
 
 global.fetch = require('node-fetch') // in the browser we have native fetch
 

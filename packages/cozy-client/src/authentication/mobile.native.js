@@ -1,7 +1,7 @@
 //@ts-ignore
-import { InAppBrowser } from 'react-native-inappbrowser-reborn'
-//@ts-ignore
 import { Linking, Platform } from 'react-native'
+//@ts-ignore
+import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 
 const USER_CANCELED = 'USER_CANCELED'
 

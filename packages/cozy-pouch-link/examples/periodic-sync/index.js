@@ -1,12 +1,12 @@
 #!/usr/bin/env babel-node
 
+import map from 'lodash/map'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import map from 'lodash/map'
 
-import PouchManager from '../../src/PouchManager'
-import { getReplicationURL } from '../../src/CozyPouchLink'
 import AccessToken from '../../src/AccessToken'
+import { getReplicationURL } from '../../src/CozyPouchLink'
+import PouchManager from '../../src/PouchManager'
 
 const DOCTYPE = 'io.cozy.bank.operations'
 

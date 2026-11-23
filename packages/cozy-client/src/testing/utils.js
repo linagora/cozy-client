@@ -1,8 +1,9 @@
 import React from 'react'
+
+import CozyClient from '../CozyClient'
+import ClientProvider from '../Provider'
 import { createMockClient } from '../mock'
 import simpsonsFixture from '../testing/simpsons.json'
-import ClientProvider from '../Provider'
-import CozyClient from '../CozyClient'
 
 /**
  * Setups a client suitable for testing

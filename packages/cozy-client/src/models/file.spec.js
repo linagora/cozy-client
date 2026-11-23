@@ -1,8 +1,9 @@
 import { isFlagshipApp } from 'cozy-device-helper'
 
-import * as fileModel from './file'
-import { Qualification } from './document/qualification'
 import { QueryDefinition } from '../queries/dsl'
+import { Qualification } from './document/qualification'
+import * as fileModel from './file'
+
 const CozyClient = require('cozy-client/dist/CozyClient').default
 const CozyStackClient = require('cozy-stack-client').default
 

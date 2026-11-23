@@ -1,8 +1,10 @@
-import { default as helpers } from './helpers'
 import startsWith from 'lodash/startsWith'
+
+import CozyClient from 'cozy-client'
+
+import { default as helpers } from './helpers'
 import logger from './logger'
 import { fetchRemoteInstance } from './remote'
-import CozyClient from 'cozy-client'
 
 const { isDesignDocument, isDeletedDocument } = helpers
 

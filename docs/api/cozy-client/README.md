@@ -223,7 +223,7 @@ Rejects with canceled: true as soon as cancel is called
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L17)
+[packages/cozy-client/src/utils.js:18](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L18)
 
 ***
 
@@ -615,7 +615,7 @@ Array of references found
 
 *Defined in*
 
-[packages/cozy-client/src/associations/helpers.js:134](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L134)
+[packages/cozy-client/src/associations/helpers.js:135](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L135)
 
 ***
 
@@ -641,7 +641,7 @@ Array of the reference found
 
 *Defined in*
 
-[packages/cozy-client/src/associations/helpers.js:148](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L148)
+[packages/cozy-client/src/associations/helpers.js:149](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L149)
 
 ***
 
@@ -663,7 +663,7 @@ Returns whether queries have been loaded at least once
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:66](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L66)
+[packages/cozy-client/src/utils.js:67](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L67)
 
 ***
 
@@ -685,7 +685,7 @@ Returns whether a query has been loaded at least once
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:50](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L50)
+[packages/cozy-client/src/utils.js:51](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L51)
 
 ***
 
@@ -737,7 +737,7 @@ Returns whether the result of queries are loading
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:57](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L57)
+[packages/cozy-client/src/utils.js:58](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L58)
 
 ***
 
@@ -760,7 +760,7 @@ is loading.
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:39](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L39)
+[packages/cozy-client/src/utils.js:40](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L40)
 
 ***
 
@@ -785,7 +785,7 @@ If a reference is found
 
 *Defined in*
 
-[packages/cozy-client/src/associations/helpers.js:102](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L102)
+[packages/cozy-client/src/associations/helpers.js:103](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L103)
 
 ***
 
@@ -811,7 +811,7 @@ If a reference is found
 
 *Defined in*
 
-[packages/cozy-client/src/associations/helpers.js:117](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L117)
+[packages/cozy-client/src/associations/helpers.js:118](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/helpers.js#L118)
 
 ***
 
@@ -837,7 +837,7 @@ If a reference is found
 
 *Defined in*
 
-[packages/cozy-client/src/hoc.jsx:78](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L78)
+[packages/cozy-client/src/hoc.jsx:79](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L79)
 
 ***
 
@@ -865,7 +865,7 @@ if there are N queries, only 1 extra level of nesting is introduced.
 
 *Defined in*
 
-[packages/cozy-client/src/hoc.jsx:94](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L94)
+[packages/cozy-client/src/hoc.jsx:95](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L95)
 
 ***
 
@@ -977,7 +977,7 @@ The root Cozy URL
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useAppLinkWithStoreFallback.jsx:9](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useAppLinkWithStoreFallback.jsx#L9)
+[packages/cozy-client/src/hooks/useAppLinkWithStoreFallback.jsx:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useAppLinkWithStoreFallback.jsx#L10)
 
 ***
 
@@ -1020,7 +1020,7 @@ An array with all apps in maintenance
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useCapabilities.jsx:5](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useCapabilities.jsx#L5)
+[packages/cozy-client/src/hooks/useCapabilities.jsx:6](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useCapabilities.jsx#L6)
 
 ***
 
@@ -1038,7 +1038,7 @@ Returns the cozy client from the context
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useClient.js:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useClient.js#L10)
+[packages/cozy-client/src/hooks/useClient.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useClient.js#L11)
 
 ***
 
@@ -1118,7 +1118,7 @@ Retrieve intance info like context, uuid, disk usage etc
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useQuery.js:95](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useQuery.js#L95)
+[packages/cozy-client/src/hooks/useQuery.js:96](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useQuery.js#L96)
 
 ***
 
@@ -1141,7 +1141,7 @@ Fetches a queryDefinition and returns the queryState
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useQuery.js:30](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useQuery.js#L30)
+[packages/cozy-client/src/hooks/useQuery.js:31](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useQuery.js#L31)
 
 ***
 
@@ -1199,7 +1199,7 @@ return:
 
 *Defined in*
 
-[packages/cozy-client/src/hooks/useSetting.js:24](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useSetting.js#L24)
+[packages/cozy-client/src/hooks/useSetting.js:23](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hooks/useSetting.js#L23)
 
 ***
 
@@ -1225,7 +1225,7 @@ return:
 
 *Defined in*
 
-[packages/cozy-client/src/hoc.jsx:16](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L16)
+[packages/cozy-client/src/hoc.jsx:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L17)
 
 ***
 
@@ -1274,4 +1274,4 @@ return:
 
 *Defined in*
 
-[packages/cozy-client/src/withMutations.jsx:24](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/withMutations.jsx#L24)
+[packages/cozy-client/src/withMutations.jsx:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/withMutations.jsx#L25)

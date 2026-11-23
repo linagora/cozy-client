@@ -1,10 +1,13 @@
 import http from 'http'
-import { createClientInteractive } from './index'
-import { OAuthClient } from 'cozy-stack-client'
-import opn from 'open'
-import fetch from 'node-fetch'
 import { URL } from 'url'
+
+import fetch from 'node-fetch'
+import opn from 'open'
+
 import logger from 'cozy-logger'
+import { OAuthClient } from 'cozy-stack-client'
+
+import { createClientInteractive } from './index'
 
 logger.setLevel('error')
 

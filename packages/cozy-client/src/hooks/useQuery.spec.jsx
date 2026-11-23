@@ -2,11 +2,10 @@ import { renderHook } from '@testing-library/react-hooks'
 
 import CozyClient from '../CozyClient'
 import CozyLink from '../links/CozyLink'
-import useQuery, { useQueries } from './useQuery'
 import { Q } from '../queries/dsl'
-
-import { setupClient, makeWrapper } from '../testing/utils'
 import simpsonsFixture from '../testing/simpsons.json'
+import { setupClient, makeWrapper } from '../testing/utils'
+import useQuery, { useQueries } from './useQuery'
 
 /**
  * @param {object} Options options

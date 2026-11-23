@@ -1,7 +1,8 @@
-import PouchDBQuery from './pouchdb'
+import { Q } from 'cozy-client'
+
 import { createIndex } from '../../mango'
 import { getDocsAndNormalize } from './getDocs'
-import { Q } from 'cozy-client'
+import PouchDBQuery from './pouchdb'
 
 jest.mock('../../mango', () => ({
   ...jest.requireActual('../../mango'),

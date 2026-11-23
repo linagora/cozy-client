@@ -1,9 +1,12 @@
 import forEach from 'lodash/forEach'
+
 import { isMobileApp } from 'cozy-device-helper'
 
+import PouchDBQueryEngine from './db/pouchdb/pouchdb'
 import { PouchLocalStorage } from './localStorage'
-import Loop from './loop'
 import logger from './logger'
+import Loop from './loop'
+import { destroyOldDatabases } from './migrations/pouchdb'
 import { platformWeb } from './platformWeb'
 import { replicateOnce } from './replicateOnce'
 import {
@@ -12,8 +15,6 @@ import {
   getDatabaseName,
   getDoctypeFromDatabaseName
 } from './utils'
-import { destroyOldDatabases } from './migrations/pouchdb'
-import PouchDBQueryEngine from './db/pouchdb/pouchdb'
 
 const DEFAULT_DELAY = 30 * 1000
 const ENSURE_DATABASES_RETRIES = 3

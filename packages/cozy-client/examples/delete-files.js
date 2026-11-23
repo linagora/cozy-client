@@ -1,10 +1,12 @@
+const { ArgumentParser } = require('argparse')
+
 const { createClientInteractive } = require('cozy-client')
+
 const {
   schema,
   createFolderWithFilesBulk,
   deleteFile
 } = require('./helpers/file')
-const { ArgumentParser } = require('argparse')
 
 global.fetch = require('node-fetch') // in the browser we have native fetch
 

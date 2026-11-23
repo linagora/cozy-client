@@ -1,5 +1,4 @@
 import PouchDBQueryEngine from '../pouchdb/pouchdb'
-
 import SQLiteQueryEngine from './sqliteDb.native'
 
 jest.mock('@op-engineering/op-sqlite', () => ({ open: jest.fn() }))

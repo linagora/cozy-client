@@ -2,11 +2,13 @@
 // See https://github.com/cozy/cozy-client/pull/239 for example
 // on how to use fake timers with setTimeout created in promises.
 
+import MockDate from 'mockdate'
+
+import { Q } from 'cozy-client'
+import { isMobileApp } from 'cozy-device-helper'
+
 import PouchManager from './PouchManager'
 import * as mocks from './__tests__/mocks'
-import { Q } from 'cozy-client'
-import MockDate from 'mockdate'
-import { isMobileApp } from 'cozy-device-helper'
 
 jest.mock('pouchdb-browser')
 jest.mock('cozy-device-helper')
@@ -15,12 +17,12 @@ jest.mock('./remote', () => ({
   fetchRemoteInstance: jest.fn()
 }))
 
-import * as rep from './startReplication'
 import PouchDB from 'pouchdb-browser'
+
 import { LOCALSTORAGE_STORAGE_KEYS, PouchLocalStorage } from './localStorage'
 import { platformWeb } from './platformWeb'
-
 import { fetchRemoteInstance, fetchRemoteLastSequence } from './remote'
+import * as rep from './startReplication'
 
 const ls = new PouchLocalStorage(platformWeb.storage)
 

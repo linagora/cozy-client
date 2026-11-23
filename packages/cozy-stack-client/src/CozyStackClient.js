@@ -1,7 +1,13 @@
 import cloneDeep from 'lodash/cloneDeep'
+import MicroEE from 'microee'
+
+import AccessToken from './AccessToken'
 import AppCollection, { APPS_DOCTYPE } from './AppCollection'
 import AppToken from './AppToken'
-import AccessToken from './AccessToken'
+import AppsRegistryCollection, {
+  APPS_REGISTRY_DOCTYPE
+} from './AppsRegistryCollection'
+import ContactsCollection, { CONTACTS_DOCTYPE } from './ContactsCollection'
 import DocumentCollection from './DocumentCollection'
 import FileCollection from './FileCollection'
 import FileRecentsCollection, {
@@ -9,30 +15,25 @@ import FileRecentsCollection, {
 } from './FileRecentsCollection'
 import JobCollection, { JOBS_DOCTYPE } from './JobCollection'
 import KonnectorCollection, { KONNECTORS_DOCTYPE } from './KonnectorCollection'
-import SharingCollection from './SharingCollection'
-import PermissionCollection from './PermissionCollection'
-import TriggerCollection, { TRIGGERS_DOCTYPE } from './TriggerCollection'
-import SettingsCollection, { SETTINGS_DOCTYPE } from './SettingsCollection'
-import NotesCollection, { NOTES_DOCTYPE } from './NotesCollection'
-import OAuthClientsCollection, {
-  OAUTH_CLIENTS_DOCTYPE
-} from './OAuthClientsCollection'
-import ShortcutsCollection, { SHORTCUTS_DOCTYPE } from './ShortcutsCollection'
-import ContactsCollection, { CONTACTS_DOCTYPE } from './ContactsCollection'
-import AppsRegistryCollection, {
-  APPS_REGISTRY_DOCTYPE
-} from './AppsRegistryCollection'
-import getIconURL from './getIconURL'
-import logDeprecate from './logDeprecate'
-import { fetchWithXMLHttpRequest, shouldXMLHTTPRequestBeUsed } from './xhrFetch'
-import MicroEE from 'microee'
-import errors, { FetchError } from './errors'
-import logger from './logger'
-import PromiseCache from './promise-cache'
 import {
   NEXTCLOUD_FILES_DOCTYPE,
   NextcloudFilesCollection
 } from './NextcloudFilesCollection'
+import NotesCollection, { NOTES_DOCTYPE } from './NotesCollection'
+import OAuthClientsCollection, {
+  OAUTH_CLIENTS_DOCTYPE
+} from './OAuthClientsCollection'
+import PermissionCollection from './PermissionCollection'
+import SettingsCollection, { SETTINGS_DOCTYPE } from './SettingsCollection'
+import SharingCollection from './SharingCollection'
+import ShortcutsCollection, { SHORTCUTS_DOCTYPE } from './ShortcutsCollection'
+import TriggerCollection, { TRIGGERS_DOCTYPE } from './TriggerCollection'
+import errors, { FetchError } from './errors'
+import getIconURL from './getIconURL'
+import logDeprecate from './logDeprecate'
+import logger from './logger'
+import PromiseCache from './promise-cache'
+import { fetchWithXMLHttpRequest, shouldXMLHTTPRequestBeUsed } from './xhrFetch'
 
 const normalizeUri = uriArg => {
   let uri = uriArg

@@ -1,11 +1,12 @@
+import get from 'lodash/get'
 import { useEffect, useCallback } from 'react'
 import { createSelectorHook } from 'react-redux'
-import get from 'lodash/get'
-import useClient from './useClient'
-import logger from '../logger'
+
 import { clientContext } from '../context'
+import logger from '../logger'
 import { QueryDefinition } from '../queries/dsl'
 import { equalityCheckForQuery } from '../store/selector'
+import useClient from './useClient'
 
 // @ts-ignore We use our own store in with Redux
 const useSelector = createSelectorHook(clientContext)

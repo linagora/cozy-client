@@ -1,6 +1,6 @@
 import CozyClient from '../CozyClient'
-import { Q } from '../queries/dsl'
 import logger from '../logger'
+import { Q } from '../queries/dsl'
 
 const ASSISTANT_DOCTYPE = 'io.cozy.ai.chat.assistants'
 const ACCOUNT_DOCTYPE = 'io.cozy.accounts'

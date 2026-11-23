@@ -1,9 +1,10 @@
-import mapValues from 'lodash/mapValues'
-import groupBy from 'lodash/groupBy'
 import flatten from 'lodash/flatten'
+import groupBy from 'lodash/groupBy'
 import isEqual from 'lodash/isEqual'
+import mapValues from 'lodash/mapValues'
 import uniq from 'lodash/uniq'
 import uniqWith from 'lodash/uniqWith'
+
 import { QueryDefinition } from './dsl'
 
 const isIdQuery = query => query.id || query.ids

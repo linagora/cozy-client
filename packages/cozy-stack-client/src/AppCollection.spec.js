@@ -1,8 +1,8 @@
 jest.mock('./CozyStackClient')
 
-import CozyStackClient from './CozyStackClient'
 import AppCollection from './AppCollection'
 import { APPS_DOCTYPE } from './AppCollection'
+import CozyStackClient from './CozyStackClient'
 import { ALL_APPS_RESPONSE, GET_APPS_RESPONSE } from './__tests__/fixtures/apps'
 import logger from './logger'
 const FIXTURES = {

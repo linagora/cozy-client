@@ -1,5 +1,5 @@
-import CozyStackClient from './CozyStackClient'
 import ContactsCollection from './ContactsCollection'
+import CozyStackClient from './CozyStackClient'
 import DocumentCollection from './DocumentCollection'
 
 const stackMyselfResponse = {

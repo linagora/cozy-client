@@ -1,8 +1,8 @@
 import DocumentCollection from './DocumentCollection'
-import { normalizeDoc } from './normalize'
 import { isFile } from './FileCollection'
-import { uri, sharedDriveApiPrefix } from './utils'
 import logger from './logger'
+import { normalizeDoc } from './normalize'
+import { uri, sharedDriveApiPrefix } from './utils'
 
 const normalizePermission = perm => normalizeDoc(perm, 'io.cozy.permissions')
 

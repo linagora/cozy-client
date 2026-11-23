@@ -1,5 +1,5 @@
-import head from 'lodash/head'
 import get from 'lodash/get'
+import head from 'lodash/head'
 import isEqual from 'lodash/isEqual'
 import isObject from 'lodash/isObject'
 

@@ -1,5 +1,5 @@
-import OAuthClientsCollection from './OAuthClientsCollection'
 import CozyStackClient from './CozyStackClient'
+import OAuthClientsCollection from './OAuthClientsCollection'
 import { FetchError } from './errors'
 
 const DEFAULT_LIMIT = 100

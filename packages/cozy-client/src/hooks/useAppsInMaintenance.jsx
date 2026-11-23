@@ -1,6 +1,6 @@
-import useQuery from './useQuery'
-import { Q } from '../queries/dsl'
 import CozyClient from '../CozyClient'
+import { Q } from '../queries/dsl'
+import useQuery from './useQuery'
 
 const DEFAULT_CACHE_TIMEOUT_QUERIES = 10 * 60 * 1000 // 10 minutes
 

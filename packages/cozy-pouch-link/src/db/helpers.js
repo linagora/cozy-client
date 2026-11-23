@@ -1,4 +1,5 @@
 import fastEqual from 'fast-deep-equal'
+
 import DatabaseQueryEngine from './dbInterface'
 
 /**

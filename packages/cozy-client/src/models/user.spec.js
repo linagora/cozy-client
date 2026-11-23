@@ -1,5 +1,5 @@
-import { hasPasswordDefinedAttribute } from './instance'
 import { hasExtensionInstalledAttribute } from './bitwarden'
+import { hasPasswordDefinedAttribute } from './instance'
 import { hasPassword } from './user'
 
 jest.mock('./instance', () => ({

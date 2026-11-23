@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Q } from '../queries/dsl'
+
 import {
   isInstalled as checkIfAppIsInstalled,
   getStoreURL,
   getUrl
 } from '../models/applications'
+import { Q } from '../queries/dsl'
 
 const useAppLinkWithStoreFallback = (slug, client, path = '') => {
   const [fetchStatus, setFetchStatus] = useState('loading')

@@ -1,4 +1,5 @@
 import { createContext } from 'react'
+
 import CozyClient from './CozyClient'
 
 export const clientContext = createContext({

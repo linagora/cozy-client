@@ -1,6 +1,6 @@
 import Schema from './Schema'
-import HasOneInPlace from './associations/HasOneInPlace'
 import HasMany from './associations/HasMany'
+import HasOneInPlace from './associations/HasOneInPlace'
 
 describe('Schema', () => {
   const schemaDef = {

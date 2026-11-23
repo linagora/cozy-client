@@ -1,12 +1,10 @@
 //@ts-check
-import { ensureMagicFolder, MAGIC_FOLDERS } from './folder'
 
 import CozyClient from '../CozyClient'
-import { getAccountName } from './account'
-
-import { getLocalizer } from './document/locales'
-
 import { Q } from '../queries/dsl'
+import { getAccountName } from './account'
+import { getLocalizer } from './document/locales'
+import { ensureMagicFolder, MAGIC_FOLDERS } from './folder'
 
 const FILES_DOCTYPE = 'io.cozy.files'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'

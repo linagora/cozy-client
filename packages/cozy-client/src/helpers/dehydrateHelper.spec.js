@@ -1,5 +1,3 @@
-import { dehydrate } from './dehydrateHelper'
-
 import {
   HasManyInPlace,
   HasMany,
@@ -8,6 +6,7 @@ import {
   create as createAssociation,
   Association
 } from '../associations'
+import { dehydrate } from './dehydrateHelper'
 
 describe('dehydrate', () => {
   let document

@@ -1,26 +1,35 @@
-import mapValues from 'lodash/mapValues'
-import fromPairs from 'lodash/fromPairs'
+import stringify from 'json-stable-stringify'
 import flatten from 'lodash/flatten'
+import forEach from 'lodash/forEach'
+import fromPairs from 'lodash/fromPairs'
+import get from 'lodash/get'
+import mapValues from 'lodash/mapValues'
 import uniqBy from 'lodash/uniqBy'
 import zip from 'lodash/zip'
-import forEach from 'lodash/forEach'
-import get from 'lodash/get'
 import MicroEE from 'microee'
 
 import CozyStackClient, { OAuthClient } from 'cozy-stack-client'
 
-import { DOCTYPE_FILES, REGISTRATION_ABORT } from './const'
-
-import StackLink from './links/StackLink'
+import ObservableQuery from './ObservableQuery'
+import Schema from './Schema'
 import { create as createAssociation } from './associations'
 import {
   responseToRelationship,
   attachRelationships
 } from './associations/helpers'
-import { dehydrate, getSettings, saveAfterFetchSettings } from './helpers'
-import { QueryDefinition, Mutations, Q } from './queries/dsl'
 import { authFunction } from './authentication/mobile'
+import { DOCTYPE_FILES, REGISTRATION_ABORT } from './const'
+import { certifyFlagship } from './flagship-certification/flagship-certification'
+import { dehydrate, getSettings, saveAfterFetchSettings } from './helpers'
+import { chain } from './links/CozyLink'
+import StackLink from './links/StackLink'
+import logger from './logger'
+import { defaultPerformanceApi } from './performances/defaultPerformanceApi'
+import fetchPolicies from './policies'
+import PromiseCache from './promise-cache'
+import { QueryDefinition, Mutations, Q } from './queries/dsl'
 import optimizeQueryDefinitions from './queries/optimize'
+import { persistVirtualDocuments } from './storage'
 import {
   default as reducer,
   createStore,
@@ -40,19 +49,8 @@ import {
   isQueryExisting,
   executeQueryFromState
 } from './store'
-import fetchPolicies from './policies'
-import Schema from './Schema'
-import { chain } from './links/CozyLink'
-import ObservableQuery from './ObservableQuery'
-import { defaultPerformanceApi } from './performances/defaultPerformanceApi'
-import { CozyClient as SnapshotClient } from './testing/snapshots'
-import logger from './logger'
 import { QueryIDGenerator } from './store/queries'
-import stringify from 'json-stable-stringify'
-import PromiseCache from './promise-cache'
-
-import { certifyFlagship } from './flagship-certification/flagship-certification'
-import { persistVirtualDocuments } from './storage'
+import { CozyClient as SnapshotClient } from './testing/snapshots'
 
 const ensureArray = arr => (Array.isArray(arr) ? arr : [arr])
 

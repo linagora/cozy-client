@@ -1,7 +1,7 @@
+import CozyStackClient from './CozyStackClient'
 import FileRecentsCollection, {
   FILE_RECENTS_DOCTYPE
 } from './FileRecentsCollection'
-import CozyStackClient from './CozyStackClient'
 
 const queryParams = url => {
   const [path, query = ''] = url.split('?')

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 
-import { Q } from '../queries/dsl'
 import CozyClient from '../CozyClient'
 import { DOCTYPE_FILES_SHORTCUTS } from '../const'
+import { Q } from '../queries/dsl'
 
 const DEFAULT_CACHE_TIMEOUT_QUERIES = 10 * 60 * 1000 // 10 minutes
 

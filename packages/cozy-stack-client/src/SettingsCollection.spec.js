@@ -1,5 +1,5 @@
-import SettingsCollection, { normalizeSettings } from './SettingsCollection'
 import CozyStackClient from './CozyStackClient'
+import SettingsCollection, { normalizeSettings } from './SettingsCollection'
 
 describe('SettingsCollection', () => {
   const stackClient = new CozyStackClient()

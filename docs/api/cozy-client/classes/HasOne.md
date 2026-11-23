@@ -190,7 +190,7 @@ Association.data
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:12](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L12)
+[packages/cozy-client/src/associations/HasOne.js:13](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L13)
 
 ***
 
@@ -208,7 +208,7 @@ Association.raw
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:8](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L8)
+[packages/cozy-client/src/associations/HasOne.js:9](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L9)
 
 ## Methods
 
@@ -232,7 +232,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:41](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L41)
+[packages/cozy-client/src/associations/HasOne.js:42](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L42)
 
 ***
 
@@ -252,7 +252,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:89](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L89)
+[packages/cozy-client/src/associations/HasOne.js:90](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L90)
 
 ***
 
@@ -270,7 +270,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:51](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L51)
+[packages/cozy-client/src/associations/HasOne.js:52](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L52)
 
 ***
 
@@ -290,7 +290,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:75](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L75)
+[packages/cozy-client/src/associations/HasOne.js:76](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L76)
 
 ***
 
@@ -310,7 +310,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:56](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L56)
+[packages/cozy-client/src/associations/HasOne.js:57](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L57)
 
 ***
 
@@ -324,7 +324,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:82](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L82)
+[packages/cozy-client/src/associations/HasOne.js:83](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L83)
 
 ***
 
@@ -350,4 +350,4 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasOne.js:27](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L27)
+[packages/cozy-client/src/associations/HasOne.js:28](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasOne.js#L28)

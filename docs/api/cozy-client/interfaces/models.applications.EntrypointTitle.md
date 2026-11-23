@@ -14,7 +14,7 @@ English title
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:122](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L122)
+[packages/cozy-client/src/models/applications.js:123](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L123)
 
 ***
 
@@ -26,7 +26,7 @@ French title
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:123](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L123)
+[packages/cozy-client/src/models/applications.js:124](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L124)
 
 ***
 
@@ -38,7 +38,7 @@ Russian title
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:124](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L124)
+[packages/cozy-client/src/models/applications.js:125](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L125)
 
 ***
 
@@ -50,4 +50,4 @@ Vietnamese title
 
 *Defined in*
 
-[packages/cozy-client/src/models/applications.js:125](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L125)
+[packages/cozy-client/src/models/applications.js:126](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/applications.js#L126)

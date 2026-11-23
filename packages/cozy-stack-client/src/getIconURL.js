@@ -1,6 +1,6 @@
+import memoize, { ErrorReturned } from './memoize'
 import { CozyStackClient } from './types'
 
-import memoize, { ErrorReturned } from './memoize'
 /**
  * Get Icon source Url
  *

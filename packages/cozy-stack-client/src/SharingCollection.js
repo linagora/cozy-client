@@ -1,7 +1,7 @@
-import DocumentCollection from './DocumentCollection'
 import { CONTACTS_DOCTYPE, GROUPS_DOCTYPE } from './ContactsCollection'
-import { normalizeDoctypeJsonApi } from './normalize'
+import DocumentCollection from './DocumentCollection'
 import { isFile, isDirectory } from './FileCollection'
+import { normalizeDoctypeJsonApi } from './normalize'
 import { uri, sharedDriveApiPrefix } from './utils'
 
 export const SHARING_DOCTYPE = 'io.cozy.sharings'

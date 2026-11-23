@@ -1,17 +1,18 @@
-import http from 'http'
-import opn from 'open'
 import fs from 'fs'
+import http from 'http'
 
 import merge from 'lodash/merge'
+import opn from 'open'
 import enableDestroy from 'server-destroy'
 
-import CozyClient from '../CozyClient'
 import logger from 'cozy-logger'
+
+import CozyClient from '../CozyClient'
 
 const log = logger.namespace('create-cli-client')
 
-const nodeFetch = require('node-fetch')
 const btoa = require('btoa')
+const nodeFetch = require('node-fetch')
 
 /**
  * Creates and starts and HTTP server suitable for OAuth authentication

@@ -1,9 +1,10 @@
 import get from 'lodash/get'
 import omit from 'lodash/omit'
 import uniq from 'lodash/uniq'
+
+import { DOCTYPE_FILES } from '../const'
 import { Mutations, Q, QueryDefinition } from '../queries/dsl'
 import { getDocumentFromState } from '../store'
-import { DOCTYPE_FILES } from '../const'
 import Association from './Association'
 import HasMany from './HasMany'
 

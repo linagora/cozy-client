@@ -1,7 +1,7 @@
 import DocumentCollection from './DocumentCollection'
+import { getIllegalCharacters } from './getIllegalCharacter'
 import { normalizeDoctypeJsonApi } from './normalize'
 import { sharedDriveApiPrefix, uri } from './utils'
-import { getIllegalCharacters } from './getIllegalCharacter'
 
 /**
  * Doctype for shortcuts documents.

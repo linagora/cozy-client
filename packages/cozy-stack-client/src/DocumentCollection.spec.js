@@ -1,10 +1,11 @@
 jest.mock('./CozyStackClient')
 
 import flag from 'cozy-flags'
+
 import CozyStackClient from './CozyStackClient'
 import DocumentCollection from './DocumentCollection'
-import { isMatchingIndex } from './mangoIndex'
 import logger from './logger'
+import { isMatchingIndex } from './mangoIndex'
 
 jest.mock('./mangoIndex', () => ({
   ...jest.requireActual('./mangoIndex'),

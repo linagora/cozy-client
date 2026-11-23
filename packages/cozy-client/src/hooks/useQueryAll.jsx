@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 
 import { QueryDefinition } from '../queries/dsl'
-import useQuery from './useQuery'
 import useSafeState from './helpers/useSafeState'
+import useQuery from './useQuery'
 
 /**
  * Fetches a queryDefinition and run fetchMore on the query until the query is fully loaded

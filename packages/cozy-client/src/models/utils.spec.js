@@ -1,10 +1,11 @@
+import { isAndroid, isIOS } from 'cozy-device-helper'
+import flag from 'cozy-flags'
+
 import {
   getCreatedByApp,
   hasBeenUpdatedByApp,
   getFlagshipDownloadLink
 } from './utils'
-import { isAndroid, isIOS } from 'cozy-device-helper'
-import flag from 'cozy-flags'
 
 jest.mock('cozy-device-helper', () => ({
   isAndroid: jest.fn(),

@@ -1,4 +1,11 @@
+import mapValues from 'lodash/mapValues'
 import MockDate from 'mockdate'
+
+import CozyStackClient, { OAuthClient } from 'cozy-stack-client'
+import FileCollection from 'cozy-stack-client/dist/FileCollection'
+
+import CozyClient from './CozyClient'
+import { withIgnoreConsoleWarn } from './__tests__/console'
 import {
   SCHEMA,
   TODO_1,
@@ -14,12 +21,10 @@ import {
   FILE_1,
   TODO_WITH_NONEXISTING_RELATIONSHIP
 } from './__tests__/fixtures'
-import { withIgnoreConsoleWarn } from './__tests__/console'
-
-import CozyClient from './CozyClient'
-import { Q } from './queries/dsl'
-import CozyStackClient, { OAuthClient } from 'cozy-stack-client'
+import { HasManyFiles, Association } from './associations'
 import CozyLink from './links/CozyLink'
+import logger from './logger'
+import { Q } from './queries/dsl'
 import { Mutations, QueryDefinition } from './queries/dsl'
 import {
   initQuery,
@@ -35,10 +40,6 @@ import {
   resetQuery,
   executeQueryFromState
 } from './store'
-import { HasManyFiles, Association } from './associations'
-import mapValues from 'lodash/mapValues'
-import FileCollection from 'cozy-stack-client/dist/FileCollection'
-import logger from './logger'
 
 const normalizeData = data =>
   mapValues(data, (docs, doctype) => {

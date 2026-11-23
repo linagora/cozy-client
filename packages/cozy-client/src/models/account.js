@@ -1,8 +1,8 @@
 // @ts-check
 import merge from 'lodash/merge'
-import { Q } from '../queries/dsl'
 
 import { getHasManyItem, updateHasManyItem } from '../associations/HasMany'
+import { Q } from '../queries/dsl'
 import { legacyLoginFields, getIdentifier } from './manifest'
 
 /**

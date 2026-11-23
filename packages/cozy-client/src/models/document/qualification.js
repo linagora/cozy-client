@@ -1,5 +1,6 @@
-import set from 'lodash/set'
 import difference from 'lodash/difference'
+import set from 'lodash/set'
+
 import * as qualificationModel from '../../assets/qualifications.json'
 import logger from '../../logger'
 import { iconLabelPairs } from './constants'

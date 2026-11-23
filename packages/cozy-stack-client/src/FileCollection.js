@@ -1,12 +1,16 @@
-import mime from 'mime/lite'
-import has from 'lodash/has'
 import get from 'lodash/get'
+import has from 'lodash/has'
 import omit from 'lodash/omit'
 import pick from 'lodash/pick'
-import { MangoQueryOptions } from './mangoIndex'
+import mime from 'mime/lite'
 
+import { dontThrowNotFoundError } from './Collection'
 import DocumentCollection from './DocumentCollection'
+import { getIllegalCharacters } from './getIllegalCharacter'
+import logger from './logger'
+import { MangoQueryOptions } from './mangoIndex'
 import { normalizeDoctypeJsonApi } from './normalize'
+import * as querystring from './querystring'
 import {
   uri,
   slugify,
@@ -14,10 +18,6 @@ import {
   forceDownload,
   sharedDriveApiPrefix
 } from './utils'
-import { dontThrowNotFoundError } from './Collection'
-import { getIllegalCharacters } from './getIllegalCharacter'
-import * as querystring from './querystring'
-import logger from './logger'
 
 /**
  * @typedef {object} IOCozyFolder Folder

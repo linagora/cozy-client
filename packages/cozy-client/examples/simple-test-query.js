@@ -1,5 +1,6 @@
-const CozyClient = require('../dist/index.node')
 const { ArgumentParser } = require('argparse')
+
+const CozyClient = require('../dist/index.node')
 const { createClientInteractive, Q } = require('../dist/index.node')
 
 global.fetch = require('node-fetch')

@@ -1,8 +1,14 @@
-import DatabaseQueryEngine from '../dbInterface'
-
 // @ts-ignore
 import { open } from '@op-engineering/op-sqlite'
 
+import {
+  isMissingSQLiteIndexError,
+  isUnsupportedMangoSelectorError
+} from '../../errors'
+import logger from '../../logger'
+import { getIndexFields, getIndexName } from '../../mango'
+import DatabaseQueryEngine from '../dbInterface'
+import PouchDBQueryEngine from '../pouchdb/pouchdb'
 import {
   createMangoIndex,
   makeSQLCreateDeletedIndex,
@@ -15,13 +21,6 @@ import {
   makeSQLQueryFromMango,
   parseResults
 } from './sql'
-import { getIndexFields, getIndexName } from '../../mango'
-import {
-  isMissingSQLiteIndexError,
-  isUnsupportedMangoSelectorError
-} from '../../errors'
-import PouchDBQueryEngine from '../pouchdb/pouchdb'
-import logger from '../../logger'
 
 // busy_timeout is per-connection, not per-database, and applies to the
 // statements issued after it. Two values are needed because the statements it

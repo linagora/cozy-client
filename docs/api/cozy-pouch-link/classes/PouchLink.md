@@ -32,7 +32,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:101](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L101)
+[CozyPouchLink.js:102](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L102)
 
 ## Properties
 
@@ -42,7 +42,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:191](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L191)
+[CozyPouchLink.js:192](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L192)
 
 ***
 
@@ -52,7 +52,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:119](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L119)
+[CozyPouchLink.js:120](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L120)
 
 ***
 
@@ -62,7 +62,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:120](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L120)
+[CozyPouchLink.js:121](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L121)
 
 ***
 
@@ -72,7 +72,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:121](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L121)
+[CozyPouchLink.js:122](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L122)
 
 ***
 
@@ -82,7 +82,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:127](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L127)
+[CozyPouchLink.js:128](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L128)
 
 ***
 
@@ -92,7 +92,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:113](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L113)
+[CozyPouchLink.js:114](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L114)
 
 ***
 
@@ -102,7 +102,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:144](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L144)
+[CozyPouchLink.js:145](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L145)
 
 ***
 
@@ -112,7 +112,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:128](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L128)
+[CozyPouchLink.js:129](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L129)
 
 ***
 
@@ -122,7 +122,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:266](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L266)
+[CozyPouchLink.js:267](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L267)
 
 ***
 
@@ -132,7 +132,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:264](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L264)
+[CozyPouchLink.js:265](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L265)
 
 ***
 
@@ -142,7 +142,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:131](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L131)
+[CozyPouchLink.js:132](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L132)
 
 ***
 
@@ -152,7 +152,7 @@ CozyLink.constructor
 
 *Defined in*
 
-[CozyPouchLink.js:124](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L124)
+[CozyPouchLink.js:125](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L125)
 
 ## Accessors
 
@@ -170,7 +170,7 @@ CozyLink.name
 
 *Defined in*
 
-[CozyPouchLink.js:147](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L147)
+[CozyPouchLink.js:148](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L148)
 
 ## Methods
 
@@ -197,7 +197,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:881](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L881)
+[CozyPouchLink.js:882](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L882)
 
 ***
 
@@ -217,7 +217,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:829](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L829)
+[CozyPouchLink.js:830](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L830)
 
 ***
 
@@ -237,7 +237,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:815](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L815)
+[CozyPouchLink.js:816](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L816)
 
 ***
 
@@ -257,7 +257,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:778](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L778)
+[CozyPouchLink.js:779](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L779)
 
 ***
 
@@ -277,7 +277,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:783](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L783)
+[CozyPouchLink.js:784](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L784)
 
 ***
 
@@ -298,7 +298,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:833](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L833)
+[CozyPouchLink.js:834](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L834)
 
 ***
 
@@ -318,7 +318,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:796](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L796)
+[CozyPouchLink.js:797](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L797)
 
 ***
 
@@ -338,7 +338,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:807](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L807)
+[CozyPouchLink.js:808](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L808)
 
 ***
 
@@ -361,7 +361,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:734](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L734)
+[CozyPouchLink.js:735](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L735)
 
 ***
 
@@ -382,7 +382,7 @@ already managed, so the list stays free of duplicates.
 
 *Defined in*
 
-[CozyPouchLink.js:679](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L679)
+[CozyPouchLink.js:680](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L680)
 
 ***
 
@@ -408,7 +408,7 @@ The changes
 
 *Defined in*
 
-[CozyPouchLink.js:578](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L578)
+[CozyPouchLink.js:579](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L579)
 
 ***
 
@@ -431,7 +431,7 @@ Returns the registered physical doctype for a given logical doctype and query op
 
 *Defined in*
 
-[CozyPouchLink.js:450](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L450)
+[CozyPouchLink.js:451](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L451)
 
 ***
 
@@ -456,7 +456,7 @@ The db info
 
 *Defined in*
 
-[CozyPouchLink.js:593](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L593)
+[CozyPouchLink.js:594](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L594)
 
 ***
 
@@ -476,7 +476,7 @@ The db info
 
 *Defined in*
 
-[CozyPouchLink.js:487](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L487)
+[CozyPouchLink.js:488](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L488)
 
 ***
 
@@ -497,7 +497,7 @@ The db info
 
 *Defined in*
 
-[CozyPouchLink.js:463](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L463)
+[CozyPouchLink.js:464](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L464)
 
 ***
 
@@ -523,7 +523,7 @@ The authenticated replication URL
 
 *Defined in*
 
-[CozyPouchLink.js:171](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L171)
+[CozyPouchLink.js:172](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L172)
 
 ***
 
@@ -537,7 +537,7 @@ The authenticated replication URL
 
 *Defined in*
 
-[CozyPouchLink.js:913](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L913)
+[CozyPouchLink.js:914](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L914)
 
 ***
 
@@ -557,7 +557,7 @@ The authenticated replication URL
 
 *Defined in*
 
-[CozyPouchLink.js:440](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L440)
+[CozyPouchLink.js:441](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L441)
 
 ***
 
@@ -577,7 +577,7 @@ The authenticated replication URL
 
 *Defined in*
 
-[CozyPouchLink.js:336](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L336)
+[CozyPouchLink.js:337](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L337)
 
 ***
 
@@ -597,7 +597,7 @@ The authenticated replication URL
 
 *Defined in*
 
-[CozyPouchLink.js:331](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L331)
+[CozyPouchLink.js:332](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L332)
 
 ***
 
@@ -623,7 +623,7 @@ Emits an event (pouchlink:sync:end) when the sync (all doctypes) is done
 
 *Defined in*
 
-[CozyPouchLink.js:309](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L309)
+[CozyPouchLink.js:310](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L310)
 
 ***
 
@@ -643,7 +643,7 @@ Emits an event (pouchlink:sync:end) when the sync (all doctypes) is done
 
 *Defined in*
 
-[CozyPouchLink.js:671](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L671)
+[CozyPouchLink.js:672](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L672)
 
 ***
 
@@ -673,7 +673,7 @@ Migrate the current adapter
 
 *Defined in*
 
-[CozyPouchLink.js:205](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L205)
+[CozyPouchLink.js:206](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L206)
 
 ***
 
@@ -698,7 +698,7 @@ the need to wait for the warmup
 
 *Defined in*
 
-[CozyPouchLink.js:657](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L657)
+[CozyPouchLink.js:658](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L658)
 
 ***
 
@@ -712,7 +712,7 @@ the need to wait for the warmup
 
 *Defined in*
 
-[CozyPouchLink.js:224](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L224)
+[CozyPouchLink.js:225](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L225)
 
 ***
 
@@ -732,7 +732,7 @@ the need to wait for the warmup
 
 *Defined in*
 
-[CozyPouchLink.js:414](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L414)
+[CozyPouchLink.js:415](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L415)
 
 ***
 
@@ -763,7 +763,7 @@ CozyLink.persistCozyData
 
 *Defined in*
 
-[CozyPouchLink.js:608](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L608)
+[CozyPouchLink.js:609](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L609)
 
 ***
 
@@ -783,7 +783,7 @@ CozyLink.persistCozyData
 
 *Defined in*
 
-[CozyPouchLink.js:190](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L190)
+[CozyPouchLink.js:191](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L191)
 
 ***
 
@@ -806,7 +806,7 @@ and removes it from the pouches.
 
 *Defined in*
 
-[CozyPouchLink.js:907](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L907)
+[CozyPouchLink.js:908](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L908)
 
 ***
 
@@ -833,7 +833,7 @@ CozyLink.request
 
 *Defined in*
 
-[CozyPouchLink.js:517](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L517)
+[CozyPouchLink.js:518](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L518)
 
 ***
 
@@ -851,7 +851,7 @@ CozyLink.reset
 
 *Defined in*
 
-[CozyPouchLink.js:292](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L292)
+[CozyPouchLink.js:293](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L293)
 
 ***
 
@@ -877,7 +877,7 @@ Emits pouchlink:sync:start event when the replication begins
 
 *Defined in*
 
-[CozyPouchLink.js:370](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L370)
+[CozyPouchLink.js:371](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L371)
 
 ***
 
@@ -902,7 +902,7 @@ Debounce delay can be configured through constructor's `syncDebounceDelayInMs` o
 
 *Defined in*
 
-[CozyPouchLink.js:387](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L387)
+[CozyPouchLink.js:388](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L388)
 
 ***
 
@@ -921,7 +921,7 @@ Emits pouchlink:sync:stop event
 
 *Defined in*
 
-[CozyPouchLink.js:406](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L406)
+[CozyPouchLink.js:407](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L407)
 
 ***
 
@@ -942,7 +942,7 @@ Emits pouchlink:sync:stop event
 
 *Defined in*
 
-[CozyPouchLink.js:495](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L495)
+[CozyPouchLink.js:496](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L496)
 
 ***
 
@@ -956,7 +956,7 @@ Emits pouchlink:sync:stop event
 
 *Defined in*
 
-[CozyPouchLink.js:863](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L863)
+[CozyPouchLink.js:864](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L864)
 
 ***
 
@@ -976,7 +976,7 @@ Emits pouchlink:sync:stop event
 
 *Defined in*
 
-[CozyPouchLink.js:787](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L787)
+[CozyPouchLink.js:788](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L788)
 
 ***
 
@@ -996,7 +996,7 @@ Emits pouchlink:sync:stop event
 
 *Defined in*
 
-[CozyPouchLink.js:792](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L792)
+[CozyPouchLink.js:793](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L793)
 
 ***
 
@@ -1021,4 +1021,4 @@ The adapter name
 
 *Defined in*
 
-[CozyPouchLink.js:158](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L158)
+[CozyPouchLink.js:159](https://github.com/linagora/cozy-client/blob/master/packages/cozy-pouch-link/src/CozyPouchLink.js#L159)

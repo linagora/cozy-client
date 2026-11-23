@@ -1,5 +1,3 @@
-import flag from 'cozy-flags'
-
 import {
   createStore as createReduxStore,
   combineReducers,
@@ -8,9 +6,11 @@ import {
 } from 'redux'
 import thunk from 'redux-thunk'
 
+import flag from 'cozy-flags'
+
 import documents from './documents'
-import queries, { isQueryAction } from './queries'
 import { isMutationAction } from './mutations'
+import queries, { isQueryAction } from './queries'
 
 const RESET_ACTION_TYPE = 'COZY_CLIENT.RESET_STATE'
 

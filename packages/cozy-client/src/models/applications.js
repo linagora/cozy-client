@@ -1,5 +1,6 @@
-import flag from 'cozy-flags'
 import get from 'lodash/get'
+
+import flag from 'cozy-flags'
 
 import { isHttpUrl } from '../helpers'
 

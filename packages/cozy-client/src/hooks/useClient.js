@@ -1,6 +1,7 @@
 import { useContext } from 'react'
-import clientContext from '../context'
+
 import CozyClient from '../CozyClient'
+import clientContext from '../context'
 
 /**
  * Returns the cozy client from the context

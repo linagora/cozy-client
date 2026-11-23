@@ -1,6 +1,6 @@
+import { isMissingPouchDBIndexError } from '../../errors'
 import { createIndex, getIndexFields, getIndexName } from '../../mango'
 import DatabaseQueryEngine from '../dbInterface'
-import { isMissingPouchDBIndexError } from '../../errors'
 import { getDocsAndNormalize } from './getDocs'
 
 export default class PouchDBQueryEngine extends DatabaseQueryEngine {

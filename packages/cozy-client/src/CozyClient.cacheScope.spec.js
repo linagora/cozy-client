@@ -1,7 +1,7 @@
 import CozyStackClient from '../../cozy-stack-client/src/CozyStackClient'
 import CozyClient from './CozyClient'
-import { Q } from './queries/dsl'
 import { ensureFilePath } from './helpers/realtime'
+import { Q } from './queries/dsl'
 import {
   dispatchCreate,
   dispatchUpdate,

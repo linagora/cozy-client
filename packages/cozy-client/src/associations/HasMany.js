@@ -1,9 +1,10 @@
 import get from 'lodash/get'
 import merge from 'lodash/merge'
+
+import logger from '../logger'
 import { QueryDefinition } from '../queries/dsl'
 import { getDocumentFromState, receiveQueryResult } from '../store'
 import Association from './Association'
-import logger from '../logger'
 
 /**
  * @typedef {object} Relationship

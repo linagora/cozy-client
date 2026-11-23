@@ -1,5 +1,6 @@
 import CozyClient from 'cozy-client'
 
+import { queryFileById } from './files'
 import {
   computeFileFullpath,
   fromPouchResult,
@@ -7,7 +8,6 @@ import {
   normalizeDocs,
   resetAllPaths
 } from './jsonapi'
-import { queryFileById } from './files'
 
 jest.mock('./files', () => ({
   queryFileById: jest.fn()

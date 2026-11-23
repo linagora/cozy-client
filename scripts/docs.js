@@ -1,8 +1,9 @@
 'use strict'
-const jsdoc2md = require('jsdoc-to-markdown')
 const path = require('path')
-const glob = require('glob')
+
 const fs = require('fs-extra')
+const glob = require('glob')
+const jsdoc2md = require('jsdoc-to-markdown')
 
 const globPromise = (pattern, options) =>
   new Promise((resolve, reject) => {

@@ -3,6 +3,7 @@ const {
   HasMany,
   createClientInteractive
 } = require('cozy-client')
+
 global.fetch = require('node-fetch') // in the browser we have native fetch
 const { ArgumentParser } = require('argparse')
 

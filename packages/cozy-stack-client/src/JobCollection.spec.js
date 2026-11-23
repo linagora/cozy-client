@@ -1,5 +1,5 @@
-import JobCollection from './JobCollection'
 import StackClient from './CozyStackClient'
+import JobCollection from './JobCollection'
 
 describe('job collection', () => {
   let stackClient, col

@@ -1,5 +1,6 @@
-import CozyLink from './CozyLink'
 import logger from 'cozy-logger'
+
+import CozyLink from './CozyLink'
 import { resolveForceLink } from './forceLink'
 
 export default class DataProxyLink extends CozyLink {

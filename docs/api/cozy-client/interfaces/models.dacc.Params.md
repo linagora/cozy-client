@@ -16,7 +16,7 @@ The measure end date
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:90](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L90)
+[packages/cozy-client/src/models/dacc.js:91](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L91)
 
 ***
 
@@ -28,7 +28,7 @@ The measure name
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:88](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L88)
+[packages/cozy-client/src/models/dacc.js:89](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L89)
 
 ***
 
@@ -40,4 +40,4 @@ The measure start date
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:89](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L89)
+[packages/cozy-client/src/models/dacc.js:90](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L90)

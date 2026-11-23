@@ -1,10 +1,10 @@
-import HasManyFiles from './HasManyFiles'
+import Association from './Association'
 import HasMany from './HasMany'
-import HasOne from './HasOne'
-import HasOneInPlace from './HasOneInPlace'
+import HasManyFiles from './HasManyFiles'
 import HasManyInPlace from './HasManyInPlace'
 import HasManyTriggers from './HasManyTriggers'
-import Association from './Association'
+import HasOne from './HasOne'
+import HasOneInPlace from './HasOneInPlace'
 
 export {
   resolveClass,

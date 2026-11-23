@@ -1,19 +1,19 @@
-import React from 'react'
 import { screen, render } from '@testing-library/react'
-import CozyProvider from './Provider'
+import React from 'react'
 
+import CozyProvider from './Provider'
 import Query from './Query'
+import { TODOS, TODO_WITH_RELATION, FILE_1 } from './__tests__/fixtures'
+
+// TODO we should have only one way of testing with the client
+import * as mocks from './__tests__/mocks'
+import { createTestAssets, queryResultFromData } from './__tests__/utils'
 import {
   initQuery,
   receiveQueryResult,
   receiveMutationResult,
   getQueryFromState
 } from './store'
-import { TODOS, TODO_WITH_RELATION, FILE_1 } from './__tests__/fixtures'
-
-// TODO we should have only one way of testing with the client
-import { createTestAssets, queryResultFromData } from './__tests__/utils'
-import * as mocks from './__tests__/mocks'
 
 describe('Query', () => {
   const queryDef = client => ({ doctype: 'io.cozy.todos' })

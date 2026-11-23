@@ -1,15 +1,15 @@
-import { isFlagshipApp } from 'cozy-device-helper'
-
 import get from 'lodash/get'
-import isString from 'lodash/isString'
 import has from 'lodash/has'
+import isString from 'lodash/isString'
 import trimEnd from 'lodash/trimEnd'
 
-import { setQualification } from './document/qualification'
-import { Q } from '../queries/dsl'
-import { DOCTYPE_FILES, DOCTYPE_FILES_ENCRYPTION } from '../const'
+import { isFlagshipApp } from 'cozy-device-helper'
+
 import CozyClient from '../CozyClient'
+import { DOCTYPE_FILES, DOCTYPE_FILES_ENCRYPTION } from '../const'
 import logger from '../logger'
+import { Q } from '../queries/dsl'
+import { setQualification } from './document/qualification'
 
 const FILE_TYPE = 'file'
 const DIR_TYPE = 'directory'
