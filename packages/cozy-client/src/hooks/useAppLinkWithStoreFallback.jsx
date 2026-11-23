@@ -24,7 +24,7 @@ const useAppLinkWithStoreFallback = (slug, client, path = '') => {
           setURL(getStoreURL(apps.data, appDocument))
         }
         setFetchStatus('loaded')
-      } catch (error) {
+      } catch {
         setFetchStatus('errored')
       }
     }

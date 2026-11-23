@@ -16,7 +16,7 @@ const useFetchHomeShortcuts = () => {
           .statByPath(HOME_MAGIC_FOLDER_PATH)
 
         setShortcuts((included || []).filter(file => file.class === 'shortcut'))
-      } catch (e) {
+      } catch {
         setShortcuts([])
       }
     }

@@ -11,7 +11,7 @@ export const isCorrectDateFormat = date => {
   try {
     const parsedDate = new Date(Date.parse(date))
     return !!parsedDate.toISOString().startsWith(date)
-  } catch (err) {
+  } catch {
     return false
   }
 }

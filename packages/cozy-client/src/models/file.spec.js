@@ -748,7 +748,7 @@ describe('File Model', () => {
           {},
           { name: 'test', dirId: 'a', conflictStrategy: 'erase' }
         )
-      } catch (e) {
+      } catch {
         expect(createFileSpy).toHaveBeenCalled()
       }
     })

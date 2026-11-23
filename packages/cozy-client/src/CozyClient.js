@@ -217,7 +217,7 @@ class CozyClient {
     if (!(this.stackClient instanceof OAuthClient)) {
       try {
         this.loadInstanceOptionsFromDOM()
-      } catch (err) {
+      } catch {
         // not a critical error, we may be in node or the instance options are not on the default HTML element
       }
     }
@@ -390,7 +390,7 @@ class CozyClient {
 
     try {
       options.oauth = JSON.parse(COZY_CREDENTIALS)
-    } catch (err) {
+    } catch {
       options.token = COZY_CREDENTIALS.trim()
     }
     options.uri = COZY_URL.trim()

@@ -15,7 +15,7 @@ const useCapabilities = client => {
 
         setCapabilities(get(capabilitiesResult, 'data', {}))
         setFetchStatus('loaded')
-      } catch (e) {
+      } catch {
         setFetchStatus('failed')
       }
     }

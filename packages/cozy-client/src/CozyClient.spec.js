@@ -1277,7 +1277,7 @@ describe('CozyClient', () => {
       requestHandler.mockRejectedValueOnce(error)
       try {
         await client.query(query, { as: 'allTodos' })
-      } catch (e) {} // eslint-disable-line no-empty
+      } catch {} // eslint-disable-line no-empty
       const dispatchCalls = client.store.dispatch.mock.calls
       const lastDispatchCall = dispatchCalls[dispatchCalls.length - 1]
       expect(lastDispatchCall[0]).toEqual(receiveQueryError('allTodos', error))
@@ -1858,7 +1858,7 @@ describe('CozyClient', () => {
       requestHandler.mockRejectedValueOnce(error)
       try {
         await client.mutate(mutation, { as: 'updateTodo' })
-      } catch (e) {} // eslint-disable-line no-empty
+      } catch {} // eslint-disable-line no-empty
       expect(client.store.dispatch.mock.calls[1][0]).toEqual(
         receiveMutationError('updateTodo', error, mutation)
       )

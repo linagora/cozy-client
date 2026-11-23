@@ -198,7 +198,7 @@ describe('PouchManager', () => {
 
     try {
       await manager.waitForCurrentReplications()
-    } catch (e) {
+    } catch {
       /* continue regardless of error */
     }
     expect(manager.stopReplicationLoop).toHaveBeenCalled()

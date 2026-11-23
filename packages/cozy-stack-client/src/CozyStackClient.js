@@ -292,7 +292,7 @@ class CozyStackClient {
             () => this.refreshToken(),
             () => 'refreshToken'
           )
-        } catch (refreshError) {
+        } catch {
           throw e
         }
         return await this.fetchJSONWithCurrentToken(method, path, body, options)

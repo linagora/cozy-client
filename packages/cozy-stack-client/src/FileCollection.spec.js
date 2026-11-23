@@ -1175,7 +1175,7 @@ describe('FileCollection', () => {
           dir_id: '123',
           name: 'incorrect / name'
         })
-      } catch (error) {
+      } catch {
         expect(client.fetchJSON.mock.calls.length).toEqual(0)
       }
     })
@@ -1347,7 +1347,7 @@ describe('FileCollection', () => {
           name: '/'
         }
         await collection.updateFile(data, params)
-      } catch (error) {
+      } catch {
         expect(client.fetchJSON.mock.calls.length).toEqual(0)
       }
     })

@@ -338,7 +338,7 @@ export const isHttpUrl = value => {
   if (typeof value !== 'string') return false
   try {
     return ['http:', 'https:'].includes(new URL(value).protocol)
-  } catch (e) {
+  } catch {
     return false
   }
 }

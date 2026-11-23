@@ -61,7 +61,7 @@ const useFetchShortcut = (client, id, driveId) => {
         }
         setShortcutInfos({ data: shortcutInfosResult.data })
         setFetchStatus('loaded')
-      } catch (e) {
+      } catch {
         if (isCancelled) return
 
         setFetchStatus('failed')
