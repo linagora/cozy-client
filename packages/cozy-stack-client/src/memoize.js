@@ -54,6 +54,7 @@ const memoize = (fn, options) => {
             if (v instanceof ErrorReturned) {
               delete cache[key]
             }
+            return v
           })
           .catch(e => {
             delete cache[key]

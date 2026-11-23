@@ -18,9 +18,7 @@ describe('loop', () => {
 
   const scheduleForward = duration => {
     time = time + duration
-    Promise.resolve().then(() => {
-      jest.advanceTimersByTime(duration)
-    })
+    return Promise.resolve().then(() => jest.advanceTimersByTime(duration))
   }
 
   // Sleep working in conjunction with fakeTimers

@@ -61,10 +61,9 @@ class App extends React.Component {
     return getReplicationURL(this.state.url, this.state.token, doctype)
   }
 
-  componentDidMount() {
-    this.createManager().then(() => {
-      this.displayDocs()
-    })
+  async componentDidMount() {
+    await this.createManager()
+    this.displayDocs()
   }
 
   componentWillUnmount() {
