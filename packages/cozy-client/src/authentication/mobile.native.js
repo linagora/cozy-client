@@ -50,11 +50,14 @@ export const authenticateWithReactNativeInAppBrowser = async url => {
         endEnter: 'slide_in_left',
         endExit: 'slide_out_right'
       }
-    }).then(result => {
-      if (result.type === 'cancel') {
-        reject(USER_CANCELED)
-      }
     })
+      .then(result => {
+        if (result.type === 'cancel') {
+          reject(USER_CANCELED)
+        }
+        return result
+      })
+      .catch(reject)
 
     const linkListener = ({ url }) => {
       let sanitizedUrl = url
