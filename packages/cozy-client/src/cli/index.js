@@ -106,7 +106,7 @@ const mkServerFlowCallback = serverOptions => authenticationURL =>
     }, 30 * 1000)
   })
 
-const hashCode = function(str) {
+const hashCode = function (str) {
   var hash = 0,
     i,
     chr

@@ -90,8 +90,8 @@ export const getAppDisplayName = (app, lang) => {
   )
 
   return translatedPrefix &&
-    (translatedPrefix.toLowerCase() !== 'cozy' &&
-      translatedPrefix.toLowerCase() !== 'twake')
+    translatedPrefix.toLowerCase() !== 'cozy' &&
+    translatedPrefix.toLowerCase() !== 'twake'
     ? `${translatedPrefix} ${translatedName}`
     : translatedName
 }

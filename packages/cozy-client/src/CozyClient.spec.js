@@ -417,7 +417,7 @@ describe('Stack client initialization', () => {
 
   it('proxies errors from stackClient', done => {
     const client = new CozyClient({ uri: 'http://localhost:8080' })
-    client.on('error', function(value) {
+    client.on('error', function (value) {
       expect(value).toEqual('hello')
       done()
     })
@@ -552,7 +552,7 @@ describe('CozyClient logout', () => {
     const originalLogout = client.logout
     links[0].reset = jest.fn()
     links[2].reset = jest.fn()
-    jest.spyOn(client, 'logout').mockImplementation(async function() {
+    jest.spyOn(client, 'logout').mockImplementation(async function () {
       await originalLogout.apply(this, arguments)
       expect(client.emit.mock.calls.map(x => x[0])).toEqual([
         'beforeLogin',
@@ -747,8 +747,14 @@ describe('CozyClient', () => {
       jest.spyOn(client.store, 'dispatch')
       client.setData(
         normalizeData({
-          'io.cozy.todos': [{ id: 1, done: true }, { id: 2, done: false }],
-          'io.cozy.people': [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+          'io.cozy.todos': [
+            { id: 1, done: true },
+            { id: 2, done: false }
+          ],
+          'io.cozy.people': [
+            { id: 1, name: 'Alice' },
+            { id: 2, name: 'Bob' }
+          ]
         })
       )
       expect(client.getDocumentFromState('io.cozy.todos', 1)).toMatchObject({
@@ -1300,9 +1306,7 @@ describe('CozyClient', () => {
       requestHandler.mockResolvedValueOnce({ data: null })
 
       const resp = await client.query(
-        Q('io.cozy.todos')
-          .getById('missing')
-          .include(['attachments'])
+        Q('io.cozy.todos').getById('missing').include(['attachments'])
       )
 
       expect(requestHandler).toHaveBeenCalledTimes(1)

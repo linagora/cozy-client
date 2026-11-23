@@ -24,7 +24,7 @@ describe('createClientInteractive', () => {
     const originalCreateServer = http.createServer
 
     // Saves created server for destruction in afterEach
-    jest.spyOn(http, 'createServer').mockImplementation(function() {
+    jest.spyOn(http, 'createServer').mockImplementation(function () {
       const server = originalCreateServer.apply(this, arguments)
       servers.push(server)
       return server

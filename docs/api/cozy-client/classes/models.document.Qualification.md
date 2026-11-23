@@ -142,7 +142,7 @@ The Qualification object.
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/qualification.js:223](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L223)
+[packages/cozy-client/src/models/document/qualification.js:225](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L225)
 
 ***
 
@@ -166,7 +166,7 @@ The Qualification object.
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/qualification.js:174](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L174)
+[packages/cozy-client/src/models/document/qualification.js:176](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L176)
 
 ***
 
@@ -190,7 +190,7 @@ The Qualification object.
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/qualification.js:184](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L184)
+[packages/cozy-client/src/models/document/qualification.js:186](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L186)
 
 ***
 
@@ -214,7 +214,7 @@ The Qualification object.
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/qualification.js:197](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L197)
+[packages/cozy-client/src/models/document/qualification.js:199](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L199)
 
 ***
 
@@ -238,7 +238,7 @@ The Qualification object.
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/qualification.js:210](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L210)
+[packages/cozy-client/src/models/document/qualification.js:212](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L212)
 
 ***
 
@@ -256,7 +256,7 @@ The qualification attributes
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/qualification.js:235](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L235)
+[packages/cozy-client/src/models/document/qualification.js:237](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L237)
 
 ***
 
@@ -280,4 +280,4 @@ Returns the qualification associated to a label.
 
 *Defined in*
 
-[packages/cozy-client/src/models/document/qualification.js:253](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L253)
+[packages/cozy-client/src/models/document/qualification.js:255](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/document/qualification.js#L255)

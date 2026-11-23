@@ -1,6 +1,4 @@
-export {
-  default as useAppLinkWithStoreFallback
-} from './useAppLinkWithStoreFallback'
+export { default as useAppLinkWithStoreFallback } from './useAppLinkWithStoreFallback'
 export { default as useCapabilities } from './useCapabilities'
 export { default as useFetchShortcut } from './useFetchShortcut'
 export { default as useFetchHomeShortcuts } from './useFetchHomeShortcuts'

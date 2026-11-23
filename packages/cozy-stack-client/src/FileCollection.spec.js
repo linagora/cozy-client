@@ -2561,9 +2561,8 @@ describe('FileCollection', () => {
         },
         meta: {}
       })
-      const result = await collection.findNotSynchronizedDirectories(
-        oauthClient
-      )
+      const result =
+        await collection.findNotSynchronizedDirectories(oauthClient)
       expect(result.next).toBe(true)
     })
 
@@ -2573,9 +2572,8 @@ describe('FileCollection', () => {
         links: {},
         meta: {}
       })
-      const result = await collection.findNotSynchronizedDirectories(
-        oauthClient
-      )
+      const result =
+        await collection.findNotSynchronizedDirectories(oauthClient)
       expect(result.next).toBe(false)
     })
   })
@@ -2843,7 +2841,10 @@ describe('FileCollection', () => {
     })
     it('should call the right route with a specific page by file', async () => {
       const ids = ['42', '43']
-      const pages = [{ id: '42', page: 1 }, { id: '43', page: 2 }]
+      const pages = [
+        { id: '42', page: 1 },
+        { id: '43', page: 2 }
+      ]
       await collection.createArchiveLinkByIds({ ids, pages })
       expect(client.fetchJSON).toHaveBeenCalledWith('POST', '/files/archive', {
         data: {

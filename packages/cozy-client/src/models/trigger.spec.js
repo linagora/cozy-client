@@ -80,8 +80,7 @@ describe('trigger model', () => {
     type: '@cron',
     options: null,
     message: {
-      Data:
-        'eyJrb25uZWN0b3IiOiJhbWVsaSIsImFjY291bnQiOiIzYTdjMzYzZWVhMmRkYjRkNzNiZDExYWZhOWJiM2ViNiJ9',
+      Data: 'eyJrb25uZWN0b3IiOiJhbWVsaSIsImFjY291bnQiOiIzYTdjMzYzZWVhMmRkYjRkNzNiZDExYWZhOWJiM2ViNiJ9',
       Type: 'json'
     }
   }

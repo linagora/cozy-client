@@ -1056,8 +1056,11 @@ class FileCollection extends DocumentCollection {
    * @returns {boolean}                 Whether the file is a parent's child
    */
   async isChildOf(child, parent) {
-    let { _id: childID, dirID: childDirID, path: childPath } =
-      typeof child === 'object' ? child : { _id: child }
+    let {
+      _id: childID,
+      dirID: childDirID,
+      path: childPath
+    } = typeof child === 'object' ? child : { _id: child }
     let { _id: parentID } =
       typeof parent === 'object' ? parent : { _id: parent }
     if (childID === parentID || childDirID === parentID) {

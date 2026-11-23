@@ -472,9 +472,9 @@ class PouchLink extends CozyLink {
       const cacheKey = `${dbDoctype}::${logicalDoctype}`
       let engine = this._driveQueryEngines.get(cacheKey)
       if (!engine) {
-        const QueryEngine =
-          /** @type {typeof PouchDBQueryEngine} */ (this.queryEngine ||
-          PouchDBQueryEngine)
+        const QueryEngine = /** @type {typeof PouchDBQueryEngine} */ (
+          this.queryEngine || PouchDBQueryEngine
+        )
         engine = new QueryEngine(this.pouches, logicalDoctype)
         engine.openDB(dbName)
         this._driveQueryEngines.set(cacheKey, engine)

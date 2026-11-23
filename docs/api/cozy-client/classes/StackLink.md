@@ -99,7 +99,7 @@ CozyLink.name
 
 *Defined in*
 
-[packages/cozy-client/src/links/StackLink.js:228](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L228)
+[packages/cozy-client/src/links/StackLink.js:221](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/StackLink.js#L221)
 
 ***
 

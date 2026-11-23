@@ -37,14 +37,8 @@ const validateTimeSeriesFormat = timeseries => {
  * @param {TimeSeries} timeseriesOption - The time series to save
  */
 export const saveTimeSeries = async (client, timeseriesOption) => {
-  const {
-    dataType,
-    series,
-    startDate,
-    endDate,
-    source,
-    theme
-  } = timeseriesOption
+  const { dataType, series, startDate, endDate, source, theme } =
+    timeseriesOption
   validateTimeSeriesFormat({ dataType, series, startDate, endDate, source })
 
   const doctype = `io.cozy.timeseries.${dataType}`

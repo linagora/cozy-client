@@ -149,9 +149,7 @@ export default class HasManyFiles extends HasMany {
     } else {
       const cursor = newCursor([document._type, document._id], '')
 
-      return Q(assoc.doctype)
-        .referencedBy(document)
-        .offsetCursor(cursor)
+      return Q(assoc.doctype).referencedBy(document).offsetCursor(cursor)
     }
   }
 }

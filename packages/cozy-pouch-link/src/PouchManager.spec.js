@@ -467,9 +467,8 @@ describe('PouchManager', () => {
 
     it('should return the list of queries if local storage contains ones', async () => {
       const persistedQueries = [query().options.as]
-      localStorage.__STORE__[
-        LOCALSTORAGE_STORAGE_KEYS.WARMUPEDQUERIES
-      ] = JSON.stringify(persistedQueries)
+      localStorage.__STORE__[LOCALSTORAGE_STORAGE_KEYS.WARMUPEDQUERIES] =
+        JSON.stringify(persistedQueries)
       expect(await ls.getPersistedWarmedUpQueries()).toEqual(persistedQueries)
     })
   })
@@ -638,15 +637,11 @@ describe('PouchManager', () => {
       expect(executeMock).toHaveBeenCalledTimes(2)
       expect(executeMock).toHaveBeenNthCalledWith(
         1,
-        query1()
-          .definition()
-          .toDefinition()
+        query1().definition().toDefinition()
       )
       expect(executeMock).toHaveBeenNthCalledWith(
         2,
-        query2()
-          .definition()
-          .toDefinition()
+        query2().definition().toDefinition()
       )
       expect(await ls.getPersistedWarmedUpQueries()).toEqual({
         'io.cozy.todos': ['query1', 'query2']

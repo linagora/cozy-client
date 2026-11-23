@@ -387,7 +387,8 @@ class PouchManager {
   }
 
   async areQueriesWarmedUp(doctype, queries) {
-    const persistWarmedUpQueries = await this.storage.getPersistedWarmedUpQueries()
+    const persistWarmedUpQueries =
+      await this.storage.getPersistedWarmedUpQueries()
     return queries.every(
       query =>
         persistWarmedUpQueries[doctype] &&

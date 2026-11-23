@@ -152,15 +152,8 @@ export default class StackLink extends CozyLink {
    * @returns {Promise<import("../types").ClientResponse>}
    */
   async executeQuery(query) {
-    const {
-      doctype,
-      selector,
-      id,
-      ids,
-      referenced,
-      sharingId,
-      ...rawOptions
-    } = query
+    const { doctype, selector, id, ids, referenced, sharingId, ...rawOptions } =
+      query
     let options = { ...rawOptions, driveId: undefined }
     if (!doctype) {
       logger.warn('Bad query', query)

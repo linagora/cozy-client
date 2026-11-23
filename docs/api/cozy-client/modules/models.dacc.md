@@ -34,7 +34,7 @@ Build parameters to request DACC aggregate
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:102](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L102)
+[packages/cozy-client/src/models/dacc.js:95](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L95)
 
 ***
 
@@ -80,7 +80,7 @@ Send measures to a DACC through a remote doctype
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:127](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L127)
+[packages/cozy-client/src/models/dacc.js:120](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L120)
 
 ***
 
@@ -126,4 +126,4 @@ Send measures to a DACC through a remote doctype
 
 *Defined in*
 
-[packages/cozy-client/src/models/dacc.js:71](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L71)
+[packages/cozy-client/src/models/dacc.js:64](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/dacc.js#L64)

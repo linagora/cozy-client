@@ -27,7 +27,7 @@ const fetchWithXMLHttpRequest = async (fullpath, options) => {
       xhr.upload.addEventListener('progress', options.onUploadProgress, false)
     }
 
-    xhr.onload = function() {
+    xhr.onload = function () {
       if (this.readyState == 4) {
         resolve(this)
       } else {
@@ -35,7 +35,7 @@ const fetchWithXMLHttpRequest = async (fullpath, options) => {
       }
     }
 
-    xhr.onerror = function(err) {
+    xhr.onerror = function (err) {
       reject(err)
     }
 

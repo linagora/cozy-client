@@ -367,10 +367,7 @@ const removeSlug = url => {
 }
 
 const removeSubdomain = url => {
-  const hostname = url.hostname
-    .split('.')
-    .splice(1)
-    .join('.')
+  const hostname = url.hostname.split('.').splice(1).join('.')
   const noSubUrl = new URL(
     uri({ protocol: url.protocol, hostname, port: url.port })
   )

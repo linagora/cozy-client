@@ -135,8 +135,7 @@ describe('FileRecentsCollection', () => {
         data: [recent('cat')],
         meta: { count: 1 },
         links: {
-          next:
-            '/files/recents?page%5Bcursor%5D=eyJpZCI6ImNhdCJ9&page%5Blimit%5D=1'
+          next: '/files/recents?page%5Bcursor%5D=eyJpZCI6ImNhdCJ9&page%5Blimit%5D=1'
         }
       })
 

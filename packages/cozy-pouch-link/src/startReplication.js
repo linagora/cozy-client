@@ -25,7 +25,12 @@ const humanTimeDelta = timeMs => {
   return str
 }
 /** @type {[string, number][]} */
-const TIME_UNITS = [['ms', 1000], ['s', 60], ['m', 60], ['h', 24]]
+const TIME_UNITS = [
+  ['ms', 1000],
+  ['s', 60],
+  ['m', 60],
+  ['h', 24]
+]
 
 /**
  * startReplication - Create a cancellable promise for replication with default options

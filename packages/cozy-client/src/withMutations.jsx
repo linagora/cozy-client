@@ -21,41 +21,43 @@ const makeMutationsObject = (mutations, client, props) => {
  * more mutations as attributes.
  * @returns {Function} - Component that will receive mutations as props
  */
-const withMutations = (...mutations) => WrappedComponent => {
-  const wrappedDisplayName =
-    WrappedComponent.displayName || WrappedComponent.name || 'Component'
+const withMutations =
+  (...mutations) =>
+  WrappedComponent => {
+    const wrappedDisplayName =
+      WrappedComponent.displayName || WrappedComponent.name || 'Component'
 
-  class Wrapper extends Component {
-    static contextTypes = {
-      client: PropTypes.object
-    }
+    class Wrapper extends Component {
+      static contextTypes = {
+        client: PropTypes.object
+      }
 
-    constructor(props, context) {
-      super(props, context)
-      const client = props.client || context.client
-      logger.warn(
-        `Deprecation: withMutations will be removed in the near future, prefer to use withClient to access the client. See https://github.com/cozy/cozy-client/pull/638 for more information.`
-      )
-      if (!client) {
-        throw new Error(
-          `Could not find "client" in either the context or props of ${wrappedDisplayName}`
+      constructor(props, context) {
+        super(props, context)
+        const client = props.client || context.client
+        logger.warn(
+          `Deprecation: withMutations will be removed in the near future, prefer to use withClient to access the client. See https://github.com/cozy/cozy-client/pull/638 for more information.`
         )
+        if (!client) {
+          throw new Error(
+            `Could not find "client" in either the context or props of ${wrappedDisplayName}`
+          )
+        }
+        this.mutations = {
+          createDocument: client.create.bind(client),
+          saveDocument: client.save.bind(client),
+          deleteDocument: client.destroy.bind(client),
+          ...makeMutationsObject(mutations, client, props)
+        }
       }
-      this.mutations = {
-        createDocument: client.create.bind(client),
-        saveDocument: client.save.bind(client),
-        deleteDocument: client.destroy.bind(client),
-        ...makeMutationsObject(mutations, client, props)
+
+      render() {
+        return <WrappedComponent {...this.mutations} {...this.props} />
       }
     }
 
-    render() {
-      return <WrappedComponent {...this.mutations} {...this.props} />
-    }
+    Wrapper.displayName = `WithMutations(${wrappedDisplayName})`
+    return Wrapper
   }
-
-  Wrapper.displayName = `WithMutations(${wrappedDisplayName})`
-  return Wrapper
-}
 
 export default withMutations

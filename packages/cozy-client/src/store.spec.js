@@ -314,7 +314,7 @@ describe('Store', () => {
       let originalWarn
       beforeEach(() => {
         originalWarn = console.warn
-        console.warn = function(message) {
+        console.warn = function (message) {
           if (
             message.includes(
               'getDocumentFromSlice: io.cozy.todos:todo_1 is absent'
@@ -696,7 +696,10 @@ describe('Store', () => {
         )
         await store.dispatch(
           receiveQueryResult('allTodos', {
-            data: [{ ...TODO_1, done: true }, { ...TODO_2, done: true }],
+            data: [
+              { ...TODO_1, done: true },
+              { ...TODO_2, done: true }
+            ],
             meta: { count: data.length },
             skip: 0,
             next: true

@@ -770,7 +770,10 @@ describe('getFormattedAddress', () => {
         postcode: undefined,
         street: undefined
       }
-      const res = getFormattedAddress(addressMock, jest.fn(() => ' ,  , '))
+      const res = getFormattedAddress(
+        addressMock,
+        jest.fn(() => ' ,  , ')
+      )
 
       expect(res).toBe('')
     })
@@ -782,7 +785,10 @@ describe('getFormattedAddress', () => {
         formattedAddress: '38 Taylor Street 16862 Cambridge Russian Federation'
       }
 
-      const res = getFormattedAddress(addressMock, jest.fn(() => ''))
+      const res = getFormattedAddress(
+        addressMock,
+        jest.fn(() => '')
+      )
 
       expect(res).toBe('38 Taylor Street 16862 Cambridge Russian Federation')
     })

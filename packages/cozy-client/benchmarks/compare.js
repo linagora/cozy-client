@@ -128,7 +128,9 @@ const buildComparison = (baseReport, prReport, threshold) => {
 }
 
 const main = () => {
-  const { basePath, prPath, mdPath, threshold } = parseArgs(process.argv.slice(2))
+  const { basePath, prPath, mdPath, threshold } = parseArgs(
+    process.argv.slice(2)
+  )
 
   const prReport = readJson(prPath)
   if (!prReport) {

@@ -122,9 +122,7 @@ export const createAssistant = async (client, assistantData) => {
 export const deleteAssistant = async (client, assistantId) => {
   try {
     const { data: assistantDoc, included } = await client.query(
-      Q(ASSISTANT_DOCTYPE)
-        .getById(assistantId)
-        .include(['provider'])
+      Q(ASSISTANT_DOCTYPE).getById(assistantId).include(['provider'])
     )
     await client.destroy(assistantDoc)
 
@@ -149,9 +147,7 @@ export const deleteAssistant = async (client, assistantId) => {
 export const editAssistant = async (client, assistantId, assistantData) => {
   try {
     const existedAssistant = await client.query(
-      Q(ASSISTANT_DOCTYPE)
-        .getById(assistantId)
-        .include(['provider'])
+      Q(ASSISTANT_DOCTYPE).getById(assistantId).include(['provider'])
     )
 
     if (!existedAssistant) {

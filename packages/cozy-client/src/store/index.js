@@ -49,66 +49,68 @@ export class StoreProxy {
 
 const initialState = { documents: {}, queries: {} }
 
-const combinedReducer = performanceApi => (state = initialState, action) => {
-  const markName = performanceApi.mark('combinedReducer')
+const combinedReducer =
+  performanceApi =>
+  (state = initialState, action) => {
+    const markName = performanceApi.mark('combinedReducer')
 
-  if (action.type == RESET_ACTION_TYPE) {
-    performanceApi.measure({
-      markName: markName,
-      measureName: `${markName} reset`,
-      category: 'CozyClientStore'
-    })
-    return initialState
-  }
-  if (!isQueryAction(action) && !isMutationAction(action)) {
-    performanceApi.measure({
-      markName: markName,
-      measureName: `${markName} no query nor mutate action`,
-      category: 'CozyClientStore'
-    })
-    return state
-  }
-  if (action.update) {
-    const proxy = new StoreProxy(state)
-    action.update(proxy, action.response)
-    const newState = {
-      documents: proxy.getState().documents,
+    if (action.type == RESET_ACTION_TYPE) {
+      performanceApi.measure({
+        markName: markName,
+        measureName: `${markName} reset`,
+        category: 'CozyClientStore'
+      })
+      return initialState
+    }
+    if (!isQueryAction(action) && !isMutationAction(action)) {
+      performanceApi.measure({
+        markName: markName,
+        measureName: `${markName} no query nor mutate action`,
+        category: 'CozyClientStore'
+      })
+      return state
+    }
+    if (action.update) {
+      const proxy = new StoreProxy(state)
+      action.update(proxy, action.response)
+      const newState = {
+        documents: proxy.getState().documents,
+        queries: queries(
+          performanceApi,
+          proxy.getState().queries,
+          action,
+          proxy.getState().documents
+        )
+      }
+      performanceApi.measure({
+        markName: markName,
+        measureName: `${markName} update action`,
+        category: 'CozyClientStore'
+      })
+      return newState
+    }
+
+    const nextDocuments = documents(state.documents, action)
+    const haveDocumentsChanged = nextDocuments !== state.documents
+
+    const queriesResult = {
+      documents: nextDocuments,
       queries: queries(
         performanceApi,
-        proxy.getState().queries,
+        state.queries,
         action,
-        proxy.getState().documents
+        nextDocuments,
+        haveDocumentsChanged
       )
     }
+
     performanceApi.measure({
       markName: markName,
-      measureName: `${markName} update action`,
+      measureName: `${markName} queries`,
       category: 'CozyClientStore'
     })
-    return newState
+    return queriesResult
   }
-
-  const nextDocuments = documents(state.documents, action)
-  const haveDocumentsChanged = nextDocuments !== state.documents
-
-  const queriesResult = {
-    documents: nextDocuments,
-    queries: queries(
-      performanceApi,
-      state.queries,
-      action,
-      nextDocuments,
-      haveDocumentsChanged
-    )
-  }
-
-  performanceApi.measure({
-    markName: markName,
-    measureName: `${markName} queries`,
-    category: 'CozyClientStore'
-  })
-  return queriesResult
-}
 export default combinedReducer
 
 const composedEnhancer =

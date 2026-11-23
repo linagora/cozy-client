@@ -23,7 +23,7 @@ export function normalizeDoctypeJsonApi(doctype) {
    * @param {object} response - The response from the API (not used in this function)
    * @returns {object} The normalized document
    */
-  return function(data, response) {
+  return function (data, response) {
     // use the "data" attribute of the response
     const normalizedDoc = normalizeDoc(data, doctype)
     return {
@@ -46,7 +46,7 @@ export function normalizeDoctypeRawApi(doctype) {
    * @param {object} response - The raw response from the API
    * @returns {object} The normalized document
    */
-  return function(data, response) {
+  return function (data, response) {
     // use the response directly
     const normalizedDoc = normalizeDoc(response, doctype)
     return {

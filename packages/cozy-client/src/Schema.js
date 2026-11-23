@@ -114,7 +114,10 @@ class Schema {
       Object.values(this.byDoctype)
     )
 
-    merge(this.byDoctype, keyBy(normalizedSchemaDefinition, x => x.doctype))
+    merge(
+      this.byDoctype,
+      keyBy(normalizedSchemaDefinition, x => x.doctype)
+    )
   }
 
   /**

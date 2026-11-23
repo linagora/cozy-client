@@ -172,14 +172,8 @@ export default class SQLiteQueryEngine extends DatabaseQueryEngine {
   }
 
   async find(options) {
-    const {
-      selector,
-      sort,
-      partialFilter,
-      limit,
-      recreateIndex,
-      skip
-    } = options
+    const { selector, sort, partialFilter, limit, recreateIndex, skip } =
+      options
     let { indexedFields } = options
 
     indexedFields = getIndexFields({

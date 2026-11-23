@@ -22,15 +22,8 @@ export const isCorrectDateFormat = date => {
  * @param { import("../types").DACCMeasure} measure - The DACC measure
  */
 export const checkMeasureParams = measure => {
-  const {
-    createdBy,
-    measureName,
-    startDate,
-    value,
-    group1,
-    group2,
-    group3
-  } = measure
+  const { createdBy, measureName, startDate, value, group1, group2, group3 } =
+    measure
 
   if (!createdBy || typeof createdBy !== 'string') {
     throw new Error('Missing or wrong type parameter: createdBy')

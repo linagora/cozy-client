@@ -25,13 +25,13 @@ export const withIgnoreConsoleError = withIgnoreConsole('error')
  */
 export const setupConsoleToThrow = () => {
   let originalWarn = console.warn
-  console.warn = function() {
+  console.warn = function () {
     originalWarn.apply(this, arguments)
     throw new Error('console.warn should not be called during tests')
   }
 
   let originalError = console.error
-  console.error = function() {
+  console.error = function () {
     originalError.apply(this, arguments)
     throw new Error('console.error should not be called during tests')
   }

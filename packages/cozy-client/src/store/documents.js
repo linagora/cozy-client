@@ -16,7 +16,7 @@ import { properId } from './helpers'
 // In deepmerge semantics, source object is applied on target object
 const replaceByClonedSource = options => {
   const clone = options.clone
-  return function(target, source) {
+  return function (target, source) {
     return clone(source)
   }
 }

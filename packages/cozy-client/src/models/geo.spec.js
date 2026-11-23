@@ -56,11 +56,17 @@ describe('computeSphericalCenter', () => {
   })
   it('should return correct center for n points', () => {
     expect(
-      computeSphericalCenter([{ lat: 10, lon: 10 }, { lat: 10, lon: 10 }])
+      computeSphericalCenter([
+        { lat: 10, lon: 10 },
+        { lat: 10, lon: 10 }
+      ])
     ).toEqual({ lat: 10, lon: 10 })
 
     expect(
-      computeSphericalCenter([{ lat: 48, lon: 2 }, { lat: 48, lon: 3 }])
+      computeSphericalCenter([
+        { lat: 48, lon: 2 },
+        { lat: 48, lon: 3 }
+      ])
     ).toEqual({ lat: 48.0010848667078, lon: 2.5 })
 
     expect(

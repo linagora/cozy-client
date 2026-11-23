@@ -95,7 +95,7 @@
       "phone_invoice": "Factura de teléfono |||| Facturas de teléfono",
       "pregnancy_medical_certificate": "Certificado de embarazo |||| Certificados de embarazo",
       "prescription": "Receta médica |||| Recetas médicas",
-      "real_estate_insurance" : "Certificado de seguro inmobiliario |||| Certificados de seguro inmobiliario",
+      "real_estate_insurance": "Certificado de seguro inmobiliario |||| Certificados de seguro inmobiliario",
       "real_estate_tax": "Impuesto sobre bienes inmuebles |||| Impuestos sobre bienes inmuebles",
       "receipt": "Recibo |||| Recibos",
       "rent_receipt": "Recibo de alquiler |||| Recibos de alquiler",
@@ -127,7 +127,7 @@
       "work_quote": "Presupuesto de obras |||| Presupuestos de obras",
       "work_study": "Trabajo y estudios"
     },
-    "attributes":{
+    "attributes": {
       "contractType": {
         "cdi": "Indefinido",
         "cdd": "Temporal",
@@ -191,7 +191,7 @@
             "number": "Número de expediente CAF"
           },
           "payment_proof_family_allowance": {
-            "number":"Número de expediente CAF"
+            "number": "Número de expediente CAF"
           },
           "vehicle": {
             "licenseNumber": "Matrícula del vehículo",

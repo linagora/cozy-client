@@ -199,7 +199,7 @@ export const _getIconURL = async (stackClient, opts) => {
  * or using preloaded url when blob not needed
  *
  */
-const getIconURL = function() {
+const getIconURL = function () {
   return _getIconURL.apply(this, arguments).catch(() => new ErrorReturned())
 }
 

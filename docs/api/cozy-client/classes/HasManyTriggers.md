@@ -385,7 +385,7 @@ Update target document with relationships
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:256](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L256)
+[packages/cozy-client/src/associations/HasMany.js:254](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L254)
 
 ***
 
@@ -678,7 +678,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:289](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L289)
+[packages/cozy-client/src/associations/HasMany.js:287](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L287)
 
 ***
 
@@ -703,7 +703,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:298](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L298)
+[packages/cozy-client/src/associations/HasMany.js:296](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L296)
 
 ***
 
@@ -758,7 +758,7 @@ having for the 'konnector' worker, and then filter them based on their
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:336](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L336)
+[packages/cozy-client/src/associations/HasMany.js:334](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L334)
 
 ***
 
@@ -785,7 +785,7 @@ having for the 'konnector' worker, and then filter them based on their
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:310](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L310)
+[packages/cozy-client/src/associations/HasMany.js:308](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L308)
 
 ***
 
@@ -812,7 +812,7 @@ having for the 'konnector' worker, and then filter them based on their
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:360](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L360)
+[packages/cozy-client/src/associations/HasMany.js:358](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L358)
 
 ***
 
@@ -838,4 +838,4 @@ having for the 'konnector' worker, and then filter them based on their
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:371](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L371)
+[packages/cozy-client/src/associations/HasMany.js:369](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L369)

@@ -37,7 +37,8 @@ const KNOWN_SURFACES = ['banner', 'modal']
  * real instant in one browser and to NaN in another, and the shared contract
  * vectors could no longer say what every client displays.
  */
-const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/
+const ISO_TIMESTAMP =
+  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/
 
 /** A bound that is absent leaves that end of the window open, unlike an unparseable one. */
 const toTime = value => {

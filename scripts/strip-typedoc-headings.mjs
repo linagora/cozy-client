@@ -4,22 +4,26 @@
  * this is too much.
  */
 
-'use strict';
+'use strict'
 
 import { visit } from 'unist-util-visit'
 
 const typedocHeadingsToStrip = {
   'Defined in': true,
-  'Parameters': true,
-  'Returns': true,
+  Parameters: true,
+  Returns: true,
   'Type declaration': true,
   'Inherited from': true,
-  'Overrides': true
+  Overrides: true
 }
 
-const isTypedocHeadingToStrip = (node) => {
-  return node.type === 'heading' && node.children.length == 1 &&
-    (node.depth == 4 || node.depth == 5) && typedocHeadingsToStrip[node.children[0].value] 
+const isTypedocHeadingToStrip = node => {
+  return (
+    node.type === 'heading' &&
+    node.children.length == 1 &&
+    (node.depth == 4 || node.depth == 5) &&
+    typedocHeadingsToStrip[node.children[0].value]
+  )
 }
 
 export default function () {
@@ -27,14 +31,14 @@ export default function () {
     if (isTypedocHeadingToStrip(node)) {
       node.type = 'emphasis'
     }
-    return node;
+    return node
   }
 
   function transformer(tree) {
     visit(tree, n => {
-      return transform(n);
-    });
+      return transform(n)
+    })
   }
 
-  return transformer;
-};
+  return transformer
+}

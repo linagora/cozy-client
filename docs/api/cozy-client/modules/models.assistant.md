@@ -88,4 +88,4 @@ Edit assistant with the provided data.
 
 *Defined in*
 
-[packages/cozy-client/src/models/assistant.js:149](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L149)
+[packages/cozy-client/src/models/assistant.js:147](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/assistant.js#L147)

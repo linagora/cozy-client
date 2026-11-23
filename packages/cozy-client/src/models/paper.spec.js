@@ -39,10 +39,11 @@ describe('Expiration', () => {
     MockDate.reset()
   })
 
-  const fakeFileWithoutMetadata = /** @type {import('../types').IOCozyFile} */ ({
-    _id: '00',
-    name: 'unknown'
-  })
+  const fakeFileWithoutMetadata =
+    /** @type {import('../types').IOCozyFile} */ ({
+      _id: '00',
+      name: 'unknown'
+    })
   const fakeNationalIdCardFile = buildMockFile({
     qualificationLabel: 'national_id_card',
     expirationDate: '2022-09-23T11:35:58.118Z',

@@ -229,29 +229,27 @@ class HasMany extends Association {
     return HasMany.updateRelationship(target, this.name, updateFn)
   }
 
-  updateRelationshipData = getUpdatedRelationshipData => (
-    dispatch,
-    getState
-  ) => {
-    const previousRelationship = getDocumentFromState(
-      getState(),
-      this.target._type,
-      this.target._id
-    )
-    dispatch(
-      receiveQueryResult(null, {
-        data: {
-          ...previousRelationship,
-          relationships: {
-            ...previousRelationship.relationships,
-            [this.name]: getUpdatedRelationshipData(
-              previousRelationship.relationships[this.name]
-            )
+  updateRelationshipData =
+    getUpdatedRelationshipData => (dispatch, getState) => {
+      const previousRelationship = getDocumentFromState(
+        getState(),
+        this.target._type,
+        this.target._id
+      )
+      dispatch(
+        receiveQueryResult(null, {
+          data: {
+            ...previousRelationship,
+            relationships: {
+              ...previousRelationship.relationships,
+              [this.name]: getUpdatedRelationshipData(
+                previousRelationship.relationships[this.name]
+              )
+            }
           }
-        }
-      })
-    )
-  }
+        })
+      )
+    }
 
   dehydrate(doc) {
     return {

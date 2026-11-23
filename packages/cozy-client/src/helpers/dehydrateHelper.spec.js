@@ -18,7 +18,10 @@ describe('dehydrate', () => {
     oneInPlace: '1',
     relationships: {
       hasMany: {
-        data: [{ _id: 1, _type: 'has.many' }, { _id: 2, _type: 'has.many' }]
+        data: [
+          { _id: 1, _type: 'has.many' },
+          { _id: 2, _type: 'has.many' }
+        ]
       },
       hasManyFiles: {
         data: [

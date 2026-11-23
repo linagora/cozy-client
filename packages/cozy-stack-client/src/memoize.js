@@ -29,7 +29,7 @@ const isPromise = maybePromise => {
 const memoize = (fn, options) => {
   const cache = {}
 
-  return function() {
+  return function () {
     const key = options.key.apply(null, arguments)
     garbageCollect(cache, options.maxDuration)
     const existing = cache[key]

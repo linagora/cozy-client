@@ -514,7 +514,7 @@ The root Cozy URL
 
 *Defined in*
 
-[packages/cozy-client/src/helpers/urlHelper.js:434](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L434)
+[packages/cozy-client/src/helpers/urlHelper.js:431](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/helpers/urlHelper.js#L431)
 
 ***
 
@@ -837,7 +837,7 @@ If a reference is found
 
 *Defined in*
 
-[packages/cozy-client/src/hoc.jsx:74](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L74)
+[packages/cozy-client/src/hoc.jsx:78](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L78)
 
 ***
 
@@ -865,7 +865,7 @@ if there are N queries, only 1 extra level of nesting is introduced.
 
 *Defined in*
 
-[packages/cozy-client/src/hoc.jsx:90](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L90)
+[packages/cozy-client/src/hoc.jsx:94](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/hoc.jsx#L94)
 
 ***
 

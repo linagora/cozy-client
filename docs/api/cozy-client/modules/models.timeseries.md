@@ -39,7 +39,7 @@ The TimeSeries found by the query in JSON-API format
 
 *Defined in*
 
-[packages/cozy-client/src/models/timeseries.js:77](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L77)
+[packages/cozy-client/src/models/timeseries.js:71](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/timeseries.js#L71)
 
 ***
 

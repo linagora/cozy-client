@@ -20,9 +20,12 @@ export const withClient = WrappedComponent => {
     return <WrappedComponent {...props} client={client} />
   }
   // @ts-ignore
-  Wrapped.displayName = `withClient(${WrappedComponent.displayName ||
+  Wrapped.displayName = `withClient(${
     // @ts-ignore
-    WrappedComponent.name})`
+    WrappedComponent.displayName ||
+    // @ts-ignore
+    WrappedComponent.name
+  })`
   return Wrapped
 }
 
@@ -58,8 +61,9 @@ const withQuery = (dest, queryOpts, Original) => {
     Wrapper.contextTypes = {
       client: PropTypes.object
     }
-    Wrapper.displayName = `withQuery(${Component.displayName ||
-      Component.name})`
+    Wrapper.displayName = `withQuery(${
+      Component.displayName || Component.name
+    })`
     return Wrapper
   }
 }
@@ -92,7 +96,8 @@ export const queryConnectFlat = querySpecs => Component => {
     const queryResults = useQueries(querySpecs)
     return <Component {...props} {...queryResults} />
   }
-  Wrapper.displayName = `queryConnectFlat(${Component.displayName ||
-    Component.name})`
+  Wrapper.displayName = `queryConnectFlat(${
+    Component.displayName || Component.name
+  })`
   return Wrapper
 }

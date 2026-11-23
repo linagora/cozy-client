@@ -282,10 +282,7 @@ describe('dismiss', () => {
         // the read by id, then the re-read after the conflict
         .mockResolvedValueOnce({ data: stored })
         .mockResolvedValue({ data: fresh }),
-      save: jest
-        .fn()
-        .mockRejectedValueOnce(conflict)
-        .mockResolvedValue({})
+      save: jest.fn().mockRejectedValueOnce(conflict).mockResolvedValue({})
     }
 
     await dismiss(client, stored, { dismissedAt: at })
