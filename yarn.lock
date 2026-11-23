@@ -12691,13 +12691,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.iteratee@npm:^4.5.0":
-  version: 4.7.0
-  resolution: "lodash.iteratee@npm:4.7.0"
-  checksum: 10c0/19d9345c4ee9de99f7d292cb771aa6de35af8b90e62250cf098201c5bc97cc5a47db275d8ebd09d08e64d91b957082883d2ef64bff7be243174616d51d048aaa
-  languageName: node
-  linkType: hard
-
 "lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
@@ -16552,7 +16545,6 @@ __metadata:
     typedoc-plugin-markdown: "npm:3.11.14"
     typedoc-plugin-rename-defaults: "npm:0.4.0"
     typescript: "npm:4.5.5"
-    unist-util-find: "npm:1.0.2"
     unist-util-visit: "npm:3.1.0"
     whatwg-fetch: "npm:3.5.0"
   languageName: unknown
@@ -18589,29 +18581,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-find@npm:1.0.2":
-  version: 1.0.2
-  resolution: "unist-util-find@npm:1.0.2"
-  dependencies:
-    lodash.iteratee: "npm:^4.5.0"
-    unist-util-visit: "npm:^1.1.0"
-  checksum: 10c0/cc24b34344ae0e70b3ee72644299c52b4590b40fd5826a550db6d55fc428de0070a82e043a0dddacb201937e287cdfc4229cea2da28f94ae91ab1700f6f07d0e
-  languageName: node
-  linkType: hard
-
 "unist-util-inspect@npm:^5.0.0":
   version: 5.0.1
   resolution: "unist-util-inspect@npm:5.0.1"
   dependencies:
     is-empty: "npm:^1.0.0"
   checksum: 10c0/4ffe53af2ff406799fcf2df50e24d675bfe08da1f01dc61dc5e38add8c544394ba548cad3a0329369b6afcab43701b3e47f3b9970a565aba62cd3483135f0ff1
-  languageName: node
-  linkType: hard
-
-"unist-util-is@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "unist-util-is@npm:3.0.0"
-  checksum: 10c0/e46186214fabcef3c4947ab188ae272965465ec5c40652934025f6382c58dff6edca40860528f72718e42f858d1ce7db2754d5198beb96eff0379e4c3c34218f
   languageName: node
   linkType: hard
 
@@ -18628,15 +18603,6 @@ __metadata:
   dependencies:
     "@types/unist": "npm:^2.0.2"
   checksum: 10c0/46fa03f840df173b7f032cbfffdb502fb05b79b3fb5451681c796cf4985d9087a537833f5afb75d55e79b46bbbe4b3d81dd75a1062f9289091c526aebe201d5d
-  languageName: node
-  linkType: hard
-
-"unist-util-visit-parents@npm:^2.0.0":
-  version: 2.1.2
-  resolution: "unist-util-visit-parents@npm:2.1.2"
-  dependencies:
-    unist-util-is: "npm:^3.0.0"
-  checksum: 10c0/ca88e2f88f3c4849f1bb4e90edb3f5fa66bf94656165dd74027971c393274d25b1b34974b18da336c4e2b45771495d5dac2f80571fa25f86c8cec859287c25f8
   languageName: node
   linkType: hard
 
@@ -18658,15 +18624,6 @@ __metadata:
     unist-util-is: "npm:^5.0.0"
     unist-util-visit-parents: "npm:^4.0.0"
   checksum: 10c0/9b92ea4e6debadbb77f2c7a0ab8c8b7c63781b2f2050563c971687df368f6f6fe932d864442347a685f0dc56b570a55e5d7ffeb87a452489100640cf280dc8da
-  languageName: node
-  linkType: hard
-
-"unist-util-visit@npm:^1.1.0":
-  version: 1.4.1
-  resolution: "unist-util-visit@npm:1.4.1"
-  dependencies:
-    unist-util-visit-parents: "npm:^2.0.0"
-  checksum: 10c0/8fb61725270059034d987813816e6c2d6362f55d4d19936db9ce23a5ace0ae4d584064ceb94dee6618e3318aef087505607f7ccc8c4305fbb644c3b643ae0059
   languageName: node
   linkType: hard
 

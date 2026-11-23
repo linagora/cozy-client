@@ -7,7 +7,6 @@
 'use strict';
 
 import { visit } from 'unist-util-visit'
-import find from 'unist-util-find'
 
 const typedocHeadingsToStrip = {
   'Defined in': true,
@@ -23,24 +22,12 @@ const isTypedocHeadingToStrip = (node) => {
     (node.depth == 4 || node.depth == 5) && typedocHeadingsToStrip[node.children[0].value] 
 }
 
-export default function (options) {
-  const settings = options || {};
-
+export default function () {
   function transform(node) {
     if (isTypedocHeadingToStrip(node)) {
       node.type = 'emphasis'
     }
     return node;
-  }
-
-  function getNode(tree, value) {
-    if (typeof value === 'string') {
-      return find(tree, {type: 'heading', children: [{value}]});
-    }
-    if (typeof value === 'number') {
-      return tree.children[value];
-    }
-    return find(tree, value);
   }
 
   function transformer(tree) {
