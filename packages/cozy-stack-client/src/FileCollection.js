@@ -21,10 +21,6 @@ import * as querystring from './querystring'
 import logger from './logger'
 
 /**
- * @typedef {module:"./CozyStackClient.js"} CozyStackClient
- */
-
-/**
  * @typedef {object} IOCozyFolder Folder
  */
 

@@ -9,10 +9,6 @@ const normalizeNote = normalizeDoctypeJsonApi(NOTES_DOCTYPE)
 const normalizeNoteUrl = normalizeDoctypeJsonApi(NOTES_URL_DOCTYPE)
 
 /**
- * @typedef {module:"./CozyStackClient.js"} CozyStackClient
- */
-
-/**
  * Options that can be passed to NotesCollection's constructor
  *
  * @typedef {object} NotesCollectionOptions
