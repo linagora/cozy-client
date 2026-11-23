@@ -11,7 +11,7 @@ export const destroyOldDatabases = (PouchDB, doctypes, prefix) => {
         db.info()
           .then(() => {
             // The database exists: destroy it
-            db.destroy()
+            return db.destroy()
           })
           .catch(err => {
             // No database found, nothing to do
