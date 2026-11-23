@@ -238,4 +238,5 @@ class App extends React.Component {
 }
 
 const root = document.querySelector('#root')
+// eslint-disable-next-line react/no-deprecated -- the example runs React 16
 ReactDOM.render(<App />, root)

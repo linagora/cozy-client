@@ -37,6 +37,8 @@ jobs:
         run: yarn install --immutable
       - name: Lint
         run: yarn lint
+      - name: Check formatting
+        run: yarn lint:fmt
       - name: Build
         run: yarn build # before tests since packages rely on dist/ files to be available
       - name: Test

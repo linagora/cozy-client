@@ -79,6 +79,9 @@ in `docs/offline/`) before calling a change done.
 - Node 24 (`.nvmrc`), Yarn 4 through Corepack (`corepack enable`), Lerna workspaces.
 - Commits follow Conventional Commits and are checked by commitlint (`cozy` config).
 - Tests are Jest, colocated `*.spec.js` next to the source.
+- Lint with Rslint (`yarn lint`) and format with `rs fmt` (`yarn fmt`), both from Rstack and
+  configured in `rstack.config.mjs` with the presets of `rslint-config-cozy-app`. CI runs
+  `yarn lint:fmt` to check the formatting.
 
 ## Quick checklist before you open a PR
 

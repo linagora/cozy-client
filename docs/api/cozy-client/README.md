@@ -891,7 +891,7 @@ Resolves the effective forceLink target, mapping the deprecated forceStack optio
 
 *Defined in*
 
-[packages/cozy-client/src/links/forceLink.js:18](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/forceLink.js#L18)
+[packages/cozy-client/src/links/forceLink.js:17](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/forceLink.js#L17)
 
 ***
 

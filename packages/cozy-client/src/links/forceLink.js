@@ -7,7 +7,6 @@ export const _resetForceStackWarning = () => {
   hasWarnedForceStack = false
 }
 
-/* eslint-disable jsdoc/check-tag-names */
 /**
  * Resolves the effective forceLink target, mapping the deprecated forceStack option onto forceLink:'stack'.
  *
