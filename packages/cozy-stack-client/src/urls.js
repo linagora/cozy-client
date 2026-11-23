@@ -1,5 +1,3 @@
-/* global URL */
-
 import isNode from 'detect-node'
 
 const SECURED_PROTOCOL = 'https:'

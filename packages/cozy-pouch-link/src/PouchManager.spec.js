@@ -1,5 +1,3 @@
-/* global jest */
-
 // TODO use jest.useFakeTimers() to speed up the tests
 // See https://github.com/cozy/cozy-client/pull/239 for example
 // on how to use fake timers with setTimeout created in promises.

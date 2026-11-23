@@ -1,5 +1,4 @@
 /* eslint-env jest */
-/* global fetch */
 
 import CozyStackClient from './CozyStackClient'
 import DocumentCollection from './DocumentCollection'
