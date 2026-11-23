@@ -847,9 +847,8 @@ class FileCollection extends DocumentCollection {
       metadataId = meta.data.id
       path = path + `&MetadataID=${metadataId}`
     }
-    let size = ''
     if (options.contentLength) {
-      size = String(options.contentLength)
+      const size = String(options.contentLength)
       path = path + `&Size=${size}`
     }
     if (ifMatch !== '') options.ifMatch = ifMatch
@@ -1062,7 +1061,6 @@ class FileCollection extends DocumentCollection {
     if (!childPath) {
       const childDoc = await this.statById(childID)
       childPath = childDoc.data.path
-      childDirID = childDoc.data.dirID
     }
 
     // Build hierarchy paths

@@ -16,7 +16,7 @@ const getNewIndexedDBDatabaseName = dbName => {
  * @returns {Promise<object>} - The migrated pouch
  */
 export const migratePouch = async ({ dbName, fromAdapter, toAdapter }) => {
-  let oldPouch = new PouchDB(dbName, {
+  const oldPouch = new PouchDB(dbName, {
     adapter: fromAdapter,
     location: 'default'
   })
@@ -28,7 +28,6 @@ export const migratePouch = async ({ dbName, fromAdapter, toAdapter }) => {
   await oldPouch.replicate.to(newPouch, { batch_size: 1000 })
 
   await oldPouch.destroy()
-  oldPouch = null // See https://web.dev/detached-window-memory-leaks/
 
   return newPouch
 }
