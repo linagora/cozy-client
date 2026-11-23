@@ -1,7 +1,7 @@
 // @ts-check
-import _flow from 'lodash/flow'
 import _cloneDeep from 'lodash/cloneDeep'
 import findKey from 'lodash/findKey'
+import _flow from 'lodash/flow'
 
 export const ROLE_IDENTIFIER = 'identifier'
 

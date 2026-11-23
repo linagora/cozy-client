@@ -1,11 +1,10 @@
 import { useCallback } from 'react'
 
 import { editSettings, getQuery, normalizeSettings } from '../helpers'
-
+import { extractKeys } from '../helpers/settings'
+import { hasQueryBeenLoaded } from '../utils'
 import { useMutation } from './useMutation'
 import useQuery from './useQuery'
-import { hasQueryBeenLoaded } from '../utils'
-import { extractKeys } from '../helpers/settings'
 
 /**
  * Query the cozy-app settings corresponding to the given slug and

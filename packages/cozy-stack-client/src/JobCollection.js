@@ -1,7 +1,7 @@
 import Collection from './Collection'
 import DocumentCollection from './DocumentCollection'
-import { uri } from './utils'
 import { normalizeDoctypeJsonApi } from './normalize'
+import { uri } from './utils'
 
 export const JOBS_DOCTYPE = 'io.cozy.jobs'
 

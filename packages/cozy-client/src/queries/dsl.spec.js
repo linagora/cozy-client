@@ -1,5 +1,5 @@
-import { QueryDefinition, Q } from '../queries/dsl'
 import logger from '../logger'
+import { QueryDefinition, Q } from '../queries/dsl'
 
 describe('QueryDefinition', () => {
   beforeEach(() => {
@@ -154,9 +154,7 @@ describe('QueryDefinition', () => {
   })
   it('should throw an error when there is a select without all the fields in selector', () => {
     const query = () =>
-      Q('io.cozy.files')
-        .where({ name: 'saymyname' })
-        .select(['size'])
+      Q('io.cozy.files').where({ name: 'saymyname' }).select(['size'])
     expect(() => query()).toThrow()
   })
   it('should throw an error when there is a select without all the fields in partial index', () => {

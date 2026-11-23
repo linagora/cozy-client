@@ -1,6 +1,7 @@
 import CozyClient from 'cozy-client'
-import termUtils from './terms'
+
 import Registry, { transformRegistryFormatToStackFormat } from './registry'
+import termUtils from './terms'
 
 jest.mock('./terms', () => ({
   save: jest.fn()

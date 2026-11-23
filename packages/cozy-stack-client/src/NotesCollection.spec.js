@@ -1,5 +1,5 @@
-import NotesCollection from './NotesCollection'
 import CozyStackClient from './CozyStackClient'
+import NotesCollection from './NotesCollection'
 
 describe('NotesCollection', () => {
   const setup = () => {

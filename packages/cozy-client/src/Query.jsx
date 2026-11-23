@@ -1,6 +1,7 @@
-import { Component } from 'react'
-import CozyClient from './CozyClient'
 import PropTypes from 'prop-types'
+import { Component } from 'react'
+
+import CozyClient from './CozyClient'
 import ObservableQuery from './ObservableQuery'
 
 const dummyState = {}

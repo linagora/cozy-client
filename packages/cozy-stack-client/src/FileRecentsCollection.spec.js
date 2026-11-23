@@ -1,7 +1,7 @@
+import CozyStackClient from './CozyStackClient'
 import FileRecentsCollection, {
   FILE_RECENTS_DOCTYPE
 } from './FileRecentsCollection'
-import CozyStackClient from './CozyStackClient'
 
 const queryParams = url => {
   const [path, query = ''] = url.split('?')
@@ -135,8 +135,7 @@ describe('FileRecentsCollection', () => {
         data: [recent('cat')],
         meta: { count: 1 },
         links: {
-          next:
-            '/files/recents?page%5Bcursor%5D=eyJpZCI6ImNhdCJ9&page%5Blimit%5D=1'
+          next: '/files/recents?page%5Bcursor%5D=eyJpZCI6ImNhdCJ9&page%5Blimit%5D=1'
         }
       })
 

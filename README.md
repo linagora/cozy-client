@@ -37,7 +37,8 @@ Use Node 24 and Yarn 4
 ```bash
 yarn install
 yarn build         # required before tests: packages resolve each other from dist/
-yarn lint
+yarn lint          # rs lint
+yarn fmt           # rs fmt, checked in CI by yarn lint:fmt
 yarn test
 yarn docs          # regenerates docs/api/** (typedoc)
 yarn types         # regenerates packages/*/types/** (tsc, from JSDoc)

@@ -1,12 +1,12 @@
 #!/usr/bin/env babel-node
 
+import map from 'lodash/map'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import map from 'lodash/map'
 
-import PouchManager from '../../src/PouchManager'
-import { getReplicationURL } from '../../src/CozyPouchLink'
 import AccessToken from '../../src/AccessToken'
+import { getReplicationURL } from '../../src/CozyPouchLink'
+import PouchManager from '../../src/PouchManager'
 
 const DOCTYPE = 'io.cozy.bank.operations'
 
@@ -61,10 +61,9 @@ class App extends React.Component {
     return getReplicationURL(this.state.url, this.state.token, doctype)
   }
 
-  componentDidMount() {
-    this.createManager().then(() => {
-      this.displayDocs()
-    })
+  async componentDidMount() {
+    await this.createManager()
+    this.displayDocs()
   }
 
   componentWillUnmount() {
@@ -239,4 +238,5 @@ class App extends React.Component {
 }
 
 const root = document.querySelector('#root')
+// eslint-disable-next-line react/no-deprecated -- the example runs React 16
 ReactDOM.render(<App />, root)

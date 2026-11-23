@@ -1,11 +1,12 @@
 import pick from 'lodash/pick'
 import pickBy from 'lodash/pickBy'
+
 import Association from './Association'
+import HasMany from './HasMany'
+import HasManyFiles from './HasManyFiles'
+import HasManyInPlace from './HasManyInPlace'
 import HasOne from './HasOne'
 import HasOneInPlace from './HasOneInPlace'
-import HasMany from './HasMany'
-import HasManyInPlace from './HasManyInPlace'
-import HasManyFiles from './HasManyFiles'
 
 export const pickTypeAndId = x => pick(x, '_type', '_id')
 

@@ -1,5 +1,5 @@
-import { Q } from '../queries/dsl'
 import CozyClient from '../CozyClient'
+import { Q } from '../queries/dsl'
 
 function buildFileByIdQuery(id, driveId) {
   const definition = Q('io.cozy.files').getById(id)

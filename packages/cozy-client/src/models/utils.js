@@ -1,4 +1,5 @@
 import get from 'lodash/get'
+
 import { isAndroid, isIOS } from 'cozy-device-helper'
 import flag from 'cozy-flags'
 

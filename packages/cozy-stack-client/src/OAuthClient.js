@@ -1,7 +1,7 @@
-import CozyStackClient from './CozyStackClient'
 import AccessToken from './AccessToken'
-import logDeprecate from './logDeprecate'
+import CozyStackClient from './CozyStackClient'
 import errors from './errors'
+import logDeprecate from './logDeprecate'
 import logger from './logger'
 
 /**

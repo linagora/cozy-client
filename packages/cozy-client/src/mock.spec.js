@@ -1,6 +1,6 @@
-import { createFakeClient, createMockClient } from './mock'
-
 import { Q } from 'cozy-client'
+
+import { createFakeClient, createMockClient } from './mock'
 
 describe('createFakeClient', () => {
   const simpsonsFixture = [

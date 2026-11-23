@@ -58,7 +58,7 @@ export const saveAfterFetchSettings = async (
 
   const currentSettings = normalizeSettings(currentSettingsResult.data)
 
-  let items = undefined
+  let items
   if (typeof itemsOrSetter === 'function') {
     const currentItems = extractKeys(currentSettings, setterKeys)
     items = itemsOrSetter(currentItems)

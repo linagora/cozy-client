@@ -1,17 +1,18 @@
 import add from 'date-fns/add'
-import sub from 'date-fns/sub'
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict'
-import fr from 'date-fns/locale/fr'
-import es from 'date-fns/locale/es'
 import de from 'date-fns/locale/de'
+import es from 'date-fns/locale/es'
+import fr from 'date-fns/locale/fr'
 import it from 'date-fns/locale/it'
 import ru from 'date-fns/locale/ru'
 import vi from 'date-fns/locale/vi'
-import { getLocalizer as localizerDocument } from './document/locales'
-import { getLocalizer as localizerCountry } from './country/locales'
-import { getDisplayName } from './contact'
+import sub from 'date-fns/sub'
 import get from 'lodash/get'
+
+import { getDisplayName } from './contact'
 import { isValidCountryCodeTranslation } from './country/countries'
+import { getLocalizer as localizerCountry } from './country/locales'
+import { getLocalizer as localizerDocument } from './document/locales'
 
 const DATE_FNS_LOCALES = { fr, es, de, it, ru, vi }
 

@@ -1,13 +1,14 @@
-import { createStore, combineReducers } from 'redux'
 import omit from 'lodash/omit'
+import { createStore, combineReducers } from 'redux'
+
 import { Q } from 'cozy-client'
 
 import CozyClient from './CozyClient'
-import CozyLink from './links/CozyLink'
 import ObservableQuery from './ObservableQuery'
-import { initQuery, receiveQueryResult } from './store'
-import { queryResultFromData } from './__tests__/utils'
 import { SCHEMA, TODO_1, TODO_2 } from './__tests__/fixtures'
+import { queryResultFromData } from './__tests__/utils'
+import CozyLink from './links/CozyLink'
+import { initQuery, receiveQueryResult } from './store'
 
 const AUTHORS = [
   {

@@ -1,6 +1,6 @@
+import { UnsupportedMangoSelectorError } from '../../errors'
 import { normalizeDoc } from '../../jsonapi'
 import { getCozyPouchData } from '../helpers'
-import { UnsupportedMangoSelectorError } from '../../errors'
 
 // Binary operators with a direct SQL equivalent. Everything else needs its own
 // SQL shape and is handled explicitly in parseCondition.

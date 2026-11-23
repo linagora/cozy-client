@@ -1,10 +1,10 @@
+import { Q } from '../queries/dsl'
 import {
   isReadOnly,
   isDocumentReadOnly,
   fetchOwn,
   isShortcutCreatedOnTheRecipientCozy
 } from './permission'
-import { Q } from '../queries/dsl'
 
 jest.mock('../queries/dsl', () => ({
   Q: jest.fn()

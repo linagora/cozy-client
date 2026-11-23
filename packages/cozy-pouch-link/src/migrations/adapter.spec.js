@@ -1,5 +1,6 @@
-import { migratePouch } from './adapter'
 import PouchDB from 'pouchdb-browser'
+
+import { migratePouch } from './adapter'
 
 describe('adapter', () => {
   PouchDB.plugin(require('pouchdb-adapter-memory'))

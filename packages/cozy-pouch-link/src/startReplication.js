@@ -1,8 +1,10 @@
-import { default as helpers } from './helpers'
 import startsWith from 'lodash/startsWith'
+
+import CozyClient from 'cozy-client'
+
+import { default as helpers } from './helpers'
 import logger from './logger'
 import { fetchRemoteInstance } from './remote'
-import CozyClient from 'cozy-client'
 
 const { isDesignDocument, isDeletedDocument } = helpers
 
@@ -25,7 +27,12 @@ const humanTimeDelta = timeMs => {
   return str
 }
 /** @type {[string, number][]} */
-const TIME_UNITS = [['ms', 1000], ['s', 60], ['m', 60], ['h', 24]]
+const TIME_UNITS = [
+  ['ms', 1000],
+  ['s', 60],
+  ['m', 60],
+  ['h', 24]
+]
 
 /**
  * startReplication - Create a cancellable promise for replication with default options

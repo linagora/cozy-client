@@ -1,6 +1,6 @@
 import CozyClient from '../CozyClient'
-import { Q } from '../queries/dsl'
 import logger from '../logger'
+import { Q } from '../queries/dsl'
 
 const ASSISTANT_DOCTYPE = 'io.cozy.ai.chat.assistants'
 const ACCOUNT_DOCTYPE = 'io.cozy.accounts'
@@ -122,9 +122,7 @@ export const createAssistant = async (client, assistantData) => {
 export const deleteAssistant = async (client, assistantId) => {
   try {
     const { data: assistantDoc, included } = await client.query(
-      Q(ASSISTANT_DOCTYPE)
-        .getById(assistantId)
-        .include(['provider'])
+      Q(ASSISTANT_DOCTYPE).getById(assistantId).include(['provider'])
     )
     await client.destroy(assistantDoc)
 
@@ -149,9 +147,7 @@ export const deleteAssistant = async (client, assistantId) => {
 export const editAssistant = async (client, assistantId, assistantData) => {
   try {
     const existedAssistant = await client.query(
-      Q(ASSISTANT_DOCTYPE)
-        .getById(assistantId)
-        .include(['provider'])
+      Q(ASSISTANT_DOCTYPE).getById(assistantId).include(['provider'])
     )
 
     if (!existedAssistant) {

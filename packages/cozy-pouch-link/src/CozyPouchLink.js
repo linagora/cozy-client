@@ -1,3 +1,10 @@
+import debounce from 'lodash/debounce'
+import defaults from 'lodash/defaults'
+import omit from 'lodash/omit'
+import zipWith from 'lodash/zipWith'
+import PouchDB from 'pouchdb-browser'
+import PouchDBFind from 'pouchdb-find'
+
 import {
   MutationTypes,
   CozyLink,
@@ -6,25 +13,19 @@ import {
   defaultPerformanceApi,
   resolveForceLink
 } from 'cozy-client'
-import PouchDB from 'pouchdb-browser'
-import PouchDBFind from 'pouchdb-find'
-import defaults from 'lodash/defaults'
-import zipWith from 'lodash/zipWith'
-import debounce from 'lodash/debounce'
-import omit from 'lodash/omit'
 
+import PouchManager from './PouchManager'
+import { areDocsEqual, getExistingDocument } from './db/helpers'
+import PouchDBQueryEngine from './db/pouchdb/pouchdb'
+import { isExpiredTokenError } from './errors'
 import { default as helpers } from './helpers'
 import * as jsonapi from './jsonapi'
-import PouchManager from './PouchManager'
+import { normalizeDocs, sanitized, sanitizeJsonApi } from './jsonapi'
 import { PouchLocalStorage } from './localStorage'
 import logger from './logger'
 import { migratePouch } from './migrations/adapter'
 import { platformWeb } from './platformWeb'
 import { getDatabaseName, getPrefix } from './utils'
-import { isExpiredTokenError } from './errors'
-import { normalizeDocs, sanitized, sanitizeJsonApi } from './jsonapi'
-import PouchDBQueryEngine from './db/pouchdb/pouchdb'
-import { areDocsEqual, getExistingDocument } from './db/helpers'
 
 PouchDB.plugin(PouchDBFind)
 
@@ -472,9 +473,9 @@ class PouchLink extends CozyLink {
       const cacheKey = `${dbDoctype}::${logicalDoctype}`
       let engine = this._driveQueryEngines.get(cacheKey)
       if (!engine) {
-        const QueryEngine =
-          /** @type {typeof PouchDBQueryEngine} */ (this.queryEngine ||
-          PouchDBQueryEngine)
+        const QueryEngine = /** @type {typeof PouchDBQueryEngine} */ (
+          this.queryEngine || PouchDBQueryEngine
+        )
         engine = new QueryEngine(this.pouches, logicalDoctype)
         engine.openDB(dbName)
         this._driveQueryEngines.set(cacheKey, engine)

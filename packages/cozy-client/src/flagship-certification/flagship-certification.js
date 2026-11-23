@@ -1,5 +1,4 @@
 import CozyClient from '../CozyClient'
-
 import { getAppAttestationFromStore } from './store-attestation'
 /**
  * Request a challenge from the Stack that can be used to request the app attestation from the app store

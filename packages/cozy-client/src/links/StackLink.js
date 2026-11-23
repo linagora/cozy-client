@@ -1,7 +1,5 @@
 import zipWith from 'lodash/zipWith'
 
-import { MutationTypes, QueryDefinition } from '../queries/dsl'
-import CozyLink from './CozyLink'
 import {
   DOCTYPE_FILES,
   DOCTYPE_FILES_SHORTCUTS,
@@ -9,8 +7,10 @@ import {
 } from '../const'
 import { BulkEditError } from '../errors'
 import logger from '../logger'
-import { isReactNativeOfflineError } from '../utils'
 import { defaultPerformanceApi } from '../performances/defaultPerformanceApi'
+import { MutationTypes, QueryDefinition } from '../queries/dsl'
+import { isReactNativeOfflineError } from '../utils'
+import CozyLink from './CozyLink'
 import { resolveForceLink } from './forceLink'
 
 /**
@@ -152,15 +152,8 @@ export default class StackLink extends CozyLink {
    * @returns {Promise<import("../types").ClientResponse>}
    */
   async executeQuery(query) {
-    const {
-      doctype,
-      selector,
-      id,
-      ids,
-      referenced,
-      sharingId,
-      ...rawOptions
-    } = query
+    const { doctype, selector, id, ids, referenced, sharingId, ...rawOptions } =
+      query
     let options = { ...rawOptions, driveId: undefined }
     if (!doctype) {
       logger.warn('Bad query', query)

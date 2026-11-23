@@ -27,7 +27,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L10)
+[packages/cozy-client/src/links/DataProxyLink.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L11)
 
 ## Properties
 
@@ -37,7 +37,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:14](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L14)
+[packages/cozy-client/src/links/DataProxyLink.js:15](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L15)
 
 ***
 
@@ -47,7 +47,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:13](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L13)
+[packages/cozy-client/src/links/DataProxyLink.js:14](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L14)
 
 ***
 
@@ -57,7 +57,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:12](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L12)
+[packages/cozy-client/src/links/DataProxyLink.js:13](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L13)
 
 ## Accessors
 
@@ -75,7 +75,7 @@ CozyLink.name
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:21](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L21)
+[packages/cozy-client/src/links/DataProxyLink.js:22](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L22)
 
 ## Methods
 
@@ -89,7 +89,7 @@ CozyLink.name
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:75](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L75)
+[packages/cozy-client/src/links/DataProxyLink.js:76](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L76)
 
 ***
 
@@ -109,7 +109,7 @@ CozyLink.name
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:102](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L102)
+[packages/cozy-client/src/links/DataProxyLink.js:103](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L103)
 
 ***
 
@@ -130,7 +130,7 @@ CozyLink.name
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:60](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L60)
+[packages/cozy-client/src/links/DataProxyLink.js:61](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L61)
 
 ***
 
@@ -157,7 +157,7 @@ Persist the given data into the links storage
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:70](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L70)
+[packages/cozy-client/src/links/DataProxyLink.js:71](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L71)
 
 ***
 
@@ -177,7 +177,7 @@ Persist the given data into the links storage
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L25)
+[packages/cozy-client/src/links/DataProxyLink.js:26](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L26)
 
 ***
 
@@ -201,7 +201,7 @@ the dataproxy is ready and set
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:36](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L36)
+[packages/cozy-client/src/links/DataProxyLink.js:37](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L37)
 
 ***
 
@@ -230,7 +230,7 @@ Request the given operation from the link
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:45](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L45)
+[packages/cozy-client/src/links/DataProxyLink.js:46](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L46)
 
 ***
 
@@ -250,4 +250,4 @@ Reset the link data
 
 *Defined in*
 
-[packages/cozy-client/src/links/DataProxyLink.js:41](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L41)
+[packages/cozy-client/src/links/DataProxyLink.js:42](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/links/DataProxyLink.js#L42)

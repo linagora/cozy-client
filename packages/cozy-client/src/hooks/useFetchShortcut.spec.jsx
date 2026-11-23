@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks'
 
-import useFetchShortcut from './useFetchShortcut'
 import { createMockClient } from '../../dist/mock'
+import useFetchShortcut from './useFetchShortcut'
 
 describe('useFetchShortcut', () => {
   const mockClient = createMockClient({
@@ -106,8 +106,8 @@ describe('useFetchShortcut', () => {
   it('should ignore a drive answer resolving after a newer one', async () => {
     const makeDeferred = () => {
       let resolve
-      const promise = new Promise(r => {
-        resolve = r
+      const promise = new Promise(_resolve => {
+        resolve = _resolve
       })
       return { promise, resolve }
     }

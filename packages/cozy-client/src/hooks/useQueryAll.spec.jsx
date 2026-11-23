@@ -1,10 +1,9 @@
-import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
+import React from 'react'
 
-import { Q } from '../queries/dsl'
-import { createMockClient } from '../mock'
 import CozyProvider from '../Provider'
-
+import { createMockClient } from '../mock'
+import { Q } from '../queries/dsl'
 import useQueryAll from './useQueryAll'
 
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay))

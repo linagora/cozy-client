@@ -107,9 +107,7 @@ export const encodePath = path => {
   return path
     .split('/')
     .map(segment =>
-      encodeURIComponent(segment)
-        .replace(/\(/g, '%28')
-        .replace(/\)/g, '%29')
+      encodeURIComponent(segment).replace(/\(/g, '%28').replace(/\)/g, '%29')
     )
     .join('/')
 }

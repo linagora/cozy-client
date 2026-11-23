@@ -1,5 +1,5 @@
-import { Mutations } from '../queries/dsl'
 import { DOCTYPE_FILES } from '../const'
+import { Mutations } from '../queries/dsl'
 import { receiveMutationResult } from './mutations'
 
 /**

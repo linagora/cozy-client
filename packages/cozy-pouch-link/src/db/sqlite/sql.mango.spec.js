@@ -1,5 +1,4 @@
 import { UnsupportedMangoSelectorError } from '../../errors'
-
 import { makeWhereClause, makeSortClause, makeSQLQueryForIds } from './sql'
 
 // Compatibility of the native SQLite engine with the mango selector language

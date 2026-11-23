@@ -1,5 +1,5 @@
-import HasOneInPlace from './HasOneInPlace'
 import { dehydrate } from '../helpers'
+import HasOneInPlace from './HasOneInPlace'
 
 const fixtures = {
   jediMaster: {

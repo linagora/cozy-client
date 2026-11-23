@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Q } from '../queries/dsl'
+
 import {
   isInstalled as checkIfAppIsInstalled,
   getStoreURL,
   getUrl
 } from '../models/applications'
+import { Q } from '../queries/dsl'
 
 const useAppLinkWithStoreFallback = (slug, client, path = '') => {
   const [fetchStatus, setFetchStatus] = useState('loading')
@@ -24,7 +25,7 @@ const useAppLinkWithStoreFallback = (slug, client, path = '') => {
           setURL(getStoreURL(apps.data, appDocument))
         }
         setFetchStatus('loaded')
-      } catch (error) {
+      } catch {
         setFetchStatus('errored')
       }
     }

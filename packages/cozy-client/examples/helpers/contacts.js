@@ -1,4 +1,5 @@
 const { QueryDefinition, models } = require('cozy-client')
+
 const { makeDefaultSortIndexValue } = models.contact
 const { shuffle } = require('lodash')
 

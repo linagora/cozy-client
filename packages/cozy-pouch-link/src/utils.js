@@ -81,16 +81,20 @@ export const allSettled = promises => {
   return Promise.all(
     proms.map(promise =>
       promise
-        .then(value => /** @type {FulfilledPromise} */ ({
-          status: 'fulfilled',
-          value
-        }))
-        .catch((
-          /** @type {Error} */ reason
-        ) => /** @type {RejectedPromise} */ ({
-          status: 'rejected',
-          reason
-        }))
+        .then(
+          value =>
+            /** @type {FulfilledPromise} */ ({
+              status: 'fulfilled',
+              value
+            })
+        )
+        .catch(
+          (/** @type {Error} */ reason) =>
+            /** @type {RejectedPromise} */ ({
+              status: 'rejected',
+              reason
+            })
+        )
     )
   )
 }

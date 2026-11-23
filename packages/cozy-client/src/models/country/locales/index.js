@@ -1,9 +1,9 @@
 import Polyglot from 'node-polyglot'
 
-import enLocale from './en.json'
-import frLocale from './fr.json'
-import esLocale from './es.json'
 import deLocale from './de.json'
+import enLocale from './en.json'
+import esLocale from './es.json'
+import frLocale from './fr.json'
 import itLocale from './it.json'
 import ruLocale from './ru.json'
 import viLocale from './vi.json'

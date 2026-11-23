@@ -1,7 +1,7 @@
 import CozyStackClient from '../../cozy-stack-client/src/CozyStackClient'
 import CozyClient from './CozyClient'
-import { Q } from './queries/dsl'
 import { ensureFilePath } from './helpers/realtime'
+import { Q } from './queries/dsl'
 import {
   dispatchCreate,
   dispatchUpdate,
@@ -68,9 +68,7 @@ describe('file query cache scope', () => {
     })
 
     const response = await client.query(
-      Q(doctype)
-        .getById('parent-id')
-        .sharingById('drive-a'),
+      Q(doctype).getById('parent-id').sharingById('drive-a'),
       { as: 'shared-parent' }
     )
 
@@ -150,11 +148,7 @@ describe('file query cache scope', () => {
         meta: { rev: '1-parent' }
       }
     })
-    await client.query(
-      Q(doctype)
-        .getById('parent-id')
-        .sharingById('drive-a')
-    )
+    await client.query(Q(doctype).getById('parent-id').sharingById('drive-a'))
     fetchJSON.mockClear()
 
     await dispatchCreate(

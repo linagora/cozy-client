@@ -1,6 +1,6 @@
 const packageJson = require('./packages/cozy-client/package.json')
 
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true)
 
   return {

@@ -1,10 +1,10 @@
+import vectors from './__fixtures__/io.cozy.banners.json'
 import {
   BANNERS_DOCTYPE,
   dismiss,
   getActiveBanner,
   getActiveBanners
 } from './banner'
-import vectors from './__fixtures__/io.cozy.banners.json'
 
 /** A client that answers a collection read with the given documents. */
 const clientListing = docs => ({
@@ -282,10 +282,7 @@ describe('dismiss', () => {
         // the read by id, then the re-read after the conflict
         .mockResolvedValueOnce({ data: stored })
         .mockResolvedValue({ data: fresh }),
-      save: jest
-        .fn()
-        .mockRejectedValueOnce(conflict)
-        .mockResolvedValue({})
+      save: jest.fn().mockRejectedValueOnce(conflict).mockResolvedValue({})
     }
 
     await dismiss(client, stored, { dismissedAt: at })

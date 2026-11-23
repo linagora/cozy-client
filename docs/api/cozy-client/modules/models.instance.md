@@ -18,7 +18,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L10)
+[packages/cozy-client/src/models/instance.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L11)
 
 ***
 
@@ -28,7 +28,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:11](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L11)
+[packages/cozy-client/src/models/instance.js:12](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L12)
 
 ***
 
@@ -38,7 +38,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:9](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L9)
+[packages/cozy-client/src/models/instance.js:10](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L10)
 
 ## Functions
 
@@ -58,7 +58,7 @@
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:25](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L25)
+[packages/cozy-client/src/models/instance.js:26](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L26)
 
 ***
 
@@ -80,7 +80,7 @@ Returns the link to the Premium page on the Cozy's Manager
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:70](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L70)
+[packages/cozy-client/src/models/instance.js:71](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L71)
 
 ***
 
@@ -100,7 +100,7 @@ Returns the link to the Premium page on the Cozy's Manager
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:32](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L32)
+[packages/cozy-client/src/models/instance.js:33](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L33)
 
 ***
 
@@ -124,7 +124,7 @@ Does the cozy have offers
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:56](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L56)
+[packages/cozy-client/src/models/instance.js:57](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L57)
 
 ***
 
@@ -148,7 +148,7 @@ Checks the value of the password_defined attribute
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:87](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L87)
+[packages/cozy-client/src/models/instance.js:88](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L88)
 
 ***
 
@@ -168,7 +168,7 @@ Checks the value of the password_defined attribute
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:28](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L28)
+[packages/cozy-client/src/models/instance.js:29](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L29)
 
 ***
 
@@ -194,7 +194,7 @@ Checks the value of the password_defined attribute
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:22](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L22)
+[packages/cozy-client/src/models/instance.js:23](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L23)
 
 ***
 
@@ -219,7 +219,7 @@ Make human readable information from disk information (usage, quota)
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:157](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L157)
+[packages/cozy-client/src/models/instance.js:158](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L158)
 
 ***
 
@@ -243,4 +243,4 @@ Should we display offers
 
 *Defined in*
 
-[packages/cozy-client/src/models/instance.js:42](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L42)
+[packages/cozy-client/src/models/instance.js:43](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/instance.js#L43)

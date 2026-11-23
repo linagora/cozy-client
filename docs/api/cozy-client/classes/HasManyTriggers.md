@@ -198,7 +198,7 @@ HasMany.count
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:93](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L93)
+[packages/cozy-client/src/associations/HasMany.js:94](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L94)
 
 ***
 
@@ -234,7 +234,7 @@ HasMany.hasMore
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:82](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L82)
+[packages/cozy-client/src/associations/HasMany.js:83](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L83)
 
 ***
 
@@ -252,7 +252,7 @@ HasMany.raw
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:69](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L69)
+[packages/cozy-client/src/associations/HasMany.js:70](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L70)
 
 ## Methods
 
@@ -280,7 +280,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:124](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L124)
+[packages/cozy-client/src/associations/HasMany.js:125](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L125)
 
 ***
 
@@ -311,7 +311,7 @@ We certainly should use something like `updateRelationship`
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:174](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L174)
+[packages/cozy-client/src/associations/HasMany.js:175](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L175)
 
 ***
 
@@ -337,7 +337,7 @@ Update target document with relationships
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:147](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L147)
+[packages/cozy-client/src/associations/HasMany.js:148](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L148)
 
 ***
 
@@ -361,7 +361,7 @@ Update target document with relationships
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:108](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L108)
+[packages/cozy-client/src/associations/HasMany.js:109](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L109)
 
 ***
 
@@ -385,7 +385,7 @@ Update target document with relationships
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:256](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L256)
+[packages/cozy-client/src/associations/HasMany.js:255](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L255)
 
 ***
 
@@ -409,7 +409,7 @@ Update target document with relationships
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:104](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L104)
+[packages/cozy-client/src/associations/HasMany.js:105](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L105)
 
 ***
 
@@ -433,7 +433,7 @@ Update target document with relationships
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:114](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L114)
+[packages/cozy-client/src/associations/HasMany.js:115](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L115)
 
 ***
 
@@ -451,7 +451,7 @@ Update target document with relationships
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:100](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L100)
+[packages/cozy-client/src/associations/HasMany.js:101](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L101)
 
 ***
 
@@ -469,7 +469,7 @@ Update target document with relationships
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:207](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L207)
+[packages/cozy-client/src/associations/HasMany.js:208](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L208)
 
 ***
 
@@ -497,7 +497,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:136](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L136)
+[packages/cozy-client/src/associations/HasMany.js:137](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L137)
 
 ***
 
@@ -521,7 +521,7 @@ The saved target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:193](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L193)
+[packages/cozy-client/src/associations/HasMany.js:194](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L194)
 
 ***
 
@@ -547,7 +547,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:184](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L184)
+[packages/cozy-client/src/associations/HasMany.js:185](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L185)
 
 ***
 
@@ -565,7 +565,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:198](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L198)
+[packages/cozy-client/src/associations/HasMany.js:199](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L199)
 
 ***
 
@@ -590,7 +590,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:228](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L228)
+[packages/cozy-client/src/associations/HasMany.js:229](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L229)
 
 ***
 
@@ -627,7 +627,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:232](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L232)
+[packages/cozy-client/src/associations/HasMany.js:233](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L233)
 
 ***
 
@@ -652,7 +652,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:221](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L221)
+[packages/cozy-client/src/associations/HasMany.js:222](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L222)
 
 ***
 
@@ -678,7 +678,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:289](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L289)
+[packages/cozy-client/src/associations/HasMany.js:288](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L288)
 
 ***
 
@@ -703,7 +703,7 @@ Remove relationships from target document
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:298](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L298)
+[packages/cozy-client/src/associations/HasMany.js:297](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L297)
 
 ***
 
@@ -758,7 +758,7 @@ having for the 'konnector' worker, and then filter them based on their
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:336](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L336)
+[packages/cozy-client/src/associations/HasMany.js:335](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L335)
 
 ***
 
@@ -785,7 +785,7 @@ having for the 'konnector' worker, and then filter them based on their
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:310](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L310)
+[packages/cozy-client/src/associations/HasMany.js:309](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L309)
 
 ***
 
@@ -812,7 +812,7 @@ having for the 'konnector' worker, and then filter them based on their
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:360](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L360)
+[packages/cozy-client/src/associations/HasMany.js:359](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L359)
 
 ***
 
@@ -838,4 +838,4 @@ having for the 'konnector' worker, and then filter them based on their
 
 *Defined in*
 
-[packages/cozy-client/src/associations/HasMany.js:371](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L371)
+[packages/cozy-client/src/associations/HasMany.js:370](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/associations/HasMany.js#L370)

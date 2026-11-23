@@ -4,6 +4,7 @@
  * before passing them to the React component.
  */
 import get from 'lodash/get'
+
 import { getRawQueryFromState } from './store'
 
 const hasOwn = Object.prototype.hasOwnProperty

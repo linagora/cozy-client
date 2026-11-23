@@ -1175,7 +1175,7 @@ describe('FileCollection', () => {
           dir_id: '123',
           name: 'incorrect / name'
         })
-      } catch (error) {
+      } catch {
         expect(client.fetchJSON.mock.calls.length).toEqual(0)
       }
     })
@@ -1347,7 +1347,7 @@ describe('FileCollection', () => {
           name: '/'
         }
         await collection.updateFile(data, params)
-      } catch (error) {
+      } catch {
         expect(client.fetchJSON.mock.calls.length).toEqual(0)
       }
     })
@@ -2481,6 +2481,15 @@ describe('FileCollection', () => {
       const res = await collection.isChildOf(child, parent)
       expect(res).toEqual(false)
     })
+
+    it('should reject when a directory of the path cannot be fetched', async () => {
+      const error = new Error('Not found')
+      client.fetchJSON.mockReset()
+      client.fetchJSON.mockRejectedValue(error)
+      const child = { _id: 'file-id', path: '/a/b/c', dirID: '456' }
+      const parent = { _id: 'fake-id' }
+      await expect(collection.isChildOf(child, parent)).rejects.toBe(error)
+    })
   })
 
   describe('fetchFileContentById', () => {
@@ -2552,9 +2561,8 @@ describe('FileCollection', () => {
         },
         meta: {}
       })
-      const result = await collection.findNotSynchronizedDirectories(
-        oauthClient
-      )
+      const result =
+        await collection.findNotSynchronizedDirectories(oauthClient)
       expect(result.next).toBe(true)
     })
 
@@ -2564,9 +2572,8 @@ describe('FileCollection', () => {
         links: {},
         meta: {}
       })
-      const result = await collection.findNotSynchronizedDirectories(
-        oauthClient
-      )
+      const result =
+        await collection.findNotSynchronizedDirectories(oauthClient)
       expect(result.next).toBe(false)
     })
   })
@@ -2834,7 +2841,10 @@ describe('FileCollection', () => {
     })
     it('should call the right route with a specific page by file', async () => {
       const ids = ['42', '43']
-      const pages = [{ id: '42', page: 1 }, { id: '43', page: 2 }]
+      const pages = [
+        { id: '42', page: 1 },
+        { id: '43', page: 2 }
+      ]
       await collection.createArchiveLinkByIds({ ids, pages })
       expect(client.fetchJSON).toHaveBeenCalledWith('POST', '/files/archive', {
         data: {

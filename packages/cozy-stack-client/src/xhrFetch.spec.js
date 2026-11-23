@@ -6,7 +6,7 @@ const setup = ({ supportsOnUploadProgress, error, ko } = {}) => {
   const setRequestHeader = jest.fn()
   const addEventListener = jest.fn()
 
-  global.XMLHttpRequest = function() {
+  global.XMLHttpRequest = function () {
     const fakeResolve = () => {
       this.readyState = 4
       this.responseText = '{"result": true}'

@@ -95,7 +95,7 @@
       "phone_invoice": "Hóa đơn điện thoại",
       "pregnancy_medical_certificate": "Giấy xác nhận mang thai",
       "prescription": "Đơn thuốc",
-      "real_estate_insurance" : "Giấy chứng nhận bảo hiểm bất động sản",
+      "real_estate_insurance": "Giấy chứng nhận bảo hiểm bất động sản",
       "real_estate_tax": "Thuế bất động sản",
       "receipt": "Biên nhận",
       "rent_receipt": "Biên nhận tiền thuê nhà",
@@ -127,7 +127,7 @@
       "work_quote": "Báo giá thi công",
       "work_study": "Công việc & Học tập"
     },
-    "attributes":{
+    "attributes": {
       "contractType": {
         "cdi": "Không xác định thời hạn",
         "cdd": "Xác định thời hạn",
@@ -191,7 +191,7 @@
             "number": "Số hồ sơ CAF"
           },
           "payment_proof_family_allowance": {
-            "number":"Số hồ sơ CAF"
+            "number": "Số hồ sơ CAF"
           },
           "vehicle": {
             "licenseNumber": "Biển số xe",

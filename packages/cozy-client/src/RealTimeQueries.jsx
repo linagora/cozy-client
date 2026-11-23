@@ -1,11 +1,12 @@
 import { memo, useEffect } from 'react'
+
+import { ensureFilePath } from './helpers/realtime'
 import useClient from './hooks/useClient'
 import {
   dispatchCreate,
   dispatchDelete,
   dispatchUpdate
 } from './store/realtime'
-import { ensureFilePath } from './helpers/realtime'
 
 /**
  * Component that subscribes to a doctype changes and keep the

@@ -1,4 +1,5 @@
 import flag from 'cozy-flags'
+
 import logger from './logger'
 
 /**
@@ -19,8 +20,7 @@ const cancelable = promise => {
 
   const wrapped = new Promise((resolve, reject) => {
     _reject = reject
-    promise.then(resolve)
-    promise.catch(reject)
+    promise.then(resolve).catch(reject)
   })
 
   // @ts-ignore

@@ -1,7 +1,7 @@
 //@ts-ignore
-import { InAppBrowser } from 'react-native-inappbrowser-reborn'
-//@ts-ignore
 import { Linking, Platform } from 'react-native'
+//@ts-ignore
+import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 
 const USER_CANCELED = 'USER_CANCELED'
 
@@ -50,11 +50,14 @@ export const authenticateWithReactNativeInAppBrowser = async url => {
         endEnter: 'slide_in_left',
         endExit: 'slide_out_right'
       }
-    }).then(result => {
-      if (result.type === 'cancel') {
-        reject(USER_CANCELED)
-      }
     })
+      .then(result => {
+        if (result.type === 'cancel') {
+          reject(USER_CANCELED)
+        }
+        return result
+      })
+      .catch(reject)
 
     const linkListener = ({ url }) => {
       let sanitizedUrl = url

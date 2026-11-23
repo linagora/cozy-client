@@ -1,10 +1,10 @@
 import merge from 'lodash/merge'
 
-import CozyClient from './CozyClient'
-import { receiveQueryResult, receiveQueryError, initQuery } from './store'
 import { normalizeDoc } from 'cozy-stack-client'
 
+import CozyClient from './CozyClient'
 import { Q } from './queries/dsl'
+import { receiveQueryResult, receiveQueryError, initQuery } from './store'
 
 const fillQueryInsideClient = (client, queryName, queryOptions) => {
   const { definition, doctype, data, queryError, ...queryResult } = queryOptions

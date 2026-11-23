@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
 import get from 'lodash/get'
+import { useState, useEffect } from 'react'
+
 import { Q } from '../queries/dsl'
 
 const useCapabilities = client => {
@@ -15,7 +16,7 @@ const useCapabilities = client => {
 
         setCapabilities(get(capabilitiesResult, 'data', {}))
         setFetchStatus('loaded')
-      } catch (e) {
+      } catch {
         setFetchStatus('failed')
       }
     }

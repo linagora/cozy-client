@@ -1,5 +1,5 @@
-import { DOCTYPE_FILES, DOCTYPE_PERMISSIONS } from '../const'
 import CozyClient from '../CozyClient'
+import { DOCTYPE_FILES, DOCTYPE_PERMISSIONS } from '../const'
 import { generateWebLink } from '../helpers'
 
 /**

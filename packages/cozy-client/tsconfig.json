@@ -1,20 +1,20 @@
 {
-    "include": ["src/**/*"],
-    "exclude": ["**/*.spec.*"],
-    "compilerOptions": {
-      "allowJs": true,
-      "checkJs": true,
-      "outDir": "types",
-      "emitDeclarationOnly": true,
-      "resolveJsonModule": true,
-      "esModuleInterop": true,
-      "jsx": "react",
-      "declaration": true,
-      "target": "es6",
-      "moduleResolution": "node",
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true,
-      "skipLibCheck": true
-    },
-    "types": ["jest"]
+  "include": ["src/**/*"],
+  "exclude": ["**/*.spec.*"],
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "types",
+    "emitDeclarationOnly": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "declaration": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true
+  },
+  "types": ["jest"]
 }

@@ -22,7 +22,10 @@ describe('generateWebLink', () => {
     expect(
       generateWebLink({
         cozyUrl: 'http://alice.cozy.tools',
-        searchParams: [['sharecode', sharecode], ['username', username]],
+        searchParams: [
+          ['sharecode', sharecode],
+          ['username', username]
+        ],
         pathname: 'public',
         hash: '/n/4',
         slug: 'notes',
@@ -458,8 +461,7 @@ describe('rootCozyUrl', () => {
       {},
       {
         status: 200,
-        url:
-          'https://camillenimbus.mycozy.cloud/auth/login?redirect=https%3A%2F%2Fcamillenimbus-home.mycozy.cloud%2F'
+        url: 'https://camillenimbus.mycozy.cloud/auth/login?redirect=https%3A%2F%2Fcamillenimbus-home.mycozy.cloud%2F'
       }
     )
     fetch.mockOnceIf(

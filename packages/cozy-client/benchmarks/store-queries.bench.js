@@ -3,11 +3,13 @@ const path = require('path')
 const distDir = path.join(__dirname, '..', 'dist')
 const queriesModule = require(path.join(distDir, 'store', 'queries.js'))
 const dsl = require(path.join(distDir, 'queries', 'dsl.js'))
-const {
-  defaultPerformanceApi
-} = require(path.join(distDir, 'performances', 'defaultPerformanceApi.js'))
+const { defaultPerformanceApi } = require(
+  path.join(distDir, 'performances', 'defaultPerformanceApi.js')
+)
 
-const siftPath = require.resolve('sift', { paths: [path.join(__dirname, '..')] })
+const siftPath = require.resolve('sift', {
+  paths: [path.join(__dirname, '..')]
+})
 const siftModule = require(siftPath)
 const sift = siftModule.default || siftModule
 
@@ -127,7 +129,13 @@ const getSpecs = () => {
       runs: 5,
       regressionThresholdPct: 25,
       run: () => {
-        queries(defaultPerformanceApi, heavyState, receiveAction, documents, true)
+        queries(
+          defaultPerformanceApi,
+          heavyState,
+          receiveAction,
+          documents,
+          true
+        )
       }
     },
     {

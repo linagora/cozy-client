@@ -1,7 +1,7 @@
-import useQuery from './useQuery'
 import CozyClient from '../CozyClient'
 import { Q } from '../queries/dsl'
 import { hasQueryBeenLoaded } from '../utils'
+import useQuery from './useQuery'
 
 /**
  * Retrieve intance info like context, uuid, disk usage etc

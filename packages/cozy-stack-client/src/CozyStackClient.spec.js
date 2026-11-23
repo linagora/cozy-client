@@ -1,12 +1,12 @@
 /* eslint-env jest */
-/* global fetch */
 
+import jestFetchMock from 'jest-fetch-mock'
+
+import AppToken from './AppToken'
 import CozyStackClient from './CozyStackClient'
 import DocumentCollection from './DocumentCollection'
 import JobCollection from './JobCollection'
 import KonnectorCollection from './KonnectorCollection'
-import jestFetchMock from 'jest-fetch-mock'
-import AppToken from './AppToken'
 import { FetchError } from './errors'
 
 const FAKE_RESPONSE = {

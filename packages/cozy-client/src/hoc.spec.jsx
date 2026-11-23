@@ -1,13 +1,13 @@
+import { fireEvent, render, screen } from '@testing-library/react'
 import React, { useState } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
-import { fireEvent, render, screen } from '@testing-library/react'
 
-import { withClient, queryConnect, queryConnectFlat } from './hoc'
-import { Q } from './queries/dsl'
 import Provider from './Provider'
-import logger from './logger'
-// At some point __tests__/mocks and testing/utils shall be reconciled
 import * as mocks from './__tests__/mocks'
+import { withClient, queryConnect, queryConnectFlat } from './hoc'
+import logger from './logger'
+import { Q } from './queries/dsl'
+// At some point __tests__/mocks and testing/utils shall be reconciled
 import { setupClient } from './testing/utils'
 
 beforeEach(() => {

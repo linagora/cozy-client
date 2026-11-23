@@ -1,9 +1,9 @@
 jest.mock('./CozyStackClient')
 
-import CozyStackClient from './CozyStackClient'
 import AppsRegistryCollection, {
   APPS_REGISTRY_DOCTYPE
 } from './AppsRegistryCollection'
+import CozyStackClient from './CozyStackClient'
 
 describe(`AppsRegistryCollection`, () => {
   const client = new CozyStackClient()

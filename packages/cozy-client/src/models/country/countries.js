@@ -1,7 +1,7 @@
 // https://gist.github.com/incredimike/1469814
 
-import { getLocalizer } from './locales'
 import logger from '../../logger'
+import { getLocalizer } from './locales'
 
 /**
  * List of countries with their ISO codes

@@ -1,6 +1,8 @@
-import CozyClient, { generateWebLink } from 'cozy-client'
 import omit from 'lodash/omit'
 import startsWith from 'lodash/startsWith'
+
+import CozyClient, { generateWebLink } from 'cozy-client'
+
 import { getCozyPouchData } from './db/helpers'
 import { queryFileById, TYPE_DIRECTORY } from './files'
 import logger from './logger'

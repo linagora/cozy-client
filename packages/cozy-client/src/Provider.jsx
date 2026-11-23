@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+
 import clientContext from './context'
 
 const storePropType = PropTypes.shape({

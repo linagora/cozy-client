@@ -358,9 +358,9 @@ import { isReceivingMutationResult } from './mutations'
 describe('documents reducer - delete mutations', () => {
   const initialState = {
     'io.cozy.files': {
-      '1': { _id: '1', _type: 'io.cozy.files', name: 'File 1' },
-      '2': { _id: '2', _type: 'io.cozy.files', name: 'File 2' },
-      '3': { _id: '3', _type: 'io.cozy.files', name: 'File 3' }
+      1: { _id: '1', _type: 'io.cozy.files', name: 'File 1' },
+      2: { _id: '2', _type: 'io.cozy.files', name: 'File 2' },
+      3: { _id: '3', _type: 'io.cozy.files', name: 'File 3' }
     },
     'io.cozy.notes': {
       a: { _id: 'a', _type: 'io.cozy.notes', name: 'Note A' }
@@ -368,7 +368,7 @@ describe('documents reducer - delete mutations', () => {
   }
 
   beforeEach(() => {
-    /** @type {jest.Mock} */ ;(isReceivingMutationResult).mockReturnValue(true)
+    /** @type {jest.Mock} */ isReceivingMutationResult.mockReturnValue(true)
   })
 
   afterEach(() => {

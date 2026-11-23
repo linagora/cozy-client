@@ -1,10 +1,10 @@
+import * as qualificationModel from '../../assets/qualifications.json'
+import logger from '../../logger'
 import {
   Qualification,
   setQualification,
   getQualification
 } from './qualification'
-import * as qualificationModel from '../../assets/qualifications.json'
-import logger from '../../logger'
 
 jest.mock('../../assets/qualifications.json', () => ({
   qualifications: [
@@ -54,9 +54,8 @@ describe('document qualification', () => {
   })
 
   it('should get the correct qualification by the label', () => {
-    const qualification = Qualification.getByLabel(
-      'national_id_card'
-    ).toQualification()
+    const qualification =
+      Qualification.getByLabel('national_id_card').toQualification()
     expect(qualification.label).toEqual('national_id_card')
     expect(qualification.sourceCategory).toEqual('gov')
     expect(qualification.sourceSubCategory).toEqual('civil_registration')

@@ -1,4 +1,5 @@
 import log from 'cozy-logger'
+
 import CozyClient from '../CozyClient'
 
 /**
@@ -11,7 +12,7 @@ export const isCorrectDateFormat = date => {
   try {
     const parsedDate = new Date(Date.parse(date))
     return !!parsedDate.toISOString().startsWith(date)
-  } catch (err) {
+  } catch {
     return false
   }
 }
@@ -22,15 +23,8 @@ export const isCorrectDateFormat = date => {
  * @param { import("../types").DACCMeasure} measure - The DACC measure
  */
 export const checkMeasureParams = measure => {
-  const {
-    createdBy,
-    measureName,
-    startDate,
-    value,
-    group1,
-    group2,
-    group3
-  } = measure
+  const { createdBy, measureName, startDate, value, group1, group2, group3 } =
+    measure
 
   if (!createdBy || typeof createdBy !== 'string') {
     throw new Error('Missing or wrong type parameter: createdBy')

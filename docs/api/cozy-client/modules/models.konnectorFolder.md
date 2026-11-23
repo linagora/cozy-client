@@ -69,7 +69,7 @@ Permission object
 
 *Defined in*
 
-[packages/cozy-client/src/models/konnectorFolder.js:364](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L364)
+[packages/cozy-client/src/models/konnectorFolder.js:361](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L361)
 
 ***
 
@@ -160,7 +160,7 @@ Ensures the destination folder of a konnector exists and is initiated with prope
 
 *Defined in*
 
-[packages/cozy-client/src/models/konnectorFolder.js:28](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L28)
+[packages/cozy-client/src/models/konnectorFolder.js:26](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L26)
 
 ***
 
@@ -185,7 +185,7 @@ try to find a konnector account folder using file references
 
 *Defined in*
 
-[packages/cozy-client/src/models/konnectorFolder.js:472](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L472)
+[packages/cozy-client/src/models/konnectorFolder.js:469](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/models/konnectorFolder.js#L469)
 
 ***
 

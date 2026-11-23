@@ -1,7 +1,7 @@
 import DocumentCollection from './DocumentCollection'
-import { forceDownload, joinPath, encodePath } from './utils'
 import { FetchError } from './errors'
 import { normalizeDoctypeJsonApi } from './normalize'
+import { forceDownload, joinPath, encodePath } from './utils'
 
 const NEXTCLOUD_FILES_DOCTYPE = 'io.cozy.remote.nextcloud.files'
 
@@ -9,25 +9,23 @@ const normalizeNextcloudFileJsonApi = normalizeDoctypeJsonApi(
   NEXTCLOUD_FILES_DOCTYPE
 )
 
-const normalizeNextcloudFile = (
-  sourceAccount,
-  parentPath,
-  { fromTrash = false } = {}
-) => file => {
-  const normalizedDoc = normalizeNextcloudFileJsonApi(file)
+const normalizeNextcloudFile =
+  (sourceAccount, parentPath, { fromTrash = false } = {}) =>
+  file => {
+    const normalizedDoc = normalizeNextcloudFileJsonApi(file)
 
-  return {
-    ...normalizedDoc,
-    parentPath,
-    path: fromTrash
-      ? normalizedDoc.path
-      : joinPath(parentPath, normalizedDoc.name),
-    cozyMetadata: {
-      ...normalizedDoc.cozyMetadata,
-      sourceAccount
+    return {
+      ...normalizedDoc,
+      parentPath,
+      path: fromTrash
+        ? normalizedDoc.path
+        : joinPath(parentPath, normalizedDoc.name),
+      cozyMetadata: {
+        ...normalizedDoc.cozyMetadata,
+        sourceAccount
+      }
     }
   }
-}
 
 class NextcloudFilesCollection extends DocumentCollection {
   constructor(stackClient) {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 
-import { Q } from '../queries/dsl'
 import CozyClient from '../CozyClient'
 import { DOCTYPE_FILES_SHORTCUTS } from '../const'
+import { Q } from '../queries/dsl'
 
 const DEFAULT_CACHE_TIMEOUT_QUERIES = 10 * 60 * 1000 // 10 minutes
 
@@ -61,7 +61,7 @@ const useFetchShortcut = (client, id, driveId) => {
         }
         setShortcutInfos({ data: shortcutInfosResult.data })
         setFetchStatus('loaded')
-      } catch (e) {
+      } catch {
         if (isCancelled) return
 
         setFetchStatus('failed')

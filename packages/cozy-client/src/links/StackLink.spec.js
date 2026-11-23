@@ -1,8 +1,8 @@
-import { Q, MutationTypes } from '../queries/dsl'
 import CozyClient from '../CozyClient'
-import StackLink, { transformBulkDocsResponse } from './StackLink'
 import { SCHEMA } from '../__tests__/fixtures'
 import logger from '../logger'
+import { Q, MutationTypes } from '../queries/dsl'
+import StackLink, { transformBulkDocsResponse } from './StackLink'
 // eslint-disable-next-line no-underscore-dangle
 import { _resetForceStackWarning } from './forceLink'
 

@@ -1,5 +1,5 @@
-import OAuthClient from './OAuthClient'
 import AccessToken from './AccessToken'
+import OAuthClient from './OAuthClient'
 import { FetchError } from './errors'
 
 const CLIENT_INIT_OPTIONS = {

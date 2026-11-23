@@ -1,13 +1,13 @@
+import deepmerge from '@fastify/deepmerge'
+import fastEqual from 'fast-deep-equal'
 import get from 'lodash/get'
 import omit from 'lodash/omit'
-import fastEqual from 'fast-deep-equal'
-import deepmerge from '@fastify/deepmerge'
-import logger from '../logger'
-import { isReceivingData } from './queries'
-import { MutationTypes } from '../queries/dsl'
-import { isReceivingMutationResult } from './mutations'
 
+import logger from '../logger'
+import { MutationTypes } from '../queries/dsl'
 import { properId } from './helpers'
+import { isReceivingMutationResult } from './mutations'
+import { isReceivingData } from './queries'
 
 // By default, deepmerge concatenate array values.
 // We do not want concatenation and we do not know how to do partial updates
@@ -16,7 +16,7 @@ import { properId } from './helpers'
 // In deepmerge semantics, source object is applied on target object
 const replaceByClonedSource = options => {
   const clone = options.clone
-  return function(target, source) {
+  return function (target, source) {
     return clone(source)
   }
 }

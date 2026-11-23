@@ -84,9 +84,7 @@ describe('file versions', () => {
     const { client, fetchJSON } = setup()
 
     await client.query(
-      Q(FILES_DOCTYPE)
-        .getById('file-id')
-        .sharingById('drive-id'),
+      Q(FILES_DOCTYPE).getById('file-id').sharingById('drive-id'),
       { as: 'drive-file' }
     )
 

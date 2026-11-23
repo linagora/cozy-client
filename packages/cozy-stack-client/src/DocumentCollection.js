@@ -1,18 +1,11 @@
-import flag from 'cozy-flags'
-import { uri, attempt, sleep } from './utils'
-import uniq from 'lodash/uniq'
-import omit from 'lodash/omit'
 import head from 'lodash/head'
 import merge from 'lodash/merge'
+import omit from 'lodash/omit'
 import startsWith from 'lodash/startsWith'
+import uniq from 'lodash/uniq'
 import qs from 'qs'
-import {
-  MangoQueryOptions,
-  MangoSelector,
-  MangoPartialFilter,
-  DesignDoc
-} from './mangoIndex'
-import { normalizeDoc, normalizeDoctypeRawApi } from './normalize'
+
+import flag from 'cozy-flags'
 
 import Collection, {
   dontThrowNotFoundError,
@@ -23,6 +16,7 @@ import Collection, {
   isIndexNotUsedWarning,
   isTimeoutError
 } from './Collection'
+import logger from './logger'
 import {
   getIndexNameFromFields,
   transformSort,
@@ -30,10 +24,15 @@ import {
   isMatchingIndex,
   normalizeDesignDoc
 } from './mangoIndex'
+import {
+  MangoQueryOptions,
+  MangoSelector,
+  MangoPartialFilter,
+  DesignDoc
+} from './mangoIndex'
+import { normalizeDoc, normalizeDoctypeRawApi } from './normalize'
 import * as querystring from './querystring'
-import { FetchError } from './errors'
-
-import logger from './logger'
+import { uri, attempt, sleep } from './utils'
 
 const DATABASE_DOES_NOT_EXIST = 'Database does not exist.'
 

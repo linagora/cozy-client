@@ -1,12 +1,16 @@
-import mime from 'mime/lite'
-import has from 'lodash/has'
 import get from 'lodash/get'
+import has from 'lodash/has'
 import omit from 'lodash/omit'
 import pick from 'lodash/pick'
-import { MangoQueryOptions } from './mangoIndex'
+import mime from 'mime/lite'
 
+import { dontThrowNotFoundError } from './Collection'
 import DocumentCollection from './DocumentCollection'
+import { getIllegalCharacters } from './getIllegalCharacter'
+import logger from './logger'
+import { MangoQueryOptions } from './mangoIndex'
 import { normalizeDoctypeJsonApi } from './normalize'
+import * as querystring from './querystring'
 import {
   uri,
   slugify,
@@ -14,15 +18,6 @@ import {
   forceDownload,
   sharedDriveApiPrefix
 } from './utils'
-import { FetchError } from './errors'
-import { dontThrowNotFoundError } from './Collection'
-import { getIllegalCharacters } from './getIllegalCharacter'
-import * as querystring from './querystring'
-import logger from './logger'
-
-/**
- * @typedef {module:"./CozyStackClient.js"} CozyStackClient
- */
 
 /**
  * @typedef {object} IOCozyFolder Folder
@@ -263,15 +258,20 @@ export const isFile = ({ _type, type }) =>
 export const isDirectory = ({ type }) => type === 'directory'
 
 const raceWithCondition = (promises, predicate) => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     promises.forEach(p =>
-      p.then(res => {
-        if (predicate(res)) {
-          resolve(true)
-        }
-      })
+      p
+        .then(res => {
+          if (predicate(res)) {
+            resolve(true)
+          }
+          return res
+        })
+        .catch(reject)
     )
-    Promise.all(promises).then(() => resolve(false))
+    Promise.all(promises)
+      .then(() => resolve(false))
+      .catch(reject)
   })
 }
 
@@ -852,9 +852,8 @@ class FileCollection extends DocumentCollection {
       metadataId = meta.data.id
       path = path + `&MetadataID=${metadataId}`
     }
-    let size = ''
     if (options.contentLength) {
-      size = String(options.contentLength)
+      const size = String(options.contentLength)
       path = path + `&Size=${size}`
     }
     if (ifMatch !== '') options.ifMatch = ifMatch
@@ -1057,8 +1056,11 @@ class FileCollection extends DocumentCollection {
    * @returns {boolean}                 Whether the file is a parent's child
    */
   async isChildOf(child, parent) {
-    let { _id: childID, dirID: childDirID, path: childPath } =
-      typeof child === 'object' ? child : { _id: child }
+    let {
+      _id: childID,
+      dirID: childDirID,
+      path: childPath
+    } = typeof child === 'object' ? child : { _id: child }
     let { _id: parentID } =
       typeof parent === 'object' ? parent : { _id: parent }
     if (childID === parentID || childDirID === parentID) {
@@ -1067,7 +1069,6 @@ class FileCollection extends DocumentCollection {
     if (!childPath) {
       const childDoc = await this.statById(childID)
       childPath = childDoc.data.path
-      childDirID = childDoc.data.dirID
     }
 
     // Build hierarchy paths

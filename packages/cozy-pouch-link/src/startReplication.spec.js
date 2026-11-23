@@ -1,12 +1,12 @@
 import MicroEE from 'microee'
-import { fetchRemoteLastSequence, fetchRemoteInstance } from './remote'
 
+import helpers from './helpers'
+import { fetchRemoteLastSequence, fetchRemoteInstance } from './remote'
 import {
   replicateAllDocs,
   startReplication,
   sharedDriveReplicateAllDocs
 } from './startReplication'
-import helpers from './helpers'
 
 jest.mock('./remote', () => ({
   fetchRemoteLastSequence: jest.fn(),

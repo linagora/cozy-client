@@ -1,7 +1,8 @@
 /* eslint-disable-file no-console */
 
-import { createClientInteractive } from '.'
 import { ArgumentParser } from 'argparse'
+
+import { createClientInteractive } from '.'
 
 const parseArgs = () => {
   const parser = new ArgumentParser()

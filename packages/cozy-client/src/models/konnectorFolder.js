@@ -1,12 +1,10 @@
 //@ts-check
-import { ensureMagicFolder, MAGIC_FOLDERS } from './folder'
 
 import CozyClient from '../CozyClient'
-import { getAccountName } from './account'
-
-import { getLocalizer } from './document/locales'
-
 import { Q } from '../queries/dsl'
+import { getAccountName } from './account'
+import { getLocalizer } from './document/locales'
+import { ensureMagicFolder, MAGIC_FOLDERS } from './folder'
 
 const FILES_DOCTYPE = 'io.cozy.files'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
@@ -43,16 +41,18 @@ export const ensureKonnectorFolder = async (
 
   const sourceAccountIdentifier = getAccountName(account)
 
-  const alreadyExistingAccountFolder = await findKonnectorAccountFolderByReference(
-    { client, slug: konnector.slug, sourceAccountIdentifier }
-  )
+  const alreadyExistingAccountFolder =
+    await findKonnectorAccountFolderByReference({
+      client,
+      slug: konnector.slug,
+      sourceAccountIdentifier
+    })
   if (alreadyExistingAccountFolder) {
     return alreadyExistingAccountFolder
   }
 
-  const alreadyExistingKonnectorMainFolder = await findKonnectorMainFolderByReference(
-    { client, slug: konnector.slug }
-  )
+  const alreadyExistingKonnectorMainFolder =
+    await findKonnectorMainFolderByReference({ client, slug: konnector.slug })
 
   if (alreadyExistingKonnectorMainFolder) {
     // save account folder as a child of main konnector account folder
@@ -235,10 +235,7 @@ export const buildMainFolderPath = (konnector, magicFolders = {}) => {
    * * `buildedSubDir` containing the parent of the account folder, without baseDir
    */
   const baseDir = sanitizedPath.split('/', 1)
-  const parentPath = sanitizedPath
-    .split('/')
-    .slice(0, -1)
-    .join('/')
+  const parentPath = sanitizedPath.split('/').slice(0, -1).join('/')
   const buildedSubDir = buildSubDir(parentPath, baseDir[0], '$konnector')
 
   const renderedBaseDir = renderBaseDir(baseDir[0], magicFolders)

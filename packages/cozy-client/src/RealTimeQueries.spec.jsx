@@ -1,8 +1,9 @@
-import React from 'react'
 import { render, waitFor } from '@testing-library/react'
+import React from 'react'
+
+import CozyProvider from './Provider'
 import RealTimeQueries from './RealTimeQueries'
 import { createMockClient } from './mock'
-import CozyProvider from './Provider'
 
 const setup = async doctype => {
   const realtimeCallbacks = {}

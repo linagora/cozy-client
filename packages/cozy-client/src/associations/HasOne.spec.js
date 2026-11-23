@@ -1,7 +1,8 @@
-import HasOne from './HasOne'
-import { QueryDefinition } from '../queries/dsl'
 import merge from 'lodash/merge'
+
 import { dehydrate } from '../helpers'
+import { QueryDefinition } from '../queries/dsl'
+import HasOne from './HasOne'
 
 const clientMock = {
   get: (doctype, id) => new QueryDefinition({ doctype, id })

@@ -1,10 +1,9 @@
 import CozyClient from './CozyClient'
+import { SCHEMA, TODO_1, TODO_2 } from './__tests__/fixtures'
 import CozyLink from './links/CozyLink'
 import { defaultPerformanceApi } from './performances/defaultPerformanceApi'
 import { createStore, getQueryFromStore } from './store'
 import { receiveQueryResult, initQuery } from './store/queries'
-
-import { SCHEMA, TODO_1, TODO_2 } from './__tests__/fixtures'
 
 describe('Associations', () => {
   const requestHandler = jest.fn()

@@ -1,8 +1,9 @@
+import intersectionBy from 'lodash/intersectionBy'
 import keyBy from 'lodash/keyBy'
 import mapValues from 'lodash/mapValues'
 import merge from 'lodash/merge'
 import size from 'lodash/size'
-import intersectionBy from 'lodash/intersectionBy'
+
 import { resolveClass as resolveAssociationClass } from './associations'
 
 /**
@@ -114,7 +115,10 @@ class Schema {
       Object.values(this.byDoctype)
     )
 
-    merge(this.byDoctype, keyBy(normalizedSchemaDefinition, x => x.doctype))
+    merge(
+      this.byDoctype,
+      keyBy(normalizedSchemaDefinition, x => x.doctype)
+    )
   }
 
   /**

@@ -1,6 +1,6 @@
-import { hasPasswordDefinedAttribute } from './instance'
 import { hasExtensionInstalledAttribute } from './bitwarden'
 import { isMagicLink, isOIDC } from './capability'
+import { hasPasswordDefinedAttribute } from './instance'
 
 /**
  * Checks whether the user has a password

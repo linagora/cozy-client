@@ -95,7 +95,7 @@
       "phone_invoice": "Telefonrechnung |||| Telefonrechnungen",
       "pregnancy_medical_certificate": "Schwangerschaftsbescheinigung |||| Schwangerschaftsbescheinigungen",
       "prescription": "Rezept |||| Rezepte",
-      "real_estate_insurance" : "Nachweis der Gebäudeversicherung |||| Nachweise der Gebäudeversicherung",
+      "real_estate_insurance": "Nachweis der Gebäudeversicherung |||| Nachweise der Gebäudeversicherung",
       "real_estate_tax": "Grundsteuer |||| Grundsteuern",
       "receipt": "Quittung |||| Quittungen",
       "rent_receipt": "Mietquittung |||| Mietquittungen",
@@ -127,7 +127,7 @@
       "work_quote": "Kostenvoranschlag |||| Kostenvoranschläge",
       "work_study": "Arbeit & Studium"
     },
-    "attributes":{
+    "attributes": {
       "contractType": {
         "cdi": "Unbefristet",
         "cdd": "Befristet",
@@ -191,7 +191,7 @@
             "number": "CAF-Aktenzeichen"
           },
           "payment_proof_family_allowance": {
-            "number":"CAF-Aktenzeichen"
+            "number": "CAF-Aktenzeichen"
           },
           "vehicle": {
             "licenseNumber": "Kfz-Kennzeichen",

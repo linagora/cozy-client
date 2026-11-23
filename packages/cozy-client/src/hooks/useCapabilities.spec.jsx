@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
+
 import useCapabilities from './useCapabilities'
 describe('useCapabilities', () => {
   const mockClient = { query: jest.fn(), get: jest.fn() }

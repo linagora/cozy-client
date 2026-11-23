@@ -1,5 +1,6 @@
 import CozyClient from 'cozy-client'
 
+import { queryFileById } from './files'
 import {
   computeFileFullpath,
   fromPouchResult,
@@ -7,7 +8,6 @@ import {
   normalizeDocs,
   resetAllPaths
 } from './jsonapi'
-import { queryFileById } from './files'
 
 jest.mock('./files', () => ({
   queryFileById: jest.fn()
@@ -705,7 +705,6 @@ describe('computeFileFullpath', () => {
   })
 
   it('should compute fullpath for file with no path', async () => {
-    // eslint-disable-next-line prettier/prettier
     queryFileById.mockResolvedValue({ data: dir })
     const res = await computeFileFullpath(client, filewithNoPath)
     expect(res.path).toEqual('ROOT/MYDIR/file3')

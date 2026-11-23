@@ -1,5 +1,5 @@
-import Association from './Association'
 import { Q, QueryDefinition } from '../queries/dsl'
+import Association from './Association'
 
 /**
  * Here the id of the document is directly set in the attribute

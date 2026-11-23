@@ -95,7 +95,7 @@
       "phone_invoice": "Phone invoice |||| Phone invoices",
       "pregnancy_medical_certificate": "Certificate of pregnancy |||| Certificates of pregnancy",
       "prescription": "Prescription |||| Prescriptions",
-      "real_estate_insurance" : "Real estate insurance certificate |||| Real estate insurance certificates",
+      "real_estate_insurance": "Real estate insurance certificate |||| Real estate insurance certificates",
       "real_estate_tax": "Real estate tax |||| Real estate taxes",
       "receipt": "Receipt |||| Receipts",
       "rent_receipt": "Rent receipt |||| Rent receipts",
@@ -127,7 +127,7 @@
       "work_quote": "Work quote |||| Work quotes",
       "work_study": "Work & Study"
     },
-    "attributes":{
+    "attributes": {
       "contractType": {
         "cdi": "CDI",
         "cdd": "CDD",
@@ -191,7 +191,7 @@
             "number": "CAF file number"
           },
           "payment_proof_family_allowance": {
-            "number":"CAF file number"
+            "number": "CAF file number"
           },
           "vehicle": {
             "licenseNumber": "Vehicle registration number",

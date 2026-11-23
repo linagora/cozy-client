@@ -1,7 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks'
-import useAppsInMaintenance from './useAppsInMaintenance'
+
 import { createMockClient } from '../mock'
 import { makeWrapper } from '../testing/utils'
+import useAppsInMaintenance from './useAppsInMaintenance'
 
 const appsInMaintenance = [
   {

@@ -1,5 +1,6 @@
-import set from 'lodash/set'
 import difference from 'lodash/difference'
+import set from 'lodash/set'
+
 import * as qualificationModel from '../../assets/qualifications.json'
 import logger from '../../logger'
 import { iconLabelPairs } from './constants'
@@ -109,9 +110,10 @@ export class Qualification {
     }
     if (this.sourceCategory !== attributes.sourceCategory) {
       if (!this.sourceCategory) {
-        const isKnownValue = qualificationModel.sourceCategoryKnownValues.includes(
-          attributes.sourceCategory
-        )
+        const isKnownValue =
+          qualificationModel.sourceCategoryKnownValues.includes(
+            attributes.sourceCategory
+          )
         if (!isKnownValue) {
           logger.info(
             `This sourceCategory is not listed among the known values: ${attributes.sourceCategory}. ` +
@@ -127,9 +129,10 @@ export class Qualification {
     }
     if (this.sourceSubCategory !== attributes.sourceSubCategory) {
       if (!this.sourceSubCategory) {
-        const isKnownValue = qualificationModel.sourceSubCategoryKnownValues.includes(
-          attributes.sourceSubCategory
-        )
+        const isKnownValue =
+          qualificationModel.sourceSubCategoryKnownValues.includes(
+            attributes.sourceSubCategory
+          )
         if (!isKnownValue) {
           logger.info(
             `This sourceSubCategory is not listed among the known values: ${attributes.sourceSubCategory}. ` +

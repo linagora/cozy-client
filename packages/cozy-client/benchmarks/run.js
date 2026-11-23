@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 
 const { runSuite } = require('./harness')
-const { getSpecs: getStoreQueriesSpecs } = require('./store-queries.bench')
 const { getSpecs: getNormalizeDocsSpecs } = require('./normalize-docs.bench')
+const { getSpecs: getStoreQueriesSpecs } = require('./store-queries.bench')
 
 const getSpecs = () => [...getStoreQueriesSpecs(), ...getNormalizeDocsSpecs()]
 

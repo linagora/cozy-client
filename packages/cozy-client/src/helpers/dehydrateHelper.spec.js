@@ -1,5 +1,3 @@
-import { dehydrate } from './dehydrateHelper'
-
 import {
   HasManyInPlace,
   HasMany,
@@ -8,6 +6,7 @@ import {
   create as createAssociation,
   Association
 } from '../associations'
+import { dehydrate } from './dehydrateHelper'
 
 describe('dehydrate', () => {
   let document
@@ -18,7 +17,10 @@ describe('dehydrate', () => {
     oneInPlace: '1',
     relationships: {
       hasMany: {
-        data: [{ _id: 1, _type: 'has.many' }, { _id: 2, _type: 'has.many' }]
+        data: [
+          { _id: 1, _type: 'has.many' },
+          { _id: 2, _type: 'has.many' }
+        ]
       },
       hasManyFiles: {
         data: [

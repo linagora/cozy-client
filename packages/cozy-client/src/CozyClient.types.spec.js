@@ -1,4 +1,5 @@
 import path from 'path'
+
 import ts from 'typescript'
 
 it('accepts supported create and mutate options in the published types', () => {

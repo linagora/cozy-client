@@ -1,9 +1,10 @@
 import get from 'lodash/get'
 import merge from 'lodash/merge'
+
+import logger from '../logger'
 import { QueryDefinition } from '../queries/dsl'
 import { getDocumentFromState, receiveQueryResult } from '../store'
 import Association from './Association'
-import logger from '../logger'
 
 /**
  * @typedef {object} Relationship
@@ -229,29 +230,27 @@ class HasMany extends Association {
     return HasMany.updateRelationship(target, this.name, updateFn)
   }
 
-  updateRelationshipData = getUpdatedRelationshipData => (
-    dispatch,
-    getState
-  ) => {
-    const previousRelationship = getDocumentFromState(
-      getState(),
-      this.target._type,
-      this.target._id
-    )
-    dispatch(
-      receiveQueryResult(null, {
-        data: {
-          ...previousRelationship,
-          relationships: {
-            ...previousRelationship.relationships,
-            [this.name]: getUpdatedRelationshipData(
-              previousRelationship.relationships[this.name]
-            )
+  updateRelationshipData =
+    getUpdatedRelationshipData => (dispatch, getState) => {
+      const previousRelationship = getDocumentFromState(
+        getState(),
+        this.target._type,
+        this.target._id
+      )
+      dispatch(
+        receiveQueryResult(null, {
+          data: {
+            ...previousRelationship,
+            relationships: {
+              ...previousRelationship.relationships,
+              [this.name]: getUpdatedRelationshipData(
+                previousRelationship.relationships[this.name]
+              )
+            }
           }
-        }
-      })
-    )
-  }
+        })
+      )
+    }
 
   dehydrate(doc) {
     return {

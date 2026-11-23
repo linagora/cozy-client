@@ -1,3 +1,4 @@
+import logger from '../../logger'
 import {
   checkCountryCode,
   getAllCountries,
@@ -8,7 +9,6 @@ import {
   isCountryCodeAlpha2,
   isCountryCodeAlpha3
 } from './countries'
-import logger from '../../logger'
 
 describe('checkCountryCode', () => {
   it('should return true for valid country codes', () => {

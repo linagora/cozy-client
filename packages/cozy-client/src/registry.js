@@ -1,7 +1,8 @@
 import get from 'lodash/get'
 import 'url-search-params-polyfill'
-import termUtils from './terms'
+
 import { APP_TYPE } from './constants'
+import termUtils from './terms'
 
 export const transformRegistryFormatToStackFormat = doc => ({
   id: get(doc, 'latest_version.manifest.source'),

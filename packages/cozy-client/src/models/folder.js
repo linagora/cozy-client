@@ -1,7 +1,7 @@
 import sortBy from 'lodash/sortBy'
+
 import CozyClient from '../CozyClient'
 import { DOCTYPE_FILES } from '../const'
-
 import { Q } from '../queries/dsl'
 
 const APP_DOCTYPE = 'io.cozy.apps'

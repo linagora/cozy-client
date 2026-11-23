@@ -1,17 +1,18 @@
-import http from 'http'
-import opn from 'open'
 import fs from 'fs'
+import http from 'http'
 
 import merge from 'lodash/merge'
+import opn from 'open'
 import enableDestroy from 'server-destroy'
 
-import CozyClient from '../CozyClient'
 import logger from 'cozy-logger'
+
+import CozyClient from '../CozyClient'
 
 const log = logger.namespace('create-cli-client')
 
-const nodeFetch = require('node-fetch')
 const btoa = require('btoa')
+const nodeFetch = require('node-fetch')
 
 /**
  * Creates and starts and HTTP server suitable for OAuth authentication
@@ -106,7 +107,7 @@ const mkServerFlowCallback = serverOptions => authenticationURL =>
     }, 30 * 1000)
   })
 
-const hashCode = function(str) {
+const hashCode = function (str) {
   var hash = 0,
     i,
     chr
@@ -205,25 +206,22 @@ const createClientInteractive = (clientOptions, serverOpts) => {
   const savedCredentials = readJSON(createClientFS, savedCredentialsFilename)
 
   log('debug', `Starting OAuth flow`)
-  return new Promise(async (resolve, reject) => {
-    const client = new CozyClient(mergedClientOptions)
+  const client = new CozyClient(mergedClientOptions)
 
-    if (savedCredentials) {
-      log('debug', `Using saved credentials in ${savedCredentialsFilename}`)
-      client.stackClient.setToken(savedCredentials.token)
-      client.stackClient.setOAuthOptions(savedCredentials.oauthOptions)
-      resolve(client)
-      return
-    }
+  if (savedCredentials) {
+    log('debug', `Using saved credentials in ${savedCredentialsFilename}`)
+    client.stackClient.setToken(savedCredentials.token)
+    client.stackClient.setOAuthOptions(savedCredentials.oauthOptions)
+    return Promise.resolve(client)
+  }
 
-    await client.startOAuthFlow(mkServerFlowCallback(serverOptions))
-    resolve(client)
+  return client.startOAuthFlow(mkServerFlowCallback(serverOptions)).then(() => {
     log('debug', `Saving credentials to ${savedCredentialsFilename}`)
-
     writeJSON(createClientFS, savedCredentialsFilename, {
       oauthOptions: client.stackClient.oauthOptions,
       token: client.stackClient.token
     })
+    return client
   })
 }
 

@@ -1,4 +1,6 @@
+import { TODO_1, TODO_2, TODO_3 } from '../__tests__/fixtures'
 import { defaultPerformanceApi } from '../performances/defaultPerformanceApi'
+import { Q } from '../queries/dsl'
 import queries, {
   initQuery,
   receiveQueryResult,
@@ -13,8 +15,6 @@ import queries, {
   executeQueryFromState,
   mapIdsToDocuments
 } from './queries'
-import { Q } from '../queries/dsl'
-import { TODO_1, TODO_2, TODO_3 } from '../__tests__/fixtures'
 
 describe('queries reducer', () => {
   let state
@@ -818,19 +818,19 @@ describe('computeMatchPartition', () => {
 describe('execute query from state', () => {
   const docState = {
     'io.cozy.files': {
-      '123': {
+      123: {
         _id: '123',
         _type: 'io.cozy.files',
         name: 'well',
         created_at: '2024-01-01'
       },
-      '456': {
+      456: {
         _id: '456',
         _type: 'io.cozy.files',
         name: 'hello',
         created_at: '2024-02-01'
       },
-      '789': {
+      789: {
         _id: '789',
         _type: 'io.cozy.files',
         name: 'there',
@@ -974,9 +974,9 @@ describe('execute query from state', () => {
 describe('mapIdsToDocuments', () => {
   const documents = {
     'io.cozy.files': {
-      '123': { _id: '123', _type: 'io.cozy.files' },
-      '456': { _id: '456', _type: 'io.cozy.files' },
-      '789': { _id: '789', _type: 'io.cozy.files' }
+      123: { _id: '123', _type: 'io.cozy.files' },
+      456: { _id: '456', _type: 'io.cozy.files' },
+      789: { _id: '789', _type: 'io.cozy.files' }
     }
   }
 

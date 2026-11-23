@@ -18,9 +18,7 @@ describe('loop', () => {
 
   const scheduleForward = duration => {
     time = time + duration
-    Promise.resolve().then(() => {
-      jest.advanceTimersByTime(duration)
-    })
+    return Promise.resolve().then(() => jest.advanceTimersByTime(duration))
   }
 
   // Sleep working in conjunction with fakeTimers
@@ -36,7 +34,7 @@ describe('loop', () => {
   }
 
   // We have to customize loop only for tests, to be able to use Jest timers
-  const Loop = function(task, delay) {
+  const Loop = function (task, delay) {
     return new OriginalLoop(task, delay, afterRound, sleep)
   }
 

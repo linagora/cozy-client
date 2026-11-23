@@ -11,35 +11,26 @@ describe('cancelable', () => {
     return { resolve, reject, wrapped }
   }
 
-  it('should resolve with the result of the promise', done => {
+  it('should resolve with the result of the promise', async () => {
     const { resolve, wrapped } = setup()
     expect.assertions(1)
-    wrapped.then(res => {
-      expect(res).toBe(5)
-      done()
-    })
     resolve(5)
+    await expect(wrapped).resolves.toBe(5)
   })
 
-  it('should reject with the rejection of the promise', done => {
+  it('should reject with the rejection of the promise', async () => {
     jest.spyOn(console, 'log').mockImplementation()
     const error = 'normal-rejection-from-cancelable-test'
     const { reject, wrapped } = setup()
     expect.assertions(1)
-    wrapped.catch(res => {
-      expect(res).toBe(error)
-      done()
-    })
     reject(error)
+    await expect(wrapped).rejects.toBe(error)
   })
 
-  it('should reject with canceled: true if canceled', done => {
+  it('should reject with canceled: true if canceled', async () => {
     const { wrapped } = setup()
     expect.assertions(1)
-    wrapped.catch(res => {
-      expect(res).toEqual({ canceled: true })
-      done()
-    })
     wrapped.cancel()
+    await expect(wrapped).rejects.toEqual({ canceled: true })
   })
 })

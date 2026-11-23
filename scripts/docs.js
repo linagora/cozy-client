@@ -1,8 +1,9 @@
 'use strict'
-const jsdoc2md = require('jsdoc-to-markdown')
 const path = require('path')
-const glob = require('glob')
+
 const fs = require('fs-extra')
+const glob = require('glob')
+const jsdoc2md = require('jsdoc-to-markdown')
 
 const globPromise = (pattern, options) =>
   new Promise((resolve, reject) => {
@@ -21,7 +22,7 @@ const main = async () => {
   await fs.mkdirp(path.resolve(docsFolder, 'api'))
   for (let pkg of packages) {
     if (pkg === 'packages/cozy-client' || pkg === 'packages/cozy-pouch-link') {
-       continue // documentation for cozy-client is made via typedoc
+      continue // documentation for cozy-client is made via typedoc
     }
     const files = await globPromise(`${pkg}/src/**/*.js*`, {
       ignore: ['*.spec.js']

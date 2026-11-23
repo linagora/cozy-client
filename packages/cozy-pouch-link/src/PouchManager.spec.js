@@ -1,14 +1,14 @@
-/* global jest */
-
 // TODO use jest.useFakeTimers() to speed up the tests
 // See https://github.com/cozy/cozy-client/pull/239 for example
 // on how to use fake timers with setTimeout created in promises.
 
+import MockDate from 'mockdate'
+
+import { Q } from 'cozy-client'
+import { isMobileApp } from 'cozy-device-helper'
+
 import PouchManager from './PouchManager'
 import * as mocks from './__tests__/mocks'
-import { Q } from 'cozy-client'
-import MockDate from 'mockdate'
-import { isMobileApp } from 'cozy-device-helper'
 
 jest.mock('pouchdb-browser')
 jest.mock('cozy-device-helper')
@@ -17,12 +17,12 @@ jest.mock('./remote', () => ({
   fetchRemoteInstance: jest.fn()
 }))
 
-import * as rep from './startReplication'
 import PouchDB from 'pouchdb-browser'
+
 import { LOCALSTORAGE_STORAGE_KEYS, PouchLocalStorage } from './localStorage'
 import { platformWeb } from './platformWeb'
-
 import { fetchRemoteInstance, fetchRemoteLastSequence } from './remote'
+import * as rep from './startReplication'
 
 const ls = new PouchLocalStorage(platformWeb.storage)
 
@@ -198,7 +198,7 @@ describe('PouchManager', () => {
 
     try {
       await manager.waitForCurrentReplications()
-    } catch (e) {
+    } catch {
       /* continue regardless of error */
     }
     expect(manager.stopReplicationLoop).toHaveBeenCalled()
@@ -469,9 +469,8 @@ describe('PouchManager', () => {
 
     it('should return the list of queries if local storage contains ones', async () => {
       const persistedQueries = [query().options.as]
-      localStorage.__STORE__[
-        LOCALSTORAGE_STORAGE_KEYS.WARMUPEDQUERIES
-      ] = JSON.stringify(persistedQueries)
+      localStorage.__STORE__[LOCALSTORAGE_STORAGE_KEYS.WARMUPEDQUERIES] =
+        JSON.stringify(persistedQueries)
       expect(await ls.getPersistedWarmedUpQueries()).toEqual(persistedQueries)
     })
   })
@@ -640,15 +639,11 @@ describe('PouchManager', () => {
       expect(executeMock).toHaveBeenCalledTimes(2)
       expect(executeMock).toHaveBeenNthCalledWith(
         1,
-        query1()
-          .definition()
-          .toDefinition()
+        query1().definition().toDefinition()
       )
       expect(executeMock).toHaveBeenNthCalledWith(
         2,
-        query2()
-          .definition()
-          .toDefinition()
+        query2().definition().toDefinition()
       )
       expect(await ls.getPersistedWarmedUpQueries()).toEqual({
         'io.cozy.todos': ['query1', 'query2']

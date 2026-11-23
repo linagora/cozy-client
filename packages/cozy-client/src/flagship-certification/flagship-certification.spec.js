@@ -1,6 +1,5 @@
-import { certifyFlagship } from './flagship-certification'
 import { createMockClient } from '../mock'
-
+import { certifyFlagship } from './flagship-certification'
 import { getAppAttestationFromStore } from './store-attestation'
 
 jest.mock('./store-attestation', () => ({

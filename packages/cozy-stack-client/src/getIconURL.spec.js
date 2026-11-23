@@ -1,6 +1,6 @@
 import { getIconURL } from './getIconURL'
-import { ErrorReturned } from './memoize'
 import logger from './logger'
+import { ErrorReturned } from './memoize'
 
 const FakeBlob = (data, options) => {
   return { data, ...options }

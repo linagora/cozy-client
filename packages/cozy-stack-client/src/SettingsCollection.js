@@ -1,7 +1,7 @@
 import DocumentCollection from './DocumentCollection'
 import logger from './logger'
-import { uri } from './utils'
 import { normalizeDoctypeJsonApi } from './normalize'
+import { uri } from './utils'
 
 export const SETTINGS_DOCTYPE = 'io.cozy.settings'
 

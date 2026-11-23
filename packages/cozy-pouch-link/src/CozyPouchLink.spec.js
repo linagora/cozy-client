@@ -4,22 +4,24 @@ import { find, allDocs, withoutDesignDocuments } from './helpers'
 jest.mock('./helpers', () => ({
   find: jest.fn(),
   allDocs: jest.fn(),
-  normalizeFindSelector: jest.requireActual('./helpers').default
-    .normalizeFindSelector,
+  normalizeFindSelector:
+    jest.requireActual('./helpers').default.normalizeFindSelector,
   withoutDesignDocuments: jest.fn(),
   isAdapterBugged: jest.fn()
 }))
 jest.mock('./remote', () => ({
   fetchRemoteInstance: jest.fn()
 }))
-import { fetchRemoteInstance } from './remote'
+
+import PouchDBMemoryAdapterPlugin from 'pouchdb-adapter-memory'
+import PouchDB from 'pouchdb-browser'
+
+import CozyClient, { Q } from 'cozy-client'
+import { MutationTypes } from 'cozy-client/dist'
 
 import CozyPouchLink from '.'
 import { SCHEMA, TODO_1, TODO_2, TODO_3, TODO_4 } from './__tests__/fixtures'
-import PouchDB from 'pouchdb-browser'
-import PouchDBMemoryAdapterPlugin from 'pouchdb-adapter-memory'
-import CozyClient, { Q } from 'cozy-client'
-import { MutationTypes } from 'cozy-client/dist'
+import { fetchRemoteInstance } from './remote'
 
 // Necessary to have the memory adapter for the tests since neither
 // IndexedDB nor WebSQL adapter can be used in Jest

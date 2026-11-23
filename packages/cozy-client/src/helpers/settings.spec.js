@@ -1,12 +1,11 @@
+import * as mocks from '../__tests__/mocks'
+import { Q } from '../queries/dsl'
 import {
   editSettings,
   getSettings,
   normalizeSettings,
   saveAfterFetchSettings
 } from './settings'
-import { Q } from '../queries/dsl'
-
-import * as mocks from '../__tests__/mocks'
 
 describe('settings', () => {
   describe('getSettings', () => {

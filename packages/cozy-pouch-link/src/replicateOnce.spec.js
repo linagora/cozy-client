@@ -1,5 +1,3 @@
-/* global jest */
-
 jest.mock('./remote', () => ({
   fetchRemoteLastSequence: jest.fn().mockResolvedValue('0'),
   isDatabaseNotFoundError: jest.fn().mockReturnValue(false),
