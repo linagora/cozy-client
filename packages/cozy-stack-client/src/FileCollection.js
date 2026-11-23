@@ -258,15 +258,20 @@ export const isFile = ({ _type, type }) =>
 export const isDirectory = ({ type }) => type === 'directory'
 
 const raceWithCondition = (promises, predicate) => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     promises.forEach(p =>
-      p.then(res => {
-        if (predicate(res)) {
-          resolve(true)
-        }
-      })
+      p
+        .then(res => {
+          if (predicate(res)) {
+            resolve(true)
+          }
+          return res
+        })
+        .catch(reject)
     )
-    Promise.all(promises).then(() => resolve(false))
+    Promise.all(promises)
+      .then(() => resolve(false))
+      .catch(reject)
   })
 }
 

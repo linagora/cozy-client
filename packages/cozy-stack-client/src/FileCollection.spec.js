@@ -2481,6 +2481,15 @@ describe('FileCollection', () => {
       const res = await collection.isChildOf(child, parent)
       expect(res).toEqual(false)
     })
+
+    it('should reject when a directory of the path cannot be fetched', async () => {
+      const error = new Error('Not found')
+      client.fetchJSON.mockReset()
+      client.fetchJSON.mockRejectedValue(error)
+      const child = { _id: 'file-id', path: '/a/b/c', dirID: '456' }
+      const parent = { _id: 'fake-id' }
+      await expect(collection.isChildOf(child, parent)).rejects.toBe(error)
+    })
   })
 
   describe('fetchFileContentById', () => {
