@@ -7,7 +7,6 @@ import {
 import Collection from './Collection'
 import DocumentCollection from './DocumentCollection'
 import { normalizeDoctypeJsonApi } from './normalize'
-import { FetchError } from './errors'
 import logger from './logger'
 
 export const APPS_DOCTYPE = 'io.cozy.apps'

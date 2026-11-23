@@ -3,7 +3,6 @@ import { normalizeDoctypeJsonApi } from './normalize'
 import { normalizeJob } from './JobCollection'
 import { uri } from './utils'
 import DocumentCollection from './DocumentCollection'
-import { FetchError } from './errors'
 
 export const JOBS_DOCTYPE = 'io.cozy.jobs'
 export const TRIGGERS_DOCTYPE = 'io.cozy.triggers'

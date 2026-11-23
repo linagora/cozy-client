@@ -31,7 +31,6 @@ import {
   normalizeDesignDoc
 } from './mangoIndex'
 import * as querystring from './querystring'
-import { FetchError } from './errors'
 
 import logger from './logger'
 

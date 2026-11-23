@@ -14,7 +14,6 @@ import {
   forceDownload,
   sharedDriveApiPrefix
 } from './utils'
-import { FetchError } from './errors'
 import { dontThrowNotFoundError } from './Collection'
 import { getIllegalCharacters } from './getIllegalCharacter'
 import * as querystring from './querystring'
