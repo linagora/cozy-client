@@ -663,7 +663,7 @@ Returns whether queries have been loaded at least once
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:67](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L67)
+[packages/cozy-client/src/utils.js:66](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L66)
 
 ***
 
@@ -685,7 +685,7 @@ Returns whether a query has been loaded at least once
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:51](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L51)
+[packages/cozy-client/src/utils.js:50](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L50)
 
 ***
 
@@ -737,7 +737,7 @@ Returns whether the result of queries are loading
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:58](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L58)
+[packages/cozy-client/src/utils.js:57](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L57)
 
 ***
 
@@ -760,7 +760,7 @@ is loading.
 
 *Defined in*
 
-[packages/cozy-client/src/utils.js:40](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L40)
+[packages/cozy-client/src/utils.js:39](https://github.com/linagora/cozy-client/blob/master/packages/cozy-client/src/utils.js#L39)
 
 ***
 
