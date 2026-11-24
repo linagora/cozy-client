@@ -84,6 +84,9 @@ jobs:
         env:
           YARN_ENABLE_SCRIPTS: 'false'
         run: yarn install --immutable
+      # Same order as before the split: build, version, publish
+      - name: Build
+        run: yarn build
       - name: Version
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
