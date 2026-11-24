@@ -17,7 +17,8 @@ permissions: {}
 
 jobs:
   build:
-    name: Build and test
+    # Keeps its former name: the protection of master requires this status check
+    name: Build and publish
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
