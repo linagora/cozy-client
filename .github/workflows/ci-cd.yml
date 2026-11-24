@@ -79,14 +79,12 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
-      # No install scripts while the OIDC token can be requested
+      # No install scripts. The build of the publish step still runs in this job,
+      # where the OIDC token can be requested.
       - name: Install dependencies
         env:
           YARN_ENABLE_SCRIPTS: 'false'
         run: yarn install --immutable
-      # Same order as before the split: build, version, publish
-      - name: Build
-        run: yarn build
       - name: Version
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -98,7 +96,7 @@ jobs:
           git remote set-url origin https://github.com/linagora/cozy-client.git
       # lerna pushes the tags before it publishes: from-package publishes every
       # version missing from the registry, so a manual run finishes a failed release.
-      # The packages are built here by prepublishOnly, with the new version.
+      # The packages are only built here, by prepublishOnly, with the new version.
       - name: Publish to npm
         run: |
           # Only a release commit is published, so that a version always holds the code of its tag
