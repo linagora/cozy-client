@@ -8,7 +8,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/linagora/cozy-client.git"
+    "url": "git+https://github.com/linagora/cozy-client.git",
+    "directory": "packages/cozy-stack-client"
   },
   "scripts": {
     "build": "../../bin/build",
