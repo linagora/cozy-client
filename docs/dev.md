@@ -9,9 +9,12 @@ The job authenticates to npm with
 [trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC): there is
 no npm token. It runs in the `npm` GitHub environment, on master only.
 
-lerna pushes the version commit and the tags before it publishes. If the publish
-then fails, run the `CI/CD` workflow by hand on master (`Run workflow`): it
-publishes every version missing from the registry.
+lerna pushes the version commit and the tags before it publishes, and publishes
+the packages one by one: a failed release can leave only some of them published.
+Run the `CI/CD` workflow by hand on master (`Run workflow`) before anything else
+is merged: it publishes the versions missing from the registry. Otherwise the
+next release does it, and a package changed in between gets a new version while
+its failed one stays unpublished.
 
 A new package must exist on npm and have a trusted publisher before its first
 merge to master, or the publish of every package fails:
