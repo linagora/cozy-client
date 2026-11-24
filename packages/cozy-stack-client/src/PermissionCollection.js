@@ -151,6 +151,23 @@ class PermissionCollection extends DocumentCollection {
     )
   }
 
+  /**
+   * Fetches the retained events for a public file link as CSV.
+   * Requires an online connection to the link owner's instance. The promise
+   * rejects with a `FetchError` on a non-success HTTP status.
+   *
+   * @param {string} permissionId - The public link's permission ID, not its sharecode.
+   * @returns {Promise<Response>} The HTTP response with a CSV body.
+   */
+  fetchStatistics(permissionId) {
+    return this.stackClient.fetch(
+      'GET',
+      uri`/permissions/${permissionId}/statistics`,
+      undefined,
+      { throwFetchErrors: true }
+    )
+  }
+
   async findLinksByDoctype(doctype) {
     const resp = await this.stackClient.fetchJSON(
       'GET',

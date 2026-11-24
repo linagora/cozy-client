@@ -1906,6 +1906,7 @@ Implements `DocumentCollection` API along with specific methods for `io.cozy.per
     * [new PermissionCollection(doctype, stackClient, [options])](#new_PermissionCollection_new)
     * [.create(permission)](#PermissionCollection+create)
     * [.add(document, permission, options)](#PermissionCollection+add) ⇒ <code>Promise</code>
+    * [.fetchStatistics(permissionId)](#PermissionCollection+fetchStatistics) ⇒ <code>Promise.&lt;Response&gt;</code>
     * [.findLinksByIds(ids)](#PermissionCollection+findLinksByIds) ⇒ <code>Promise</code>
     * ~~[.findApps()](#PermissionCollection+findApps)~~
     * [.createSharingLink(document, options)](#PermissionCollection+createSharingLink)
@@ -1970,6 +1971,20 @@ const permissions = await client.collection('io.cozy.permissions').add(
   { expiresAt: '2100-01-01T00:00:00Z', password: 'password' }
 )
 ```
+<a name="PermissionCollection+fetchStatistics"></a>
+
+### permissionCollection.fetchStatistics(permissionId) ⇒ <code>Promise.&lt;Response&gt;</code>
+Fetches the retained events for a public file link as CSV.
+Requires an online connection to the link owner's instance. The promise
+rejects with a `FetchError` on a non-success HTTP status.
+
+**Kind**: instance method of [<code>PermissionCollection</code>](#PermissionCollection)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - The HTTP response with a CSV body.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| permissionId | <code>string</code> | The public link's permission ID, not its sharecode. |
+
 <a name="PermissionCollection+findLinksByIds"></a>
 
 ### permissionCollection.findLinksByIds(ids) ⇒ <code>Promise</code>
