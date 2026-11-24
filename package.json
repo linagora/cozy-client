@@ -16,7 +16,7 @@
     "jest-environment-jsdom-sixteen": "1.0.3",
     "jest-fetch-mock": "3.0.3",
     "jsdoc-to-markdown": "8.0.3",
-    "lerna": "8.1.9",
+    "lerna": "9.0.7",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "redux-mock-store": "1.5.4",
