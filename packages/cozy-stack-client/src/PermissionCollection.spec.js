@@ -75,6 +75,22 @@ describe('PermissionCollection', () => {
       expect(client.fetchJSON).toHaveBeenCalledWith('GET', '/permissions/self')
     })
 
+    it('requests statistics for the encoded permission ID and returns the response untouched', async () => {
+      const response = new Response('action\r\ndownload\r\n')
+      client.fetch.mockResolvedValueOnce(response)
+
+      const result = await collection.fetchStatistics('permission/id?#')
+
+      expect(client.fetch).toHaveBeenCalledWith(
+        'GET',
+        '/permissions/permission%2Fid%3F%23/statistics',
+        undefined,
+        { throwFetchErrors: true }
+      )
+      expect(result).toBe(response)
+      expect(result.bodyUsed).toBe(false)
+    })
+
     describe('add', () => {
       it('uses expected permissions endpoint', async () => {
         await collection.add(
