@@ -10,7 +10,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/linagora/cozy-client.git"
+    "url": "git+https://github.com/linagora/cozy-client.git",
+    "directory": "packages/cozy-pouch-link"
   },
   "dependencies": {
     "cozy-client": "^62.3.0",
