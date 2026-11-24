@@ -22,7 +22,8 @@ from the tag.
 
 A new package must exist on npm and have a trusted publisher before its first
 merge to master, or the publish fails at that package and leaves the release
-partly published, to be finished with the manual run:
+partly published. Do the two steps below, then finish the release with the
+manual run:
 
 1. Publish a `0.0.0` placeholder by hand: set the version to `0.0.0` locally (do
    not commit it) and run `npm publish`.
