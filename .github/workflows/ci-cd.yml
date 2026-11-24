@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - master
+  # On master, publishes the versions that a failed release left unpublished.
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,7 +17,7 @@ permissions: {}
 
 jobs:
   build:
-    name: Build and publish
+    name: Build and test
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -24,16 +26,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          token: ${{ github.ref == 'refs/heads/master' && secrets.GH_TOKEN || github.token }}
           persist-credentials: false
-          fetch-depth: 0
       - name: Enable Corepack
         run: corepack enable
       - name: Use Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
+      # Same install as the release job
       - name: Install dependencies
+        env:
+          YARN_ENABLE_SCRIPTS: 'false'
         run: yarn install --immutable
       - name: Lint
         run: yarn lint
@@ -53,17 +56,48 @@ jobs:
         run: |
           git add -A
           git diff --cached --exit-code || (echo "Types are not up-to-date, please run cd packages/cozy-client && yarn typecheck and repush" && exit 1)
-      - name: Publish to NPM
-        if: github.ref == 'refs/heads/master'
+
+  release:
+    name: Publish
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: npm
+    permissions:
+      contents: read # the release commit, the tags and the GitHub release are pushed as cozy-bot
+      id-token: write # npm trusted publishing (OIDC)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # lerna reads the tags and the commits since the last release
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Use Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+      # No install scripts while the OIDC token can be requested
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_SCRIPTS: 'false'
+        run: yarn install --immutable
+      - name: Version
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           git config user.name "Cozy Bot"
           git config user.email "npm@cozycloud.cc"
-          git remote set-url origin https://cozy-bot:$GH_TOKEN@github.com/cozy/cozy-client.git
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          yarn lerna publish --yes -m "chore: Publish [skip ci]"
+          git remote set-url origin "https://cozy-bot:$GH_TOKEN@github.com/linagora/cozy-client.git"
+          yarn lerna version --yes -m "chore: Publish [skip ci]"
+          git remote set-url origin https://github.com/linagora/cozy-client.git
+      # lerna pushes the tags before it publishes: from-package publishes every
+      # version missing from the registry, so a manual run finishes a failed release.
+      # The packages are built here by prepublishOnly, with the new version.
+      - name: Publish to npm
+        run: yarn lerna publish from-package --yes
 
   zizmor:
     name: Audit workflows
