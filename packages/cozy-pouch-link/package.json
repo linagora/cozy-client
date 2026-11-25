@@ -1,6 +1,6 @@
 {
   "name": "cozy-pouch-link",
-  "version": "62.3.0",
+  "version": "62.3.1",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -14,7 +14,7 @@
     "directory": "packages/cozy-pouch-link"
   },
   "dependencies": {
-    "cozy-client": "^62.3.0",
+    "cozy-client": "^62.3.1",
     "pouchdb-browser": "^7.3.1",
     "pouchdb-find": "^7.3.1"
   },
