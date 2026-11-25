@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.4.0](https://github.com/linagora/cozy-client/compare/v62.3.1...v62.4.0) (2026-11-25)
+
+
+### Features
+
+* **cozy-stack-client:** Add public link statistics download ([a67cc69](https://github.com/linagora/cozy-client/commit/a67cc697bd19d5b4e80e189829d6048888b6b936))
+
+
+
+
+
 ## [62.3.1](https://github.com/linagora/cozy-client/compare/v62.3.0...v62.3.1) (2026-11-25)
 
 
