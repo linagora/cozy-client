@@ -955,14 +955,14 @@ The returned documents are paginated by the stack.
 Searches the files and folders of the user, and those of the shared
 drives they are a member of, by their name.
 
-The hits have a `path` (the folder of the file, empty when it cannot be
-known) and a `drive_id` for the files of a shared drive.
+The hits have the `path` of the file or folder as the user sees it, and a
+`driveId` for the files of a shared drive.
 
 **Kind**: instance method of [<code>FileCollection</code>](#FileCollection)  
 **Returns**: <code>Promise.&lt;{data: Array.&lt;object&gt;, next: boolean, cursor: (string\|null)}&gt;</code> - The hits, and the cursor of the next page  
 **Throws**:
 
-- <code>FetchError</code> 503 when the search is not configured on the stack
+- <code>FetchError</code> 503 when the search is not configured on the stack, or fails
 
 
 | Param | Type | Description |

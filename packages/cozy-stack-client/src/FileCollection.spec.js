@@ -154,25 +154,23 @@ describe('FileCollection', () => {
         name: 'Report.pdf',
         type: 'file',
         dir_id: 'd1',
-        path: '/Team',
-        drive_id: 's1'
+        path: '/Team/Report.pdf',
+        driveId: 's1'
       }
     }
 
     it('should post the query and normalize the hits', async () => {
       spy.mockResolvedValue({ data: [hit], links: {} })
       const result = await collection.search('report', { limit: 10 })
-      expect(spy).toHaveBeenCalledWith('POST', '/files/search', {
-        q: 'report',
-        limit: 10,
-        cursor: undefined
+      expect(spy).toHaveBeenCalledWith('POST', '/files/search?page[limit]=10', {
+        q: 'report'
       })
       expect(result.data[0]).toMatchObject({
         _id: 'f1',
         _type: 'io.cozy.files',
         name: 'Report.pdf',
-        path: '/Team',
-        drive_id: 's1'
+        path: '/Team/Report.pdf',
+        driveId: 's1'
       })
       expect(result.next).toBe(false)
       expect(result.cursor).toBe(null)
@@ -181,7 +179,9 @@ describe('FileCollection', () => {
     it('should return the cursor of the next page', async () => {
       spy.mockResolvedValue({
         data: [hit],
-        links: { next: '/files/search?page[cursor]=abc%3D%3D' }
+        links: {
+          next: '/files/search?page%5Bcursor%5D=abc%3D%3D&page%5Blimit%5D=20'
+        }
       })
       const result = await collection.search('report')
       expect(result.next).toBe(true)
@@ -189,11 +189,11 @@ describe('FileCollection', () => {
 
       spy.mockResolvedValue({ data: [], links: {} })
       await collection.search('report', { cursor: result.cursor })
-      expect(spy).toHaveBeenLastCalledWith('POST', '/files/search', {
-        q: 'report',
-        limit: undefined,
-        cursor: 'abc=='
-      })
+      expect(spy).toHaveBeenLastCalledWith(
+        'POST',
+        '/files/search?page[cursor]=abc%3D%3D',
+        { q: 'report' }
+      )
     })
   })
 

@@ -311,22 +311,22 @@ class FileCollection extends DocumentCollection {
    * Searches the files and folders of the user, and those of the shared
    * drives they are a member of, by their name.
    *
-   * The hits have a `path` (the folder of the file, empty when it cannot be
-   * known) and a `drive_id` for the files of a shared drive.
+   * The hits have the `path` of the file or folder as the user sees it, and a
+   * `driveId` for the files of a shared drive.
    *
    * @param {string} q - The searched text
    * @param {object} [options] - Search options
    * @param {number} [options.limit] - The maximal number of results
    * @param {string} [options.cursor] - The cursor of the page to fetch
    * @returns {Promise<{data: Array<object>, next: boolean, cursor: string|null}>} The hits, and the cursor of the next page
-   * @throws {FetchError} 503 when the search is not configured on the stack
+   * @throws {FetchError} 503 when the search is not configured on the stack, or fails
    */
   async search(q, { limit, cursor } = {}) {
-    const resp = await this.stackClient.fetchJSON('POST', '/files/search', {
-      q,
-      limit,
-      cursor
+    const url = querystring.buildURL('/files/search', {
+      'page[limit]': limit,
+      'page[cursor]': cursor
     })
+    const resp = await this.stackClient.fetchJSON('POST', url, { q })
     const nextLink = get(resp, 'links.next', '')
     const nextCursor = nextLink
       ? new URL(nextLink, 'http://stack').searchParams.get('page[cursor]')
