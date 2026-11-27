@@ -859,6 +859,7 @@ files associated to a specific document
     * [.get(id)](#FileCollection+get) ⇒ <code>Object</code>
     * [.getAll(ids)](#FileCollection+getAll) ⇒ <code>Promise.&lt;{data, meta, execution\_stats}&gt;</code>
     * [.find(selector, options)](#FileCollection+find) ⇒ <code>Promise.&lt;{data, meta, skip, next, bookmark, execution\_stats}&gt;</code>
+    * [.search(q, [options])](#FileCollection+search) ⇒ <code>Promise.&lt;{data: Array.&lt;object&gt;, next: boolean, cursor: (string\|null)}&gt;</code>
     * [.findReferencedBy(document, options)](#FileCollection+findReferencedBy) ⇒ <code>Promise.&lt;{data, included, meta, skip, next}&gt;</code>
     * [.addReferencedBy(document, documents)](#FileCollection+addReferencedBy) ⇒ <code>Promise.&lt;{data, meta}&gt;</code>
     * [.removeReferencedBy(document, documents)](#FileCollection+removeReferencedBy) ⇒ <code>Promise.&lt;{data, meta}&gt;</code>
@@ -956,6 +957,29 @@ The returned documents are paginated by the stack.
 | --- | --- | --- |
 | selector | <code>object</code> | The Mango selector. |
 | options | [<code>MangoQueryOptions</code>](#MangoQueryOptions) | The query options |
+
+<a name="FileCollection+search"></a>
+
+### fileCollection.search(q, [options]) ⇒ <code>Promise.&lt;{data: Array.&lt;object&gt;, next: boolean, cursor: (string\|null)}&gt;</code>
+Searches the files and folders of the user, and those of the shared
+drives they are a member of, by their name.
+
+The hits have the `path` of the file or folder as the user sees it, and a
+`driveId` for the files of a shared drive.
+
+**Kind**: instance method of [<code>FileCollection</code>](#FileCollection)  
+**Returns**: <code>Promise.&lt;{data: Array.&lt;object&gt;, next: boolean, cursor: (string\|null)}&gt;</code> - The hits, and the cursor of the next page  
+**Throws**:
+
+- <code>FetchError</code> 503 when the search is not configured on the stack, or fails
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| q | <code>string</code> | The searched text |
+| [options] | <code>object</code> | Search options |
+| [options.limit] | <code>number</code> | The maximal number of results |
+| [options.cursor] | <code>string</code> | The cursor of the page to fetch |
 
 <a name="FileCollection+findReferencedBy"></a>
 
